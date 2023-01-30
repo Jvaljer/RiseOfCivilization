@@ -12,6 +12,14 @@ public class CellCtrl extends Thread {
 		model = view.GetCellModel();
 	}
 	
+	public CellModel GetCellModel() {
+		return model;
+	}
+	
+	public CellView GetCellView() {
+		return view;
+	}
+	
 	@Override
 	public void run() {
 		//must implement

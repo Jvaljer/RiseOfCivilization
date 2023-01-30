@@ -20,6 +20,22 @@ public class MapCtrl extends Thread {
 		map_model = map_view.GetMapModel();
 	}
 	
+	public GameModel GetGameModel() {
+		return model;
+	}
+	
+	public GameView GetGameView() {
+		return view;
+	}
+	
+	public MapModel GetMapModel() {
+		return map_model;
+	}
+	
+	public MapView GetMapView() {
+		return map_view;
+	}
+	
 	@Override
 	public void run() {
 		//must implement
