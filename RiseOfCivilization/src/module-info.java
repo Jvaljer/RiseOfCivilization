@@ -6,4 +6,5 @@
  *
  */
 module RiseOfCivilization {
+	requires java.desktop;
 }
