@@ -1,6 +1,7 @@
 package View;
 
 import Model.*;
+import java.awt.*;
 
 public class CellView {
 	private CellModel model;
@@ -9,8 +10,8 @@ public class CellView {
 	
 	public CellView(CellModel M) {
 		model = M;
-		abs = model.GetAbs();
-		ord = model.GetOrd();
+		abs = model.GetX();
+		ord = model.GetY();
 		//must figure out how to define this view properly.
 	}
 	
@@ -22,7 +23,11 @@ public class CellView {
 		return ord;
 	}
 	
-	public void DrawCell() {
-		//mustImplement
+	public void DrawCell(Graphics G) {
+		//idea : 
+			//gonna calculated the 6 peaks of the cell
+			//and then draw the polygon's line corresponding to these
+		
+		//do we really need to draw each cell ? can't we just draw all in 'MapView' ???
 	}
 }

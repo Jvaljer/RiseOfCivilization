@@ -7,15 +7,14 @@ import Types.CellId;
 public class MapModel {
 	private static final int lines = 15;
 	private static final int columns = 15;
-	private ArrayList<ArrayList<CellModel>> grid;
+	private CellModel[][] grid;
 	
 	public MapModel() {
 		//must add calcul of starting point, and all percentages for Cell types
-		grid = new ArrayList<ArrayList<CellModel>>();
-		for(int j=0; j<lines; j++) {
-			grid.add(new ArrayList<CellModel>());
-			for(int i=0; i<columns; i++) {
-				grid.get(j).add( new CellModel(i,j, CellId.Plain) );
+		grid = new CellModel[lines][columns];
+		for(int i=0; i<lines; i++) {
+			for(int j=0; j<columns; j++) {
+				grid[i][j] = new CellModel(i,j,CellId.None);
 			}
 		}
 	}

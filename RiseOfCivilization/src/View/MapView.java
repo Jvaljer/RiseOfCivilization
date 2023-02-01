@@ -2,6 +2,7 @@ package View;
 
 import Model.*;
 import javax.swing.*;
+import java.awt.*;
 
 public class MapView extends JPanel {
 	private MapModel model;
@@ -24,5 +25,13 @@ public class MapView extends JPanel {
 	
 	public int GetHeight() {
 		return height;
+	}
+	
+	public void DrawMap(Graphics G) {
+		for(int i=0; i<width; i++) {
+			for(int j=0; j<height; j++) {
+				//must draw the [i][j] Cell as an hexagon
+			}
+		}
 	}
 }

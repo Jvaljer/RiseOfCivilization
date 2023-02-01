@@ -3,31 +3,31 @@ package Model;
 import Types.*;
 
 public class CellModel {
-	private static int abs;
-	private static int ord;
-	private static final int width = 20;
-	private static final int height = 20;
+	private static int X;
+	private static int Y;
+	private static int Z;
 	private CellId id;
+	private static final int ray = 15;
 	
 	public CellModel(int x, int y, CellId i) {
-		abs = x;
-		ord = y;
+		X = x;
+		Y = y;
+		Z = -X -Y;
 	}
 	
-	public int GetAbs() {
-		return abs;
+	public int GetX() {
+		return X;
 	}
 	
-	public int GetOrd() {
-		return ord;
+	public int GetY() {
+		return Y;
 	}
 	
-	public int GetWidth() {
-		return width;
+	public int GetZ() {
+		return Z;
 	}
 	
-	public int GetHeight() {
-		return height;
+	public int GetRay() {
+		return ray;
 	}
-	
 }
