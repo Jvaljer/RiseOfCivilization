@@ -5,18 +5,30 @@ import java.util.*;
 import Types.CellId;
 
 public class MapModel {
+	private GameModel game;
+	private static int width;
+	private static int height;
 	private static final int lines = 15;
 	private static final int columns = 15;
+	private static final int Cell_size = 10;
 	private CellModel[][] grid;
 	
-	public MapModel() {
+	public MapModel(GameModel M) {
+		game = M;
+		width = game.GetMapWidth();
+		height = game.GetMapHeight();
 		//must add calcul of starting point, and all percentages for Cell types
 		grid = new CellModel[lines][columns];
 		for(int i=0; i<lines; i++) {
 			for(int j=0; j<columns; j++) {
+				//must add the cell's Id random association
 				grid[i][j] = new CellModel(i,j,CellId.None);
 			}
 		}
+	}
+	
+	public GameModel GetGameModel() {
+		return game;
 	}
 	
 	public int GetLinesAmount() {
@@ -27,11 +39,23 @@ public class MapModel {
 		return columns;
 	}
 	
-	public ArrayList<ArrayList<CellModel>> GetGrid(){
+	public int GetCellSize() {
+		return Cell_size;
+	}
+	
+	public CellModel[][] GetGrid(){
 		return grid;
 	}
 	
 	public CellModel GetCellFromCoord(int x, int y) {
-		return grid.get(x).get(y);
+		return grid[x][y];
+	}
+	
+	public int GetWidth() {
+		return width;
+	}
+	
+	public int GetHeight() {
+		return height;
 	}
 }
