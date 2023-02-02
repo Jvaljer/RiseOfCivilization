@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.*;
+import java.awt.*;
 
 import Types.CellId;
 
@@ -11,6 +12,7 @@ public class MapModel {
 	private static final int lines = 15;
 	private static final int columns = 15;
 	private static final int Cell_size = 10;
+	private static final Point OriginPoint = new Point(20,25);
 	private CellModel[][] grid;
 	
 	public MapModel(GameModel M) {
@@ -57,5 +59,9 @@ public class MapModel {
 	
 	public int GetHeight() {
 		return height;
+	}
+	
+	public Point GetOriginCoord() {
+		return OriginPoint;
 	}
 }
