@@ -23,5 +23,6 @@ public class CellCtrl extends Thread {
 	@Override
 	public void run() {
 		//must implement
+		System.out.println("CellCtrl is running");
 	}
 }

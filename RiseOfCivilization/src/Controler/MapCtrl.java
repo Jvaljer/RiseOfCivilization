@@ -39,5 +39,6 @@ public class MapCtrl extends Thread {
 	@Override
 	public void run() {
 		//must implement
+		System.out.println("MapCtrl running");
 	}
 }
