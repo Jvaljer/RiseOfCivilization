@@ -8,13 +8,17 @@ public class MapView extends JPanel {
 	private MapModel map_model;
 	private int width;
 	private int height;
+	private int lines;
+	private int columns;
 	public MapView(MapModel M) {
 		map_model = M;
 		
+		lines = map_model.GetLinesAmount();
+		columns = map_model.GetColumnsAmount();
+		
 		width = map_model.GetWidth();
 		height = map_model.GetHeight();
-		
-		setPreferredSize(new Dimension(height,width));
+		setPreferredSize(new Dimension(width,height));
 	}
 	
 	public int GetWidth() {
@@ -30,44 +34,46 @@ public class MapView extends JPanel {
 	}
 	
 	public void DrawMap(Graphics G) {
-		int size = map_model.GetCellSize();
-		//getting the point's coordinates
-		int originX = map_model.GetOriginCoord().x;
-		int originY = map_model.GetOriginCoord().y;
+		int s = map_model.GetCellSize();
 		
-		for(int i=0; i<width; i++) {
-			for(int j=0; j<height; j++) {
-				//must draw the [i][j] Cell as an hexagon
-				int[] pts_x = new int[6];
-				int[] pts_y = new int[6];
-				
-				int cell_gap; 
-				if(i%2!=0) {
-					cell_gap = 1;
+		int w = (int) (Math.sqrt(3) * s);
+		
+		int x0 = map_model.GetOriginCoord().x;
+		int y0 = map_model.GetOriginCoord().y;
+		
+		int w_gap = s + s/2;
+		int h_gap = (int) (Math.sqrt(3) * s);
+		int gap;
+		Point[] pts = new Point[7];
+		int[] x = new int[7];
+		int[] y = new int[7];
+		
+		for(int j=0; j<columns; j++) {
+			for(int i=0; i<lines; i++) {
+				if(i%2==0) {
+					gap = 0;
 				} else {
-					cell_gap = 0;
+					gap = w/2;
 				}
-				int cell_width_dist = 3/4 * 3/2 * size; 
-				int cell_height = (int) Math.sqrt(3.) * size; // sqrt(3) * size
+				int xi = x0 + i*w_gap;
+				int yi = y0 + j*h_gap - gap;
 				
-				int pos_x = originX + i*cell_width_dist;
-				int pos_y = originY + j*cell_height - (cell_gap*cell_height/2);
-				
-				Point[] pts = new Point[6];
-				pts[0] = new Point(pos_x - size, pos_y);
-				pts[1] = new Point(pos_x - (size/2), pos_y - (cell_height/2));
-				pts[2] = new Point(pos_x + (size/2), pos_y - (cell_height/2));
-				pts[3] = new Point(pos_x + size, pos_y);
-				pts[4] = new Point(pos_x + (size/2), pos_y + (cell_height/2));
-				pts[5] = new Point(pos_x - (size/2), pos_y + (cell_height/2));
+				pts[0] = new Point(xi - s, yi);
+				pts[1] = new Point(xi - (s/2), yi - (w/2));
+				pts[2] = new Point(xi + (s/2), yi - (w/2));
+				pts[3] = new Point(xi + s, yi);
+				pts[4] = new Point(xi + (s/2), yi + (w/2));
+				pts[5] = new Point(xi - (s/2), yi + (w/2));
+				pts[6] = new Point(xi - s, yi);
 				
 				for(int n=0; n<pts.length; n++) {
-					pts_x[n] = pts[n].x;
-					pts_y[n] = pts[n].y;
+					x[n] = pts[n].x;
+					y[n] = pts[n].y;
 				}
 				
-				G.drawPolyline(pts_x, pts_y, 6);
+				G.drawPolyline(x, y, pts.length);
 			}
 		}
+		
 	}
 }

@@ -1,7 +1,7 @@
 package Model;
 
 public class GameModel {
-	private static final int map_width = 700;
+	private static final int map_width = 725;
 	private static final int map_height = 700;
 	private static final int panel_width = 300;
 	private static final int panel_height = 700;
