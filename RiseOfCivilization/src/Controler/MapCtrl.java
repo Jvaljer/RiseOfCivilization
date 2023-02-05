@@ -41,15 +41,66 @@ public class MapCtrl extends Thread implements MouseListener {
 		return map_view;
 	}
 	
-	public Point GettCellFromClick(int X, int Y) {
+	public Point GetCellFromClick(int X, int Y) {
 		Point origin = map_model.GetOriginCoord();
-		Point cell;
+		Point cell = new Point(0,0);
 		
-		for(int y=0; y<map_model.GetColumnsAmount(); y++) {
-			for(int x=0; x<map_model.GetLinesAmount(); x++) {
+		int size = map_model.GetCellSize();
+		int w_gap = size + (size/2);
+		int h_gap = (int) (Math.sqrt(3) * size);
+		int gap;
+		
+		int originX = origin.x;
+		int originY = origin.y;
+		
+		int fstX = 0;
+		int sndX = 1;
+		int fstY = 0;
+		int sndY = 1;
+		
+		//first we wanna get the maximum
+		for(int j=0; j<map_model.GetColumnsAmount(); j++) {
+			for(int i=0; i<map_model.GetLinesAmount(); i++) {
+				if(i%2==0) {
+					gap = 0;
+				} else {
+					gap = w_gap / 2;
+				}
 				
+				if(Y < originY + (j* h_gap) - gap) {
+					fstY = j-1;
+					sndY = j;
+				}
+				
+				if(X < originX + (i* w_gap) ) {
+					fstX = i-1;
+					sndX = i;
+				}
 			}
 		}
+		//now we wanna test if the Y is closer to fstY or sndY 
+		int finalX;
+		int finalY;
+		
+		int MidY;
+		int MidX;
+		
+		if(fstX%2!=0) {
+			gap = w_gap / 2;
+		} else {
+			gap = 0;
+		}
+		
+		MidY = ( (originY + (sndY* h_gap) - gap) - (originY + (sndY* h_gap) - gap) )/ 2;
+		if((originY + (sndY* h_gap) - gap) - Y > MidY) {
+			cell.y = fstY;
+		} else {
+			cell.y = sndY;
+		}
+
+		//then we wanna test if th X is closer to fstX or sndX
+		MidX = ( (originX + (sndX* w_gap)) - (originX + (fstX* w_gap)) ) / 2;
+		
 		return cell;
 	}
 	
