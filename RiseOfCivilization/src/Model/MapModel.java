@@ -9,10 +9,10 @@ public class MapModel {
 	private GameModel game;
 	private static int width;
 	private static int height;
-	private static final int lines = 23;
-	private static final int columns = 20;
+	private static final int lines = 21;
+	private static final int columns = 18;
 	private static final int Cell_size = 20;
-	private static final Point OriginPoint = new Point(30,72);
+	private static final Point OriginPoint = new Point(35,75);
 	private CellModel[][] grid;
 	
 	public MapModel(GameModel M) {

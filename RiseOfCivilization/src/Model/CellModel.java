@@ -7,12 +7,12 @@ public class CellModel {
 	private static int Y;
 	private static int Z;
 	private CellId id;
-	private static final int ray = 15;
 	
 	public CellModel(int x, int y, CellId i) {
 		X = x;
 		Y = y;
 		Z = -X -Y;
+		id = i;
 	}
 	
 	public int GetX() {
@@ -27,7 +27,8 @@ public class CellModel {
 		return Z;
 	}
 	
-	public int GetRay() {
-		return ray;
+	public CellId GetId() {
+		return id;
 	}
+	
 }
