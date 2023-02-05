@@ -19,6 +19,7 @@ public class MapCtrl extends Thread implements MouseListener {
 	
 	public MapCtrl(GameView V) {
 		view = V;
+		view.addMouseListener(this);
 		model = view.GetGameModel();
 		map_view = view.GetMapView();
 		map_model = map_view.GetMapModel();
@@ -41,67 +42,58 @@ public class MapCtrl extends Thread implements MouseListener {
 		return map_view;
 	}
 	
-	public Point GetCellFromClick(int X, int Y) {
-		Point origin = map_model.GetOriginCoord();
-		Point cell = new Point(0,0);
+	public Point GetCellFromClick(Point pos) {
+		Point coord = new Point(0,0);
+		int pos_x = pos.x;
+		int pos_y = pos.y;
 		
 		int size = map_model.GetCellSize();
 		int w_gap = size + (size/2);
 		int h_gap = (int) (Math.sqrt(3) * size);
 		int gap;
 		
-		int originX = origin.x;
-		int originY = origin.y;
+		int x0 = map_model.GetOriginCoord().x;
+		int y0 = map_model.GetOriginCoord().y;
 		
-		int fstX = 0;
-		int sndX = 1;
-		int fstY = 0;
-		int sndY = 1;
+		int x1 = 0;
+		int y1 = 0;
+		int x2 = 1;
+		int y2 = 1;
 		
-		//first we wanna get the maximum
-		for(int j=0; j<map_model.GetColumnsAmount(); j++) {
-			for(int i=0; i<map_model.GetLinesAmount(); i++) {
+		int cpt = 0;
+		boolean OrdNotFound = true;
+		boolean AbsNotFound = true;
+		//first we wanna get an estimation of the possible coord of the click :
+			// (i,j) is the highest possibility
+			// (i, j-1) (i-1, j) are the mid possibilities
+			// (i-1, j-1) is the lowest possibility
+		
+		for(int j=1; j<map_model.GetColumnsAmount(); j++) {
+			for(int i=1; i<map_model.GetLinesAmount(); i++) {
 				if(i%2==0) {
-					gap = 0;
+					gap = h_gap / 2;
 				} else {
-					gap = w_gap / 2;
+					gap = 0;
 				}
 				
-				if(Y < originY + (j* h_gap) - gap) {
-					fstY = j-1;
-					sndY = j;
+				if( (pos_y < y0 + (j * h_gap) - gap) && (pos_y > y0 + ((j-1) * h_gap) - gap) && OrdNotFound) {
+					y1 = j-1;
+					y2 = j;
+					OrdNotFound = false;
 				}
 				
-				if(X < originX + (i* w_gap) ) {
-					fstX = i-1;
-					sndX = i;
+				if( (pos_x < x0 + (i * w_gap)) && (pos_x > x0 + ((i-1) * w_gap)) && AbsNotFound ) {
+					x1 = i-1;
+					x2 = i;
+					AbsNotFound = false;
 				}
 			}
 		}
-		//now we wanna test if the Y is closer to fstY or sndY 
-		int finalX;
-		int finalY;
 		
-		int MidY;
-		int MidX;
-		
-		if(fstX%2!=0) {
-			gap = w_gap / 2;
-		} else {
-			gap = 0;
-		}
-		
-		MidY = ( (originY + (sndY* h_gap) - gap) - (originY + (sndY* h_gap) - gap) )/ 2;
-		if((originY + (sndY* h_gap) - gap) - Y > MidY) {
-			cell.y = fstY;
-		} else {
-			cell.y = sndY;
-		}
-
-		//then we wanna test if th X is closer to fstX or sndX
-		MidX = ( (originX + (sndX* w_gap)) - (originX + (fstX* w_gap)) ) / 2;
-		
-		return cell;
+		//now that we have our 4 possibilities, let's check on them all if the point is in it or not.
+				//thanks to the y-axis, we can easily choose 2 of them.
+		System.out.println("possibilities : " + x1 + "," + y1 + " & " + x2 + "," + y2);
+		return coord;
 	}
 	
 	@Override
@@ -113,10 +105,12 @@ public class MapCtrl extends Thread implements MouseListener {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		//first we wanna get the clicked cell's coordinates
-		int mouseX = e.getX();
-		int mouseY = e.getY();
-		
-		Point cell = GetCellFromClick(mouseX,mouseY);
+		//Point mouse_pos = e.getLocationOnScreen();
+		int mouse_x = e.getX();
+		int mouse_y = e.getY();
+		Point mouse_pos = new Point(mouse_x, mouse_y);
+		System.out.println("clicked on : " + mouse_pos);
+		Point cell = GetCellFromClick(mouse_pos);
 	}
 	
 	@Override
