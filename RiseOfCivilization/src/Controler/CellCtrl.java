@@ -38,26 +38,32 @@ public class CellCtrl extends Thread {
 		}
 	}
 	
+	public void CellBehaviour(CellId id) {
+		switch (id) {
+			case City :
+			case Forest :
+			case Plain :
+			case None :
+			default:
+		}
+	}
+	
 	@Override
 	public void run() {
 		//must implement
 		System.out.println("CellCtrl is running");
 		while(true) {
-			id = cell_model.GetId();
-			if(id==CellId.City) {
-				//real-time behaviour if City Cell
-			} else if(id==CellId.Forest) {
-				//real-time behaviour if Forest Cell
-			} else if(id==CellId.Plain) {
-				//real-time behaviour if Plain Cell
-			} else if(id==CellId.None) {
-				//real-time behaviour if None id 
-			} else {
-				//real-time behaviour else
-			}
+			//passive behaviours
+			CellBehaviour(cell_model.GetId());
 			
 			//on click behaviour of the cell
 			OnClick();
+			
+			try {
+				Thread.sleep(60);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
