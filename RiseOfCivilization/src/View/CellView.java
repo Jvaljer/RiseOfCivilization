@@ -2,16 +2,19 @@ package View;
 
 import Model.*;
 import java.awt.*;
+import Types.*;
 
 public class CellView {
 	private CellModel model;
 	private int abs;
 	private int ord;
+	private CellId id;
 	
 	public CellView(CellModel M) {
 		model = M;
 		abs = model.GetX();
 		ord = model.GetY();
+		id = model.GetId();
 		//must figure out how to define this view properly.
 	}
 	
@@ -25,6 +28,21 @@ public class CellView {
 	
 	public CellModel GetCellModel() {
 		return model;
+	}
+	
+	public Color GetColorFromId() {
+		switch (id) {
+			case Plain :
+				return (new Color(255, 204, 102));
+			case Forest :
+				return (new Color(0, 153, 0));
+			case City : 
+				return (new Color(184, 184, 148));
+			case None : 
+				return (new Color(255, 255, 255));
+			default :
+				return (new Color(0,0,0));
+		}
 	}
 	
 	public void DrawCell(Graphics G, int s, int x0, int y0) {
@@ -61,6 +79,7 @@ public class CellView {
 			y[n] = pts[n].y;
 		}
 		
+		G.setColor(new Color(0,0,0));
 		G.drawPolyline(x, y, pts.length);
 	}
 }

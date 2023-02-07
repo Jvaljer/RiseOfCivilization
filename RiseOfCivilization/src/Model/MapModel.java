@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 import java.awt.*;
 
 import Types.CellId;
@@ -20,14 +21,32 @@ public class MapModel {
 		game = M;
 		width = game.GetMapWidth();
 		height = game.GetMapHeight();
+		
 		//must add calcul of starting point, and all percentages for Cell types
 		grid = new CellModel[lines][columns];
 		for(int j=0; j<columns; j++) {
 			for(int i=0; i<lines; i++) {
 				//must add the cell's Id random association
-				grid[i][j] = new CellModel(i,j,CellId.None);
+				CellId id;
+				int rand_id = ThreadLocalRandom.current().nextInt(0,1);
+				if(rand_id==0) {
+					id = CellId.Plain;
+				} else if(rand_id==1) {
+					id= CellId.Forest;
+				} else {
+					id = CellId.None;
+				}
+				grid[i][j] = new CellModel(i,j,id);
 			}
 		}
+		
+		int city_x = ThreadLocalRandom.current().nextInt(1,20);
+		int city_y = ThreadLocalRandom.current().nextInt(1,17);
+		
+		grid[city_x][city_y].TurnToCity();
+		grid[city_x+1][city_y].TurnToCity();
+		grid[city_x][city_y+1].TurnToCity();
+		
 		direction[0] = new Point(0,-1);
 		direction[1] = new Point(1,0);
 		direction[2] = new Point(1,1);

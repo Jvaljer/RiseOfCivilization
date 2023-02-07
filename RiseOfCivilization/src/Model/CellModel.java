@@ -26,4 +26,8 @@ public class CellModel {
 		return id;
 	}
 	
+	public void TurnToCity() {
+		id = CellId.City;
+	}
+	
 }
