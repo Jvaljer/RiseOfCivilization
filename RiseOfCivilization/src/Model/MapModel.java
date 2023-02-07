@@ -14,6 +14,7 @@ public class MapModel {
 	private static final int Cell_size = 20;
 	private static final Point OriginPoint = new Point(40,80);
 	private CellModel[][] grid;
+	private Point[] direction = new Point[6];
 	
 	public MapModel(GameModel M) {
 		game = M;
@@ -27,6 +28,12 @@ public class MapModel {
 				grid[i][j] = new CellModel(i,j,CellId.None);
 			}
 		}
+		direction[0] = new Point(0,-1);
+		direction[1] = new Point(1,0);
+		direction[2] = new Point(1,1);
+		direction[3] = new Point(0,1);
+		direction[4] = new Point(-1,0);
+		direction[5] = new Point(-1,-1);
 	}
 	
 	public GameModel GetGameModel() {
@@ -67,61 +74,22 @@ public class MapModel {
 	
 	public Point GetCoordFromClick(int x_, int y_) {
 		Point coord = new Point(0,0);
+		//must implement properly
+		return coord;
+	}
+	
+	public ArrayList<Point> GetNeighbours(int i, int j) {
+		ArrayList<Point > neighbours = new ArrayList<Point>();
 		
-		//calculating important dimensions
-		int size = Cell_size;
-		int w = 2*size;
-		int h = (int) (Math.sqrt(3.) * size);
-		
-		//getting screen's spaces
-		int gap_x = OriginPoint.x - Cell_size;
-		int gap_y = OriginPoint.y - h;
-		
-		//scaling mouse's coord
-		int x = x_ + gap_x;
-		int y = y_ + gap_y;
-		
-		//interpolating coordinates values
-		int pos_x = x / ( (w/4) * 7 ); 
-		int pos_y = y / ( (h/2) * 3 );
-		
-		int mod_x = pos_x%7;
-		int mod_y = pos_y%3;
-		
-		switch (mod_y) {
-			case 0 :
-				//on first Y demi
-				if(mod_x < 4) {
-					//we're out
-					coord.x = -1;
-					coord.y = -1;
-				} else if(mod_x == 5 || mod_x == 6) {
-					coord.x = (pos_x / 4) + 1;
-					coord.y = (pos_y / 2);
-				} else {
-					//must get 4 & 7
-				}
-			case 1 : 
-				//on second Y demi
-				if(mod_x == 2 || mod_x == 3) {
-					coord.x = (pos_x / 4);
-					coord.y = (pos_y / 2);
-				} else if(mod_x == 5 || mod_x == 6) {
-					coord.x = (pos_x / 4);
-					coord.y = (pos_y / 2) + 1;
-				} else if(mod_x == 4) {
-					// betwenn 2 cells
-				}else {
-					//must do 1 & 7
-				}
-			case 2 :
-				//on third Y demi
-				
-			default:
-				break;
+		for(int n=0; n<6; n++) {
+			int x = direction[n].x;
+			int y = direction[n].y;
+			if(i+x > 0 && i+x < 8 && j+y > 0 && j+y < 8) {
+				neighbours.add(new Point(i+x,j+y));
+			}
 		}
 		
-		return coord;
+		return neighbours;
 	}
 	
 }
