@@ -22,8 +22,8 @@ public class MapModel {
 		height = game.GetMapHeight();
 		//must add calcul of starting point, and all percentages for Cell types
 		grid = new CellModel[lines][columns];
-		for(int i=0; i<lines; i++) {
-			for(int j=0; j<columns; j++) {
+		for(int j=0; j<columns; j++) {
+			for(int i=0; i<lines; i++) {
 				//must add the cell's Id random association
 				grid[i][j] = new CellModel(i,j,CellId.None);
 			}

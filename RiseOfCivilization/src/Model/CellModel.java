@@ -3,11 +3,12 @@ package Model;
 import Types.*;
 
 public class CellModel {
-	private static int X;
-	private static int Y;
+	private int X;
+	private int Y;
 	private CellId id;
 	
 	public CellModel(int x, int y, CellId i) {
+		
 		X = x;
 		Y = y;
 		id = i;
