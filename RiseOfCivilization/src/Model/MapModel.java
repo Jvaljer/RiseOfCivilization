@@ -28,10 +28,11 @@ public class MapModel {
 			for(int i=0; i<lines; i++) {
 				//must add the cell's Id random association
 				CellId id;
-				int rand_id = ThreadLocalRandom.current().nextInt(0,1);
-				if(rand_id==0) {
+				int rand_id = ThreadLocalRandom.current().nextInt(0,3);
+				System.out.println("rand_id = " + rand_id);
+				if(rand_id<2) {
 					id = CellId.Plain;
-				} else if(rand_id==1) {
+				} else if(rand_id>=2) {
 					id= CellId.Forest;
 				} else {
 					id = CellId.None;
@@ -146,17 +147,17 @@ public class MapModel {
 		double h = s * Math.sin(angle) * 2. ;
 		double w = s * 2. - (1. - Math.cos(angle)) * s;
 		
-		int i = (int) Math.floor( x_ / w );
+		int i = (int) (x_/w) ; //Math.floor() here
 		int x = (int) (x_ - (i - w));
 		
 		int j;
 		int y;
 		
 		if(i%2==0) {
-			j = (int) Math.floor( y_ / h);
+			j = (int) (y_ / h); //here
 			y = (int) (y_ - (j * h) - (h/2));
 		} else {
-			j = (int) Math.floor( (y_ - h / 2.) / h);
+			j = (int) ((y_ - h / 2.)/h); //& here
 			y = (int) (y_ - (j * h) - h);
 		}
 		

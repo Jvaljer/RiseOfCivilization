@@ -79,6 +79,8 @@ public class CellView {
 			y[n] = pts[n].y;
 		}
 		
+		G.setColor(GetColorFromId());
+		G.fillPolygon(x, y, pts.length);
 		G.setColor(new Color(0,0,0));
 		G.drawPolyline(x, y, pts.length);
 	}
