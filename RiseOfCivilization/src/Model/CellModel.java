@@ -8,7 +8,6 @@ public class CellModel {
 	private CellId id;
 	
 	public CellModel(int x, int y, CellId i) {
-		
 		X = x;
 		Y = y;
 		id = i;

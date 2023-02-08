@@ -22,6 +22,13 @@ public class MapModel {
 		width = game.GetMapWidth();
 		height = game.GetMapHeight();
 		
+		direction[0] = new Point(0,-1);
+		direction[1] = new Point(1,0);
+		direction[2] = new Point(1,1);
+		direction[3] = new Point(0,1);
+		direction[4] = new Point(-1,0);
+		direction[5] = new Point(-1,-1);
+		
 		//must add calcul of starting point, and all percentages for Cell types
 		grid = new CellModel[lines][columns];
 		for(int j=0; j<columns; j++) {
@@ -29,7 +36,6 @@ public class MapModel {
 				//must add the cell's Id random association
 				CellId id;
 				int rand_id = ThreadLocalRandom.current().nextInt(0,3);
-				System.out.println("rand_id = " + rand_id);
 				if(rand_id<2) {
 					id = CellId.Plain;
 				} else if(rand_id>=2) {
@@ -45,15 +51,16 @@ public class MapModel {
 		int city_y = ThreadLocalRandom.current().nextInt(1,17);
 		
 		grid[city_x][city_y].TurnToCity();
-		grid[city_x+1][city_y].TurnToCity();
-		grid[city_x][city_y+1].TurnToCity();
-		
-		direction[0] = new Point(0,-1);
-		direction[1] = new Point(1,0);
-		direction[2] = new Point(1,1);
-		direction[3] = new Point(0,1);
-		direction[4] = new Point(-1,0);
-		direction[5] = new Point(-1,-1);
+		ArrayList<Point> city_neigh = GetNeighbours(city_x, city_y);
+		int i1 = ThreadLocalRandom.current().nextInt(0,6);
+		Point city = city_neigh.get(i1);
+		grid[city.x][city.y].TurnToCity();
+		int i2;
+		do {
+			i2 = ThreadLocalRandom.current().nextInt(0,6);
+		} while (i2==i1);
+		city = city_neigh.get(i2);
+		grid[city.x][city.y].TurnToCity();
 	}
 	
 	public GameModel GetGameModel() {
@@ -92,73 +99,29 @@ public class MapModel {
 		return OriginPoint;
 	}
 	
-	public Point GetCoordFromClick_will(int x_, int y_) {
-		Point coord = new Point(0,0);
-		int x0 = OriginPoint.x; 
-		int y0 = OriginPoint.y;
-		
-		int s = Cell_size;
-		int h = (int) (Math.sqrt(3.) * s);
-		int w = 2*s;
-		
-		
-		int x = x_ + x0 - s;
-		int y = y_ +y0 - (h/2);
-		
-		double half_h = h/2.;
-		double quart_w = w/4.;
-		
-		double pos_x = x/(quart_w*7);
-		double pos_y = y/(half_h*3);
-		System.out.printf("pos_x : %f | pos_y : %f \n", pos_x, pos_y);
-		int mod_x = (int) pos_x%7;
-		int mod_y = (int) pos_y%3;
-		System.out.printf("mod_x : %d | mod_y : %d \n", mod_x, mod_y);
-		
-		switch (mod_y) {
-			case 0 :
-				if(mod_x > 2) {
-					System.out.printf("coord : %f %f \n", (pos_x/4) + 1, pos_y/2);
-				} 
-			case 1 : 
-				if(mod_x < 3) {
-					System.out.printf("coord : %f %f \n", pos_x/4, pos_y/2);
-				} else if(mod_x > 3) {
-					System.out.printf("coord : %f %f \n", (pos_x/4) + 1, pos_y/2);
-				} else {
-					//function GetPos(Point(i,j)) -> return sa position à l'ecran
-					//GetPos((pos_x/4) + 1, pos_y/2) & GetPos(pos_x/4, pos_y/2) 
-					//distance euclidienne entre les deux -> la plus proche est la case voulu
-					
-					//version 2 -> couper le rectangle en 2 et juste dire haut -> +1 & bas -> 0
-				}
-			case 2 :
-				if(mod_x < 4) {
-					System.out.printf("coord : %f %f \n", pos_x/4, pos_y/2);
-				}
-		}
-		
-		return coord;
+	public Point GetPosFromCoord(int i, int j) {
+		Point pos = new Point(0,0);
+		return pos;
 	}
 	
-	public Point GetCoordFromClick_abel(int x_, int y_) {
+	public Point GetCoordFromClick(int x_, int y_) {
 		int s = Cell_size;
 		double angle = 60. * Math.PI / 180. ;
 		double h = s * Math.sin(angle) * 2. ;
 		double w = s * 2. - (1. - Math.cos(angle)) * s;
 		
-		int i = (int) (x_/w) ; //Math.floor() here
-		int x = (int) (x_ - (i - w));
+		double i = (x_/w) ; //Math.floor() here ? 
+		double x = (x_ - (i - w));
 		
-		int j;
-		int y;
+		double j;
+		double y;
 		
 		if(i%2==0) {
-			j = (int) (y_ / h); //here
-			y = (int) (y_ - (j * h) - (h/2));
+			j = (y_ / h); //here
+			y = (y_ - (j * h) - (h/2));
 		} else {
-			j = (int) ((y_ - h / 2.)/h); //& here
-			y = (int) (y_ - (j * h) - h);
+			j = ((y_ - h / 2.)/h); //& here
+			y = (y_ - (j * h) - h);
 		}
 		
 		double f1 = Math.sin(angle) / Math.cos(angle) * x;
@@ -170,17 +133,17 @@ public class MapModel {
 			i = i - 1;
 			j = j - 1;
 		}
-		System.out.printf("Clicked coords are : (%d,%d)\n", i-1, j-1);
-		return (new Point(i-1,j-1));
+		//System.out.printf("Clicked coords are : (%d,%d)\n",(int) i-1,(int) j-1);
+		return (new Point((int) i-1,(int) j-1));
 	}
 	
 	public ArrayList<Point> GetNeighbours(int i, int j) {
 		ArrayList<Point > neighbours = new ArrayList<Point>();
 		
-		for(int n=0; n<6; n++) {
-			int x = direction[n].x;
-			int y = direction[n].y;
-			if(i+x > 0 && i+x < 8 && j+y > 0 && j+y < 8) {
+		for(Point pts : direction) {
+			int x = pts.x;
+			int y = pts.y;
+			if(i+x > 0 && i+x < 21 && j+y > 0 && j+y < 18) {
 				neighbours.add(new Point(i+x,j+y));
 			}
 		}

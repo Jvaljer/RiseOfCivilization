@@ -49,7 +49,7 @@ public class MapCtrl extends Thread implements MouseListener {
 		int pos_x = pos.x;
 		int pos_y = pos.y;
 		
-		coord = map_model.GetCoordFromClick_abel(pos_x, pos_y);
+		coord = map_model.GetCoordFromClick(pos_x, pos_y);
 		
 		return coord;
 	}
