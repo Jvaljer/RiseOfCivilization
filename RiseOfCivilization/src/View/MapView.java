@@ -41,6 +41,10 @@ public class MapView extends JPanel {
 		return map_model;
 	}
 	
+	public CellView[][] GetGrid(){
+		return grid_view;
+	}
+	
 	public void DrawMap(Graphics G) {
 		int s = map_model.GetCellSize();
 		

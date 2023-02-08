@@ -52,12 +52,12 @@ public class MapModel {
 		
 		grid[city_x][city_y].TurnToCity();
 		ArrayList<Point> city_neigh = GetNeighbours(city_x, city_y);
-		int i1 = ThreadLocalRandom.current().nextInt(0,6);
+		int i1 = ThreadLocalRandom.current().nextInt(0,city_neigh.size());
 		Point city = city_neigh.get(i1);
 		grid[city.x][city.y].TurnToCity();
 		int i2;
 		do {
-			i2 = ThreadLocalRandom.current().nextInt(0,6);
+			i2 = ThreadLocalRandom.current().nextInt(0,city_neigh.size());
 		} while (i2==i1);
 		city = city_neigh.get(i2);
 		grid[city.x][city.y].TurnToCity();
@@ -101,6 +101,21 @@ public class MapModel {
 	
 	public Point GetPosFromCoord(int i, int j) {
 		Point pos = new Point(0,0);
+		int x0 = OriginPoint.x;
+		int y0 = OriginPoint.y;
+		int s = Cell_size;
+		int w_gap = s + s/2;
+		int h = (int) (Math.sqrt(3.) * s);
+		int h_gap = h;
+		int gap;
+		if(i%2==0) {
+			gap = 0;
+		} else {
+			gap = h/2;
+		}
+		pos.x = (x0 + i*w_gap);
+		pos.y = (y0 + j*h_gap - gap);
+		//System.out.printf("pos from coord : x->[%d] y->[%d] \n",pos.x, pos.y);
 		return pos;
 	}
 	

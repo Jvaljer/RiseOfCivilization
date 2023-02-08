@@ -25,6 +25,11 @@ public class MapCtrl extends Thread implements MouseListener {
 		map_view = view.GetMapView();
 		map_model = map_view.GetMapModel();
 		ctrl_grid = new CellCtrl[map_model.GetColumnsAmount()][map_model.GetLinesAmount()];
+		for(int j=0; j<map_model.GetColumnsAmount(); j++) {
+			for(int i=0; i<map_model.GetLinesAmount(); i++) {
+				ctrl_grid[i][j] = new CellCtrl(map_view.GetGrid()[i][j]);
+			}
+		}
 	}
 	
 	public GameModel GetGameModel() {
@@ -67,10 +72,10 @@ public class MapCtrl extends Thread implements MouseListener {
 		int mouse_x = e.getX();
 		int mouse_y = e.getY();
 		Point mouse_pos = new Point(mouse_x, mouse_y);
-		
 		System.out.println("clicked on : " + mouse_pos);
 		
 		Point cell = GetCellFromClick(mouse_pos);
+		Point pos = map_model.GetPosFromCoord(cell.x,cell.y);
 	}
 	
 	@Override
