@@ -23,8 +23,8 @@ public class MapModel {
 		height = game.GetMapHeight();
 		
 		direction[0] = new Point(0,-1);
-		direction[1] = new Point(1,0);
-		direction[2] = new Point(1,1);
+		direction[1] = new Point(1,-1);
+		direction[2] = new Point(1,0);
 		direction[3] = new Point(0,1);
 		direction[4] = new Point(-1,0);
 		direction[5] = new Point(-1,-1);
@@ -148,7 +148,7 @@ public class MapModel {
 			i = i - 1;
 			j = j - 1;
 		}
-		//System.out.printf("Clicked coords are : (%d,%d)\n",(int) i-1,(int) j-1);
+		System.out.printf("Clicked coords are : (%d,%d)\n",(int) i-1,(int) j-1);
 		return (new Point((int) i-1,(int) j-1));
 	}
 	

@@ -24,9 +24,10 @@ public class MapCtrl extends Thread implements MouseListener {
 		model = view.GetGameModel();
 		map_view = view.GetMapView();
 		map_model = map_view.GetMapModel();
-		ctrl_grid = new CellCtrl[map_model.GetColumnsAmount()][map_model.GetLinesAmount()];
+		ctrl_grid = new CellCtrl[map_model.GetLinesAmount()][map_model.GetColumnsAmount()];
 		for(int j=0; j<map_model.GetColumnsAmount(); j++) {
 			for(int i=0; i<map_model.GetLinesAmount(); i++) {
+				
 				ctrl_grid[i][j] = new CellCtrl(map_view.GetGrid()[i][j]);
 			}
 		}
