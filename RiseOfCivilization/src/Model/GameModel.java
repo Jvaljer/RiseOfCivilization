@@ -7,9 +7,11 @@ public class GameModel {
 	private static final int panel_height = 650;
 	
 	private MapModel map;
+	private InventoryModel inventory;
 
 	public GameModel() {
 		map = new MapModel(this);
+		inventory = new InventoryModel();
 	}
 	
 	public int GetMapWidth() {
@@ -30,5 +32,9 @@ public class GameModel {
 	
 	public MapModel GetMapModel() {
 		return map;
+	}
+	
+	public InventoryModel getInventoryModel() {
+		return inventory;
 	}
 }

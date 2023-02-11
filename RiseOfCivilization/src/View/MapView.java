@@ -4,6 +4,7 @@ import Model.*;
 import javax.swing.*;
 import java.awt.*;
 
+@SuppressWarnings("serial")
 public class MapView extends JPanel {
 	private MapModel map_model;
 	private int width;
