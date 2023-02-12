@@ -8,10 +8,12 @@ public class GameModel {
 	
 	private MapModel map;
 	private InventoryModel inventory;
+	private PlayerModel player;
 
 	public GameModel() {
 		map = new MapModel(this);
 		inventory = new InventoryModel();
+		player = new PlayerModel(this);
 	}
 	
 	public int GetMapWidth() {
@@ -36,5 +38,9 @@ public class GameModel {
 	
 	public InventoryModel getInventoryModel() {
 		return inventory;
+	}
+	
+	public PlayerModel GetPlayerModel() {
+		return player;
 	}
 }

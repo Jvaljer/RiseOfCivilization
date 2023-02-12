@@ -22,6 +22,7 @@ public class MapModel {
 	private static final Point OriginPoint = new Point(40,80);
 	private CellModel[][] grid;
 	private Point[] direction = new Point[6];
+	private Point city_origin;
 	
 	public MapModel(GameModel M) {
 		game = M;
@@ -55,6 +56,7 @@ public class MapModel {
 		
 		int city_x = ThreadLocalRandom.current().nextInt(1,20);
 		int city_y = ThreadLocalRandom.current().nextInt(1,17);
+		city_origin = new Point(city_x, city_y);
 		
 		grid[city_x][city_y].TurnToCity();
 		ArrayList<Point> city_neigh = GetNeighbours(city_x, city_y);
@@ -105,6 +107,9 @@ public class MapModel {
 		return OriginPoint;
 	}
 	
+	public Point GetCityOriginCoord() {
+		return city_origin;
+	}
 	public Point GetPosFromCoord(int i, int j) {
 		Point pos = new Point(0,0);
 		int x0 = OriginPoint.x;

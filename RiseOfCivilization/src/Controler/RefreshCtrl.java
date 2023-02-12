@@ -19,7 +19,6 @@ public class RefreshCtrl extends Thread {
 			//working but don't know why it is not visually good
 			view.repaint();
 			view.revalidate();
-			
 			try {
 				Thread.sleep(120);
 			} catch (Exception e) {
