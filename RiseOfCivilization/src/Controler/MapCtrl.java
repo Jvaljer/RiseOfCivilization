@@ -18,6 +18,9 @@ public class MapCtrl extends Thread implements MouseListener {
 	private MapView map_view;
 	private CellCtrl[][] ctrl_grid;
 	
+	private CellCtrl new_click;
+	private CellCtrl old_click;
+	
 	public MapCtrl(GameView V) {
 		view = V;
 		view.addMouseListener(this);
@@ -27,7 +30,6 @@ public class MapCtrl extends Thread implements MouseListener {
 		ctrl_grid = new CellCtrl[map_model.GetLinesAmount()][map_model.GetColumnsAmount()];
 		for(int j=0; j<map_model.GetColumnsAmount(); j++) {
 			for(int i=0; i<map_model.GetLinesAmount(); i++) {
-				
 				ctrl_grid[i][j] = new CellCtrl(map_view.GetGrid()[i][j]);
 			}
 		}
@@ -76,6 +78,14 @@ public class MapCtrl extends Thread implements MouseListener {
 		System.out.println("clicked on : " + mouse_pos);
 		
 		Point cell = GetCellFromClick(mouse_pos);
+		
+		if(old_click != null) {
+			old_click.UnClick();
+		}
+		new_click = ctrl_grid[cell.x][cell.y];
+		new_click.OnClick();
+		old_click = new_click;
+		
 		Point pos = map_model.GetPosFromCoord(cell.x,cell.y);
 	}
 	

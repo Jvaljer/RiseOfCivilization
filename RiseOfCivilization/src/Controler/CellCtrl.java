@@ -52,6 +52,7 @@ public class CellCtrl extends Thread {
 	 * its Id. 
 	 */
 	public void OnClick() {
+		cell_view.Click();
 		switch (id) {
 			case City :
 				
@@ -64,6 +65,10 @@ public class CellCtrl extends Thread {
 			default:
 				
 		}
+	}
+	
+	public void UnClick() {
+		cell_view.Click();
 	}
 	
 	/** 
