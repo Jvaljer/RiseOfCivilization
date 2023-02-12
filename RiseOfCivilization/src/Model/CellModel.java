@@ -2,6 +2,11 @@ package Model;
 
 import Types.*;
 
+/**
+ * Model of a cell, containing all position & Id values of a cell. Ans the 
+ * needed methods to act on it properly.
+ * @author abel
+ */
 public class CellModel {
 	private int X;
 	private int Y;

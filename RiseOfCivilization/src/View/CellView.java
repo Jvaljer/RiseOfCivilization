@@ -4,6 +4,12 @@ import Model.*;
 import java.awt.*;
 import Types.*;
 
+/**
+ * View class of a Cell, containing and defining all the needed informations to 
+ * draw properly the cell as a regular Hexagon, who's color gonna evolve throughout
+ * the game.
+ * @author abel
+ */
 public class CellView {
 	private CellModel model;
 	private int abs;
@@ -15,7 +21,6 @@ public class CellView {
 		abs = model.GetX();
 		ord = model.GetY();
 		id = model.GetId();
-		//must figure out how to define this view properly.
 	}
 	
 	public int GetAbs() {

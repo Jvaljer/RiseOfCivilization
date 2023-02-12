@@ -13,6 +13,8 @@ public class GameCtrl extends Thread{
 		view = V;
 		model = view.GetGameModel();
 		map = new MapCtrl(view);
+		
+		(new RefreshCtrl(view)).start();
 	}
 	
 	@Override

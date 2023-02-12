@@ -4,7 +4,13 @@ import Model.*;
 import javax.swing.*;
 import java.awt.*;
 
-@SuppressWarnings("serial")
+/**
+ * View class of the overall map, as a grid of regular hexagon, placed in an
+ * even-q disposition, using a vertical layout. And drawing each cell usign its own
+ * DrawCell method.
+ * @author abel
+ * @SuppressWarnings("serial")
+ */
 public class MapView extends JPanel {
 	private MapModel map_model;
 	private int width;
@@ -54,9 +60,6 @@ public class MapView extends JPanel {
 		
 		for(int j=0; j<columns; j++) {
 			for(int i=0; i<lines; i++) {
-				
-				//DrawCell(i,j,G, s, x0, y0);
-				
 				grid_view[i][j].DrawCell(G, s, x0, y0);
 			}
 		}

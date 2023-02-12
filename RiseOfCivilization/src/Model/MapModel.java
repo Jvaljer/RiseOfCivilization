@@ -6,6 +6,12 @@ import java.awt.*;
 
 import Types.CellId;
 
+/**
+ * Model for the overall map, containing all the grid informations, and the needed
+ * methods to manipulate it as we want. As the lines & columns amount, or even the 
+ * directions & positions.
+ * @author abel
+ */
 public class MapModel {
 	private GameModel game;
 	private static int width;
