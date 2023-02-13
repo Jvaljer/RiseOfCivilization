@@ -1,7 +1,12 @@
 Documentation - 
 
 All features : 
-	Click on a slot -> shows all possible actions : 
-		 	   - Harvest
-		 	   - Guard
-		 	   - Drop 
+	Click on a cell -> shows all possible actions : 
+		 	   - Harvest (get the nearest available worker and move it to the cell)
+		 	   - Guard (get the nearest available knight and moce it to the cell
+		 	   - Drop (makes the clicked worker go to town to loot his stuff)
+		 	   
+	Continuously -> forest grows (only on the cell -> has more wood)
+	
+	Resources -> Each cell has a precise amount of resources (specified only by the cell's Id)
+	

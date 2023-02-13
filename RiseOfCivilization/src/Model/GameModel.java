@@ -1,5 +1,7 @@
 package Model;
 
+import Types.WorkerRole;
+
 public class GameModel {
 	private static final int map_width = 675;
 	private static final int map_height = 650;
@@ -8,12 +10,12 @@ public class GameModel {
 	
 	private MapModel map;
 	private InventoryModel inventory;
-	private PlayerModel player;
+	private WorkerModel player;
 
 	public GameModel() {
 		map = new MapModel(this);
 		inventory = new InventoryModel();
-		player = new PlayerModel(this);
+		player = new WorkerModel(this,WorkerRole.Worker);
 	}
 	
 	public int GetMapWidth() {
@@ -40,7 +42,7 @@ public class GameModel {
 		return inventory;
 	}
 	
-	public PlayerModel GetPlayerModel() {
+	public WorkerModel GetWorkerModel() {
 		return player;
 	}
 }

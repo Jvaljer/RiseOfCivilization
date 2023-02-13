@@ -13,13 +13,13 @@ public class WorkerModel {
 	private boolean occupied;
 	private WorkerRole role;
 	
-	public WorkerModel(GameModel M, WorkerModel R) {
+	public WorkerModel(GameModel M, WorkerRole R) {
 		model = M;
 		map_model = model.GetMapModel();
 		model_grid = map_model.GetGrid();
 		pos = map_model.GetCityOriginCoord();
 		occupied = false;
-		
+		role = R;
 	}
 	
 	public Point GetPos() {

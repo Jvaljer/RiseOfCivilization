@@ -3,18 +3,18 @@ package View;
 import Model.*;
 import java.awt.*;
 
-public class PlayerView {
+public class WorkerView {
 	private GameView view;
 	private MapModel map_model;
-	private PlayerModel player;
+	private WorkerModel player;
 	
 	private Point player_pos;
 	private Point player_size;
 	
-	public PlayerView(GameView V) {
+	public WorkerView(GameView V) {
 		view = V;
 		map_model = view.GetGameModel().GetMapModel();
-		player = view.GetGameModel().GetPlayerModel();
+		player = view.GetGameModel().GetWorkerModel();
 		player_pos = player.GetPos();
 		player_size = new Point(player.GetWidth(),player.GetHeight());
 	}
