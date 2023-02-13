@@ -20,7 +20,7 @@ public class RefreshCtrl extends Thread {
 			view.repaint();
 			view.revalidate();
 			try {
-				Thread.sleep(120);
+				Thread.sleep(240);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
