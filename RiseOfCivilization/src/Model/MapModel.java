@@ -177,4 +177,9 @@ public class MapModel {
 		return neighbours;
 	}
 	
+	public boolean CellIsValid(Point cell) {
+		int i = cell.x;
+		int j = cell.y;
+		return (i<21 && i>=0 && j<18 && j>=0);
+	}
 }

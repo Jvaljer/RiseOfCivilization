@@ -78,13 +78,14 @@ public class MapCtrl extends Thread implements MouseListener {
 		System.out.println("clicked on : " + mouse_pos);
 		
 		Point cell = GetCellFromClick(mouse_pos);
-		
-		if(old_click != null) {
-			old_click.UnClick();
+		if(map_model.CellIsValid(cell)) {
+			if(old_click != null) {
+				old_click.UnClick();
+			}
+			new_click = ctrl_grid[cell.x][cell.y];
+			new_click.OnClick();
+			old_click = new_click;
 		}
-		new_click = ctrl_grid[cell.x][cell.y];
-		new_click.OnClick();
-		old_click = new_click;
 		
 		Point pos = map_model.GetPosFromCoord(cell.x,cell.y);
 	}

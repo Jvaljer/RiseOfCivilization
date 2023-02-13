@@ -1,24 +1,7 @@
 Documentation - 
 
-First week : 
-	Model-
-		GameModel.java
-		--------------------
-		CellModel.java (Abel)
-		MapModel.java (Abel)
-		WorkerModel.java (William)
-		InventoryModel.java (Martin)
-	View-
-		GameView.java
-		-------------------
-		CellView.java (Abel)
-		MapView.java (Abel)
-		WorkerView.java (William)
-		InventoryView.java (Martin)
-	Controler-
-		GameCtrl.java 
-		-------------------
-		CellCtrl.java (Abel)
-		MapCtrl.java (Abel)
-		WorkerCtrl.java (William)
-		InventoryCtrl.java (Martin)
+All features : 
+	Click on a slot -> shows all possible actions : 
+		 	   - Harvest
+		 	   - Guard
+		 	   - Drop 
