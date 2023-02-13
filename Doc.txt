@@ -1,12 +1,76 @@
 Documentation - 
 
 All features : 
-	Click on a cell -> shows all possible actions : 
-		 	   - Harvest (get the nearest available worker and move it to the cell)
-		 	   - Guard (get the nearest available knight and moce it to the cell
-		 	   - Drop (makes the clicked worker go to town to loot his stuff)
-		 	   
-	Continuously -> forest grows (only on the cell -> has more wood)
+	- Only one worker per cell
+	- each resource or building cell has an inventory
+	- clicking on a slot -> shows the possible actions (harvest / collect / turn to city)
+	- clicking on a slot containing a player -> shows the possible actions (drop / move)
+	- player inventory inside City 
+	- worker harvesting -> constant value
+	- cell's stock limited (the more it has resrouces left, the more it regains fast)
+	- worker's inventory divided in 3 part -> harvesting = fulfilling a third of its inventory.
+
+Must implement : 
+	##### PATHFINDING FUCNTION #####
+	Cells ; 
+		CityHall building (Building.java) at start -> has the overall inventory
+		OnClick -> show all the possible actions (on the panel) 
+			    - Resources Cell : Harvest / Build
+			    - Worker Cell : Drop / Move
+			    - Adjacent to city Cell : Expand 
+			    - CityHall Cell : New Worker
+			    - Building Cell : Collect
+			    
+			-> show the cell's information (on the panel too)
+			    - CellId 
+			    - Resource Quantity
+			    - Production rate
+			    - if worker on it -> shows worker's infos 
+			    			   - inventory
+			    - if CityHall -> shows Occupied & Free Workers lists
+			    
+		Continuous Behaviour ;
+		
+	Worker ;
+		2 worker at start (1 per city slot) 
+		2 lists -> one Occupied, one Free
+		When inventory is full -> automatically sets occupied & goes drop
+	Panel ; 
+		Possibles actions ; (takes place in CellCtrl) + (take a constant time) + (when a worker doing something -> not free)
+			- Harvest -> the nearest free worker goes to the clicked cell to harvest (takes a constant amount of the resources)
+			- Build -> the nearest free worker goes to the clicked cell to turn it into a building (corresponding to the initial 
+				   Cell's type) !! necessitates the needed resources !!
+			- Drop -> the clicked worker goes to the cityhall and drop all his inventory into the city's one
+			- Move -> the clicked worker goes to the indicated cell 
+			- Collect -> the nearest free worker goes to the cell to collect (takes the maximum amount of resources)
+			- New Worker -> creates a new worker inside the city !! necessitates the needed resources !!
+			- Expand -> turns the clicked cell into a City Cell !! necessitates the needed resources !!
+		
+
+Martin ; 
+	- Inventory View + Controler
+	- Buildings implementation 
+	- Continous Resources handling
+Amaury ; 
+	- Actions View
+	- Informations View
+William ; 
+	- Worker's lists 
+	- Worker's animation
+	- Develop worker (inventory ...) 
+Abel ; 
+	- Actions Methods 
+	- Pathfinding
+	- Window Adjustment
 	
-	Resources -> Each cell has a precise amount of resources (specified only by the cell's Id)
+Report Work :  
+    - Write Global Analysis (overall project description)
+    - tasks List (all we must do throughout the project)
+    - tasks repartition (person & time) -> Gant Diagram
+    - Global Conception (explains globally what features we want)
+    - Detailled Conception (what are the features and how we wanna implement it
+
+
+
+
 	
