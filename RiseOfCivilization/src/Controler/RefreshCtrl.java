@@ -8,9 +8,11 @@ import View.*;
  */
 public class RefreshCtrl extends Thread {
 	private GameView view;
+	private MapView map_view;
 	
 	public RefreshCtrl(GameView V) {
 		view = V;
+		map_view = view.GetMapView();
 	}
 	
 	@Override

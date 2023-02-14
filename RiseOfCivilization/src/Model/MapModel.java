@@ -182,4 +182,9 @@ public class MapModel {
 		int j = cell.y;
 		return (i<21 && i>=0 && j<18 && j>=0);
 	}
+	
+	public ArrayList<Point> GetShortestPath(Point start, Point end){
+		ArrayList<Point> path = new ArrayList<Point>();
+		return path;
+	}
 }
