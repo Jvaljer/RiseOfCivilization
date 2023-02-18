@@ -184,7 +184,29 @@ public class MapModel {
 	}
 	
 	public ArrayList<Point> GetShortestPath(Point start, Point end){
-		ArrayList<Point> path = new ArrayList<Point>();
-		return path;
+		/*
+		1. Initialiser tous les noeuds avec une distance infinie et un booléen visited à false
+		2. Le nœud de départ a une distance de 0 et est ajouté à une file d'attente de priorité 
+		   (priority queue)
+		3. Tant que la file d'attente n'est pas vide :
+		      a. Retirer le nœud avec la distance la plus courte de la file d'attente
+		      b. Si le nœud a déjà été visité, passer à l'étape 3a
+		      c. Marquer le nœud comme visité
+		      d. Pour chaque voisin non visité du nœud actuel :
+		            i. Calculer la distance tentative entre le nœud actuel et son voisin
+		            ii. Si la distance tentative est plus courte que la distance actuelle 
+		            	du voisin, mettre à jour la distance du voisin
+		            iii. Ajouter le voisin à la file d'attente
+
+		4. Une fois que la file d'attente est vide, la distance minimale pour chaque nœud est connue
+		*/
+		int dist = 10000;
+		DijkstraPoint[][] grid_ = new DijkstraPoint[lines][columns];
+		DijkstraPoint start_pts = new DijkstraPoint(start.x, start.y, 0);
+		for(int j=0; j<lines; j++) {
+			for(int i=0; i<columns; i++) {
+				grid_[i][j] = new DijkstraPoint(i,j,dist);
+			}
+		}
 	}
 }
