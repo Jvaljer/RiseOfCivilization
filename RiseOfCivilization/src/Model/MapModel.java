@@ -185,11 +185,11 @@ public class MapModel {
 	
 	public ArrayList<Point> GetShortestPath(Point s, Point e){
 		Node[][] Graph = new Node[lines][columns];
-		Node start = new Node(s.x,s.y);
-		Node end = new Node(e.x,e.y);
+		Node start = new Node(this, s.x, s.y);
+		Node end = new Node(this, e.x, e.y);
 		for(CellModel[] line : grid) {
 			for(CellModel cell : line) {
-				Graph[cell.GetX()][cell.GetY()] = new Node(cell.GetX(),cell.GetY());
+				Graph[cell.GetX()][cell.GetY()] = new Node(this, cell.GetX(),cell.GetY());
 			}
 		}
 		
@@ -214,6 +214,9 @@ public class MapModel {
 				break;
 			}
 			
+			if(current.GetNeighbors(Graph).size()==0) {
+				System.out.println("empty af...");
+			}
 			for(Node neighbor : current.GetNeighbors(Graph)) {
 				int dist = distances.get(current) + 1;
 				
@@ -243,5 +246,11 @@ public class MapModel {
 		}
 		
 		return pts_path;
+	}
+	
+	public Point GetPointFromCoord(int x, int y) {
+		CellModel cell = GetCellFromCoord(x,y);
+		Point pts = new Point(cell.GetX(),cell.GetY());
+		return pts;
 	}
 }
