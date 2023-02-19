@@ -183,40 +183,60 @@ public class MapModel {
 		return (i<21 && i>=0 && j<18 && j>=0);
 	}
 	
-	public ArrayList<Point> GetShortestPath(Point start, Point end){
-		/*
-		1. Initialiser tous les noeuds avec une distance infinie et un booléen visited à false
-		2. Le nœud de départ a une distance de 0 et est ajouté à une file d'attente de priorité 
-		   (priority queue)
-		3. Tant que la file d'attente n'est pas vide :
-		      a. Retirer le nœud avec la distance la plus courte de la file d'attente
-		      b. Si le nœud a déjà été visité, passer à l'étape 3a
-		      c. Marquer le nœud comme visité
-		      d. Pour chaque voisin non visité du nœud actuel :
-		            i. Calculer la distance tentative entre le nœud actuel et son voisin
-		            ii. Si la distance tentative est plus courte que la distance actuelle 
-		            	du voisin, mettre à jour la distance du voisin
-		            iii. Ajouter le voisin à la file d'attente
-
-		4. Une fois que la file d'attente est vide, la distance minimale pour chaque nœud est connue
-		*/
-		int dist = 10000;
-		DijkstraPoint[][] grid_ = new DijkstraPoint[lines][columns];
-		DijkstraPoint start_pts = new DijkstraPoint(start.x, start.y, 0);
-		for(int j=0; j<lines; j++) {
-			for(int i=0; i<columns; i++) {
-				grid_[i][j] = new DijkstraPoint(i,j,dist);
+	public ArrayList<Point> GetShortestPath(Point s, Point e){
+		Node[][] Graph = new Node[lines][columns];
+		Node start = new Node(s.x,s.y);
+		Node end = new Node(e.x,e.y);
+		for(CellModel[] line : grid) {
+			for(CellModel cell : line) {
+				Graph[cell.GetX()][cell.GetY()] = new Node(cell.GetX(),cell.GetY());
 			}
 		}
 		
-		ArrayList<DijkstraPoint> prio_queue = new ArrayList<DijkstraPoint>();
-		start_pts.dist = 0;
-		prio_queue.add(start_pts);
+		Map<Node, Integer> distances = new HashMap<>();
+		Map<Node, Node> prev_nodes = new HashMap<>();
 		
-		while(!prio_queue.isEmpty()) {
-			for(int i=0; i<prio_queue.size(); i++) {
+		for(Node[] line : Graph) {
+			for(Node node : line) {
+				distances.put(node, Integer.MAX_VALUE);
+				prev_nodes.put(node, null);
+			}
+		}
+		distances.put(start, 0);
+		
+		PriorityQueue<Node> unvisited = new PriorityQueue<>(Comparator.comparingInt(distances::get));
+		unvisited.add(start);
+		
+		while(!unvisited.isEmpty()) {
+			Node current = unvisited.poll();
+			
+			if(current == end) {
+				break;
+			}
+			
+			for(Node neighbor : current.GetNeighbors(Graph)) {
+				int dist = distances.get(current) + 1;
 				
+				if(dist < distances.get(neighbor)) {
+					distances.put(neighbor, dist);
+					prev_nodes.put(neighbor, current);
+					unvisited.add(neighbor);
+				}
 			}
 		}
+		
+		if(distances.get(end) == Integer.MAX_VALUE) {
+			return null;
+		}
+		
+		ArrayList<Node> path = new ArrayList<Node>();
+		Node current = end;
+		while(current != null) {
+			path.add(current);
+			current = prev_nodes.get(current);
+		}
+		Collections.reverse(path);
+		
+		return path;
 	}
 }
