@@ -208,5 +208,15 @@ public class MapModel {
 				grid_[i][j] = new DijkstraPoint(i,j,dist);
 			}
 		}
+		
+		ArrayList<DijkstraPoint> prio_queue = new ArrayList<DijkstraPoint>();
+		start_pts.dist = 0;
+		prio_queue.add(start_pts);
+		
+		while(!prio_queue.isEmpty()) {
+			for(int i=0; i<prio_queue.size(); i++) {
+				
+			}
+		}
 	}
 }
