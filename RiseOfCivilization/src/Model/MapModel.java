@@ -237,6 +237,11 @@ public class MapModel {
 		}
 		Collections.reverse(path);
 		
-		return path;
+		ArrayList<Point> pts_path = new ArrayList<Point>();
+		for(Node node : path) {
+			pts_path.add(new Point(node.x, node.y));
+		}
+		
+		return pts_path;
 	}
 }
