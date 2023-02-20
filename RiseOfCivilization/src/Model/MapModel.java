@@ -62,13 +62,17 @@ public class MapModel {
 		ArrayList<Point> city_neigh = GetNeighbours(city_x, city_y);
 		int i1 = ThreadLocalRandom.current().nextInt(0,city_neigh.size());
 		Point city = city_neigh.get(i1);
+		ArrayList<Point> path_to_origin = GetShortestPath(city,new Point(0,0));
 		grid[city.x][city.y].TurnToCity();
+		System.out.println("shortest path to origin -> " + path_to_origin);
 		int i2;
 		do {
 			i2 = ThreadLocalRandom.current().nextInt(0,city_neigh.size());
 		} while (i2==i1);
 		city = city_neigh.get(i2);
 		grid[city.x][city.y].TurnToCity();
+		
+		
 	}
 	
 	public GameModel GetGameModel() {
@@ -164,16 +168,18 @@ public class MapModel {
 	}
 	
 	public ArrayList<Point> GetNeighbours(int i, int j) {
+		System.out.println("starting GetNeighbours...");
 		ArrayList<Point > neighbours = new ArrayList<Point>();
 		
 		for(Point pts : direction) {
 			int x = pts.x;
 			int y = pts.y;
 			if(i+x > 0 && i+x < 21 && j+y > 0 && j+y < 18) {
+				System.out.println("found a neighbor !");
 				neighbours.add(new Point(i+x,j+y));
 			}
 		}
-		
+		System.out.println("returning the " + neighbours.size() +" neighbours");
 		return neighbours;
 	}
 	

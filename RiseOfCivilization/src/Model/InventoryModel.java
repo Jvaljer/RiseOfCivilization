@@ -1,6 +1,6 @@
 package Model;
 
-import Types.Resource;
+import Types.*;
 
 import java.util.concurrent.ConcurrentHashMap;
 
