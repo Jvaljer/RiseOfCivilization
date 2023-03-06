@@ -19,11 +19,6 @@ public class GameCtrl extends Thread{
 	}
 	
 	//here are the actions method, which will be called whenever the player clicks on the related button
-	public void Harvest(CellModel cell) {
-		Point pts = cell.GetCoord();
-		WorkerModel nearest_worker = model.GetMapModel().GetNearestWorker(pts);
-		return;
-	}
 	public void Build(CellModel cell) {
 		Point pts = cell.GetCoord();
 		WorkerModel nearest_worker = model.GetMapModel().GetNearestWorker(pts);
@@ -35,8 +30,6 @@ public class GameCtrl extends Thread{
 		return;
 	}
 	public void Move(CellModel cell) {
-		Point pts = cell.GetCoord();
-		WorkerModel nearest_worker = model.GetMapModel().GetNearestWorker(pts);
 		return;
 	}
 	public void Collect(CellModel cell) {
@@ -45,8 +38,6 @@ public class GameCtrl extends Thread{
 		return;
 	}
 	public void NewWorker(CellModel cell) {
-		Point pts = cell.GetCoord();
-		WorkerModel nearest_worker = model.GetMapModel().GetNearestWorker(pts);
 		return;
 	}
 	public void Expand(CellModel cell) {

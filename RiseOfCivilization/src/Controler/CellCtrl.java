@@ -53,6 +53,7 @@ public class CellCtrl extends Thread {
 	 */
 	public void OnClick() {
 		cell_view.Click();
+		//here we wanna give the possibility for the player to click certain buttons depending on the cell's id and condition
 		switch (id) {
 			case City :
 				

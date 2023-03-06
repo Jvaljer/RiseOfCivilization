@@ -33,5 +33,6 @@ public class InfobarView extends JPanel {
 		add(minimap_view, BorderLayout.NORTH);
 		add(inventory_view, BorderLayout.CENTER);
 		
+		
 	}
 }
