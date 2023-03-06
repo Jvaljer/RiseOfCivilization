@@ -47,6 +47,9 @@ public class GameCtrl extends Thread{
 	public GameModel GetGameModel() {
 		return model;
 	}
+	public MapCtrl GetMapCtrl() {
+		return map;
+	}
 	@Override
 	public void run() {
 		//must implement

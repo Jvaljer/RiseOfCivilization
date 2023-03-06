@@ -12,6 +12,14 @@ public class ActionDrop implements ActionListener {
 		enabled = false;
 		map = ctrl.GetGameModel().GetMapModel();
 	}
+	
+	public void Enable() {
+		enabled = true;
+	}
+	public void Disable() {
+		enabled = false;
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(enabled) {

@@ -21,6 +21,8 @@ public class MapCtrl extends Thread implements MouseListener {
 	private CellCtrl new_click;
 	private CellCtrl old_click;
 	
+	private CellModel current_cell;
+	
 	public MapCtrl(GameView V) {
 		view = V;
 		view.addMouseListener(this);
@@ -63,6 +65,10 @@ public class MapCtrl extends Thread implements MouseListener {
 		return coord;
 	}
 	
+	public CellModel GetClickedCell() {
+		return current_cell;
+	}
+	
 	@Override
 	public void run() {
 		//must implement
@@ -90,6 +96,8 @@ public class MapCtrl extends Thread implements MouseListener {
 			new_click = ctrl_grid[cell.x][cell.y];
 			new_click.OnClick();
 			old_click = new_click;
+			
+			current_cell = new_click.GetCellModel();
 		}
 		
 		Point pos = map_model.GetPosFromCoord(cell.x,cell.y);
