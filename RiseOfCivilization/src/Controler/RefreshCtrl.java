@@ -18,11 +18,10 @@ public class RefreshCtrl extends Thread {
 	@Override
 	public void run() {
 		while(true) {
-			//working but don't know why it is not visually good
-			view.revalidate();
-			view.repaint();
+			map_view.revalidate();
+			map_view.repaint();
 			try {
-				Thread.sleep(240);
+				Thread.sleep(60);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

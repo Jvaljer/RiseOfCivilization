@@ -21,22 +21,22 @@ public class GameCtrl extends Thread{
 		for(JButton button : buttons) {
 			switch (button.getName()) {
 				case "Build" :
-					button.addActionListener(new ActionBuild());
+					button.addActionListener(new ActionBuild(this));
 					break;
 				case "Expand" :
-					button.addActionListener(new ActionExpand());
+					button.addActionListener(new ActionExpand(this));
 					break;
 				case "Move" :
-					button.addActionListener(new ActionMove());
+					button.addActionListener(new ActionMove(this));
 					break;
 				case "New_Worker" :
-					button.addActionListener(new ActionNewWorker());
+					button.addActionListener(new ActionNewWorker(this));
 					break;
 				case "Collect" :
-					button.addActionListener(new ActionCollect());
+					button.addActionListener(new ActionCollect(this));
 					break;
 				case "Drop" :
-					button.addActionListener(new ActionDrop());
+					button.addActionListener(new ActionDrop(this));
 					break;
 			}
 		}
@@ -44,34 +44,9 @@ public class GameCtrl extends Thread{
 		(new RefreshCtrl(view)).start();
 	}
 	
-	//here are the actions method, which will be called whenever the player clicks on the related button
-	public void Build(CellModel cell) {
-		Point pts = cell.GetCoord();
-		WorkerModel nearest_worker = model.GetMapModel().GetNearestWorker(pts);
-		return;
+	public GameModel GetGameModel() {
+		return model;
 	}
-	public void Drop(CellModel cell) {
-		Point pts = cell.GetCoord();
-		WorkerModel nearest_worker = model.GetMapModel().GetNearestWorker(pts);
-		return;
-	}
-	public void Move(CellModel cell) {
-		return;
-	}
-	public void Collect(CellModel cell) {
-		Point pts = cell.GetCoord();
-		WorkerModel nearest_worker = model.GetMapModel().GetNearestWorker(pts);
-		return;
-	}
-	public void NewWorker(CellModel cell) {
-		return;
-	}
-	public void Expand(CellModel cell) {
-		Point pts = cell.GetCoord();
-		WorkerModel nearest_worker = model.GetMapModel().GetNearestWorker(pts);
-		return;
-	}
-	
 	@Override
 	public void run() {
 		//must implement

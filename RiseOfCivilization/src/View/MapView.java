@@ -12,14 +12,20 @@ import java.awt.*;
  * @SuppressWarnings("serial")
  */
 public class MapView extends JPanel {
+	private GameView view;
 	private MapModel map_model;
+	private WorkerView player_view;
 	private int width;
 	private int height;
 	private int lines;
 	private int columns;
 	private CellView[][] grid_view;
-	public MapView(MapModel M) {
+	
+	public MapView(GameView V, MapModel M) {
+		view = V;
 		map_model = M;
+		
+		player_view = new WorkerView(view);
 		
 		lines = map_model.GetLinesAmount();
 		columns = map_model.GetColumnsAmount();
@@ -63,6 +69,13 @@ public class MapView extends JPanel {
 				grid_view[i][j].DrawCell(G, s, x0, y0);
 			}
 		}
+	}
+	
+	@Override
+	public void paint(Graphics G) {
+		super.paint(G);
 		
+		DrawMap(G);
+		player_view.DrawPlayer(G);
 	}
 }
