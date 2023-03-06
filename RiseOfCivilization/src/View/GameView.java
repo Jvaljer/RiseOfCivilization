@@ -50,7 +50,9 @@ public class GameView extends JFrame {
 	public MapView GetMapView() {
 		return map_view;
 	}
-	
+	public DashboardView GetDashboardView() {
+		return dashboard_view;
+	}
 	@Override
 	public void paint(Graphics G) {
 		super.paint(G);

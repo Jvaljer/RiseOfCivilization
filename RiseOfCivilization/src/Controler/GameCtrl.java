@@ -3,6 +3,8 @@ package Controler;
 import View.*;
 import Model.*;
 import java.awt.*;
+import java.util.*;
+import javax.swing.JButton;
 
 public class GameCtrl extends Thread{
 	private GameView view;
@@ -14,6 +16,30 @@ public class GameCtrl extends Thread{
 		view = V;
 		model = view.GetGameModel();
 		map = new MapCtrl(view);
+		
+		ArrayList<JButton> buttons = view.GetDashboardView().GetInfobarView().GetButtonList();
+		for(JButton button : buttons) {
+			switch (button.getName()) {
+				case "Build" :
+					button.addActionListener(new ActionBuild());
+					break;
+				case "Expand" :
+					button.addActionListener(new ActionExpand());
+					break;
+				case "Move" :
+					button.addActionListener(new ActionMove());
+					break;
+				case "New_Worker" :
+					button.addActionListener(new ActionNewWorker());
+					break;
+				case "Collect" :
+					button.addActionListener(new ActionCollect());
+					break;
+				case "Drop" :
+					button.addActionListener(new ActionDrop());
+					break;
+			}
+		}
 		
 		(new RefreshCtrl(view)).start();
 	}

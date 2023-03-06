@@ -97,7 +97,6 @@ public class CellCtrl extends Thread {
 	 */
 	public void run() {
 		//must implement
-		System.out.println("CellCtrl is running");
 		while(true) {
 			CellBehaviour();
 			

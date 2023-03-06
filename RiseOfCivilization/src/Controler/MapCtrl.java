@@ -75,6 +75,9 @@ public class MapCtrl extends Thread implements MouseListener {
 		//Point mouse_pos = e.getLocationOnScreen();
 		int mouse_x = e.getX();
 		int mouse_y = e.getY();
+		if(mouse_x > map_model.GetWidth()) {
+			return;
+		}
 		Point mouse_pos = new Point(mouse_x, mouse_y);
 		System.out.println("clicked on : " + mouse_pos);
 		

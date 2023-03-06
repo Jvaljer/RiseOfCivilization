@@ -37,4 +37,8 @@ public class DashboardView extends JPanel {
 		add(inventory_view, BorderLayout.SOUTH);
 		
 	}
+	
+	public InfobarView GetInfobarView() {
+		return infobar_view;
+	}
 }

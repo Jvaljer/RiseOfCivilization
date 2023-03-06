@@ -43,7 +43,7 @@ public class InfobarView extends JPanel {
 		button.setIcon(wrench);
 		Button_list.add(button);
 		add(button, c);
-
+		
 		button = new JButton("");
 		button.setName("Drop");
 		c.gridx = 1;
@@ -83,11 +83,18 @@ public class InfobarView extends JPanel {
 		button.setIcon(wrench);
 		Button_list.add(button);
 		add(button, c);
-
+		
 	}
 
-	public ArrayList<JButton> getButton_list(){
+	public ArrayList<JButton> GetButtonList(){
 		return Button_list;
 	}
-
+	public JButton GetButtonFromName(String name) {
+		for(JButton but : Button_list) {
+			if(but.getName()==name) {
+				return but;
+			}
+		}
+		return null;
+	}
 }
