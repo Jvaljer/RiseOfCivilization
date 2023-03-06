@@ -63,7 +63,7 @@ public class CellCtrl extends Thread {
 			case None :
 				
 			default:
-				
+				break;
 		}
 	}
 	
@@ -77,10 +77,15 @@ public class CellCtrl extends Thread {
 	public void CellBehaviour() {
 		switch (id) {
 			case City :
+				
 			case Forest :
+				
 			case Plain :
+				
 			case None :
+				
 			default:
+				break;
 		}
 	}
 	
