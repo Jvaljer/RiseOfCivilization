@@ -62,9 +62,7 @@ public class MapModel {
 		ArrayList<Point> city_neigh = GetNeighbours(city_x, city_y);
 		int i1 = ThreadLocalRandom.current().nextInt(0,city_neigh.size());
 		Point city = city_neigh.get(i1);
-		ArrayList<Point> path_to_origin = GetShortestPath(city,new Point(0,0));
 		grid[city.x][city.y].TurnToCity();
-		System.out.println("shortest path to origin -> " + path_to_origin);
 		int i2;
 		do {
 			i2 = ThreadLocalRandom.current().nextInt(0,city_neigh.size());
@@ -168,18 +166,15 @@ public class MapModel {
 	}
 	
 	public ArrayList<Point> GetNeighbours(int i, int j) {
-		System.out.println("starting GetNeighbours...");
 		ArrayList<Point > neighbours = new ArrayList<Point>();
 		
 		for(Point pts : direction) {
 			int x = pts.x;
 			int y = pts.y;
-			if(i+x > 0 && i+x < 21 && j+y > 0 && j+y < 18) {
-				System.out.println("found a neighbor !");
+			if(i+x >= 0 && i+x < 21 && j+y >= 0 && j+y < 18) {
 				neighbours.add(new Point(i+x,j+y));
 			}
 		}
-		System.out.println("returning the " + neighbours.size() +" neighbours");
 		return neighbours;
 	}
 	
@@ -189,69 +184,64 @@ public class MapModel {
 		return (i<21 && i>=0 && j<18 && j>=0);
 	}
 	
-	public ArrayList<Point> GetShortestPath(Point s, Point e){
-		Node[][] Graph = new Node[lines][columns];
-		Node start = new Node(this, s.x, s.y);
-		Node end = new Node(this, e.x, e.y);
-		for(CellModel[] line : grid) {
-			for(CellModel cell : line) {
-				Graph[cell.GetX()][cell.GetY()] = new Node(this, cell.GetX(),cell.GetY());
+	public ArrayList<Point> GetShortestPath(Point start, Point end){
+
+		Point[][] graph;
+		graph = new Point[21][18];
+		
+		HashMap<Point, Integer> distances= new HashMap<Point,Integer>();
+		HashMap<Point, Point> prev_nodes = new HashMap<Point,Point>();
+		
+		for(CellModel[] line : grid){
+			for(CellModel cell : line){
+				graph[cell.GetX()][cell.GetY()] = new Point(cell.GetX(),cell.GetY());
 			}
 		}
 		
-		Map<Node, Integer> distances = new HashMap<>();
-		Map<Node, Node> prev_nodes = new HashMap<>();
-		
-		for(Node[] line : Graph) {
-			for(Node node : line) {
-				distances.put(node, Integer.MAX_VALUE);
-				prev_nodes.put(node, null);
+		for(Point[] pts : graph){
+			for(Point p : pts){
+				distances.put(p,Integer.MAX_VALUE);
+				prev_nodes.put(p,null);
 			}
 		}
-		distances.put(start, 0);
+		distances.put(start,0);
 		
-		PriorityQueue<Node> unvisited = new PriorityQueue<>(Comparator.comparingInt(distances::get));
+		PriorityQueue<Point> unvisited = new PriorityQueue<Point>(Comparator.comparingInt(distances::get));
 		unvisited.add(start);
 		
-		while(!unvisited.isEmpty()) {
-			Node current = unvisited.poll();
-			
-			if(current == end) {
-				break;
+		while(!unvisited.isEmpty()){
+			Point current = unvisited.poll();
+			if(current==end){
+				break;	
 			}
 			
-			if(current.GetNeighbors(Graph).size()==0) {
-				System.out.println("empty af...");
-			}
-			for(Node neighbor : current.GetNeighbors(Graph)) {
+			ArrayList<Point> neighbors = GetNeighbours(current.x, current.y);
+			
+			for(Point neigh : neighbors){
 				int dist = distances.get(current) + 1;
-				
-				if(dist < distances.get(neighbor)) {
-					distances.put(neighbor, dist);
-					prev_nodes.put(neighbor, current);
-					unvisited.add(neighbor);
+				if(dist < distances.get(neigh)){
+					distances.put(neigh, dist);
+					prev_nodes.put(neigh, current);
+					unvisited.add(neigh);
 				}
 			}
 		}
 		
-		if(distances.get(end) == Integer.MAX_VALUE) {
+		if(distances.get(end) == Integer.MAX_VALUE){
 			return null;
 		}
 		
-		ArrayList<Node> path = new ArrayList<Node>();
-		Node current = end;
-		while(current != null) {
-			path.add(current);
-			current = prev_nodes.get(current);
+		ArrayList<Point> path = new ArrayList<Point>();
+		Point cur = end;
+		
+		while(cur != null){
+			path.add(cur);
+			cur = prev_nodes.get(cur);
 		}
+		
 		Collections.reverse(path);
 		
-		ArrayList<Point> pts_path = new ArrayList<Point>();
-		for(Node node : path) {
-			pts_path.add(new Point(node.x, node.y));
-		}
-		
-		return pts_path;
+		return path;
 	}
 	
 	public Point GetPointFromCoord(int x, int y) {
