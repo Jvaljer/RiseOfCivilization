@@ -2,6 +2,7 @@ package Controler;
 
 import View.*;
 import Model.*;
+import java.awt.*;
 
 public class GameCtrl extends Thread{
 	private GameView view;
@@ -18,25 +19,39 @@ public class GameCtrl extends Thread{
 	}
 	
 	//here are the actions method, which will be called whenever the player clicks on the related button
-	public void Harvest() {
+	public void Harvest(CellModel cell) {
+		Point pts = cell.GetCoord();
+		WorkerModel nearest_worker = model.GetMapModel().GetNearestWorker(pts);
 		return;
 	}
-	public void Build() {
+	public void Build(CellModel cell) {
+		Point pts = cell.GetCoord();
+		WorkerModel nearest_worker = model.GetMapModel().GetNearestWorker(pts);
 		return;
 	}
-	public void Drop() {
+	public void Drop(CellModel cell) {
+		Point pts = cell.GetCoord();
+		WorkerModel nearest_worker = model.GetMapModel().GetNearestWorker(pts);
 		return;
 	}
-	public void Move() {
+	public void Move(CellModel cell) {
+		Point pts = cell.GetCoord();
+		WorkerModel nearest_worker = model.GetMapModel().GetNearestWorker(pts);
 		return;
 	}
-	public void Collect() {
+	public void Collect(CellModel cell) {
+		Point pts = cell.GetCoord();
+		WorkerModel nearest_worker = model.GetMapModel().GetNearestWorker(pts);
 		return;
 	}
-	public void NewWorker() {
+	public void NewWorker(CellModel cell) {
+		Point pts = cell.GetCoord();
+		WorkerModel nearest_worker = model.GetMapModel().GetNearestWorker(pts);
 		return;
 	}
-	public void Expand() {
+	public void Expand(CellModel cell) {
+		Point pts = cell.GetCoord();
+		WorkerModel nearest_worker = model.GetMapModel().GetNearestWorker(pts); vill
 		return;
 	}
 	

@@ -185,19 +185,15 @@ public class MapModel {
 	}
 	
 	public ArrayList<Point> GetShortestPath(Point start, Point end){
-
 		Point[][] graph;
 		graph = new Point[21][18];
-		
 		HashMap<Point, Integer> distances= new HashMap<Point,Integer>();
 		HashMap<Point, Point> prev_nodes = new HashMap<Point,Point>();
-		
 		for(CellModel[] line : grid){
 			for(CellModel cell : line){
 				graph[cell.GetX()][cell.GetY()] = new Point(cell.GetX(),cell.GetY());
 			}
 		}
-		
 		for(Point[] pts : graph){
 			for(Point p : pts){
 				distances.put(p,Integer.MAX_VALUE);
@@ -205,18 +201,14 @@ public class MapModel {
 			}
 		}
 		distances.put(start,0);
-		
 		PriorityQueue<Point> unvisited = new PriorityQueue<Point>(Comparator.comparingInt(distances::get));
 		unvisited.add(start);
-		
 		while(!unvisited.isEmpty()){
 			Point current = unvisited.poll();
 			if(current==end){
 				break;	
 			}
-			
 			ArrayList<Point> neighbors = GetNeighbours(current.x, current.y);
-			
 			for(Point neigh : neighbors){
 				int dist = distances.get(current) + 1;
 				if(dist < distances.get(neigh)){
@@ -226,21 +218,16 @@ public class MapModel {
 				}
 			}
 		}
-		
 		if(distances.get(end) == Integer.MAX_VALUE){
 			return null;
 		}
-		
 		ArrayList<Point> path = new ArrayList<Point>();
 		Point cur = end;
-		
 		while(cur != null){
 			path.add(cur);
 			cur = prev_nodes.get(cur);
 		}
-		
 		Collections.reverse(path);
-		
 		return path;
 	}
 	
@@ -248,5 +235,10 @@ public class MapModel {
 		CellModel cell = GetCellFromCoord(x,y);
 		Point pts = new Point(cell.GetX(),cell.GetY());
 		return pts;
+	}
+	
+	public WorkerModel GetNearestWorker(Point coord) {
+		WorkerModel nearest;
+		return nearest;
 	}
 }

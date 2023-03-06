@@ -1,6 +1,7 @@
 package Model;
 
 import Types.*;
+import java.awt.*;
 
 /**
  * Model of a cell, containing all position & Id values of a cell. Ans the 
@@ -32,6 +33,9 @@ public class CellModel {
 	
 	public void TurnToCity() {
 		id = CellId.City;
+	}
+	public Point GetCoord() {
+		return (new Point(X,Y));
 	}
 	
 }
