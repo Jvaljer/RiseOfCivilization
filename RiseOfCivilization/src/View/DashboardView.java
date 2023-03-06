@@ -33,8 +33,8 @@ public class DashboardView extends JPanel {
 		setLayout(new BorderLayout());
 		
 		add(minimap_view, BorderLayout.NORTH);
-		add(inventory_view, BorderLayout.CENTER);
-		add(infobar_view, BorderLayout.SOUTH);
+		add(infobar_view, BorderLayout.CENTER);
+		add(inventory_view, BorderLayout.SOUTH);
 		
 	}
 }

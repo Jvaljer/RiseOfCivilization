@@ -42,7 +42,7 @@ public class GameCtrl extends Thread{
 	}
 	public void Expand(CellModel cell) {
 		Point pts = cell.GetCoord();
-		WorkerModel nearest_worker = model.GetMapModel().GetNearestWorker(pts); vill
+		WorkerModel nearest_worker = model.GetMapModel().GetNearestWorker(pts);
 		return;
 	}
 	

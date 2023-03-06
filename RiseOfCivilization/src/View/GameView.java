@@ -14,6 +14,7 @@ public class GameView extends JFrame {
 	private InfobarView infobar_view;
 	private MinimapView minimap_view;
 	private InventoryView inventory_view;
+	private DashboardView dashboard_view;
 	private WorkerView player_view;
 	
 	public GameView(GameModel m) {
@@ -22,18 +23,21 @@ public class GameView extends JFrame {
 		inventory_model = model.getInventoryModel();
 		
 		map_view = new MapView(map_model);
-		
+
 		minimap_view = new MinimapView(map_model);
 		inventory_view = new InventoryView(map_model, inventory_model);
-		infobar_view = new InfobarView(map_model, minimap_view, inventory_view);
-		
+		infobar_view = new InfobarView(map_model);
+		dashboard_view = new DashboardView(map_model, minimap_view, inventory_view, infobar_view);
+
+
 		player_view = new WorkerView(this);
 		
 		setTitle("Rise Of Civilizations");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
-		
+
 		add(map_view, BorderLayout.CENTER);
-		add(infobar_view, BorderLayout.EAST);
+		add(dashboard_view, BorderLayout.EAST);
 
 		pack();
 		setVisible(true);
@@ -52,7 +56,6 @@ public class GameView extends JFrame {
 		super.paint(G);
 		
 		map_view.DrawMap(G);
-		inventory_view.drawInventory(G);
 		player_view.DrawPlayer(G);
 	}
 }

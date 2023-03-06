@@ -2,37 +2,92 @@ package View;
 
 import Model.MapModel;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import javax.swing.JPanel;
-
+import java.awt.*;
+import java.util.ArrayList;
+import javax.swing.*;
 
 /**
  * This class is for the view of the infobar. The infobar is represented in
- * a seperate panel at the right of the map and contains from top to bottom :
- * the minimap, the inventory and information about the selected cell/worker.
- * Its default height is the height of the map and its default width is a
- * third of the width of the map.
+ * a seperate panel at the bottom of the dashboard.
+ * Its default height is half of the height of the dashboard.
  *
  * @author martin
  */
 @SuppressWarnings("serial")
 public class InfobarView extends JPanel {
 	private MapModel map_model;
-	private MinimapView minimap_view;
-	private InventoryView inventory_view;
-	
-	public InfobarView(MapModel mm, MinimapView mmv, InventoryView iv) {
+	private ArrayList<JButton> Button_list;
+
+	public InfobarView(MapModel mm) {
+		Button_list=new ArrayList<JButton>();
+
 		map_model = mm;
-		minimap_view = mmv;
-		inventory_view = iv;
-		
-		setPreferredSize(new Dimension(map_model.GetWidth()/3, map_model.GetHeight()));
-		setLayout(new BorderLayout());
-		
-		add(minimap_view, BorderLayout.NORTH);
-		add(inventory_view, BorderLayout.CENTER);
-		
-		
+		setPreferredSize(new Dimension(map_model.GetWidth()/3, map_model.GetHeight()/2));
+		setBackground(Color.LIGHT_GRAY);
+
+		setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		JButton button = new JButton("");
+		Icon wrench = new ImageIcon("./img/Wrench_v2.jpg");
+
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.fill = GridBagConstraints.VERTICAL;
+		c.insets=new Insets(5,10,5,10);
+		c.ipady=50-button.getMinimumSize().height;
+		c.ipadx=50-button.getMinimumSize().width;
+
+		button.setName("Build");
+		button.setIcon(wrench);
+		c.gridx = 0;
+		c.gridy = 0;
+		button.setIcon(wrench);
+		Button_list.add(button);
+		add(button, c);
+
+		button = new JButton("");
+		button.setName("Drop");
+		c.gridx = 1;
+		c.gridy = 0;
+		button.setIcon(wrench);
+		Button_list.add(button);
+		add(button, c);
+
+		button = new JButton("");
+		button.setName("Move");
+		c.gridx = 2;
+		c.gridy = 0;
+		button.setIcon(wrench);
+		Button_list.add(button);
+		add(button, c);
+
+		button = new JButton("");
+		button.setName("Collect");
+		c.gridx = 0;
+		c.gridy = 1;
+		button.setIcon(wrench);
+		Button_list.add(button);
+		add(button, c);
+
+		button = new JButton("");
+		button.setName("New_Worker");
+		c.gridx = 1;
+		c.gridy = 1;
+		button.setIcon(wrench);
+		Button_list.add(button);
+		add(button, c);
+
+		button = new JButton("");
+		button.setName("Expand");
+		c.gridx = 2;
+		c.gridy = 1;
+		button.setIcon(wrench);
+		Button_list.add(button);
+		add(button, c);
+
 	}
+
+	public ArrayList<JButton> getButton_list(){
+		return Button_list;
+	}
+
 }
