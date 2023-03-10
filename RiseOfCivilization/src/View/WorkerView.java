@@ -8,26 +8,32 @@ public class WorkerView {
 	private MapModel map_model;
 	private WorkerModel player;
 	
-	private Point player_pos;
 	private Point player_size;
 	
 	public WorkerView(GameView V) {
 		view = V;
 		map_model = view.GetGameModel().GetMapModel();
 		player = view.GetGameModel().GetWorkerModel();
-		player_pos = player.GetPos();
-		player_size = new Point(player.GetWidth(),player.GetHeight());
 	}
 	
 	public void DrawPlayer(Graphics G) {
-		Point pixel_pos = map_model.GetPosFromCoord(player_pos.x, player_pos.y);
 		
-		int p_width = player_size.x;
-		int p_height = player_size.y;
+		int p_width = this.player.getWidth();
+		int p_height = this.player.getHeight();
+		Point pos = this.map_model.GetPosFromCoord(this.player.getCordX(), this.player.getCordX());
 		
-		G.setColor(new Color(150,0,0));
-		G.drawOval(pixel_pos.x - p_width/2 , pixel_pos.y - p_height/2, player.GetWidth(), player.GetHeight());
-		G.setColor(new Color(255,0,0));
-		G.fillOval(pixel_pos.x - p_width/2, pixel_pos.y - p_height/2, player.GetWidth(), player.GetHeight());
+		
+		G.setColor(new Color(0,0,0));
+		G.drawOval(pos.x - p_width/2 , pos.y - p_height/2, player.getWidth(), player.getHeight());
+		G.setColor(new Color(0,0,255));
+		G.fillOval(pos.x - p_width/2, pos.y - p_height/2, player.getWidth(), player.getHeight());
+	}
+	
+	public void DrawMovingPlayer(Graphics G, int i, int j) {
+		
+		G.setColor(new Color(0,0,0));
+		G.drawOval(i,j, player.getWidth(), player.getHeight());
+		G.setColor(new Color(0,100,255));
+		G.drawOval(i,j, player.getWidth(), player.getHeight());
 	}
 }

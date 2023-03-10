@@ -46,7 +46,25 @@ public class GameView extends JFrame {
 	public MapView GetMapView() {
 		return map_view;
 	}
+
 	public DashboardView GetDashboardView() {
 		return dashboard_view;
+	}
+
+	
+	public WorkerView getWorkerView() {
+		return this.player_view;
+	}
+	
+	@Override
+	public void paint(Graphics G) {
+		super.paint(G);
+		
+		map_view.DrawMap(G);
+		inventory_view.drawInventory(G);
+		if(!this.model.GetWorkerModel().GetOccupied())
+		{
+			player_view.DrawPlayer(G);
+		}
 	}
 }
