@@ -139,17 +139,17 @@ public class MapModel {
 		double h = s * Math.sin(angle) * 2. ;
 		double w = s * 2. - (1. - Math.cos(angle)) * s;
 		
-		double i = (x_/w) ; //Math.floor() here ? 
+		double i = Math.floor(x_/w) ;
 		double x = (x_ - (i - w));
 		
 		double j;
 		double y;
 		
 		if(i%2==0) {
-			j = (y_ / h); //here
+			j = Math.floor(y_ / h); 
 			y = (y_ - (j * h) - (h/2));
 		} else {
-			j = ((y_ - h / 2.)/h); //& here
+			j = Math.floor((y_ - h / 2.)/h);
 			y = (y_ - (j * h) - h);
 		}
 		
@@ -176,6 +176,7 @@ public class MapModel {
 				neighbours.add(new Point(i+x,j+y));
 			}
 		}
+		//must fix it
 		return neighbours;
 	}
 	
