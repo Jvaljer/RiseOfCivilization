@@ -21,7 +21,6 @@ public class MapModel {
 	private static final int Cell_size = 20;
 	private static final Point OriginPoint = new Point(2*Cell_size,2*Cell_size);
 	private CellModel[][] grid;
-	private Point[] direction = new Point[6];
 	private Point city_origin;
 	private WorkerModel[] workers;
 	
@@ -29,13 +28,6 @@ public class MapModel {
 		game = M;
 		width = game.GetMapWidth();
 		height = game.GetMapHeight();
-		
-		direction[0] = new Point(0,-1);
-		direction[1] = new Point(1,-1);
-		direction[2] = new Point(1,0);
-		direction[3] = new Point(0,1);
-		direction[4] = new Point(-1,0);
-		direction[5] = new Point(-1,-1);
 		
 		//must add calcul of starting point, and all percentages for Cell types
 		grid = new CellModel[lines][columns];
@@ -167,17 +159,38 @@ public class MapModel {
 	}
 	
 	public ArrayList<Point> GetNeighbours(int i, int j) {
-		ArrayList<Point > neighbours = new ArrayList<Point>();
-		
-		for(Point pts : direction) {
-			int x = pts.x;
-			int y = pts.y;
-			if(i+x >= 0 && i+x < 21 && j+y >= 0 && j+y < 18) {
-				neighbours.add(new Point(i+x,j+y));
+		ArrayList<Point > neighbors = new ArrayList<Point>();
+		Point[] directions = new Point[6];
+		if(j%2==0) {
+			directions[0] = new Point(0,-1);
+			directions[1] = new Point(1,0);
+			directions[2] = new Point(1,1);
+			directions[3] = new Point(0,1);
+			directions[4] = new Point(-1,1);
+			directions[5] = new Point(-1,0);
+			
+			for(Point dir : directions) {
+				Point pts = new Point(i+dir.x, j+dir.y);
+				if(CellIsValid(pts)) {
+					neighbors.add(pts);
+				}
+			}
+		} else {
+			directions[0] = new Point(0,-1);
+			directions[1] = new Point(1,0);
+			directions[2] = new Point(1,1);
+			directions[3] = new Point(0,1);
+			directions[4] = new Point(-1,1);
+			directions[5] = new Point(-1,0);
+			for(Point dir : directions) {
+				Point pts = new Point(i+dir.x, j+dir.y);
+				if(CellIsValid(pts)) {
+					neighbors.add(pts);
+				}
 			}
 		}
-		//must fix it
-		return neighbours;
+		
+		return neighbors;
 	}
 	
 	public boolean CellIsValid(Point cell) {
