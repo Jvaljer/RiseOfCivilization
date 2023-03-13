@@ -257,7 +257,7 @@ public class MapModel {
 		int dist;
 		int shortest_dist = Integer.MAX_VALUE;
 		for(WorkerModel worker : workers) {
-			if(!worker.GetOccupied()) {
+			if(!worker.getOccupied()) {
 				ArrayList<Point> worker_path = GetShortestPath(worker.getPos(),coord);
 				dist = worker_path.size();
 				if(dist <= shortest_dist) {

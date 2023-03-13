@@ -7,6 +7,7 @@ public class WorkerView {
 	private GameView view; 
 	private MapModel map_model;
 	private WorkerModel worker;
+	private int FPS = 12;
 	
 	public WorkerView(GameView V, WorkerModel worker) {
 		view = V;
@@ -42,10 +43,10 @@ public class WorkerView {
 		int y_src = cord.y - worker.getHeight()/2;
 		int x_dst = dst_cord.x - worker.getWidth()/2;
 		int y_dst = dst_cord.y - worker.getHeight()/2;
-		for(int i = 0; i < 48; i++)
+		for(int i = 0; i < FPS; i++)
 		{
-			int x = (int) ((x_dst - x_src) / 48) + x_src;
-			int y = (int) ((y_dst - y_src) / 48) + y_src;
+			int x = (int) ((x_dst - x_src) / FPS) + x_src;
+			int y = (int) ((y_dst - y_src) / FPS) + y_src;
 			this.drawMove(G, x, y);
 		}
 	}
