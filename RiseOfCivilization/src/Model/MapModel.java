@@ -22,7 +22,6 @@ public class MapModel {
 	private static final Point OriginPoint = new Point(2*Cell_size,2*Cell_size);
 	private CellModel[][] grid;
 	private Point city_origin;
-	private WorkerModel[] workers;
 	
 	public MapModel(GameModel M) {
 		game = M;
@@ -256,8 +255,9 @@ public class MapModel {
 		WorkerModel nearest = null;
 		int dist;
 		int shortest_dist = Integer.MAX_VALUE;
+		ArrayList<WorkerModel> workers = game.GetWorkerModel();
 		for(WorkerModel worker : workers) {
-			if(!worker.getOccupied()) {
+			if(!worker.GetOccupied()) {
 				ArrayList<Point> worker_path = GetShortestPath(worker.getPos(),coord);
 				dist = worker_path.size();
 				if(dist <= shortest_dist) {
