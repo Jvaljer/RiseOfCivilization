@@ -17,7 +17,7 @@ public class GameCtrl extends Thread{
 		model = view.GetGameModel();
 		map = new MapCtrl(this,view);
 		
-		buttons = view.GetDashboardView().GetInfobarView().GetButtonList();
+		buttons = view.GetDashboardView().GetActionView().GetButtonList();
 		for(JButton button : buttons) {
 			switch (button.getName()) {
 				case "Build" :

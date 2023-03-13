@@ -18,27 +18,27 @@ import javax.swing.JPanel;
  */
 @SuppressWarnings("serial")
 public class DashboardView extends JPanel {
-	private MapModel map_model;
-	private MinimapView minimap_view;
-	private InventoryView inventory_view;
-	private InfobarView infobar_view;
-	
-	public DashboardView(MapModel mm, MinimapView mmv, InventoryView iv, InfobarView ibv) {
-		map_model = mm;
-		minimap_view = mmv;
-		inventory_view = iv;
-		infobar_view = ibv;
-		
-		setPreferredSize(new Dimension(map_model.GetWidth()/3, map_model.GetHeight()));
-		setLayout(new BorderLayout());
-		
-		add(minimap_view, BorderLayout.NORTH);
-		add(infobar_view, BorderLayout.CENTER);
-		add(inventory_view, BorderLayout.SOUTH);
-		
-	}
-	
-	public InfobarView GetInfobarView() {
-		return infobar_view;
-	}
+    private MapModel map_model;
+    private MinimapView minimap_view;
+    private InventoryView inventory_view;
+    private ActionView Action_view;
+
+    public DashboardView(MapModel mm, MinimapView mmv, InventoryView iv, ActionView ibv) {
+        map_model = mm;
+        minimap_view = mmv;
+        inventory_view = iv;
+        Action_view = ibv;
+
+        setPreferredSize(new Dimension(map_model.GetWidth()/3, map_model.GetHeight()));
+        setLayout(new BorderLayout());
+
+        add(minimap_view, BorderLayout.NORTH);
+        add(Action_view, BorderLayout.CENTER);
+        add(inventory_view, BorderLayout.SOUTH);
+
+    }
+
+    public ActionView GetActionView() {
+        return Action_view;
+    }
 }
