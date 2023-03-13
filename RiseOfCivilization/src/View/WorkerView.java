@@ -14,7 +14,7 @@ public class WorkerView {
 		this.worker = worker;
 	}
 	
-	public void drawPlayer(Graphics G) {
+	public void drawWorker(Graphics G) {
 		
 		int p_width = this.worker.getWidth();
 		int p_height = this.worker.getHeight();
@@ -27,7 +27,7 @@ public class WorkerView {
 		G.fillOval(pos.x - p_width/2, pos.y - p_height/2, worker.getWidth(), worker.getHeight());
 	}
 	
-	public void drawWorker(Graphics G, int i, int j) {
+	public void drawMove(Graphics G, int i, int j) {
 		
 		G.setColor(new Color(0,0,0));
 		G.drawOval(i,j, worker.getWidth(), worker.getHeight());
@@ -46,7 +46,7 @@ public class WorkerView {
 		{
 			int x = (int) ((x_dst - x_src) / 48) + x_src;
 			int y = (int) ((y_dst - y_src) / 48) + y_src;
-			this.drawWorker(G, x, y);
+			this.drawMove(G, x, y);
 		}
 	}
 }

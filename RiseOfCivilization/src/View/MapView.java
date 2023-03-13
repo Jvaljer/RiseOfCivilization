@@ -73,5 +73,13 @@ public class MapView extends JPanel {
 		super.paint(G);
 		
 		DrawMap(G);
+
+		for(int i = 0; i < this.view.GetGameModel().GetWorkerModel().size(); i++)
+		{
+			if(!this.view.GetGameModel().GetWorkerModel().get(i).GetOccupied())
+			{
+				this.view.getWorkerView().get(i).drawWorker(G);
+			}
+		}
 	}
 }

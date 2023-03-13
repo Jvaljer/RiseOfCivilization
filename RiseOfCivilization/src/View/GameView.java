@@ -24,7 +24,8 @@ public class GameView extends JFrame {
 		inventory_model = model.getInventoryModel();
 		
 		map_view = new MapView(this,map_model);
-		workers_view = new ArrayList<WorkerView>(10);		for(int i = 0; i < this.model.GetWorkerModel().size(); i++)
+		workers_view = new ArrayList<WorkerView>(10);		
+		for(int i = 0; i < this.model.GetWorkerModel().size(); i++)
 		{
 			workers_view.add(new WorkerView(this, this.model.GetWorkerModel().get(i)));
 		}
@@ -67,13 +68,5 @@ public class GameView extends JFrame {
 		
 		map_view.DrawMap(G);
 		//inventory_view.DrawInventory(G);
-
-		for(int i = 0; i < this.model.GetWorkerModel().size(); i++)
-		{
-			if(!this.model.GetWorkerModel().get(i).GetOccupied())
-			{
-				workers_view.get(i).drawPlayer(G);
-			}
-		}
 	}
 }
