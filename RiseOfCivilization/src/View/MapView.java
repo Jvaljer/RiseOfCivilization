@@ -14,7 +14,6 @@ import java.awt.*;
 public class MapView extends JPanel {
 	private GameView view;
 	private MapModel map_model;
-	private WorkerView player_view;
 	private int width;
 	private int height;
 	private int lines;
@@ -24,8 +23,6 @@ public class MapView extends JPanel {
 	public MapView(GameView V, MapModel M) {
 		view = V;
 		map_model = M;
-		
-		player_view = new WorkerView(view);
 		
 		lines = map_model.GetLinesAmount();
 		columns = map_model.GetColumnsAmount();
@@ -76,6 +73,5 @@ public class MapView extends JPanel {
 		super.paint(G);
 		
 		DrawMap(G);
-		player_view.DrawPlayer(G);
 	}
 }

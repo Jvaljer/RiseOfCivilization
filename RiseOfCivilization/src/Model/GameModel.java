@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.ArrayList;
+
 import Types.WorkerRole;
 
 public class GameModel {
@@ -10,12 +12,13 @@ public class GameModel {
 	
 	private MapModel map;
 	private InventoryModel inventory;
-	private WorkerModel player;
+	private ArrayList<WorkerModel> workers;
 
 	public GameModel() {
 		map = new MapModel(this);
 		inventory = new InventoryModel();
-		player = new WorkerModel(this,WorkerRole.Worker);
+		workers = new ArrayList<WorkerModel>(10);
+		workers.add(new WorkerModel(this,WorkerRole.Worker));
 	}
 	
 	public int GetMapWidth() {
@@ -42,7 +45,7 @@ public class GameModel {
 		return inventory;
 	}
 	
-	public WorkerModel GetWorkerModel() {
-		return player;
+	public ArrayList<WorkerModel> GetWorkerModel() {
+		return workers;
 	}
 }
