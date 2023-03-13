@@ -70,11 +70,35 @@ public class CellCtrl extends Thread {
 		switch (id) {
 			case City :
 				ActionListener build = g_ctrl.GetButtonFromName("Build").getActionListeners()[0];
+
+				g_ctrl.GetButtonFromName("Build").setEnabled(false);
+				g_ctrl.GetButtonFromName("Collect").setEnabled(false);
+				g_ctrl.GetButtonFromName("Drop").setEnabled(false);
+				g_ctrl.GetButtonFromName("Expand").setEnabled(true);
+				g_ctrl.GetButtonFromName("Move").setEnabled(true);
+				g_ctrl.GetButtonFromName("New_Worker").setEnabled(true);
+				break;
+
 			case Forest :
+				g_ctrl.GetButtonFromName("Build").setEnabled(true);
+				g_ctrl.GetButtonFromName("Collect").setEnabled(true);
+				g_ctrl.GetButtonFromName("Drop").setEnabled(true);
+				g_ctrl.GetButtonFromName("Expand").setEnabled(false);
+				g_ctrl.GetButtonFromName("Move").setEnabled(true);
+				g_ctrl.GetButtonFromName("New_Worker").setEnabled(true);
+				break;
 				
 			case Plain :
+				g_ctrl.GetButtonFromName("Build").setEnabled(true);
+				g_ctrl.GetButtonFromName("Collect").setEnabled(false);
+				g_ctrl.GetButtonFromName("Drop").setEnabled(true);
+				g_ctrl.GetButtonFromName("Expand").setEnabled(false);
+				g_ctrl.GetButtonFromName("Move").setEnabled(true);
+				g_ctrl.GetButtonFromName("New_Worker").setEnabled(true);
+				break;
 				
 			case None :
+				break;
 				
 			default:
 				break;
