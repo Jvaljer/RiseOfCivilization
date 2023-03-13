@@ -12,6 +12,7 @@ import java.util.*;
  * @author Abel
  */
 public class MapCtrl extends Thread implements MouseListener {
+	private GameCtrl ctrl;
 	private GameModel model;
 	private GameView view;
 	private MapModel map_model;
@@ -23,8 +24,9 @@ public class MapCtrl extends Thread implements MouseListener {
 	
 	private CellModel current_cell;
 	
-	public MapCtrl(GameView V) {
+	public MapCtrl(GameCtrl C,GameView V) {
 		view = V;
+		ctrl = C;
 		view.addMouseListener(this);
 		model = view.GetGameModel();
 		map_view = view.GetMapView();
@@ -32,7 +34,7 @@ public class MapCtrl extends Thread implements MouseListener {
 		ctrl_grid = new CellCtrl[map_model.GetLinesAmount()][map_model.GetColumnsAmount()];
 		for(int j=0; j<map_model.GetColumnsAmount(); j++) {
 			for(int i=0; i<map_model.GetLinesAmount(); i++) {
-				ctrl_grid[i][j] = new CellCtrl(map_view.GetGrid()[i][j]);
+				ctrl_grid[i][j] = new CellCtrl(ctrl,map_view.GetGrid()[i][j]);
 				ctrl_grid[i][j].start();
 			}
 		}

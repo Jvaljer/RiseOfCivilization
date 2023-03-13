@@ -9,15 +9,15 @@ import javax.swing.JButton;
 public class GameCtrl extends Thread{
 	private GameView view;
 	private GameModel model;
-	
+	private ArrayList<JButton> buttons;
 	private MapCtrl map;
 	
 	public GameCtrl(GameView V) {
 		view = V;
 		model = view.GetGameModel();
-		map = new MapCtrl(view);
+		map = new MapCtrl(this,view);
 		
-		ArrayList<JButton> buttons = view.GetDashboardView().GetInfobarView().GetButtonList();
+		buttons = view.GetDashboardView().GetInfobarView().GetButtonList();
 		for(JButton button : buttons) {
 			switch (button.getName()) {
 				case "Build" :
@@ -47,9 +47,24 @@ public class GameCtrl extends Thread{
 	public GameModel GetGameModel() {
 		return model;
 	}
+	public GameView GetGameView() {
+		return view;
+	}
 	public MapCtrl GetMapCtrl() {
 		return map;
 	}
+	public ArrayList<JButton> GetButtons(){
+		return buttons;
+	}
+	public JButton GetButtonFromName(String name) {
+		for(JButton but : buttons) {
+			if(but.getName()==name) {
+				return but;
+			}
+		}
+		return null;
+	}
+	
 	@Override
 	public void run() {
 		//must implement

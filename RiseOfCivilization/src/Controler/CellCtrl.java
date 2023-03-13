@@ -3,6 +3,9 @@ package Controler;
 import Model.*;
 import Types.CellId;
 import View.*;
+import java.util.*;
+import javax.swing.*;
+import java.awt.event.ActionListener;
 
 /**
  * This is the Controller of a Cell, which contains & defines all behaviors we
@@ -11,19 +14,28 @@ import View.*;
  * @author abel
  */
 public class CellCtrl extends Thread {
+	/**represents the ctrl of the whole game*/
+	private GameCtrl g_ctrl;
+	/**represents the view of the whole game*/
+	private GameView g_view;
 	/** represents the model of the cell we wanna infer on */
 	private CellModel cell_model;
 	/** represents the view of the cell we wanna infer on */
 	private CellView cell_view;
 	/** refers to the Id of the cell, on which its behavior will depend */
 	private CellId id;
+	/** refers to the actions buttons*/
+	private ArrayList<JButton> buttons;
 	
 	/**
 	 * Constructor, associating all the necessaries variables (Model, View, Id) 
 	 * from an already existing Cell View, to link the controler to it & its model.
 	 * @param V
 	 */
-	public CellCtrl(CellView V) {
+	public CellCtrl(GameCtrl G, CellView V) {
+		g_ctrl = G;
+		g_view = g_ctrl.GetGameView();
+		buttons = g_ctrl.GetButtons();
 		cell_view = V;
 		cell_model = cell_view.GetCellModel();
 		id = cell_model.GetId();
@@ -57,7 +69,7 @@ public class CellCtrl extends Thread {
 		//depending on the cell's id and condition
 		switch (id) {
 			case City :
-				
+				ActionListener build = g_ctrl.GetButtonFromName("Build").getActionListeners()[0];
 			case Forest :
 				
 			case Plain :
