@@ -19,7 +19,7 @@ public class MapModel {
 	private static final int lines = 21;
 	private static final int columns = 18;
 	private static final int Cell_size = 20;
-	private static final Point OriginPoint = new Point(40,80);
+	private static final Point OriginPoint = new Point(2*Cell_size,2*Cell_size);
 	private CellModel[][] grid;
 	private Point[] direction = new Point[6];
 	private Point city_origin;
@@ -244,7 +244,7 @@ public class MapModel {
 		int shortest_dist = Integer.MAX_VALUE;
 		for(WorkerModel worker : workers) {
 			if(!worker.GetOccupied()) {
-				ArrayList<Point> worker_path = GetShortestPath(worker.GetPos(),coord);
+				ArrayList<Point> worker_path = GetShortestPath(worker.getPos(),coord);
 				dist = worker_path.size();
 				if(dist <= shortest_dist) {
 					dist = shortest_dist;
