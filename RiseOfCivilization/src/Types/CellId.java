@@ -8,5 +8,6 @@ public enum CellId {
 	None,
 	City,
 	Forest,
+	Mountain,
 	Plain
 }

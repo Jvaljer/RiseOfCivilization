@@ -45,7 +45,9 @@ public class CellView {
 			case Forest :
 				return (new Color(0, 153, 0));
 			case City : 
-				return (new Color(184, 184, 148));
+				return (new Color(165, 110, 20));
+			case Mountain :
+				return (new Color(150,150,150));
 			case None : 
 				return (new Color(255, 255, 255));
 			default :

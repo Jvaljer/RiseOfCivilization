@@ -96,6 +96,15 @@ public class CellCtrl extends Thread {
 				g_ctrl.GetButtonFromName("Move").setEnabled(true);
 				g_ctrl.GetButtonFromName("New_Worker").setEnabled(true);
 				break;
+			
+			case Mountain :
+				g_ctrl.GetButtonFromName("Build").setEnabled(true);
+				g_ctrl.GetButtonFromName("Collect").setEnabled(true);
+				g_ctrl.GetButtonFromName("Drop").setEnabled(true);
+				g_ctrl.GetButtonFromName("Expand").setEnabled(false);
+				g_ctrl.GetButtonFromName("Move").setEnabled(true);
+				g_ctrl.GetButtonFromName("New_Worker").setEnabled(true);
+				break;
 				
 			case None :
 				break;
