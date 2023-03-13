@@ -14,11 +14,11 @@ import javax.swing.*;
  * @author martin
  */
 @SuppressWarnings("serial")
-public class InfobarView extends JPanel {
+public class ActionView extends JPanel {
 	private MapModel map_model;
 	private ArrayList<JButton> Button_list;
 
-	public InfobarView(MapModel mm) {
+	public ActionView(MapModel mm) {
 		Button_list=new ArrayList<JButton>();
 
 		map_model = mm;
@@ -83,6 +83,9 @@ public class InfobarView extends JPanel {
 		button.setIcon(wrench);
 		Button_list.add(button);
 		add(button, c);
+		for (JButton but :Button_list) {
+			but.setEnabled(false);
+		}
 		
 	}
 
