@@ -45,7 +45,7 @@ public class ActionView extends JPanel {
 		add(button, c);
 		
 		button = new JButton("");
-		button.setName("Drop");
+		button.setName("Harvest");
 		c.gridx = 1;
 		c.gridy = 0;
 		button.setIcon(wrench);
@@ -69,7 +69,7 @@ public class ActionView extends JPanel {
 		add(button, c);
 
 		button = new JButton("");
-		button.setName("New_Worker");
+		button.setName("Train");
 		c.gridx = 1;
 		c.gridy = 1;
 		button.setIcon(wrench);

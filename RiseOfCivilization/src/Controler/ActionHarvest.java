@@ -4,10 +4,10 @@ import Model.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ActionDrop implements ActionListener {
+public class ActionHarvest implements ActionListener {
 	private MapModel map;
 	
-	public ActionDrop(GameCtrl ctrl) {
+	public ActionHarvest(GameCtrl ctrl) {
 		map = ctrl.GetGameModel().GetMapModel();
 	}
 	
