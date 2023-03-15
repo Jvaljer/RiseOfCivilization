@@ -10,6 +10,7 @@ public class WorkerModel {
 	private CellModel cell;
 	private static final int width = 10;
 	private static final int height = 10;
+	private InventoryModel inventory;
 	private boolean moving;
 	private boolean occupied;
 	private WorkerRole role;
@@ -18,8 +19,10 @@ public class WorkerModel {
 		model = M;
 		map_model = model.GetMapModel();
 		model_grid = map_model.GetGrid();
-		this.cell = this.map_model.GetCellFromCoord(0, 0);
+		cell = map_model.GetCellFromCoord(0, 0);
+		inventory = new InventoryModel();
 		moving = false;
+		occupied = false;
 		role = R;
 	}
 
@@ -75,5 +78,13 @@ public class WorkerModel {
 	
 	public boolean GetMoving() {
 		return moving;
+	}
+	
+	public void harvest(Resource r, int ammount) {
+		inventory.add(r, ammount);
+	}
+	
+	public void dropOff(Resource r, int ammount) {
+		inventory.remove(r, ammount);
 	}
 }

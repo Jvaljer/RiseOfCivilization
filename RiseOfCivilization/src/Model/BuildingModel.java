@@ -9,6 +9,7 @@ public class BuildingModel {
 	private CellModel[][] model_grid;
 	private CellModel cell;
 	private BuildingId id;
+	private InventoryModel inventory;
 	
 	public BuildingModel(GameModel G, Point C, BuildingId bid) {
 		game = G;
@@ -16,6 +17,7 @@ public class BuildingModel {
 		model_grid = map.GetGrid();
 		cell = model_grid[C.x][C.y];
 		id = bid;
+		inventory = new InventoryModel(200);
 	}
 	
 	public BuildingId GetId() {

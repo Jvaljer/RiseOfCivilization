@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 /**
- * This class is for the view of the infobar. The infobar is represented in
+ * This class is the view of the infobar. The infobar is represented in
  * a seperate panel at the bottom of the dashboard.
  * Its default height is half of the height of the dashboard.
  *

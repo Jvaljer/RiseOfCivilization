@@ -1,10 +1,10 @@
 package Model;
 
+import Types.CellId;
+
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.awt.*;
-
-import Types.CellId;
 
 /**
  * Model for the overall map, containing all the grid informations, and the needed
@@ -22,6 +22,7 @@ public class MapModel {
 	private static final Point OriginPoint = new Point(2*Cell_size,2*Cell_size);
 	private CellModel[][] grid;
 	private Point city_origin;
+	private ArrayList<CellModel> city_cells;
 	
 	public MapModel(GameModel M) {
 		game = M;
@@ -34,13 +35,16 @@ public class MapModel {
 			for(int i=0; i<lines; i++) {
 				//must add the cell's Id random association
 				CellId id;
-				int rand_id = ThreadLocalRandom.current().nextInt(0,6);
-				if(rand_id <=2) {
-					id = CellId.Plain;
-				} else if(rand_id <=4) {
-					id = CellId.Forest;
-				} else if(rand_id <6) {
+				int rand_id = ThreadLocalRandom.current().nextInt(0,24);
+				System.out.println("rand_id :"+rand_id);
+				if(rand_id == 0) {
+					id = CellId.Iron_Deposit;
+				} else if(1 <= rand_id && rand_id < 5) {
 					id = CellId.Mountain;
+				} else if(5 <= rand_id && rand_id < 12) {
+					id = CellId.Forest;
+				} else if(12 <= rand_id) {
+					id = CellId.Plain;
 				} else {
 					id = CellId.None;
 				}
@@ -48,23 +52,27 @@ public class MapModel {
 			}
 		}
 		
-		int city_x = ThreadLocalRandom.current().nextInt(1,20);
-		int city_y = ThreadLocalRandom.current().nextInt(1,17);
-		city_origin = new Point(city_x, city_y);
+		city_cells = new ArrayList<CellModel>();
+		int city_origin_x = ThreadLocalRandom.current().nextInt(1, 20);
+		int city_origin_y = ThreadLocalRandom.current().nextInt(1, 17);
+		city_origin = new Point(city_origin_x, city_origin_y);
+		CellModel city_origin = grid[city_origin_x][city_origin_y];
+		city_origin.TurnToCity();
+		city_cells.add(city_origin);
 		
-		grid[city_x][city_y].TurnToCity();
-		ArrayList<Point> city_neigh = GetNeighbours(city_x, city_y);
-		int i1 = ThreadLocalRandom.current().nextInt(0,city_neigh.size());
-		Point city = city_neigh.get(i1);
-		grid[city.x][city.y].TurnToCity();
-		int i2;
-		do {
-			i2 = ThreadLocalRandom.current().nextInt(0,city_neigh.size());
-		} while (i2==i1);
-		city = city_neigh.get(i2);
-		grid[city.x][city.y].TurnToCity();
+		ArrayList<Point> city_neighbours = GetNeighbours(city_origin_x, city_origin_y);
+		int random_id_1 = ThreadLocalRandom.current().nextInt(0, city_neighbours.size());
+		Point p1 = city_neighbours.get(random_id_1);
+		CellModel city_cell_1 = grid[p1.x][p1.y];
+		city_cell_1.TurnToCity();
+		city_cells.add(city_cell_1);
+		city_neighbours.remove(p1);
 		
-		
+		int random_id_2 = ThreadLocalRandom.current().nextInt(0, city_neighbours.size());
+		Point p2 = city_neighbours.get(random_id_2);
+		CellModel city_cell_2 = grid[p2.x][p2.y];
+		city_cell_2.TurnToCity();
+		city_cells.add(city_cell_2);
 	}
 	
 	public GameModel GetGameModel() {
@@ -91,6 +99,10 @@ public class MapModel {
 		return grid[x][y];
 	}
 	
+	public CellModel getCellFromPoint(Point p) {
+		return grid[p.x][p.y];
+	}
+	
 	public int GetWidth() {
 		return width;
 	}
@@ -106,6 +118,11 @@ public class MapModel {
 	public Point GetCityOriginCoord() {
 		return city_origin;
 	}
+	
+	public ArrayList<CellModel> getCityCells() {
+		return city_cells;
+	}
+	
 	public Point GetPosFromCoord(int i, int j) {
 		Point pos = new Point(0,0);
 		int x0 = OriginPoint.x;

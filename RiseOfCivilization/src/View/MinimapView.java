@@ -7,7 +7,7 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 
 /**
- * This class is for the view of the minimap. The minimap is represented in
+ * This class is the view of the minimap. The minimap is represented in
  * a seperate panel at the top of the infobar panel.
  * Its default height is a third of the height of the infobar.
  *

@@ -7,7 +7,8 @@ package Types;
 public enum CellId {
 	None,
 	City,
+	Plain,
 	Forest,
 	Mountain,
-	Plain
+	Iron_Deposit,
 }

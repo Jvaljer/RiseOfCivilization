@@ -4,14 +4,16 @@ import Model.*;
 import Types.CellId;
 import View.*;
 import java.util.*;
+
 import javax.swing.*;
-import java.awt.event.ActionListener;
 
 /**
  * This is the Controller of a Cell, which contains & defines all behaviors we
  * want a cell to have (continuously and when we click on it). Using a Thread for 
  * the continuous events, and an OnClick method for the click event.
+ * 
  * @author abel
+ * @author martin
  */
 public class CellCtrl extends Thread {
 	/**represents the ctrl of the whole game*/
@@ -119,6 +121,19 @@ public class CellCtrl extends Thread {
 			default:
 				break;
 		}
+		
+		InventoryModel cell_inventory = cell_model.getInventory();
+		int resource_amount = cell_model.getResourceAmount();
+		if (resource_amount < CellModel.MAX_RESOURCE) {
+			cell_inventory.add(cell_model.getResource(), resource_amount/33 + 1);
+		}
+		
+		/*
+		if (cell_model.hasBuilding()) {
+			BuildingModel building = cell_model.getBuilding();
+			building.getInventory().add(cell_model.getResource(), 5);
+		}
+		*/
 	}
 	
 	/**
@@ -130,9 +145,8 @@ public class CellCtrl extends Thread {
 		//must implement
 		while(true) {
 			CellBehaviour();
-			
 			try {
-				Thread.sleep(60);
+				Thread.sleep(1000);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

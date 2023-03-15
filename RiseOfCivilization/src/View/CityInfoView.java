@@ -1,45 +1,42 @@
 package View;
 
+import Model.GameModel;
 import Model.InventoryModel;
 import Model.MapModel;
 import Types.Resource;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.util.concurrent.ConcurrentHashMap;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
 /**
- * This class is for the view of the inventory. The inventory is represented in
- * a seperate panel in the middle of the dashboard.
+ * This class is the view of the city's information. It shows the
+ * global inventory, the number of available and busy worker.
+ * It is represented in a seperate panel in the middle of the dashboard.
  * Its default height is a sixth of the height of the dashboard.
  *
  * @author martin
  */
 @SuppressWarnings("serial")
-public class InventoryView extends JPanel {
+public class CityInfoView extends JPanel {
 	private MapModel map_model;
-	private InventoryModel inventory_model;
+	private GameModel game_model;
 
-	private ConcurrentHashMap<Resource, JLabel> labels;
-
-	public InventoryView(MapModel mm, InventoryModel im) {
+	public CityInfoView(MapModel mm, GameModel gm) {
 		map_model = mm;
-		inventory_model = im;
-
-		labels = new ConcurrentHashMap<Resource, JLabel>();
+		game_model = gm;
+		InventoryModel global_inventory = game_model.getInventoryModel();
+		
 		Resource[] resource_values = Resource.values();
 		for(int i=0; i < resource_values.length; i++) {
-			JLabel label = new JLabel(Resource.values()[i] + " : " + inventory_model.getAmount(Resource.values()[i]));
+			Resource resource = resource_values[i];
+			JLabel label = new JLabel(resource + " : " + global_inventory.getAmmount(resource));
 			add(label);
 		}
 
 		setPreferredSize(new Dimension(map_model.GetWidth()/3, map_model.GetHeight()/3));
 		setBackground(Color.GRAY);
-
 	}
 }

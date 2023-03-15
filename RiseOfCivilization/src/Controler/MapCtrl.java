@@ -103,6 +103,11 @@ public class MapCtrl extends Thread implements MouseListener {
 		}
 		
 		Point pos = map_model.GetPosFromCoord(cell.x,cell.y);
+		
+		CellModel clicked_cell = map_model.GetCellFromCoord(cell.x, cell.y);
+		System.out.println("Cell Inventory : " + clicked_cell.getInventory().getResources());
+		//BuildingModel building = clicked_cell.getBuilding();
+		//System.out.println("Building : " + building.getType() + " has " + building.getInventory().getResources());
 	}
 	
 	@Override

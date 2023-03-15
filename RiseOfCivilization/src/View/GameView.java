@@ -9,19 +9,17 @@ import java.util.ArrayList;
 public class GameView extends JFrame {
 	private GameModel model;
 	private MapModel map_model;
-	private InventoryModel inventory_model;
 
 	private MapView map_view;
 	private ArrayList<WorkerView> workers_view;
 	private ActionView Action_view;
 	private MinimapView minimap_view;
-	private InventoryView inventory_view;
+	private CityInfoView city_info_view;
 	private DashboardView dashboard_view;
 
 	public GameView(GameModel m) {
 		model = m;
 		map_model = model.GetMapModel();
-		inventory_model = model.getInventoryModel();
 
 		map_view = new MapView(this,map_model);
 		workers_view = new ArrayList<WorkerView>(10);
@@ -30,9 +28,9 @@ public class GameView extends JFrame {
 			workers_view.add(new WorkerView(this, this.model.GetWorkerModel().get(i)));
 		}
 		minimap_view = new MinimapView(map_model);
-		inventory_view = new InventoryView(map_model, inventory_model);
+		city_info_view = new CityInfoView(map_model, model);
 		Action_view = new ActionView(map_model);
-		dashboard_view = new DashboardView(map_model, minimap_view, inventory_view, Action_view);
+		dashboard_view = new DashboardView(map_model, minimap_view, city_info_view, Action_view);
 
 		setTitle("Rise Of Civilizations");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
