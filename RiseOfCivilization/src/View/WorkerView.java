@@ -12,7 +12,7 @@ public class WorkerView {
 	public WorkerView(GameView V, WorkerModel worker) {
 		view = V;
 		map_model = view.GetGameModel().GetMapModel();
-		this.worker = worker;
+		worker = worker;
 	}
 	
 	public void drawWorker(Graphics G) {
