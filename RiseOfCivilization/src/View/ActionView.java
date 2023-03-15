@@ -45,7 +45,7 @@ public class ActionView extends JPanel {
 		add(button, c);
 		
 		button = new JButton("");
-		button.setName("Harvest");
+		button.setName("LevelUp");
 		c.gridx = 1;
 		c.gridy = 0;
 		button.setIcon(wrench);

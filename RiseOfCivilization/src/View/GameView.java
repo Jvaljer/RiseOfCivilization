@@ -67,6 +67,5 @@ public class GameView extends JFrame {
 		super.paint(G);
 
 		map_view.DrawMap(G);
-		//inventory_view.DrawInventory(G);
 	}
 }

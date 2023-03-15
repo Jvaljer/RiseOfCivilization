@@ -29,14 +29,14 @@ public class GameCtrl extends Thread{
 				case "Move" :
 					button.addActionListener(new ActionMove(this));
 					break;
-				case "New_Worker" :
+				case "Train" :
 					button.addActionListener(new ActionTrain(this));
 					break;
 				case "Collect" :
 					button.addActionListener(new ActionCollect(this));
 					break;
-				case "Drop" :
-					button.addActionListener(new ActionHarvest(this));
+				case "LevelUp" :
+					button.addActionListener(new ActionLevelUp(this));
 					break;
 			}
 		}

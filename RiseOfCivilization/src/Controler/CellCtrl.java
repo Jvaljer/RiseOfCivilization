@@ -71,7 +71,7 @@ public class CellCtrl extends Thread {
 			case City :
 				g_ctrl.GetButtonFromName("Build").setEnabled(false);
 				g_ctrl.GetButtonFromName("Collect").setEnabled(false);
-				g_ctrl.GetButtonFromName("Harvest").setEnabled(false);
+				g_ctrl.GetButtonFromName("LevelUp").setEnabled(false);
 				g_ctrl.GetButtonFromName("Expand").setEnabled(true);
 				g_ctrl.GetButtonFromName("Move").setEnabled(true);
 				g_ctrl.GetButtonFromName("Train").setEnabled(true);
@@ -80,7 +80,7 @@ public class CellCtrl extends Thread {
 			case Forest :
 				g_ctrl.GetButtonFromName("Build").setEnabled(true);
 				g_ctrl.GetButtonFromName("Collect").setEnabled(true);
-				g_ctrl.GetButtonFromName("Harvest").setEnabled(true);
+				g_ctrl.GetButtonFromName("LevelUp").setEnabled(true);
 				g_ctrl.GetButtonFromName("Expand").setEnabled(false);
 				g_ctrl.GetButtonFromName("Move").setEnabled(true);
 				g_ctrl.GetButtonFromName("Train").setEnabled(true);
@@ -89,7 +89,7 @@ public class CellCtrl extends Thread {
 			case Plain :
 				g_ctrl.GetButtonFromName("Build").setEnabled(true);
 				g_ctrl.GetButtonFromName("Collect").setEnabled(false);
-				g_ctrl.GetButtonFromName("Harvest").setEnabled(true);
+				g_ctrl.GetButtonFromName("LevelUp").setEnabled(true);
 				g_ctrl.GetButtonFromName("Expand").setEnabled(false);
 				g_ctrl.GetButtonFromName("Move").setEnabled(true);
 				g_ctrl.GetButtonFromName("Train").setEnabled(true);
@@ -98,7 +98,7 @@ public class CellCtrl extends Thread {
 			case Mountain :
 				g_ctrl.GetButtonFromName("Build").setEnabled(true);
 				g_ctrl.GetButtonFromName("Collect").setEnabled(true);
-				g_ctrl.GetButtonFromName("Harvest").setEnabled(true);
+				g_ctrl.GetButtonFromName("LevelUp").setEnabled(true);
 				g_ctrl.GetButtonFromName("Expand").setEnabled(false);
 				g_ctrl.GetButtonFromName("Move").setEnabled(true);
 				g_ctrl.GetButtonFromName("Train").setEnabled(true);
@@ -126,6 +126,8 @@ public class CellCtrl extends Thread {
 			case Forest :
 				
 			case Plain :
+				
+			case Mountain :
 				
 			case None :
 				

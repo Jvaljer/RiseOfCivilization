@@ -35,7 +35,6 @@ public class MapModel {
 				//must add the cell's Id random association
 				CellId id;
 				int rand_id = ThreadLocalRandom.current().nextInt(0,6);
-				System.out.println("rand_id :"+rand_id);
 				if(rand_id <=2) {
 					id = CellId.Plain;
 				} else if(rand_id <=4) {
