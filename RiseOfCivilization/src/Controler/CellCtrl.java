@@ -26,6 +26,8 @@ public class CellCtrl extends Thread {
 	private CellId id;
 	/** refers to the actions buttons*/
 	private ArrayList<JButton> buttons;
+	/** refers to the map model */
+	private MapModel map;
 	
 	/**
 	 * Constructor, associating all the necessaries variables (Model, View, Id) 
@@ -39,6 +41,7 @@ public class CellCtrl extends Thread {
 		cell_view = V;
 		cell_model = cell_view.GetCellModel();
 		id = cell_model.GetId();
+		map = g_ctrl.GetGameModel().GetMapModel();
 	}
 	
 	/**
@@ -65,51 +68,33 @@ public class CellCtrl extends Thread {
 	 */
 	public void OnClick() {
 		cell_view.Click();
-		//here we wanna give the possibility for the player to click certain buttons 
-		//depending on the cell's id and condition
-		switch (id) {
-			case City :
-				g_ctrl.GetButtonFromName("Build").setEnabled(false);
-				g_ctrl.GetButtonFromName("Collect").setEnabled(false);
-				g_ctrl.GetButtonFromName("LevelUp").setEnabled(false);
-				g_ctrl.GetButtonFromName("Expand").setEnabled(true);
-				g_ctrl.GetButtonFromName("Move").setEnabled(true);
-				g_ctrl.GetButtonFromName("Train").setEnabled(true);
-				break;
-
-			case Forest :
-				g_ctrl.GetButtonFromName("Build").setEnabled(true);
-				g_ctrl.GetButtonFromName("Collect").setEnabled(true);
-				g_ctrl.GetButtonFromName("LevelUp").setEnabled(true);
-				g_ctrl.GetButtonFromName("Expand").setEnabled(false);
-				g_ctrl.GetButtonFromName("Move").setEnabled(true);
-				g_ctrl.GetButtonFromName("Train").setEnabled(true);
-				break;
-				
-			case Plain :
-				g_ctrl.GetButtonFromName("Build").setEnabled(true);
-				g_ctrl.GetButtonFromName("Collect").setEnabled(false);
-				g_ctrl.GetButtonFromName("LevelUp").setEnabled(true);
-				g_ctrl.GetButtonFromName("Expand").setEnabled(false);
-				g_ctrl.GetButtonFromName("Move").setEnabled(true);
-				g_ctrl.GetButtonFromName("Train").setEnabled(true);
-				break;
+		//here we wanna give the possibility for the player to click certain buttons
+		if(map.CellIsOccupiedByBuilding(cell_model)) {
+			g_ctrl.GetButtonFromName("Move").setEnabled(false);
+			g_ctrl.GetButtonFromName("Collect").setEnabled(true);
+			g_ctrl.GetButtonFromName("LevelUp").setEnabled(true);
+			g_ctrl.GetButtonFromName("Expand").setEnabled(map.CanExpand(cell_model));
+			g_ctrl.GetButtonFromName("Build").setEnabled(false);
+			g_ctrl.GetButtonFromName("Train").setEnabled(true);
 			
-			case Mountain :
-				g_ctrl.GetButtonFromName("Build").setEnabled(true);
-				g_ctrl.GetButtonFromName("Collect").setEnabled(true);
-				g_ctrl.GetButtonFromName("LevelUp").setEnabled(true);
-				g_ctrl.GetButtonFromName("Expand").setEnabled(false);
-				g_ctrl.GetButtonFromName("Move").setEnabled(true);
-				g_ctrl.GetButtonFromName("Train").setEnabled(true);
-				break;
-				
-			case None :
-				break;
-				
-			default:
-				break;
+		} else if(map.CellIsOccupiedByWorker(cell_model)) {
+			g_ctrl.GetButtonFromName("Move").setEnabled(false);
+			g_ctrl.GetButtonFromName("Collect").setEnabled(map.CanCollect(cell_model));
+			g_ctrl.GetButtonFromName("LevelUp").setEnabled(true);
+			g_ctrl.GetButtonFromName("Expand").setEnabled(map.CanExpand(cell_model));
+			g_ctrl.GetButtonFromName("Build").setEnabled(map.CanBuild(cell_model));
+			g_ctrl.GetButtonFromName("Train").setEnabled(false);
+			
+		} else {
+			g_ctrl.GetButtonFromName("Move").setEnabled(true);
+			g_ctrl.GetButtonFromName("Collect").setEnabled(map.CanCollect(cell_model));
+			g_ctrl.GetButtonFromName("LevelUp").setEnabled(false);
+			g_ctrl.GetButtonFromName("Expand").setEnabled(map.CanExpand(cell_model));
+			g_ctrl.GetButtonFromName("Build").setEnabled(map.CanBuild(cell_model));
+			g_ctrl.GetButtonFromName("Train").setEnabled(false);
+			
 		}
+		
 	}
 	
 	public void UnClick() {

@@ -196,6 +196,12 @@ public class MapModel {
 		return neighbors;
 	}
 	
+	public ArrayList<Point> GetValidNeighbors(int i, int j){
+		ArrayList<Point> neighbors = new ArrayList<Point>();
+		//must implement
+		return neighbors;
+	}
+	
 	public boolean CellIsValid(Point cell) {
 		int i = cell.x;
 		int j = cell.y;
@@ -271,5 +277,39 @@ public class MapModel {
 			}
 		}
 		return nearest;
+	}
+	
+	public boolean CellIsOccupiedByBuilding(CellModel cell) {
+		for(BuildingModel building : game.GetBuildingList()) {
+			if(building.GetPos()==cell.GetCoord()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean CellIsOccupiedByWorker(CellModel cell) {
+		for(WorkerModel worker : game.GetWorkerModel()) {
+			if(worker.getPos()==cell.GetCoord()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean CanExpand(CellModel cell) {
+		if(cell.GetId()==CellId.City) {
+			return false;
+		}
+		for(Point neigh : GetNeighbours(cell.GetX(), cell.GetY())) {
+			if(grid[neigh.x][neigh.y].GetId()==CellId.City) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean CanBuild(CellModel cell) {
+		return (cell.GetId()==CellId.Forest || cell.GetId()==CellId.Mountain);
+	}
+	public boolean CanCollect(CellModel cell) {
+		return cell.GetId()==CellId.Forest || cell.GetId()==CellId.Mountain || CellIsOccupiedByBuilding(cell);
 	}
 }

@@ -15,8 +15,7 @@ public class ActionMove implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-			CellModel cell = controler.GetMapCtrl().GetClickedCell();
-			WorkerModel nearest_worker = map.GetNearestWorker(cell.GetCoord());
+		System.out.println("clicked Move Button");
 	}
 	
 }
