@@ -36,7 +36,6 @@ public class MapModel {
 				//must add the cell's Id random association
 				CellId id;
 				int rand_id = ThreadLocalRandom.current().nextInt(0,24);
-				System.out.println("rand_id :"+rand_id);
 				if(rand_id == 0) {
 					id = CellId.Iron_Deposit;
 				} else if(1 <= rand_id && rand_id < 5) {
@@ -180,13 +179,13 @@ public class MapModel {
 		ArrayList<Point > neighbors = new ArrayList<Point>();
 		Point[] directions = new Point[6];
 		
-		if(j%2==0) {
-			directions[0] = new Point(-1,0);
-			directions[1] = new Point(0,1);
+		if(i%2==0) {
+			directions[0] = new Point(0,-1);
+			directions[1] = new Point(1,0);
 			directions[2] = new Point(1,1);
-			directions[3] = new Point(1,0);
-			directions[4] = new Point(1,-1);
-			directions[5] = new Point(0,-1);
+			directions[3] = new Point(0,1);
+			directions[4] = new Point(-1,1);
+			directions[5] = new Point(-1,0);
 			
 			for(Point dir : directions) {
 				Point pts = new Point(i+dir.x,j+dir.y);
@@ -195,11 +194,11 @@ public class MapModel {
 				}
 			}
 		} else {
-			directions[0] = new Point(-1,0);
-			directions[1] = new Point(-1,1);
-			directions[2] = new Point(0,1);
-			directions[3] = new Point(1,0);
-			directions[4] = new Point(0,-1);
+			directions[0] = new Point(0,-1);
+			directions[1] = new Point(1,-1);
+			directions[2] = new Point(1,0);
+			directions[3] = new Point(0,1);
+			directions[4] = new Point(-1,0);
 			directions[5] = new Point(-1,-1);
 			
 			for(Point dir : directions) {

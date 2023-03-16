@@ -90,6 +90,7 @@ public class MapCtrl extends Thread implements MouseListener {
 		System.out.println("clicked on : " + mouse_pos);
 		
 		Point cell = GetCellFromClick(mouse_pos);
+		System.out.println("i%2 : " + (cell.x%2==0));
 		
 		if(map_model.CellIsValid(cell)) {
 			if(old_click != null) {

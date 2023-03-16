@@ -12,6 +12,7 @@ public class GameView extends JFrame {
 
 	private MapView map_view;
 	private ArrayList<WorkerView> workers_view;
+	private ArrayList<BuildingView> buildings_view;
 	private ActionView Action_view;
 	private MinimapView minimap_view;
 	private CityInfoView city_info_view;
@@ -22,10 +23,14 @@ public class GameView extends JFrame {
 		map_model = model.GetMapModel();
 
 		map_view = new MapView(this,map_model);
-		workers_view = new ArrayList<WorkerView>(10);
+		workers_view = new ArrayList<WorkerView>();
 		for(int i = 0; i < this.model.GetWorkerModel().size(); i++)
 		{
 			workers_view.add(new WorkerView(this, this.model.GetWorkerModel().get(i)));
+		}
+		buildings_view = new ArrayList<BuildingView>();
+		for(int i=0; i<model.GetBuildingList().size(); i++) {
+			buildings_view.add(new BuildingView(this,model.GetBuildingList().get(i)));
 		}
 		minimap_view = new MinimapView(map_model);
 		city_info_view = new CityInfoView(map_model, model);
@@ -63,7 +68,7 @@ public class GameView extends JFrame {
 	@Override
 	public void paint(Graphics G) {
 		super.paint(G);
-
+		
 		map_view.DrawMap(G);
 	}
 }

@@ -29,19 +29,18 @@ public class CellModel {
 		Y = y;
 		id = i;
 		
-		if (id == CellId.Plain) {
-			natural_resource = Resource.Wheat;
-		} else if(id == CellId.Forest) {
+		if(id == CellId.Forest) {
 			natural_resource = Resource.Wood;
 		} else if(id == CellId.Mountain) {
 			natural_resource = Resource.Stone;
 		} else if(id == CellId.Iron_Deposit) {
 			natural_resource = Resource.Iron;
+		} else {
+			natural_resource = Resource.None;
 		}
 		
 		inventory = new InventoryModel();
 		inventory.add(natural_resource, MAX_RESOURCE);
-		//building = new BuildingModel();
 	}
 	
 	public int GetX() {
@@ -71,16 +70,6 @@ public class CellModel {
 	public int getResourceAmount() {
 		return inventory.getAmmount(natural_resource);
 	}
-	
-	/*
-	public BuildingModel getBuilding() {
-		return building;
-	}
-	
-	public boolean hasBuilding() {
-		return building.getType() != Building.None;
-	}
-	*/
 	
 	public void TurnToCity() {
 		id = CellId.City;
