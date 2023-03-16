@@ -5,7 +5,6 @@ package Types;
  * @author abel
  */
 public enum CellId {
-	None,
 	City,
 	Plain,
 	Forest,

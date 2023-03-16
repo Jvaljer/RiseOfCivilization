@@ -6,6 +6,7 @@ import Types.BuildingId;
 import Types.WorkerRole;
 
 public class GameModel {
+	private static final int time_unit = 60;
 	private static final int map_width = 675;
 	private static final int map_height = 650;
 	private static final int panel_width = 300;
@@ -57,5 +58,9 @@ public class GameModel {
 	
 	public ArrayList<BuildingModel> GetBuildingList(){
 		return buildings;
+	}
+	
+	public int TimeUnit() {
+		return time_unit;
 	}
 }

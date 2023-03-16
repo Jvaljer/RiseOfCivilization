@@ -46,7 +46,7 @@ public class MapModel {
 				} else if(12 <= rand_id) {
 					id = CellId.Plain;
 				} else {
-					id = CellId.None;
+					id = null;
 				}
 				grid[i][j] = new CellModel(i,j,id);
 			}

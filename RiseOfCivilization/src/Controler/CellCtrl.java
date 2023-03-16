@@ -116,8 +116,6 @@ public class CellCtrl extends Thread {
 				
 			case Mountain :
 				
-			case None :
-				
 			default:
 				break;
 		}
