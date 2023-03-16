@@ -11,6 +11,9 @@ public class BuildingModel {
 	private BuildingId id;
 	private InventoryModel inventory;
 	
+	private static final int width = 20;
+	private static final int height = 15;
+	
 	public BuildingModel(GameModel G, Point C, BuildingId bid) {
 		game = G;
 		map = game.GetMapModel();
@@ -25,5 +28,11 @@ public class BuildingModel {
 	}
 	public Point GetPos() {
 		return cell.GetCoord();
+	}
+	public int GetWidth() {
+		return width;
+	}
+	public int GetHeight() {
+		return height;
 	}
 }

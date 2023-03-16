@@ -64,6 +64,10 @@ public class GameView extends JFrame {
 	public ArrayList<WorkerView> getWorkerView() {
 		return this.workers_view;
 	}
+	
+	public ArrayList<BuildingView> GetBuildingsView(){
+		return buildings_view;
+	}
 
 	@Override
 	public void paint(Graphics G) {

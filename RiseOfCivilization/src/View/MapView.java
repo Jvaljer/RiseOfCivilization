@@ -81,5 +81,9 @@ public class MapView extends JPanel {
 				this.view.getWorkerView().get(i).drawWorker(G);
 			}
 		}
+		
+		for(BuildingView b_view : view.GetBuildingsView()) {
+			b_view.DrawBuilding(G);
+		}
 	}
 }

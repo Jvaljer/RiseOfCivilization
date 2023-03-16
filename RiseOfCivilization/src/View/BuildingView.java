@@ -44,10 +44,14 @@ public class BuildingView {
 	}
 	
 	public void DrawBuilding(Graphics G) {
+		int w = model.GetWidth();
+		int h = model.GetHeight();
+		int w_div = w / 2;
+		int h_div = h / 2;
 		Point pos = map.GetPosFromCoord(coord.x,coord.y);
 		G.setColor(new Color(0,0,0));
-		G.drawRoundRect(pos.x, pos.y, 10, 15, 2, 2);
+		G.drawRoundRect(pos.x - w_div, pos.y - h_div, w, h, 2, 2);
 		G.setColor(color);
-		G.fillRoundRect(pos.x, pos.y, 10, 15, 2, 2);
+		G.fillRoundRect(pos.x - w_div, pos.y - h_div, w, h, 2, 2);
 	}
 }
