@@ -25,15 +25,23 @@ public class WorkerCollect extends Thread{
 		worker.isOccupied();
 		while(worker.getPos()!=dst_cell.GetCoord()) {
 			try {
-				Point nxt = map.GetShortestPath(worker.getPos(),dst_cell.GetCoord()).get(0);
+				Point nxt = map.GetShortestPath(worker.getPos(),dst_cell.GetCoord()).get(1);
+				System.out.println("moving from " + worker.getPos() + " to " + nxt);
 				Thread.sleep(500);
 				worker.MoveTo(nxt.x, nxt.y);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
+		System.out.println("worker has arrived !");
 		//now we wanna make the worker collect
 		worker.isNotMoving();
 		ctrl.GetGameModel().Harvest(worker,dst_cell);
+		try {
+			Thread.sleep(500);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		worker.isFree();
 	}
 }
