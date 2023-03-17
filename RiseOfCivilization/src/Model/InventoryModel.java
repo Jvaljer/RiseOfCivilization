@@ -35,6 +35,7 @@ public class InventoryModel {
 	
 	public InventoryModel(int max_amount) {
 		this(Arrays.asList(0, 0, 0, 0), max_amount);
+		max_resource = max_amount;
 	}
 	
 	public InventoryModel() {
@@ -82,6 +83,10 @@ public class InventoryModel {
 		int amount_diff = prev_amount - amount;
 		resources.replace(r, Math.max(amount_diff, 0));
 		return Math.min(amount, prev_amount);
+	}
+	
+	public int GetMaxAmount() {
+		return max_resource;
 	}
 	
 }

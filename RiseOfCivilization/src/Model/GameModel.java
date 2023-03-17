@@ -90,4 +90,21 @@ public class GameModel {
 	public void AddBuilding(BuildingId bid, Point pts) {
 		buildings.add(new BuildingModel(this,pts,bid));
 	}
+	
+	public void Harvest(WorkerModel worker, CellModel cell) {
+		InventoryModel cell_inventory = cell.getInventory();
+		InventoryModel worker_inventory = worker.getInventory();
+		
+		if(worker_inventory.getAmmount(cell.getResource()) < worker_inventory.GetMaxAmount()
+				&& cell_inventory.getAmmount(cell.getResource()) > 0) {
+			int available = cell_inventory.getAmmount(cell.getResource());
+			if(available >= worker.GetHarvestCapacity()) {
+				worker.harvest(cell.getResource());
+				cell.collectResource(worker.GetHarvestCapacity());
+			} else {
+				worker.harvest(cell.getResource(),cell.getResourceAmount());
+				cell.collectResource(cell.getResourceAmount());
+			}
+		}
+	}
 }

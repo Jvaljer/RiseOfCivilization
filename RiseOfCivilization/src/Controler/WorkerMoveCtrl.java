@@ -9,13 +9,11 @@ import View.WorkerView;
 public class WorkerMoveCtrl extends Thread {
 	private GameModel model;
 	private WorkerModel worker;
-	private WorkerView workerView;
 	private Point destCord;
 
-	public WorkerMoveCtrl(GameModel m, WorkerModel w, WorkerView wv, Point p) {
+	public WorkerMoveCtrl(GameModel m, WorkerModel w, Point p) {
 		this.model = m;
 		this.worker = w;
-		this.workerView = wv;
 		this.destCord = p;
 	}
 

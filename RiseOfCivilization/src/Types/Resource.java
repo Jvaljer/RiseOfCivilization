@@ -8,5 +8,4 @@ public enum Resource {
 	Wood,
 	Stone,
 	Iron,
-	None,
 }

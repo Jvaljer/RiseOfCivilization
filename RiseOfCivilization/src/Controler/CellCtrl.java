@@ -138,8 +138,11 @@ public class CellCtrl extends Thread {
 				break;
 			case Mountain :
 				cell_inventory.add(Resource.Stone, 5);
+				break;
 			case Iron_Deposit : 
 				cell_inventory.add(Resource.Iron, 2);
+				break;
+				
 			default:
 				break;
 		}

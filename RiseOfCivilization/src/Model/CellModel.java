@@ -103,4 +103,8 @@ public class CellModel {
 		//must implement
 		return;
 	}
+	
+	public void collectResource(int n) {
+		inventory.remove(natural_resource, n);
+	}
 }

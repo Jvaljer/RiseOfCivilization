@@ -14,13 +14,15 @@ public class WorkerModel {
 	private boolean moving;
 	private boolean occupied;
 	private WorkerRole role;
+	private int harvest_capacity;
 	
 	public WorkerModel(GameModel M, WorkerRole R) {
 		model = M;
 		map_model = model.GetMapModel();
 		model_grid = map_model.GetGrid();
 		cell = map_model.GetCellFromCoord(0, 0);
-		inventory = new InventoryModel();
+		harvest_capacity = 100;
+		inventory = new InventoryModel(harvest_capacity*3);
 		moving = false;
 		occupied = false;
 		role = R;
@@ -80,11 +82,21 @@ public class WorkerModel {
 		return moving;
 	}
 	
-	public void harvest(Resource r, int ammount) {
-		inventory.add(r, ammount);
+	public void harvest(Resource r) {
+		inventory.add(r, harvest_capacity);
+	}
+	public void harvest(Resource r, int n) {
+		inventory.add(r, n);
 	}
 	
 	public void dropOff(Resource r, int ammount) {
 		inventory.remove(r, ammount);
+	}
+	
+	public int GetHarvestCapacity() {
+		return harvest_capacity;
+	}
+	public InventoryModel getInventory() {
+		return inventory;
 	}
 }
