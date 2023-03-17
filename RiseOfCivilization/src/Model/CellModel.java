@@ -2,6 +2,7 @@ package Model;
 
 import Types.*;
 import java.awt.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * This class is for the model of a cell. A cell has a position and an id
@@ -29,26 +30,34 @@ public class CellModel {
 		Y = y;
 		id = i;
 		
-		if(id == CellId.Forest) {
-			natural_resource = Resource.Wood;
-			color = new Color(0, 153, 0);
-		} else if(id == CellId.Mountain) {
-			natural_resource = Resource.Stone;
-			color = new Color(150, 150, 150);
-		} else if(id == CellId.Iron_Deposit) {
-			natural_resource = Resource.Iron;
-			color = new Color(169, 84, 69);
-		} else {
-			natural_resource = Resource.None;
-			if(id == CellId.City) {
-				color = new Color(165, 110, 20);
-			} else if(id == CellId.Plain) {
-				color = new Color(255, 204, 102);
-			}
-		}
-		
 		inventory = new InventoryModel();
-		inventory.add(natural_resource, 50);
+		int amount;
+		switch (id) {
+			case Forest :
+				natural_resource = Resource.Wood;
+				color = new Color(0, 153, 0);
+				amount = ThreadLocalRandom.current().nextInt(10,100);
+				inventory.add(natural_resource, amount);
+				break;
+			case Mountain :
+				natural_resource = Resource.Stone;
+				color = new Color(150, 150, 150);
+				amount = ThreadLocalRandom.current().nextInt(0,40);
+				inventory.add(natural_resource, amount);
+				break;
+			case Iron_Deposit :
+				natural_resource = Resource.Iron;
+				color = new Color(169,84,69);
+				amount = ThreadLocalRandom.current().nextInt(10,100);
+				inventory.add(natural_resource, amount);
+				break;
+			case City:
+				color = new Color(165,110,20);
+			case Plain:
+				color = new Color(225,205,102);
+			default:
+				break;
+		}
 	}
 	
 	public int GetX() {
@@ -80,8 +89,10 @@ public class CellModel {
 	}
 	
 	public void TurnToCity() {
+		if(id!=CellId.Plain) {
+			inventory.remove(natural_resource, MAX_RESOURCE);
+		}
 		id = CellId.City;
-		inventory.remove(natural_resource, MAX_RESOURCE);
 	}
 	
 	public Color GetColor() {

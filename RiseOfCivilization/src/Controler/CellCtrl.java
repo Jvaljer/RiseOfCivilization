@@ -6,6 +6,7 @@ import View.*;
 import java.util.*;
 
 import javax.swing.*;
+import Types.Resource;
 
 /**
  * This is the Controller of a Cell, which contains & defines all behaviors we
@@ -108,42 +109,40 @@ public class CellCtrl extends Thread {
 	 */
 	public void CellBehaviour() {
 		InventoryModel cell_inventory = cell_model.getInventory();
-		int resource_amount = cell_model.getResourceAmount();
 		
 		if(map.CellIsOccupiedByBuilding(cell_model)) {
 			BuildingModel building = map.GetBuildingFromCoord(cell_model.GetCoord());
 			InventoryModel inventory = building.GetInventory();
 			switch (building.GetId()) {
 				case SawMill:
+					inventory.add(Resource.Wood, 16);
 					break;
 				case Mine:
+					inventory.add(Resource.Stone, 10);
 					break;
 				case Quarry:
+					inventory.add(Resource.Iron, 5);
 					break;
+					
 				default:
 					break;
 			}
 		}
 		switch (id) {
 			case City :
-				
+				break;
 			case Forest :
-				
+				cell_inventory.add(Resource.Wood,8);
+				break;
 			case Plain :
-				
+				break;
 			case Mountain :
-			
+				cell_inventory.add(Resource.Stone, 5);
 			case Iron_Deposit : 
+				cell_inventory.add(Resource.Iron, 2);
 			default:
 				break;
 		}
-		
-		/*
-		if (cell_model.hasBuilding()) {
-			BuildingModel building = cell_model.getBuilding();
-			building.getInventory().add(cell_model.getResource(), 5);
-		}
-		*/
 	}
 	
 	/**
@@ -156,7 +155,7 @@ public class CellCtrl extends Thread {
 		while(true) {
 			CellBehaviour();
 			try {
-				Thread.sleep(2400);
+				Thread.sleep(2000);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

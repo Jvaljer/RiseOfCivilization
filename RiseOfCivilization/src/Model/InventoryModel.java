@@ -19,6 +19,7 @@ public class InventoryModel {
 	/* Default of -1 means no max_resource */
 	private int max_resource;
 	
+	
 	public InventoryModel(List<Integer> ammounts, int max_amount) {
 		max_resource = max_amount;
 		resources = new ConcurrentHashMap<Resource, Integer>();
