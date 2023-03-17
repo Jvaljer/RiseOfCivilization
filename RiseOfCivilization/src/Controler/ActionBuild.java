@@ -27,21 +27,25 @@ public class ActionBuild implements ActionListener {
             		case Mountain:
             			bid = BuildingId.Mine;
             			if(g_ctrl.GetGameModel().PlayerHasEnoughToBuild(bid)) {
-            				map.Build(bid);
+            				g_ctrl.GetGameModel().AddBuilding(bid,cell.GetCoord());
             			}
+            			break;
             		case Forest:
             			bid = BuildingId.SawMill;
             			if(g_ctrl.GetGameModel().PlayerHasEnoughToBuild(bid)) {
-            				map.Build(bid);
+            				g_ctrl.GetGameModel().AddBuilding(bid,cell.GetCoord());
             			}
+            			break;
             		case Iron_Deposit:
             			bid = BuildingId.Quarry;
             			if(g_ctrl.GetGameModel().PlayerHasEnoughToBuild(bid)) {
-            				map.Build(bid);
+            				g_ctrl.GetGameModel().AddBuilding(bid,cell.GetCoord());
             			}
+            			break;
             		case City:
             			//here we wanna give the player the choice between
             			// MinerCamp || LumberCamp
+            			break;
             		default:
             			break;
             	}

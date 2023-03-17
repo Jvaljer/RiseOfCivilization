@@ -5,6 +5,7 @@ import Types.CellId;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.awt.*;
+import Types.*;
 
 /**
  * Model for the overall map, containing all the grid informations, and the needed
@@ -344,5 +345,9 @@ public class MapModel {
 			}
 		}
 		return null;
+	}
+	
+	public void Build(BuildingId bid, Point pts) {
+		game.AddBuilding(bid, pts);
 	}
 }
