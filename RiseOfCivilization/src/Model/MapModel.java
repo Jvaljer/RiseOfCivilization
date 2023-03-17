@@ -328,4 +328,21 @@ public class MapModel {
 	public boolean CanCollect(CellModel cell) {
 		return cell.GetId()==CellId.Forest || cell.GetId()==CellId.Mountain || CellIsOccupiedByBuilding(cell);
 	}
+	
+	public BuildingModel GetBuildingFromCoord(Point coord) {
+		for(BuildingModel building : game.GetBuildingList()) {
+			if(building.GetPos()==coord) {
+				return building;
+			}
+		}
+		return null;
+	}
+	public WorkerModel GetWorkerFromCoord(Point coord) {
+		for(WorkerModel worker : game.GetWorkerModel()) {
+			if(worker.getPos()==coord) {
+				return worker;
+			}
+		}
+		return null;
+	}
 }

@@ -35,4 +35,7 @@ public class BuildingModel {
 	public int GetHeight() {
 		return height;
 	}
+	public InventoryModel GetInventory() {
+		return inventory;
+	}
 }

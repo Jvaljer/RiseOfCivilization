@@ -20,6 +20,8 @@ public class CellCtrl extends Thread {
 	private GameCtrl g_ctrl;
 	/**represents the view of the whole game*/
 	private GameView g_view;
+	/**represents the map model*/
+	private MapModel map;
 	/** represents the model of the cell we wanna infer on */
 	private CellModel cell_model;
 	/** represents the view of the cell we wanna infer on */
@@ -28,8 +30,6 @@ public class CellCtrl extends Thread {
 	private CellId id;
 	/** refers to the actions buttons*/
 	private ArrayList<JButton> buttons;
-	/** refers to the map model */
-	private MapModel map;
 	
 	/**
 	 * Constructor, associating all the necessaries variables (Model, View, Id) 
@@ -107,6 +107,23 @@ public class CellCtrl extends Thread {
 	 * Method which dictates & describe the behaviour of the cell throughout the game
 	 */
 	public void CellBehaviour() {
+		InventoryModel cell_inventory = cell_model.getInventory();
+		int resource_amount = cell_model.getResourceAmount();
+		
+		if(map.CellIsOccupiedByBuilding(cell_model)) {
+			BuildingModel building = map.GetBuildingFromCoord(cell_model.GetCoord());
+			InventoryModel inventory = building.GetInventory();
+			switch (building.GetId()) {
+				case SawMill:
+					break;
+				case Mine:
+					break;
+				case Quarry:
+					break;
+				default:
+					break;
+			}
+		}
 		switch (id) {
 			case City :
 				
@@ -115,15 +132,10 @@ public class CellCtrl extends Thread {
 			case Plain :
 				
 			case Mountain :
-				
+			
+			case Iron_Deposit : 
 			default:
 				break;
-		}
-		
-		InventoryModel cell_inventory = cell_model.getInventory();
-		int resource_amount = cell_model.getResourceAmount();
-		if (resource_amount < CellModel.MAX_RESOURCE) {
-			cell_inventory.add(cell_model.getResource(), resource_amount/33 + 1);
 		}
 		
 		/*
@@ -144,7 +156,7 @@ public class CellCtrl extends Thread {
 		while(true) {
 			CellBehaviour();
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(2400);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

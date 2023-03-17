@@ -19,9 +19,9 @@ public class CellModel {
 	private int Y;
 	private CellId id;
 	private Resource natural_resource;
-	public static final int MAX_RESOURCE = 100;
+	public static final int MAX_RESOURCE = 500;
 	private InventoryModel inventory;
-	//private BuildingModel building;
+	private Color color;
 	
 	
 	public CellModel(int x, int y, CellId i) {
@@ -31,16 +31,24 @@ public class CellModel {
 		
 		if(id == CellId.Forest) {
 			natural_resource = Resource.Wood;
+			color = new Color(0, 153, 0);
 		} else if(id == CellId.Mountain) {
 			natural_resource = Resource.Stone;
+			color = new Color(150, 150, 150);
 		} else if(id == CellId.Iron_Deposit) {
 			natural_resource = Resource.Iron;
+			color = new Color(169, 84, 69);
 		} else {
 			natural_resource = Resource.None;
+			if(id == CellId.City) {
+				color = new Color(165, 110, 20);
+			} else if(id == CellId.Plain) {
+				color = new Color(255, 204, 102);
+			}
 		}
 		
 		inventory = new InventoryModel();
-		inventory.add(natural_resource, MAX_RESOURCE);
+		inventory.add(natural_resource, 50);
 	}
 	
 	public int GetX() {
@@ -76,4 +84,12 @@ public class CellModel {
 		inventory.remove(natural_resource, MAX_RESOURCE);
 	}
 	
+	public Color GetColor() {
+		return color;
+	}
+	
+	public void SetColor() {
+		//must implement
+		return;
+	}
 }
