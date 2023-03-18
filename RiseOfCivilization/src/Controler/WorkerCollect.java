@@ -3,37 +3,43 @@ package Controler;
 import java.awt.Point;
 import Types.*;
 import Model.*;
+import java.util.*;
 
 public class WorkerCollect extends Thread{
 	private static GameCtrl ctrl;
 	private static MapModel map;
 	private static WorkerModel worker;
 	private static CellModel dst_cell;
-	private static Resource resource;
 	
 	public WorkerCollect(GameCtrl GC,WorkerModel W, CellModel C) {
 		ctrl = GC;
 		map = ctrl.GetGameModel().GetMapModel();
 		worker = W;
 		dst_cell = C;
-		resource = dst_cell.getResource();
 	}
 	
 	@Override
 	public void run() {
 		worker.isMoving();
 		worker.isOccupied();
-		while(worker.getPos()!=dst_cell.GetCoord()) {
+		System.out.println("path from original pos to destination :");
+		System.out.println("       " + map.GetShortestPath(worker.getPos(),dst_cell.GetCoord()));
+		while((worker.getPos().x != dst_cell.GetCoord().x) && (worker.getPos().y != dst_cell.GetCoord().y)) {
 			try {
-				Point nxt = map.GetShortestPath(worker.getPos(),dst_cell.GetCoord()).get(1);
-				System.out.println("moving from " + worker.getPos() + " to " + nxt);
+				ArrayList<Point> path = map.GetShortestPath(worker.getPos(),dst_cell.GetCoord());
+				Point nxt;
+				if(path.size() > 1) {
+					nxt = path.get(1);
+				} else {
+					nxt = path.get(0);
+				}
 				Thread.sleep(500);
 				worker.MoveTo(nxt.x, nxt.y);
+				System.out.println("");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("worker has arrived !");
 		//now we wanna make the worker collect
 		worker.isNotMoving();
 		ctrl.GetGameModel().Harvest(worker,dst_cell);
