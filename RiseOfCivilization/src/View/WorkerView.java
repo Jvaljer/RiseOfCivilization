@@ -9,10 +9,10 @@ public class WorkerView {
 	private WorkerModel worker;
 	private int FPS = 12;
 	
-	public WorkerView(GameView V, WorkerModel worker) {
+	public WorkerView(GameView V, WorkerModel w) {
 		view = V;
 		map_model = view.GetGameModel().GetMapModel();
-		this.worker = worker;
+		this.worker = w;
 	}
 	
 	public void drawMove(Graphics G, int i, int j) {
@@ -38,7 +38,19 @@ public class WorkerView {
 		}
 	}
 	
-	public void DrawPlayer(Graphics G) {
+	public void DrawWorker(Graphics G) {
+		int w = worker.getWidth();
+		int h = worker.getHeight();
+		int w_div = w/2;
+		int h_div = h/2;
 		
+		Point coord = worker.getPos();
+		System.out.println("drawing the player on slot : " + coord);
+		Point pos = map_model.GetPosFromCoord(coord.x,coord.y);
+		
+		G.setColor(new Color(0,0,0));
+		G.drawOval(pos.x - w_div, pos.y - h_div, w, h);
+		G.setColor(new Color(0,100,200));
+		G.fillOval(pos.x - w_div, pos.y - h_div, w, h);
 	}
 }
