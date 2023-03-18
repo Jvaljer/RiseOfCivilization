@@ -22,8 +22,11 @@ public class WorkerCollect extends Thread{
 	public void run() {
 		worker.isMoving();
 		worker.isOccupied();
-		System.out.println("path from original pos to destination :");
-		System.out.println("       " + map.GetShortestPath(worker.getPos(),dst_cell.GetCoord()));
+		System.out.println("path from " + worker.getPos() + " to " + dst_cell.GetCoord() + " :");
+		ArrayList<Point> shortest = map.GetShortestPath(worker.getPos(),dst_cell.GetCoord());
+		for(int i=0; i<shortest.size(); i++) {
+			System.out.println(shortest.get(i));
+		}
 		while((worker.getPos().x != dst_cell.GetCoord().x) && (worker.getPos().y != dst_cell.GetCoord().y)) {
 			try {
 				ArrayList<Point> path = map.GetShortestPath(worker.getPos(),dst_cell.GetCoord());

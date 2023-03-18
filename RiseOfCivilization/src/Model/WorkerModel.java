@@ -16,11 +16,11 @@ public class WorkerModel {
 	private WorkerRole role;
 	private int harvest_capacity;
 	
-	public WorkerModel(GameModel M, WorkerRole R) {
+	public WorkerModel(GameModel M, WorkerRole R, Point pts) {
 		model = M;
 		map_model = model.GetMapModel();
 		model_grid = map_model.GetGrid();
-		cell = map_model.GetCellFromCoord(0, 0);
+		cell = map_model.GetCellFromCoord(pts.x,pts.y);
 		harvest_capacity = 100;
 		inventory = new InventoryModel(harvest_capacity*3);
 		moving = false;

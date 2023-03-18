@@ -327,7 +327,7 @@ public class MapModel {
 		return (cell.GetId()==CellId.Forest || cell.GetId()==CellId.Mountain);
 	}
 	public boolean CanCollect(CellModel cell) {
-		return cell.GetId()==CellId.Forest || cell.GetId()==CellId.Mountain || CellIsOccupiedByBuilding(cell);
+		return  cell.GetId()==CellId.Iron_Deposit || cell.GetId()==CellId.Forest || cell.GetId()==CellId.Mountain || CellIsOccupiedByBuilding(cell);
 	}
 	
 	public BuildingModel GetBuildingFromCoord(Point coord) {

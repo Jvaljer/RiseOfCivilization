@@ -15,19 +15,6 @@ public class WorkerView {
 		this.worker = worker;
 	}
 	
-	public void drawWorker(Graphics G) {
-		
-		int p_width = this.worker.getWidth();
-		int p_height = this.worker.getHeight();
-		Point pos = this.map_model.GetPosFromCoord(this.worker.getCordX(), this.worker.getCordX());
-		
-		
-		G.setColor(new Color(0,0,0));
-		G.drawOval(pos.x - p_width/2 , pos.y - p_height/2, worker.getWidth(), worker.getHeight());
-		G.setColor(new Color(0,0,255));
-		G.fillOval(pos.x - p_width/2, pos.y - p_height/2, worker.getWidth(), worker.getHeight());
-	}
-	
 	public void drawMove(Graphics G, int i, int j) {
 		
 		G.setColor(new Color(0,0,0));
@@ -49,5 +36,9 @@ public class WorkerView {
 			int y = (int) ((y_dst - y_src) / FPS) + y_src;
 			this.drawMove(G, x, y);
 		}
+	}
+	
+	public void DrawPlayer(Graphics G) {
+		
 	}
 }

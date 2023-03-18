@@ -24,7 +24,7 @@ public class GameModel {
 		inventory = new InventoryModel();
 		
 		workers = new ArrayList<WorkerModel>(10);
-		workers.add(new WorkerModel(this,WorkerRole.Worker));
+		workers.add(new WorkerModel(this,WorkerRole.Worker, new Point(13,8)));
 		
 		buildings = new ArrayList<BuildingModel>();
 		buildings.add(new BuildingModel(this,map.GetCityOriginCoord(),BuildingId.CityHall));
