@@ -1,8 +1,0 @@
-Features of the game : 
-
-	- Different Cells ID -> one behaviour per ID
-	- Player Movement 
-	- Specific actions depending of which cell has been clicked
-	- Random Generation of the map's cell's Id
-	- Cell modification by player (if certain conditions)
-	- Player's informations on the side-panel

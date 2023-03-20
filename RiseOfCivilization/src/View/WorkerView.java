@@ -45,7 +45,6 @@ public class WorkerView {
 		int h_div = h/2;
 		
 		Point coord = worker.getPos();
-		System.out.println("drawing the player on slot : " + coord);
 		Point pos = map_model.GetPosFromCoord(coord.x,coord.y);
 		
 		G.setColor(new Color(0,0,0));

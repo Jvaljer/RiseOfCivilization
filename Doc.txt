@@ -71,6 +71,11 @@ Report Work :
     - Detailled Conception (what are the features and how we wanna implement it
 
 
-
+--> DashBoard :
+	Minimap 
+	CityInfo - doesn't change a lot simply 
+	ActionView - info of the clicked cell 
+			° worker on the cell -> worker + cell info
+			° building on the cell -> building info
 
 	
