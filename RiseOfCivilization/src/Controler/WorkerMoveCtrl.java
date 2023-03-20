@@ -1,6 +1,7 @@
 package Controler;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 import Model.GameModel;
 import Model.WorkerModel;
@@ -20,12 +21,13 @@ public class WorkerMoveCtrl extends Thread {
 
 	public void run()
 	{
-		while (this.worker.getCordX() != this.destCord.x && this.worker.getCordY() != this.destCord.y)
+		while (this.worker.getCordX() != this.destCord.x || this.worker.getCordY() != this.destCord.y)
 		{
 			try 
 			{
 				this.worker.moving();
-				Point nextCord = this.model.GetMapModel().GetShortestPath(this.worker.getPos(),this.destCord).get(1);
+				ArrayList<Point> path = this.model.GetMapModel().GetShortestPath(this.worker.getPos(),this.destCord);
+ 				Point nextCord = path.get(1);
 				Thread.sleep(480);
 				this.worker.MoveTo(nextCord.x, nextCord.y);
 				this.worker.stopMoving();
