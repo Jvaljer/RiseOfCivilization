@@ -28,59 +28,70 @@ public class ActionView extends JPanel {
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		JButton button = new JButton("");
-		Icon wrench = new ImageIcon("./img/Wrench_v2.jpg");
 
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.fill = GridBagConstraints.VERTICAL;
 		c.insets=new Insets(5,10,5,10);
-		c.ipady=50-button.getMinimumSize().height;
-		c.ipadx=50-button.getMinimumSize().width;
+		c.ipady=10-button.getMinimumSize().height;
+		c.ipadx=10-button.getMinimumSize().width;
 
 		button.setName("Build");
-		button.setIcon(wrench);
+		button.setToolTipText("build");
+		button.setBackground(Color.BLACK);
+		button.setIcon(new ImageIcon("./icons/Build.png"));
 		c.gridx = 0;
 		c.gridy = 0;
-		button.setIcon(wrench);
 		Button_list.add(button);
 		add(button, c);
 		
 		button = new JButton("");
 		button.setName("LevelUp");
+		button.setToolTipText("LevelUp");
+		button.setBackground(Color.BLACK);
+		button.setIcon(new ImageIcon("./icons/LevelUp.png"));
 		c.gridx = 1;
 		c.gridy = 0;
-		button.setIcon(wrench);
 		Button_list.add(button);
 		add(button, c);
 
 		button = new JButton("");
 		button.setName("Move");
+		button.setToolTipText("Move");
+		button.setBackground(Color.BLACK);
+		button.setIcon(new ImageIcon("./icons/Move.png"));
 		c.gridx = 2;
 		c.gridy = 0;
-		button.setIcon(wrench);
 		Button_list.add(button);
 		add(button, c);
 
 		button = new JButton("");
 		button.setName("Collect");
+		button.setToolTipText("Collect");
+		button.setBackground(Color.BLACK);
+		button.setIcon(new ImageIcon("./icons/Collect.png"));
+
 		c.gridx = 0;
 		c.gridy = 1;
-		button.setIcon(wrench);
 		Button_list.add(button);
 		add(button, c);
 
 		button = new JButton("");
 		button.setName("Train");
+		button.setToolTipText("Train");
+		button.setBackground(Color.BLACK);
+		button.setIcon(new ImageIcon("./icons/Train.png"));
 		c.gridx = 1;
 		c.gridy = 1;
-		button.setIcon(wrench);
 		Button_list.add(button);
 		add(button, c);
 
 		button = new JButton("");
 		button.setName("Expand");
+		button.setToolTipText("Expand");
+		button.setBackground(Color.BLACK);
+		button.setIcon(new ImageIcon("./icons/Expand.png"));
 		c.gridx = 2;
 		c.gridy = 1;
-		button.setIcon(wrench);
 		Button_list.add(button);
 		add(button, c);
 		for (JButton but :Button_list) {
