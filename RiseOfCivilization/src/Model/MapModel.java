@@ -213,9 +213,59 @@ public class MapModel {
 		return neighbors;
 	}
 	
+	public boolean CellIsFree(Point pts) {
+		ArrayList<Point> workers_pos = new ArrayList<Point>();
+		ArrayList<Point> buildings_pos = new ArrayList<Point>();
+		
+		for(WorkerModel worker : game.GetWorkerModel()) {
+			if(pts==worker.getPos()) {
+				return false;
+			}
+		}
+		for(BuildingModel building : game.GetBuildingList()) {
+			if(pts==building.GetPos()) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
 	public ArrayList<Point> GetValidNeighbors(int i, int j){
 		ArrayList<Point> neighbors = new ArrayList<Point>();
-		//must implement
+		
+		Point[] directions = new Point[6];
+		
+		if(i%2==0) {
+			directions[0] = new Point(0,-1);
+			directions[1] = new Point(1,0);
+			directions[2] = new Point(1,1);
+			directions[3] = new Point(0,1);
+			directions[4] = new Point(-1,1);
+			directions[5] = new Point(-1,0);
+			
+			for(Point dir : directions) {
+				Point pts = new Point(i+dir.x,j+dir.y);
+				if(CellIsFree(pts)) {
+					neighbors.add(pts);
+				}
+			}
+		} else {
+			directions[0] = new Point(0,-1);
+			directions[1] = new Point(1,-1);
+			directions[2] = new Point(1,0);
+			directions[3] = new Point(0,1);
+			directions[4] = new Point(-1,0);
+			directions[5] = new Point(-1,-1);
+			
+			for(Point dir : directions) {
+				Point pts = new Point(i+dir.x,j+dir.y);
+				if(CellIsFree(pts)) {
+					neighbors.add(pts);
+				}
+			}
+		}
+		
 		return neighbors;
 	}
 	
@@ -249,7 +299,8 @@ public class MapModel {
 			if(current==end){
 				break;	
 			}
-			ArrayList<Point> neighbors = GetNeighbours(current.x, current.y);
+			//ArrayList<Point> neighbors = GetNeighbours(current.x, current.y);
+			ArrayList<Point> neighbors = GetValidNeighbors(current.x,current.y);
 			for(Point neigh : neighbors){
 				int dist = distances.get(current) + 1;
 				if(dist < distances.get(neigh)){
