@@ -299,8 +299,8 @@ public class MapModel {
 			if(current==end){
 				break;	
 			}
-			//ArrayList<Point> neighbors = GetNeighbours(current.x, current.y);
-			ArrayList<Point> neighbors = GetValidNeighbors(current.x,current.y);
+			ArrayList<Point> neighbors = GetNeighbours(current.x, current.y);
+			//ArrayList<Point> neighbors = GetValidNeighbors(current.x,current.y);
 			for(Point neigh : neighbors){
 				int dist = distances.get(current) + 1;
 				if(dist < distances.get(neigh)){
