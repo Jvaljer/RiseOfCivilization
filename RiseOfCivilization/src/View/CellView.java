@@ -40,8 +40,6 @@ public class CellView {
 	
 	public Color GetColorFromId() {
 		switch (id) {
-			case City : 
-				return (new Color(165, 110, 20));
 			case Plain :
 				return (new Color(255, 204, 102));
 			case Forest :
@@ -50,6 +48,8 @@ public class CellView {
 				return (new Color(150, 150, 150));
 			case Iron_Deposit :
 				return (new Color(169, 84, 69));
+			case City : 
+				return (new Color(165, 110, 20));
 			default :
 				return (new Color(0,0,0));
 		}

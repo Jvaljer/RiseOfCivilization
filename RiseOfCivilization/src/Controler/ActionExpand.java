@@ -20,7 +20,7 @@ public class ActionExpand implements ActionListener {
 			CellModel cell = g_ctrl.GetMapCtrl().GetClickedCell();
 			WorkerModel nearest = map.GetNearestWorker(cell.GetCoord());
 			
-			(new WorkerExpand(g_ctrl,nearest,cell)).start();
+			(new WorkerExpand(g_ctrl,nearest,cell.GetCoord())).start();
 	}
 	
 }

@@ -92,6 +92,7 @@ public class CellModel {
 		if(id!=CellId.Plain) {
 			inventory.remove(natural_resource, MAX_RESOURCE);
 		}
+		id = null;
 		id = CellId.City;
 	}
 	
