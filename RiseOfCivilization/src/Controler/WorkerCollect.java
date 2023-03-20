@@ -20,8 +20,8 @@ public class WorkerCollect extends Thread{
 	
 	@Override
 	public void run() {
-		worker.isMoving();
-		worker.isOccupied();
+		worker.moving();
+		worker.occupied();
 		System.out.println("path from " + worker.getPos() + " to " + dst_cell.GetCoord() + " :");
 		ArrayList<Point> shortest = map.GetShortestPath(worker.getPos(),dst_cell.GetCoord());
 		for(int i=0; i<shortest.size(); i++) {
@@ -43,14 +43,15 @@ public class WorkerCollect extends Thread{
 				e.printStackTrace();
 			}
 		}
+		
 		//now we wanna make the worker collect
-		worker.isNotMoving();
+		worker.stopMoving();
 		ctrl.GetGameModel().Harvest(worker,dst_cell);
 		try {
 			Thread.sleep(500);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		worker.isFree();
+		worker.Free();
 	}
 }

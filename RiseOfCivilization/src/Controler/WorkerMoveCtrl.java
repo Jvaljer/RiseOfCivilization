@@ -15,12 +15,13 @@ public class WorkerMoveCtrl extends Thread {
 		this.model = m;
 		this.worker = w;
 		this.destCord = p;
+		this.worker.setDstCord(p);
 	}
 
 	public void run()
 	{
-		this.worker.isMoving();
-		this.worker.isOccupied();
+		this.worker.moving();
+		this.worker.occupied();
 		while (this.worker.getPos() != this.destCord)
 		{
 			try 
@@ -33,8 +34,8 @@ public class WorkerMoveCtrl extends Thread {
 				e.printStackTrace();
 			}
 		}
-		this.worker.isFree();
-		this.worker.isNotMoving();
+		this.worker.Free();
+		this.worker.stopMoving();
 	}
 
 }

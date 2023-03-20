@@ -1,19 +1,26 @@
 package Controler;
 
 import java.awt.event.ActionEvent;
+import Model.*;
 import java.awt.event.ActionListener;
 import Model.MapModel;
 
 public class ActionExpand implements ActionListener {
 	private MapModel map;
+	private GameCtrl g_ctrl;
 	
 	public ActionExpand(GameCtrl ctrl) {
-		map = ctrl.GetGameModel().GetMapModel();
+		g_ctrl = ctrl;
+		map = g_ctrl.GetGameModel().GetMapModel();
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-			System.out.println("clicked Expand button");
+			System.out.println("clicked on Expand Button");
+			CellModel cell = g_ctrl.GetMapCtrl().GetClickedCell();
+			WorkerModel nearest = map.GetNearestWorker(cell.GetCoord());
+			
+			(new WorkerExpand(g_ctrl,nearest,cell)).start();
 	}
 	
 }

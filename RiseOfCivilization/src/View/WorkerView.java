@@ -7,7 +7,7 @@ public class WorkerView {
 	private GameView view; 
 	private MapModel map_model;
 	private WorkerModel worker;
-	private int FPS = 12;
+	private int FPS = 24;
 	
 	public WorkerView(GameView V, WorkerModel w) {
 		view = V;
@@ -30,12 +30,13 @@ public class WorkerView {
 		int y_src = cord.y - worker.getHeight()/2;
 		int x_dst = dst_cord.x - worker.getWidth()/2;
 		int y_dst = dst_cord.y - worker.getHeight()/2;
-		for(int i = 0; i < FPS; i++)
-		{
-			int x = (int) ((x_dst - x_src) / FPS) + x_src;
-			int y = (int) ((y_dst - y_src) / FPS) + y_src;
-			this.drawMove(G, x, y);
-		}
+		//for(int i = 1; i <= FPS; i++)
+		//{
+		//	int x = (int) ((x_dst - x_src) / FPS) + x_src;
+		//	int y = (int) ((y_dst - y_src) / FPS) + y_src;
+		//	this.drawMove(G, x, y);
+		//}
+		this.drawMove(G, x_dst, y_dst);
 	}
 	
 	public void DrawWorker(Graphics G) {
@@ -45,6 +46,7 @@ public class WorkerView {
 		int h_div = h/2;
 		
 		Point coord = worker.getPos();
+		//System.out.println("drawing the player on slot : " + coord);
 		Point pos = map_model.GetPosFromCoord(coord.x,coord.y);
 		
 		G.setColor(new Color(0,0,0));

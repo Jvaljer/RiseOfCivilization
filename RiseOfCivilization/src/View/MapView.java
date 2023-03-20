@@ -76,8 +76,10 @@ public class MapView extends JPanel {
 
 		for(int i = 0; i < this.view.GetGameModel().GetWorkerModel().size(); i++)
 		{
-			if(!this.view.GetGameModel().GetWorkerModel().get(i).GetMoving())
+			if(this.view.GetGameModel().GetWorkerModel().get(i).GetMoving())
 			{
+				this.view.getWorkerView().get(i).drawMovingPlayer(G, this.map_model.GetGameModel().GetWorkerModel().get(i).getDstCord());
+			} else {
 				this.view.getWorkerView().get(i).DrawWorker(G);
 			}
 		}

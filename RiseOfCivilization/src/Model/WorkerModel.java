@@ -8,6 +8,7 @@ public class WorkerModel {
 	private MapModel map_model;
 	private CellModel[][] model_grid;
 	private CellModel cell;
+	private Point dst_cord;
 	private static final int width = 10;
 	private static final int height = 10;
 	private InventoryModel inventory;
@@ -60,26 +61,36 @@ public class WorkerModel {
 		this.cell = this.model.GetMapModel().GetCellFromCoord(i, j);
 	}
 	
-	public void isOccupied() {
+	public void occupied() {
 		this.occupied = true;
 	}
 
-	public void isMoving()
+	public void moving()
 	{
 		this.moving = true;
 	}
 
-	public void isNotMoving()
+	public void stopMoving()
 	{
 		this.moving = false;
 	}
 	
-	public void isFree() {
+	public void Free() {
 		this.occupied = false;
 	}
 	
 	public boolean GetMoving() {
 		return moving;
+	}
+
+	public void setDstCord(Point p)
+	{
+		this.dst_cord = p;
+	}
+
+	public Point getDstCord()
+	{
+		return this.dst_cord;
 	}
 	
 	public void harvest(Resource r) {
