@@ -8,7 +8,7 @@ public class WorkerModel {
 	private MapModel map_model;
 	private CellModel[][] model_grid;
 	private CellModel cell;
-	private Point dst_cord;
+	private Point next_cord;
 	private static final int width = 10;
 	private static final int height = 10;
 	private InventoryModel inventory;
@@ -84,14 +84,14 @@ public class WorkerModel {
 		return moving;
 	}
 
-	public void setDstCord(Point p)
+	public void setNextCord(Point p)
 	{
-		this.dst_cord = p;
+		this.next_cord = p;
 	}
 
-	public Point getDstCord()
+	public Point getNextCord()
 	{
-		return this.dst_cord;
+		return this.next_cord;
 	}
 	
 	public void harvest(Resource r) {

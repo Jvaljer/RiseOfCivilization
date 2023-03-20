@@ -25,15 +25,16 @@ public class WorkerView {
 
 	public void drawMovingPlayer(Graphics G, Point dst_cord)
 	{
-		Point cord = this.view.GetGameModel().GetMapModel().GetPosFromCoord(worker.getCordX(), worker.getCordY());
-		int x_src = cord.x - worker.getWidth()/2;
-		int y_src = cord.y - worker.getHeight()/2;
-		int x_dst = dst_cord.x - worker.getWidth()/2;
-		int y_dst = dst_cord.y - worker.getHeight()/2;
+		Point cord_src = this.view.GetGameModel().GetMapModel().GetPosFromCoord(worker.getCordX(), worker.getCordY());
+		Point cord_dst = this.view.GetGameModel().GetMapModel().GetPosFromCoord(dst_cord.x, dst_cord.y);
+		int x_src = cord_src.x - worker.getWidth()/2;
+		int y_src = cord_src.y - worker.getHeight()/2;
+		int x_dst = cord_dst.x - worker.getWidth()/2;
+		int y_dst = cord_dst.y - worker.getHeight()/2;
 		for(int i = 1; i <= FPS; i++)
 		{
-			int x = (int) ((x_dst - x_src) / FPS) + x_src;
-			int y = (int) ((y_dst - y_src) / FPS) + y_src;
+			int x = (int) ((x_dst - x_src) * i/ FPS) + x_src;
+			int y = (int) ((y_dst - y_src) * i/ FPS) + y_src;
 			this.drawMove(G, x, y);
 		}
 	}

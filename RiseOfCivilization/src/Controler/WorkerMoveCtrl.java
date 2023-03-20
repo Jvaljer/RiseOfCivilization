@@ -16,7 +16,6 @@ public class WorkerMoveCtrl extends Thread {
 		this.model = m;
 		this.worker = w;
 		this.destCord = p;
-		this.worker.setDstCord(p);
 	}
 
 	public void run()
@@ -28,6 +27,7 @@ public class WorkerMoveCtrl extends Thread {
 				this.worker.moving();
 				ArrayList<Point> path = this.model.GetMapModel().GetShortestPath(this.worker.getPos(),this.destCord);
  				Point nextCord = path.get(1);
+				this.worker.setNextCord(nextCord);
 				Thread.sleep(480);
 				this.worker.MoveTo(nextCord.x, nextCord.y);
 				this.worker.stopMoving();
