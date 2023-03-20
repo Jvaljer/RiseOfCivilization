@@ -24,6 +24,7 @@ public class WorkerMoveCtrl extends Thread {
 		{
 			try 
 			{
+				this.worker.occupied();
 				this.worker.moving();
 				ArrayList<Point> path = this.model.GetMapModel().GetShortestPath(this.worker.getPos(),this.destCord);
  				Point nextCord = path.get(1);
@@ -31,6 +32,7 @@ public class WorkerMoveCtrl extends Thread {
 				Thread.sleep(480);
 				this.worker.MoveTo(nextCord.x, nextCord.y);
 				this.worker.stopMoving();
+				this.worker.Free();
 			} catch (Exception e) {
 				System.out.println("Error in Move Worker");
 				e.printStackTrace();

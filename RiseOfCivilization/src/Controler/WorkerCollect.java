@@ -9,42 +9,36 @@ public class WorkerCollect extends Thread{
 	private static GameCtrl ctrl;
 	private static MapModel map;
 	private static WorkerModel worker;
-	private static CellModel dst_cell;
+	private static Point dst_coord;
 	
-	public WorkerCollect(GameCtrl GC,WorkerModel W, CellModel C) {
+	public WorkerCollect(GameCtrl GC,WorkerModel W, Point pts) {
 		ctrl = GC;
 		map = ctrl.GetGameModel().GetMapModel();
 		worker = W;
-		dst_cell = C;
-		worker.setDstCord(dst_cell.GetCoord());
+		dst_coord = pts;
 	}
 	
 	@Override
 	public void run() {
-		worker.moving();
-		worker.occupied();
-		System.out.println("path from " + worker.getPos() + " to " + dst_cell.GetCoord() + " :");
-		ArrayList<Point> shortest = map.GetShortestPath(worker.getPos(),dst_cell.GetCoord());
-		Point dst_coord = dst_cell.GetCoord();
-		for(int i=0; i<shortest.size(); i++) {
-			System.out.println(shortest.get(i));
-		}
-		while (this.worker.getPos() != dst_coord){
+		while(dst_coord.x != worker.getCordX() || dst_coord.y != worker.getCordY()) {
 			try {
-				Point nextCord = map.GetShortestPath(this.worker.getPos(),dst_coord).get(0);
-				Thread.sleep(500);
-				this.worker.MoveTo(nextCord.x, nextCord.y);
+				worker.occupied();
+				worker.moving();
+				ArrayList<Point> path = map.GetShortestPath(worker.getPos(), dst_coord);
+				Point nxt = path.get(1);
+				worker.setNextCord(nxt);
+				sleep(480);
+				worker.MoveTo(nxt.x, nxt.y);
+				worker.stopMoving();
+				worker.Free();
 			} catch (Exception e) {
-				System.out.println("Error in Move Worker");
 				e.printStackTrace();
 			}
 		}
-		
-		//now we wanna make the worker collect
-		worker.stopMoving();
-		ctrl.GetGameModel().Harvest(worker,dst_cell);
+		worker.occupied();
+		ctrl.GetGameModel().Harvest(worker,map.GetCellFromCoord(dst_coord.x, dst_coord.y));
 		try {
-			Thread.sleep(500);
+			Thread.sleep(1000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -21,7 +21,7 @@ public class ActionCollect implements ActionListener {
 			WorkerModel nearest = map.GetNearestWorker(cell.GetCoord());
 			//here must we launch a thread that will make the player move and AFTER THAT 
 				//make him collect ???
-			(new WorkerCollect(g_ctrl,nearest,cell)).start();
+			(new WorkerCollect(g_ctrl,nearest,cell.GetCoord())).start();
 	}
 
 }
