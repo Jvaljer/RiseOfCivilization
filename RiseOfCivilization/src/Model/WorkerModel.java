@@ -59,6 +59,7 @@ public class WorkerModel {
 	
 	public void MoveTo(int i, int j) {
 		this.cell = this.model.GetMapModel().GetCellFromCoord(i, j);
+		System.out.println(this.cell.GetCoord());
 	}
 	
 	public void occupied() {

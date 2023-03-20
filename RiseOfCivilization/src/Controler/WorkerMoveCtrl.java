@@ -20,22 +20,20 @@ public class WorkerMoveCtrl extends Thread {
 
 	public void run()
 	{
-		this.worker.moving();
-		this.worker.occupied();
-		while (this.worker.getPos() != this.destCord)
+		while (this.worker.getCordX() != this.destCord.x && this.worker.getCordY() != this.destCord.y)
 		{
 			try 
 			{
-				Point nextCord = this.model.GetMapModel().GetShortestPath(this.worker.getPos(),this.destCord).get(0);
-				Thread.sleep(500);
+				this.worker.moving();
+				Point nextCord = this.model.GetMapModel().GetShortestPath(this.worker.getPos(),this.destCord).get(1);
+				Thread.sleep(480);
 				this.worker.MoveTo(nextCord.x, nextCord.y);
+				this.worker.stopMoving();
 			} catch (Exception e) {
 				System.out.println("Error in Move Worker");
 				e.printStackTrace();
 			}
 		}
-		this.worker.Free();
-		this.worker.stopMoving();
 	}
 
 }
