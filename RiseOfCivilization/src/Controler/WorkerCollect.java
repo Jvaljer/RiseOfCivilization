@@ -43,6 +43,7 @@ public class WorkerCollect extends Thread{
 				e.printStackTrace();
 			}
 		}
+		
 		//now we wanna make the worker collect
 		worker.isNotMoving();
 		ctrl.GetGameModel().Harvest(worker,dst_cell);
