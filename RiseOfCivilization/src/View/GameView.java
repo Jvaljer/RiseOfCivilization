@@ -60,6 +60,10 @@ public class GameView extends JFrame {
 		return dashboard_view;
 	}
 
+	public void addWorkerView() {
+		int size = this.model.GetWorkerModel().size();
+		this.workers_view.add(new WorkerView(this, this.model.GetWorkerModel().get(size)));
+	}
 
 	public ArrayList<WorkerView> getWorkerView() {
 		return this.workers_view;
