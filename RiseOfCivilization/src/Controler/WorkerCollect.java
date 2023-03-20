@@ -16,6 +16,7 @@ public class WorkerCollect extends Thread{
 		map = ctrl.GetGameModel().GetMapModel();
 		worker = W;
 		dst_cell = C;
+		worker.setDstCord(dst_cell.GetCoord());
 	}
 	
 	@Override
@@ -24,22 +25,17 @@ public class WorkerCollect extends Thread{
 		worker.occupied();
 		System.out.println("path from " + worker.getPos() + " to " + dst_cell.GetCoord() + " :");
 		ArrayList<Point> shortest = map.GetShortestPath(worker.getPos(),dst_cell.GetCoord());
+		Point dst_coord = dst_cell.GetCoord();
 		for(int i=0; i<shortest.size(); i++) {
 			System.out.println(shortest.get(i));
 		}
-		while((worker.getPos().x != dst_cell.GetCoord().x) && (worker.getPos().y != dst_cell.GetCoord().y)) {
+		while (this.worker.getPos() != dst_coord){
 			try {
-				ArrayList<Point> path = map.GetShortestPath(worker.getPos(),dst_cell.GetCoord());
-				Point nxt;
-				if(path.size() > 1) {
-					nxt = path.get(1);
-				} else {
-					nxt = path.get(0);
-				}
+				Point nextCord = map.GetShortestPath(this.worker.getPos(),dst_coord).get(0);
 				Thread.sleep(500);
-				worker.MoveTo(nxt.x, nxt.y);
-				System.out.println("");
+				this.worker.MoveTo(nextCord.x, nextCord.y);
 			} catch (Exception e) {
+				System.out.println("Error in Move Worker");
 				e.printStackTrace();
 			}
 		}
