@@ -38,11 +38,7 @@ public class WorkerExpand extends Thread {
 		}
 		worker.occupied();
 		CellId cell_id = map.GetCellFromCoord(dst_coord.x, dst_coord.y).GetId();
-		System.out.println("cell ("+dst_coord.x+","+dst_coord.y+") is :" + cell_id);
 		map.GetCellFromCoord(dst_coord.x, dst_coord.y).TurnToCity();
-		
-		cell_id = map.GetCellFromCoord(dst_coord.x, dst_coord.y).GetId();
-		System.out.println("cell ("+dst_coord.x+","+dst_coord.y+") is :" + cell_id);
 		
 		try {
 			Thread.sleep(1000);

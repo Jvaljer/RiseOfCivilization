@@ -38,8 +38,8 @@ public class CellView {
 		return model;
 	}
 	
-	public Color GetColorFromId() {
-		switch (id) {
+	public Color GetColorFromId(CellId m_id) {
+		switch (m_id) {
 			case Plain :
 				return (new Color(255, 204, 102));
 			case Forest :
@@ -73,13 +73,12 @@ public class CellView {
 			G.setColor(new Color(200,0,0));
 			G.fillPolygon(pts_x, pts_y, len);
 		} else {
-			G.setColor(GetColorFromId());
+			G.setColor(GetColorFromId(model.GetId()));
 			G.fillPolygon(pts_x, pts_y, len);
 		}
 	}
 	
 	public void DrawCell(Graphics G, int s, int x0, int y0) {
-		
 		int w = (int) (Math.sqrt(3) * s);
 		
 		int w_gap = s + s/2;

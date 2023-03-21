@@ -38,6 +38,11 @@ public class GameCtrl extends Thread{
 				case "LevelUp" :
 					button.addActionListener(new ActionLevelUp(this));
 					break;
+				case "Shop" :
+					button.addActionListener(new ActionShop(this));
+					break;
+				default:
+					break;
 			}
 		}
 		

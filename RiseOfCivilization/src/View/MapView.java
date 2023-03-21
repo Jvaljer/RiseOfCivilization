@@ -1,6 +1,7 @@
 package View;
 
 import Model.*;
+import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 
@@ -19,6 +20,7 @@ public class MapView extends JPanel {
 	private int lines;
 	private int columns;
 	private CellView[][] grid_view;
+	private ArrayList<CellView> city_cells;
 	
 	public MapView(GameView V, MapModel M) {
 		view = V;
@@ -35,6 +37,17 @@ public class MapView extends JPanel {
 		for(int j=0; j<columns; j++) {
 			for(int i=0; i<lines; i++) {
 				grid_view[i][j] = new CellView(map_model.GetCellFromCoord(i, j));
+			}
+		}
+		
+		city_cells = new ArrayList<CellView>();
+		for(CellView[] cells : grid_view) {
+			for(CellView cell_v : cells) {
+				for(CellModel cell_m : map_model.GetCityCells()) {
+					if(cell_v.GetAbs()==cell_m.GetX() && cell_v.GetOrd()==cell_m.GetY()) {
+						city_cells.add(cell_v);
+					}
+				}
 			}
 		}
 	}

@@ -401,4 +401,8 @@ public class MapModel {
 	public void Build(BuildingId bid, Point pts) {
 		game.AddBuilding(bid, pts);
 	}
+	
+	public ArrayList<CellModel> GetCityCells(){
+		return city_cells;
+	}
 }
