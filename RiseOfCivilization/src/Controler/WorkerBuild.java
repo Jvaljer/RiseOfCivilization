@@ -37,17 +37,17 @@ public class WorkerBuild extends Thread {
 			}
 		}
 		worker.occupied();
+		try {
+			Thread.sleep(3000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		int old_len = ctrl.GetGameModel().GetBuildingList().size();
 		CellModel cell = map.GetCellFromCoord(dst_coord.x, dst_coord.y);
 		ctrl.GetGameModel().Build(cell);
 		int new_len = ctrl.GetGameModel().GetBuildingList().size();
 		if(old_len < new_len) {
 			ctrl.GetGameView().AddBuildingView(ctrl.GetGameModel().GetBuildingList().get(old_len));
-		}
-		try {
-			Thread.sleep(3000);
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		worker.Free();
 	}

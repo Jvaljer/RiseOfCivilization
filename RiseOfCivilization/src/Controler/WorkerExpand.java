@@ -37,14 +37,13 @@ public class WorkerExpand extends Thread {
 			}
 		}
 		worker.occupied();
-		CellId cell_id = map.GetCellFromCoord(dst_coord.x, dst_coord.y).GetId();
-		map.GetCellFromCoord(dst_coord.x, dst_coord.y).TurnToCity();
-		
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		CellId cell_id = map.GetCellFromCoord(dst_coord.x, dst_coord.y).GetId();
+		map.GetCellFromCoord(dst_coord.x, dst_coord.y).TurnToCity();
 		worker.Free();
 	}
 }
