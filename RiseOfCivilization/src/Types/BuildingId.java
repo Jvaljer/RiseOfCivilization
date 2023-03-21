@@ -8,5 +8,6 @@ public enum BuildingId {
 	LumberCamp,
 	MinerCamp,
 	QuarrymanCamp,
+	Barrack,
 	Shop,
 }

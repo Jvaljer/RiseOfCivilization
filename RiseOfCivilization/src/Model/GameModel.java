@@ -1,7 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
-
+import Types.*;
 import Types.BuildingId;
 import Types.Resource;
 import Types.WorkerRole;
@@ -69,7 +69,7 @@ public class GameModel {
 		int wood = inventory.getAmmount(Resource.Wood);
 		int stone = inventory.getAmmount(Resource.Stone);
 		int iron = inventory.getAmmount(Resource.Iron);
-		
+		/*
 		switch (bid) {
 			case SawMill:
 				return (wood>=200) && (stone>=120) && (iron>=50);
@@ -85,7 +85,8 @@ public class GameModel {
 				return (wood>=200) && (stone>=200) && (iron>=150);
 			default:
 				return false;
-		}
+		}*/
+		return true;
 	}
 	public void AddBuilding(BuildingId bid, Point pts) {
 		buildings.add(new BuildingModel(this,pts,bid));
@@ -106,5 +107,38 @@ public class GameModel {
 				cell.collectResource(cell.getResourceAmount());
 			}
 		}
+	}
+	
+	public void Build(CellModel cell) {
+		BuildingId bid;
+    	CellId cid = cell.GetId();
+    	switch (cid) {
+    		case Mountain:
+    			System.out.println("building a Mine");
+    			bid = BuildingId.Mine;
+    			if(PlayerHasEnoughToBuild(bid)) {
+    				AddBuilding(bid,cell.GetCoord());
+    			}
+    			break;
+    		case Forest:
+    			System.out.println("building a SawMill");
+    			bid = BuildingId.SawMill;
+    			if(PlayerHasEnoughToBuild(bid)) {
+    				AddBuilding(bid,cell.GetCoord());
+    			}
+    			break;
+    		case Iron_Deposit:
+    			System.out.println("building a Quarry");
+    			bid = BuildingId.Quarry;
+    			if(PlayerHasEnoughToBuild(bid)) {
+    				AddBuilding(bid,cell.GetCoord());
+    			}
+    			break;
+    		case City:
+    			System.out.println("must choose MinerCamp || Barrack || QuarrymanCamp || LumberCamp");
+    			break;
+    		default:
+    			break;
+    	}
 	}
 }

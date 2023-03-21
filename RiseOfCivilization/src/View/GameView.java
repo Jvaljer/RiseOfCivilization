@@ -64,6 +64,10 @@ public class GameView extends JFrame {
 		int size = this.model.GetWorkerModel().size();
 		this.workers_view.add(new WorkerView(this, this.model.GetWorkerModel().get(size)));
 	}
+	
+	public void AddBuildingView(BuildingModel BM) {
+		buildings_view.add(new BuildingView(this,BM));
+	}
 
 	public ArrayList<WorkerView> getWorkerView() {
 		return this.workers_view;
