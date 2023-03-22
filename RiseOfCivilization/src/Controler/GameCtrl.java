@@ -6,7 +6,7 @@ import java.awt.*;
 import java.util.*;
 import javax.swing.JButton;
 
-public class GameCtrl extends Thread{
+public class GameCtrl{
 	private GameView view;
 	private GameModel model;
 	private ArrayList<JButton> buttons;
@@ -47,6 +47,7 @@ public class GameCtrl extends Thread{
 		}
 		
 		(new RefreshCtrl(view)).start();
+		(new WorkersCtrl(this)).start();
 	}
 	
 	public GameModel GetGameModel() {
@@ -68,10 +69,5 @@ public class GameCtrl extends Thread{
 			}
 		}
 		return null;
-	}
-	
-	@Override
-	public void run() {
-		//must implement
 	}
 }

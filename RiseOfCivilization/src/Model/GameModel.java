@@ -22,7 +22,7 @@ public class GameModel {
 	public GameModel() {
 		map = new MapModel(this);
 		inventory = new InventoryModel();
-		
+		inventory.add(Resource.Gold, 150);
 		workers = new ArrayList<WorkerModel>(10);
 		workers.add(new WorkerModel(this,WorkerRole.Worker, new Point(1,1)));
 		
@@ -70,19 +70,31 @@ public class GameModel {
 		int stone = inventory.getAmmount(Resource.Stone);
 		int iron = inventory.getAmmount(Resource.Iron);
 		int gold = inventory.getAmmount(Resource.Gold);
-		
+		boolean cond;
 		switch (bid) {
 			case SawMill:
-				return (wood>=200) && (stone>=120) && (iron>=50) && (gold>=30);
+				cond = (wood>=200) && (stone>=120) && (iron>=50) && (gold>=30);
+				System.out.println("enough to build SawMill : " + cond); 
+				return cond;
 			case Mine:
+				cond = (wood>=120) && (stone>=200) && (iron>=50) && (gold>=30);
+				System.out.println("enough to build SawMill : " + cond); 
 				return (wood>=120) && (stone>=200) && (iron>=50) && (gold>=30);
 			case Quarry:
+				cond = (wood>=150) && (stone>=150) && (iron>=120) && (gold>=30);
+				System.out.println("enough to build SawMill : " + cond); 
 				return (wood>=150) && (stone>=150) && (iron>=120) && (gold>=30);
 			case LumberCamp:
+				cond = (wood>=300) && (stone>=200) && (iron>=80) && (gold>=50);
+				System.out.println("enough to build SawMill : " + cond); 
 				return (wood>=300) && (stone>=200) && (iron>=80) && (gold>=50);
 			case MinerCamp:
+				cond = (wood>=200) && (stone>=300) && (iron>=80) && (gold>=50);
+				System.out.println("enough to build SawMill : " + cond); 
 				return (wood>=200) && (stone>=300) && (iron>=80) && (gold>=50);
 			case QuarrymanCamp:
+				cond = (wood>=200) && (stone>=200) && (iron>=150) && (gold>=50);
+				System.out.println("enough to build SawMill : " + cond); 
 				return (wood>=200) && (stone>=200) && (iron>=150) && (gold>=50);
 			default:
 				return false;
