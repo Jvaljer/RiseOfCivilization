@@ -10,9 +10,11 @@ public class BuildingModel {
 	private CellModel cell;
 	private BuildingId id;
 	private InventoryModel inventory;
-	
-	private static final int width = 20;
-	private static final int height = 15;
+	private int level;
+	private static final int rec_width = 20;
+	private static final int rec_height = 15;
+	private static final int triangle_dist = 10;
+	private static final int poly_dist = 5;
 	
 	public BuildingModel(GameModel G, Point C, BuildingId bid) {
 		game = G;
@@ -21,6 +23,7 @@ public class BuildingModel {
 		cell = model_grid[C.x][C.y];
 		id = bid;
 		inventory = new InventoryModel(200);
+		level = 1;
 	}
 	
 	public BuildingId GetId() {
@@ -29,13 +32,22 @@ public class BuildingModel {
 	public Point GetPos() {
 		return cell.GetCoord();
 	}
-	public int GetWidth() {
-		return width;
+	public int GetRecWidth() {
+		return rec_width;
 	}
-	public int GetHeight() {
-		return height;
+	public int GetRecHeight() {
+		return rec_height;
+	}
+	public int GetTriangleDist() {
+		return triangle_dist;
+	}
+	public int GetPolyDist() {
+		return poly_dist;
 	}
 	public InventoryModel GetInventory() {
 		return inventory;
+	}
+	public int GetLevel() {
+		return level;
 	}
 }

@@ -44,14 +44,44 @@ public class BuildingView {
 	}
 	
 	public void DrawBuilding(Graphics G) {
-		int w = model.GetWidth();
-		int h = model.GetHeight();
-		int w_div = w / 2;
-		int h_div = h / 2;
 		Point pos = map.GetPosFromCoord(coord.x,coord.y);
 		G.setColor(new Color(0,0,0));
-		G.drawRoundRect(pos.x - w_div, pos.y - h_div, w, h, 2, 2);
-		G.setColor(color);
-		G.fillRoundRect(pos.x - w_div, pos.y - h_div, w, h, 2, 2);
+		
+		Point[] pts;
+		switch (model.GetLevel()) {
+			case 1 :
+				int d = model.GetTriangleDist();
+				pts = new Point[3];
+				pts[0] = new Point(pos.x,pos.y-d);
+				pts[1] = new Point(pos.x+(d/2)+(d/3), pos.y+(d/2)+(d/3));
+				pts[2] = new Point(pos.x-(d/2)-(d/3), pos.y+(d/2)+(d/3));
+				
+				int[] pts_x = new int[3];
+				int[] pts_y = new int[3];
+				
+				for(int i=0; i<pts.length; i++) {
+					pts_x[i] = pts[i].x;
+					pts_y[i] = pts[i].y;
+				}
+				
+				G.drawPolygon(pts_x, pts_y, pts.length);
+				G.setColor(color);
+				G.fillPolygon(pts_x, pts_y, pts.length);
+				break;
+				
+			case 2 :
+				int w = model.GetRecWidth();
+				int h = model.GetRecHeight();
+				int w_div = w / 2;
+				int h_div = h / 2;
+				G.drawRoundRect(pos.x - w_div, pos.y - h_div, w, h, 2, 2);
+				G.setColor(color);
+				G.fillRoundRect(pos.x - w_div, pos.y - h_div, w, h, 2, 2);
+				break;
+			case 3 :
+				break;
+			default :
+				break;	
+		}
 	}
 }

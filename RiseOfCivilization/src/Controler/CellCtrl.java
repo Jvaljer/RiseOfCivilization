@@ -73,6 +73,7 @@ public class CellCtrl extends Thread {
 		cell_view.Click();
 		//here we wanna give the possibility for the player to click certain buttons
 		if(map.CellIsOccupiedByBuilding(cell_model)) {
+			System.out.println("the cell is occupied by a building");
 			g_ctrl.GetButtonFromName("Move").setEnabled(false);
 			g_ctrl.GetButtonFromName("Collect").setEnabled(true);
 			g_ctrl.GetButtonFromName("LevelUp").setEnabled(true);
@@ -112,20 +113,22 @@ public class CellCtrl extends Thread {
 		
 		if(map.CellIsOccupiedByBuilding(cell_model)) {
 			BuildingModel building = map.GetBuildingFromCoord(cell_model.GetCoord());
-			InventoryModel inventory = building.GetInventory();
-			switch (building.GetId()) {
-				case SawMill:
-					inventory.add(Resource.Wood, 16);
-					break;
-				case Mine:
-					inventory.add(Resource.Stone, 10);
-					break;
-				case Quarry:
-					inventory.add(Resource.Iron, 5);
-					break;
-					
-				default:
-					break;
+			if(building!=null) {
+				InventoryModel inventory = building.GetInventory();
+				switch (building.GetId()) {
+					case SawMill:
+						inventory.add(Resource.Wood, 16);
+						break;
+					case Mine:
+						inventory.add(Resource.Stone, 10);
+						break;
+					case Quarry:
+						inventory.add(Resource.Iron, 5);
+						break;
+						
+					default:
+						break;
+				}
 			}
 		}
 		switch (id) {

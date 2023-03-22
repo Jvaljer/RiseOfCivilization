@@ -18,7 +18,9 @@ public class ActionMove implements ActionListener {
 		System.out.println("clicked Move Button");
 		CellModel cell = g_ctrl.GetMapCtrl().GetClickedCell();
 		WorkerModel nearest = map.GetNearestWorker(cell.GetCoord());
-		(new WorkerMoveCtrl(g_ctrl.GetGameModel(),nearest,cell.GetCoord())).start();
+		if(nearest!=null) {
+			(new WorkerMoveCtrl(g_ctrl.GetGameModel(),nearest,cell.GetCoord())).start();
+		}
 	}
 	
 }

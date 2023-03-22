@@ -349,7 +349,7 @@ public class MapModel {
 	
 	public boolean CellIsOccupiedByBuilding(CellModel cell) {
 		for(BuildingModel building : game.GetBuildingList()) {
-			if(building.GetPos()==cell.GetCoord()) {
+			if(building.GetPos().x==cell.GetX() && building.GetPos().y==cell.GetY()) {
 				return true;
 			}
 		}

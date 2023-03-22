@@ -19,7 +19,9 @@ public class ActionBuild implements ActionListener {
             System.out.println("clicked Build button");
             CellModel cell = g_ctrl.GetMapCtrl().GetClickedCell();
             WorkerModel nearest = map.GetNearestWorker(cell.GetCoord());
-            (new WorkerBuild(g_ctrl,nearest,cell.GetCoord())).start();
+            if(nearest!=null) {
+            	(new WorkerBuild(g_ctrl,nearest,cell.GetCoord())).start();
+            }
     }
 
 }

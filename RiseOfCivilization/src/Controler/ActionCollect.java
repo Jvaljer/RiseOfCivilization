@@ -19,9 +19,9 @@ public class ActionCollect implements ActionListener {
 			CellModel cell = g_ctrl.GetMapCtrl().GetClickedCell();
 			//we must first make the nearest worker (first without the right Id) move on the clicked cell
 			WorkerModel nearest = map.GetNearestWorker(cell.GetCoord());
-			//here must we launch a thread that will make the player move and AFTER THAT 
-				//make him collect ???
-			(new WorkerCollect(g_ctrl,nearest,cell.GetCoord())).start();
+			if(nearest!=null) {
+				(new WorkerCollect(g_ctrl,nearest,cell.GetCoord())).start();
+			}
 	}
 
 }
