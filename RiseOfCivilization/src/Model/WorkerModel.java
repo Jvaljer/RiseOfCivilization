@@ -16,6 +16,7 @@ public class WorkerModel {
 	private boolean occupied;
 	private WorkerRole role;
 	private int harvest_capacity;
+	private int level;
 	
 	public WorkerModel(GameModel M, WorkerRole R, Point pts) {
 		model = M;
@@ -27,6 +28,7 @@ public class WorkerModel {
 		moving = false;
 		occupied = false;
 		role = R;
+		level = 1;
 	}
 
 	public Point getPos()
@@ -110,5 +112,28 @@ public class WorkerModel {
 	}
 	public InventoryModel getInventory() {
 		return inventory;
+	}
+	public int GetLevel() {
+		return level;
+	}
+	
+	public void LevelUp() {
+		level += 1;
+		switch(level) {
+			case 2:
+				harvest_capacity+=100;
+				break;
+			case 3:
+				harvest_capacity+=80;
+				break;
+			case 4:
+				harvest_capacity+=60;
+				break;
+			case 5:
+				harvest_capacity+=60;
+				break;
+			default:
+				break;
+		}
 	}
 }

@@ -69,24 +69,25 @@ public class GameModel {
 		int wood = inventory.getAmmount(Resource.Wood);
 		int stone = inventory.getAmmount(Resource.Stone);
 		int iron = inventory.getAmmount(Resource.Iron);
-		/*
+		int gold = inventory.getAmmount(Resource.Gold);
+		
 		switch (bid) {
 			case SawMill:
-				return (wood>=200) && (stone>=120) && (iron>=50);
+				return (wood>=200) && (stone>=120) && (iron>=50) && (gold>=30);
 			case Mine:
-				return (wood>=120) && (stone>=200) && (iron>=50);
+				return (wood>=120) && (stone>=200) && (iron>=50) && (gold>=30);
 			case Quarry:
-				return (wood>=150) && (stone>=150) && (iron>=120);
+				return (wood>=150) && (stone>=150) && (iron>=120) && (gold>=30);
 			case LumberCamp:
-				return (wood>=300) && (stone>=200) && (iron>=80);
+				return (wood>=300) && (stone>=200) && (iron>=80) && (gold>=50);
 			case MinerCamp:
-				return (wood>=200) && (stone>=300) && (iron>=80);
+				return (wood>=200) && (stone>=300) && (iron>=80) && (gold>=50);
 			case QuarrymanCamp:
-				return (wood>=200) && (stone>=200) && (iron>=150);
+				return (wood>=200) && (stone>=200) && (iron>=150) && (gold>=50);
 			default:
 				return false;
-		}*/
-		return true;
+		}
+		//return true;
 	}
 	public void AddBuilding(BuildingId bid, Point pts) {
 		buildings.add(new BuildingModel(this,pts,bid));
@@ -140,5 +141,22 @@ public class GameModel {
     		default:
     			break;
     	}
+	}
+	
+	public boolean PlayerCanUpgradeWorker(WorkerModel worker) {
+		int gold = inventory.getAmmount(Resource.Gold);
+		
+		switch (worker.GetLevel()){
+			case 1 :
+				return gold>=50;
+			case 2 :
+				return gold>=100;
+			case 3 :
+				return gold>=175;
+			case 4 :
+				return gold>=250;
+			default :
+				return false;
+		}
 	}
 }
