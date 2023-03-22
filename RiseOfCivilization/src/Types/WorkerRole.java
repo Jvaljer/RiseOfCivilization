@@ -2,7 +2,7 @@ package Types;
 
 public enum WorkerRole {
 	Worker,
-	Lumber,
+	LumberJack,
 	QuarryMan,
 	Miner,
 	Citizen,

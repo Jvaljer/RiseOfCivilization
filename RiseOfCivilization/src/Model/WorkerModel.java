@@ -136,4 +136,32 @@ public class WorkerModel {
 				break;
 		}
 	}
+	
+	public boolean InventoryIsFull() {
+		Resource res_type;
+		switch (role) {
+			case Worker:
+				
+				return true;
+				
+			case Miner:
+				res_type = Resource.Stone;
+				break;
+				
+			case LumberJack:
+				res_type = Resource.Wood;
+				break;
+				
+			case QuarryMan:
+				res_type = Resource.Iron;
+				break;
+				
+			default:
+				res_type = null;
+				break;
+		}
+		
+		int res_amount = inventory.getAmmount(res_type);
+		return (res_amount==inventory.GetMaxAmount());
+	}
 }
