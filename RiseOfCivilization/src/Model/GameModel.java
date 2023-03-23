@@ -171,4 +171,15 @@ public class GameModel {
 				return false;
 		}
 	}
+	
+	public void PlayerDropsInventory(WorkerModel worker) {
+		switch (worker.GetRole()) {
+			case Worker:
+			case LumberJack:
+			case Miner:
+			case QuarryMan:
+			default:
+				break;
+		}
+	}
 }

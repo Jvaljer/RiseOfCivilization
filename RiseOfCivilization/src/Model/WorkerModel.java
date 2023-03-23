@@ -31,6 +31,9 @@ public class WorkerModel {
 		level = 1;
 	}
 
+	public WorkerRole GetRole() {
+		return role;
+	}
 	public Point getPos()
 	{
 		return this.cell.GetCoord();

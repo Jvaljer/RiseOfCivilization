@@ -20,7 +20,7 @@ public class WorkersCtrl extends Thread{
 		
 		for(int i=0; i<workers.size(); i++) {
 			if(workers.get(i).InventoryIsFull()) {
-				(new WorkerDrop(g_ctrl,workers.get(i))).start();
+				(new WorkerDrop(ctrl,workers.get(i))).start();
 			}
 		}
 	}
