@@ -405,4 +405,9 @@ public class MapModel {
 	public ArrayList<CellModel> GetCityCells(){
 		return city_cells;
 	}
+	
+	public boolean CellHasShop(CellModel cell) {
+		BuildingModel shop = GetBuildingFromCoord(cell.GetCoord());
+		return shop.GetId()==BuildingId.Shop;
+	}
 }

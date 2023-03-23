@@ -41,6 +41,9 @@ public class GameCtrl{
 				case "Shop" :
 					button.addActionListener(new ActionShop(this));
 					break;
+				case "Drop" :
+					button.addActionListener(new ActionDrop(this));
+					break;
 				default:
 					break;
 			}

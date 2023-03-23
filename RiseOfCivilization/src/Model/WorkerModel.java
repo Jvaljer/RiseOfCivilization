@@ -144,8 +144,11 @@ public class WorkerModel {
 		Resource res_type;
 		switch (role) {
 			case Worker:
-				
-				return true;
+				int wood = getInventory().getAmmount(Resource.Wood);
+				int stone = getInventory().getAmmount(Resource.Stone);
+				int iron = getInventory().getAmmount(Resource.Iron);
+				int max = inventory.GetMaxAmount();
+				return (wood==max) || (stone==max) || (iron==max);
 				
 			case Miner:
 				res_type = Resource.Stone;

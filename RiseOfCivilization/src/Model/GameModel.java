@@ -173,11 +173,40 @@ public class GameModel {
 	}
 	
 	public void PlayerDropsInventory(WorkerModel worker) {
+		Resource res_type;
+		int amount = worker.getInventory().GetMaxAmount();
+		
 		switch (worker.GetRole()) {
 			case Worker:
+				int wood = worker.getInventory().getAmmount(Resource.Wood);
+				int stone = worker.getInventory().getAmmount(Resource.Stone);
+				int iron = worker.getInventory().getAmmount(Resource.Iron);
+				worker.dropOff(Resource.Wood, wood);
+				inventory.add(Resource.Wood, wood);
+				worker.dropOff(Resource.Stone, stone);
+				inventory.add(Resource.Stone, stone);
+				worker.dropOff(Resource.Iron, iron);
+				inventory.add(Resource.Iron, iron);
+				break;
+				
 			case LumberJack:
+				res_type = Resource.Wood;
+				worker.dropOff(res_type, amount);
+				inventory.add(res_type, amount);
+				break;
+				
 			case Miner:
+				res_type = Resource.Stone;
+				worker.dropOff(res_type, worker.getInventory().GetMaxAmount());
+				inventory.add(res_type, amount);
+				break;
+				
 			case QuarryMan:
+				res_type = Resource.Iron;
+				worker.dropOff(res_type, worker.getInventory().GetMaxAmount());
+				inventory.add(res_type, amount);
+				break;
+				
 			default:
 				break;
 		}
