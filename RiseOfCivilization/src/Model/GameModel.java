@@ -205,15 +205,30 @@ public class GameModel {
 		
 		switch (worker.GetRole()) {
 			case Worker:
+				int wood_ = inventory.getAmmount(Resource.Wood);
+				int stone_ = inventory.getAmmount(Resource.Stone);
+				int iron_ = inventory.getAmmount(Resource.Iron);
+				System.out.println("inventory has : wood("+wood_+"), stone("+stone_+"), iron("+iron_+")");
 				int wood = worker.getInventory().getAmmount(Resource.Wood);
 				int stone = worker.getInventory().getAmmount(Resource.Stone);
 				int iron = worker.getInventory().getAmmount(Resource.Iron);
+				
+				System.out.println("workers has : wood("+wood+"), stone("+stone+"), iron("+iron+")");
 				worker.dropOff(Resource.Wood, wood);
 				inventory.add(Resource.Wood, wood);
 				worker.dropOff(Resource.Stone, stone);
 				inventory.add(Resource.Stone, stone);
 				worker.dropOff(Resource.Iron, iron);
 				inventory.add(Resource.Iron, iron);
+				
+				wood_ = inventory.getAmmount(Resource.Wood);
+				stone_ = inventory.getAmmount(Resource.Stone);
+				iron_ = inventory.getAmmount(Resource.Iron);
+				wood = worker.getInventory().getAmmount(Resource.Wood);
+				stone = worker.getInventory().getAmmount(Resource.Stone);
+				iron = worker.getInventory().getAmmount(Resource.Iron);
+				System.out.println("inventory has : wood("+wood_+"), stone("+stone_+"), iron("+iron_+")");
+				System.out.println("workers has : wood("+wood+"), stone("+stone+"), iron("+iron+")");
 				break;
 				
 			case LumberJack:

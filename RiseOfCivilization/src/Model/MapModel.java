@@ -139,7 +139,6 @@ public class MapModel {
 		}
 		pos.x = (x0 + i*w_gap);
 		pos.y = (y0 + j*h_gap - gap);
-		//System.out.printf("pos from coord : x->[%d] y->[%d] \n",pos.x, pos.y);
 		return pos;
 	}
 	
@@ -149,18 +148,18 @@ public class MapModel {
 		double h = s * Math.sin(angle) * 2. ;
 		double w = s * 2. - (1. - Math.cos(angle)) * s;
 		
-		double i = (x_/w) ; //Math.floor() here ? 
-		double x = (x_ - (i - w));
+		double i = Math.floor(x_/w) ;
+		double x = Math.floor(x_ - (i - w));
 		
 		double j;
 		double y;
 		
 		if(i%2==0) {
-			j = (y_ / h); //here
-			y = (y_ - (j * h) - (h/2));
+			j = Math.floor(y_ / h);
+			y = Math.floor(y_ - (j * h) - (h/2));
 		} else {
-			j = ((y_ - h / 2.)/h); //& here
-			y = (y_ - (j * h) - h);
+			j = Math.floor((y_ - h / 2.)/h);
+			y = Math.floor(y_ - (j * h) - h);
 		}
 		
 		double f1 = Math.sin(angle) / Math.cos(angle) * x;
@@ -357,7 +356,7 @@ public class MapModel {
 	}
 	public boolean CellIsOccupiedByWorker(CellModel cell) {
 		for(WorkerModel worker : game.GetWorkerModel()) {
-			if(worker.getPos()==cell.GetCoord()) {
+			if(worker.getCordX()==cell.GetX() && worker.getCordY()==cell.GetY()) {
 				return true;
 			}
 		}
