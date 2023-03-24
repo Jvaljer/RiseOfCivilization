@@ -5,7 +5,7 @@ import Model.MapModel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JPanel;
-
+import java.awt.*;
 
 /**
  * This class is the view of the dashboard. The dashboard is represented in
@@ -40,5 +40,10 @@ public class DashboardView extends JPanel {
 
     public ActionView GetActionView() {
         return Action_view;
+    }
+    
+    @Override
+    public void paint(Graphics G) {
+    	super.paint(G);
     }
 }
