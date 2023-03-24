@@ -35,13 +35,18 @@ public class WorkerCollect extends Thread{
 				e.printStackTrace();
 			}
 		}
+		System.out.println("worker is collecting resources");
 		worker.occupied();
 		try {
 			Thread.sleep(1000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		ctrl.GetGameModel().Harvest(worker,map.GetCellFromCoord(dst_coord.x, dst_coord.y));
+		if(map.CellIsOccupiedByBuilding(map.GetCellFromCoord(dst_coord.x, dst_coord.y))) {
+			ctrl.GetGameModel().Collect(worker,map.GetCellFromCoord(dst_coord.x, dst_coord.y));
+		} else {
+			ctrl.GetGameModel().Harvest(worker,map.GetCellFromCoord(dst_coord.x, dst_coord.y));
+		}
 		worker.Free();
 	}
 }

@@ -20,7 +20,7 @@ public class WorkerDrop extends Thread{
 	@Override
 	public void run() {
 		Point town_hall = map.GetCityOriginCoord();
-		
+		System.out.println("Worker is dropping his inventory");
 		//first we want the worker to move to the town hall.
 		while(town_hall.x != worker.getCordX() || town_hall.y != worker.getCordY()) {
 			try {
@@ -44,7 +44,7 @@ public class WorkerDrop extends Thread{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		ctrl.WorkerDropsInventory(worker);
+		ctrl.GetGameModel().WorkerDropsInventory(worker);
 		worker.Free();
 	}
 }

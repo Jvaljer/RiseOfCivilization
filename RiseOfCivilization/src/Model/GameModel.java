@@ -74,32 +74,56 @@ public class GameModel {
 		switch (bid) {
 			case SawMill:
 				cond = (wood>=200) && (stone>=120) && (iron>=50) && (gold>=30);
+				
+				System.out.println("wood : "+ wood+"/200");
+				System.out.println("stone : "+ stone+"/120");
+				System.out.println("iron : "+ iron+"/50");
+				System.out.println("gold : "+ gold+"/30");
+				
 				System.out.println("enough to build SawMill : " + cond); 
 				return cond;
+				
 			case Mine:
 				cond = (wood>=120) && (stone>=200) && (iron>=50) && (gold>=30);
-				System.out.println("enough to build SawMill : " + cond); 
-				return (wood>=120) && (stone>=200) && (iron>=50) && (gold>=30);
+				
+				System.out.println("wood : "+ wood+"120");
+				System.out.println("stone : "+ stone+"/200");
+				System.out.println("iron : "+ iron+"/50");
+				System.out.println("gold : "+ gold+"/30");
+				
+				System.out.println("enough to build SawMill : " + cond);
+				break;
+				
 			case Quarry:
 				cond = (wood>=150) && (stone>=150) && (iron>=120) && (gold>=30);
+				
+				System.out.println("wood : "+ wood+"150");
+				System.out.println("stone : "+ stone+"/150");
+				System.out.println("iron : "+ iron+"/120");
+				System.out.println("gold : "+ gold+"/30");
+				
 				System.out.println("enough to build SawMill : " + cond); 
-				return (wood>=150) && (stone>=150) && (iron>=120) && (gold>=30);
+				break;
+				
 			case LumberCamp:
 				cond = (wood>=300) && (stone>=200) && (iron>=80) && (gold>=50);
 				System.out.println("enough to build SawMill : " + cond); 
-				return (wood>=300) && (stone>=200) && (iron>=80) && (gold>=50);
+				break;
+				
 			case MinerCamp:
 				cond = (wood>=200) && (stone>=300) && (iron>=80) && (gold>=50);
 				System.out.println("enough to build SawMill : " + cond); 
-				return (wood>=200) && (stone>=300) && (iron>=80) && (gold>=50);
+				break;
+				
 			case QuarrymanCamp:
 				cond = (wood>=200) && (stone>=200) && (iron>=150) && (gold>=50);
 				System.out.println("enough to build SawMill : " + cond); 
-				return (wood>=200) && (stone>=200) && (iron>=150) && (gold>=50);
+				break;
+				
 			default:
 				return false;
 		}
-		//return true;
+		return cond;
 	}
 	public void AddBuilding(BuildingId bid, Point pts) {
 		buildings.add(new BuildingModel(this,pts,bid));
@@ -115,9 +139,12 @@ public class GameModel {
 			if(available >= worker.GetHarvestCapacity()) {
 				worker.harvest(cell.getResource());
 				cell.collectResource(worker.GetHarvestCapacity());
+				System.out.println("worker harvested "+worker.GetHarvestCapacity()+" on the "+available+" available resources");
 			} else {
+				int amount = cell.getResourceAmount();
 				worker.harvest(cell.getResource(),cell.getResourceAmount());
 				cell.collectResource(cell.getResourceAmount());
+				System.out.println("worker harvested "+amount+" the total amount of cell's resources");
 			}
 		}
 	}
@@ -172,7 +199,7 @@ public class GameModel {
 		}
 	}
 	
-	public void PlayerDropsInventory(WorkerModel worker) {
+	public void WorkerDropsInventory(WorkerModel worker) {
 		Resource res_type;
 		int amount = worker.getInventory().GetMaxAmount();
 		
@@ -210,5 +237,10 @@ public class GameModel {
 			default:
 				break;
 		}
+	}
+	
+	public void Collect(WorkerModel worker, CellModel cell) {
+		//must implement
+		return;
 	}
 }

@@ -408,6 +408,10 @@ public class MapModel {
 	
 	public boolean CellHasShop(CellModel cell) {
 		BuildingModel shop = GetBuildingFromCoord(cell.GetCoord());
-		return shop.GetId()==BuildingId.Shop;
+		if(shop!=null) {
+			return shop.GetId()==BuildingId.Shop;
+		} else {
+			return false;
+		}
 	}
 }
