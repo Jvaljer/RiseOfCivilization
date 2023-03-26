@@ -18,6 +18,13 @@ public class WorkerUpgrade extends Thread{
 	
 	@Override
 	public void run() {
-		//must implement 
+		worker.occupied();
+		try {
+			Thread.sleep(3000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		worker.LevelUp();
+		worker.Free();
 	}
 }

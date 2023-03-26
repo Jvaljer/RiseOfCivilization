@@ -254,8 +254,24 @@ public class GameModel {
 		}
 	}
 	
-	public void Collect(WorkerModel worker, CellModel cell) {
-		//must implement
+	public void Collect(WorkerModel worker, BuildingModel building) {
+		InventoryModel building_inventory = building.GetInventory();
+		
+		Resource res_type = building.GetProducedResource();
+		int available = building_inventory.getAmmount(res_type);
+		System.out.println("building has "+available+" available resources");
+		int amount;
+		if(worker.GetHarvestCapacity()>=available) {
+			amount = available;
+			worker.harvest(res_type, amount);
+			System.out.println("worker has collected the "+amount+" of building's resources");
+		} else {
+			amount = worker.GetHarvestCapacity();
+			worker.harvest(res_type);
+			System.out.println("worker has collected "+amount+" /200 resources of this building");
+		}
+		
+		building_inventory.remove(res_type, amount);
 		return;
 	}
 }

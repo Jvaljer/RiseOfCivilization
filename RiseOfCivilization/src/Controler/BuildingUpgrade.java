@@ -1,6 +1,9 @@
 package Controler;
 
 import Model.MapModel;
+import java.awt.*;
+import java.util.ArrayList;
+
 import Model.WorkerModel;
 import Model.BuildingModel;
 
@@ -19,6 +22,32 @@ public class BuildingUpgrade extends Thread{
 	
 	@Override
 	public void run() {
-		//must implement
+		Point dst = building.GetPos();
+		while(worker.getCordX()!=dst.x && worker.getCordY()!=dst.y) {
+			try {
+				worker.occupied();
+				worker.moving();
+				ArrayList<Point> path = map.GetShortestPath(worker.getPos(), dst);
+				Point nxt = path.get(1);
+				worker.setNextCord(nxt);
+				sleep(480);
+				worker.MoveTo(nxt.x, nxt.y);
+				worker.stopMoving();
+				worker.Free();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		worker.occupied();
+		try {
+			sleep(2500);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		building.LevelUp();
+		worker.Free();
+		
 	}
 }

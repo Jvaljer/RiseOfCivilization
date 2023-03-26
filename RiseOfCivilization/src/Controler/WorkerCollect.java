@@ -43,7 +43,7 @@ public class WorkerCollect extends Thread{
 			e.printStackTrace();
 		}
 		if(map.CellIsOccupiedByBuilding(map.GetCellFromCoord(dst_coord.x, dst_coord.y))) {
-			ctrl.GetGameModel().Collect(worker,map.GetCellFromCoord(dst_coord.x, dst_coord.y));
+			ctrl.GetGameModel().Collect(worker,map.GetBuildingFromCoord(dst_coord));
 		} else {
 			ctrl.GetGameModel().Harvest(worker,map.GetCellFromCoord(dst_coord.x, dst_coord.y));
 		}

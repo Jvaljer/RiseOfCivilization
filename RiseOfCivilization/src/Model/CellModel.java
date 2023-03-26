@@ -30,7 +30,7 @@ public class CellModel {
 		Y = y;
 		id = i;
 		
-		inventory = new InventoryModel();
+		inventory = new InventoryModel(200);
 		int amount;
 		switch (id) {
 			case Forest :

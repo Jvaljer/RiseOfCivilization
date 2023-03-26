@@ -89,4 +89,8 @@ public class InventoryModel {
 		return max_resource;
 	}
 	
+	public void IncreaseMaxAmount(int n) {
+		max_resource += n;
+		return;
+	}
 }

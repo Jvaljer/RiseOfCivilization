@@ -382,7 +382,7 @@ public class MapModel {
 	
 	public BuildingModel GetBuildingFromCoord(Point coord) {
 		for(BuildingModel building : game.GetBuildingList()) {
-			if(building.GetPos()==coord) {
+			if(building.GetPos().x==coord.x && building.GetPos().y==coord.y) {
 				return building;
 			}
 		}
@@ -390,7 +390,7 @@ public class MapModel {
 	}
 	public WorkerModel GetWorkerFromCoord(Point coord) {
 		for(WorkerModel worker : game.GetWorkerModel()) {
-			if(worker.getPos()==coord) {
+			if(worker.getCordX()==coord.x && worker.getCordY()==coord.y) {
 				return worker;
 			}
 		}
@@ -413,4 +413,13 @@ public class MapModel {
 			return false;
 		}
 	}
+	
+	public boolean CanUpgradeWorker(CellModel cell, WorkerModel worker) {
+		return worker.GetLevel()<5;
+	}
+	
+	public boolean CanUpgradeBuilding(CellModel cell, BuildingModel building) {
+		return building.GetLevel()<3;
+	}
+	
 }

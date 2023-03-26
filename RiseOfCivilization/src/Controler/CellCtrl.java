@@ -76,17 +76,17 @@ public class CellCtrl extends Thread {
 			System.out.println("the cell is occupied by a building");
 			g_ctrl.GetButtonFromName("Move").setEnabled(false);
 			g_ctrl.GetButtonFromName("Collect").setEnabled(true);
-			g_ctrl.GetButtonFromName("LevelUp").setEnabled(true);
+			g_ctrl.GetButtonFromName("LevelUp").setEnabled(map.CanUpgradeBuilding(cell_model,map.GetBuildingFromCoord(cell_model.GetCoord())));
 			g_ctrl.GetButtonFromName("Expand").setEnabled(map.CanExpand(cell_model));
 			g_ctrl.GetButtonFromName("Build").setEnabled(false);
 			g_ctrl.GetButtonFromName("Train").setEnabled(true);
 			g_ctrl.GetButtonFromName("Shop").setEnabled(map.CellHasShop(cell_model));
-			g_ctrl.GetButtonFromName("Drop").setEnabled(false);
+			g_ctrl.GetButtonFromName("Drop").setEnabled(map.CellIsOccupiedByWorker(cell_model));
 			
 		} else if(map.CellIsOccupiedByWorker(cell_model)) {
 			g_ctrl.GetButtonFromName("Move").setEnabled(false);
 			g_ctrl.GetButtonFromName("Collect").setEnabled(map.CanCollect(cell_model));
-			g_ctrl.GetButtonFromName("LevelUp").setEnabled(true);
+			g_ctrl.GetButtonFromName("LevelUp").setEnabled(map.CanUpgradeWorker(cell_model,map.GetWorkerFromCoord(cell_model.GetCoord())));
 			g_ctrl.GetButtonFromName("Expand").setEnabled(map.CanExpand(cell_model));
 			g_ctrl.GetButtonFromName("Build").setEnabled(map.CanBuild(cell_model));
 			g_ctrl.GetButtonFromName("Train").setEnabled(false);
@@ -163,7 +163,6 @@ public class CellCtrl extends Thread {
 	 * @Override from the Thread class, allowing us to run this controler as one 
 	 */
 	public void run() {
-		//must implement
 		while(true) {
 			CellBehaviour();
 			try {
