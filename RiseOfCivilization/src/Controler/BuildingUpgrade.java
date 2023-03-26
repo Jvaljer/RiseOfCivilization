@@ -19,6 +19,6 @@ public class BuildingUpgrade extends Thread{
 	
 	@Override
 	public void run() {
-		
+		//must implement
 	}
 }

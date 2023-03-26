@@ -9,7 +9,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+import java.awt.*;
 
 /**
  * This class is the view of the city's information. It shows the
@@ -23,7 +23,7 @@ import javax.swing.JPanel;
 public class CityInfoView extends JPanel {
 	private MapModel map_model;
 	private GameModel game_model;
-
+	
 	public CityInfoView(MapModel mm, GameModel gm) {
 		map_model = mm;
 		game_model = gm;

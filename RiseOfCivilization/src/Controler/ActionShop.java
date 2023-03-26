@@ -14,7 +14,7 @@ public class ActionShop implements ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//must implement 
-		return;
+		System.out.println("clicked on Shop button");
+		//must implement
 	}
 }

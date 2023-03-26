@@ -25,6 +25,7 @@ public class RefreshCtrl extends Thread {
 			
 			dashboard_view.revalidate();
 			dashboard_view .repaint();
+			
 			try {
 				Thread.sleep(60);
 			} catch (Exception e) {
