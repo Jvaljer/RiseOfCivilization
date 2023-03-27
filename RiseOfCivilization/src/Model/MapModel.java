@@ -24,6 +24,7 @@ public class MapModel {
 	private CellModel[][] grid;
 	private Point city_origin;
 	private ArrayList<CellModel> city_cells;
+	private CellModel current_cell;
 	
 	public MapModel(GameModel M) {
 		game = M;
@@ -422,4 +423,11 @@ public class MapModel {
 		return building.GetLevel()<3;
 	}
 	
+	public void SetCurrentCell(CellModel cell) {
+		current_cell = cell;
+	}
+	
+	public CellModel GetCurrentCell() {
+		return current_cell;
+	}
 }

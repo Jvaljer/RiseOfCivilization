@@ -81,12 +81,21 @@ public class MapView extends JPanel {
 		}
 	}
 	
+	public void DrawCurrentCell(Graphics G) {
+		Point coord = map_model.GetCurrentCell().GetCoord();
+		CellView cell = grid_view[coord.x][coord.y];
+		cell.DrawContour(G, map_model.GetCellSize(), map_model.GetOriginCoord().x, map_model.GetOriginCoord().y);
+	}
+	
 	@Override
 	public void paint(Graphics G) {
 		super.paint(G);
 		
 		DrawMap(G);
-
+		if(map_model.GetCurrentCell()!=null) {
+			DrawCurrentCell(G);
+		}
+		
 		for(int i = 0; i < this.view.GetGameModel().GetWorkerModel().size(); i++)
 		{
 			if(this.view.GetGameModel().GetWorkerModel().get(i).GetMoving())

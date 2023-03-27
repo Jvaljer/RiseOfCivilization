@@ -101,6 +101,7 @@ public class MapCtrl extends Thread implements MouseListener {
 			old_click = new_click;
 			
 			current_cell = new_click.GetCellModel();
+			map_model.SetCurrentCell(current_cell);
 		}
 		
 		Point pos = map_model.GetPosFromCoord(cell.x,cell.y);
