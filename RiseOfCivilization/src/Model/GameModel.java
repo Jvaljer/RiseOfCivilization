@@ -276,7 +276,39 @@ public class GameModel {
 	}
 	
 	public boolean PlayerCanUpgradeBuilding(BuildingModel building) {
-		//must implement
-		return true;
+		int wood = inventory.getAmmount(Resource.Wood);
+		int stone = inventory.getAmmount(Resource.Stone);
+		int iron = inventory.getAmmount(Resource.Iron);
+		int gold = inventory.getAmmount(Resource.Gold);
+		
+		int needed_wood;
+		int needed_stone;
+		int needed_iron;
+		int needed_gold;
+		
+		BuildingId bid = building.GetId();
+		int level = building.GetLevel();
+		
+		if(bid==BuildingId.Mine || bid==BuildingId.SawMill || bid==BuildingId.Quarry) {
+			needed_wood = level*150;
+			needed_stone = level*125;
+			needed_iron = level*100;
+			needed_gold = level*75;
+			
+		} else if(bid==BuildingId.LumberCamp || bid==BuildingId.MinerCamp || bid==BuildingId.QuarrymanCamp) {
+			needed_wood = level*100;
+			needed_stone = level*100;
+			needed_iron = level*75;
+			needed_gold = level*150;
+			
+		} else {
+			//shop & cityhall 
+			needed_wood = level*250;
+			needed_stone = level*225;
+			needed_iron = level*200;
+			needed_gold = level*200;
+		}
+		
+		return (wood>=needed_wood) && (stone>=needed_stone) && (iron>=needed_iron) && (gold>=needed_gold);
 	}
 }
