@@ -334,16 +334,75 @@ public class MapModel {
 		int dist;
 		int shortest_dist = Integer.MAX_VALUE;
 		ArrayList<WorkerModel> workers = game.GetWorkerModel();
+		int cpt=0;
+		int took=-1;
 		for(WorkerModel worker : workers) {
 			if(!worker.GetOccupied()) {
 				ArrayList<Point> worker_path = GetShortestPath(worker.getPos(),coord);
 				dist = worker_path.size();
 				if(dist <= shortest_dist) {
-					dist = shortest_dist;
+					shortest_dist = dist;
 					nearest = worker;
+					took = cpt;
 				}
 			}
+			cpt++;
 		}
+		return nearest;
+	}
+	
+	public WorkerModel GetNearestWorker(CellModel cell, String task) {
+		WorkerModel nearest = null;
+		WorkerRole needed_worker;
+		//here we wanna return the nearest CORRESPONDING WORKER 
+			//if the task is moving -> nearest is okay
+			//if the task is harvesting/collecting -> nearest corresponding role
+			//if the task is expanding -> nearest is okay
+			//if the task is building -> nearest corresponding role
+		if(task=="build" || task=="harvest" || task=="collect") {
+			if(CellIsOccupiedByBuilding(cell)) {
+				BuildingModel building = GetBuildingFromCoord(cell.GetCoord());
+				switch (building.GetId()) {
+					case SawMill:
+						needed_worker = WorkerRole.LumberJack;
+						break;
+						
+					case Mine:
+						needed_worker = WorkerRole.Miner;
+						break;
+						
+					case Quarry:
+						needed_worker = WorkerRole.QuarryMan;
+						break;
+						
+					default:
+						needed_worker = WorkerRole.Worker;
+						break;
+				}
+			} else {
+				switch (cell.GetId()) {
+					case Forest:
+						needed_worker = WorkerRole.LumberJack;
+						break;
+						
+					case Mountain:
+						needed_worker = WorkerRole.Miner;
+						break;
+						
+					case Iron_Deposit:
+						needed_worker = WorkerRole.QuarryMan;
+						break;
+						
+					default:
+						needed_worker = WorkerRole.Worker;
+						break;
+				}
+			}
+		} else if(task=="move" || task=="expand") {
+			needed_worker = null;
+		}
+		
+		//must finish implementation
 		return nearest;
 	}
 	
