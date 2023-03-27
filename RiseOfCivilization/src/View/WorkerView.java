@@ -77,7 +77,37 @@ public class WorkerView {
 		
 		G.setColor(new Color(0,0,0));
 		G.drawOval(pos.x - w_div, pos.y - h_div, w, h);
-		G.setColor(new Color(0,100,200));
+		G.setColor(SetColorFromRole());
 		G.fillOval(pos.x - w_div, pos.y - h_div, w, h);
 	}
+    
+    public Color SetColorFromRole() {
+    	Color color;
+    	switch (worker.GetRole()) {
+    		case LumberJack:
+    			color = new Color(160,90,20);
+    			break;
+    			
+    		case Miner:
+    			color = new Color(75,75,75);
+    			break;
+    			
+    		case QuarryMan:
+    			color = new Color(200,200,200);
+    			break;
+    			
+    		case Knight:
+    			color = new Color(0,10,100);
+    			break;
+    			
+    		case Worker:
+    			color = new Color(0,100,200);
+    			break;
+    			
+    		default: 
+    			color = null;
+    			break;
+    	}
+    	return color;
+    }
 }

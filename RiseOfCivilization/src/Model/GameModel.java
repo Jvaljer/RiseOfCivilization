@@ -24,7 +24,9 @@ public class GameModel {
 		inventory = new InventoryModel();
 		inventory.add(Resource.Gold, 150);
 		workers = new ArrayList<WorkerModel>(10);
-		workers.add(new WorkerModel(this, WorkerRole.Worker, new Point(1,1)));
+		workers.add(new WorkerModel(this, WorkerRole.Miner, new Point(1,1)));
+		workers.add(new WorkerModel(this, WorkerRole.LumberJack, new Point(1,2)));
+		workers.add(new WorkerModel(this, WorkerRole.QuarryMan, new Point(2,1)));
 		
 		buildings = new ArrayList<BuildingModel>();
 		buildings.add(new BuildingModel(this, map.GetCityOriginCoord(), BuildingId.CityHall));
