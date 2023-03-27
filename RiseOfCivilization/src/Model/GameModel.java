@@ -27,7 +27,10 @@ public class GameModel {
 		workers.add(new WorkerModel(this, WorkerRole.Worker, new Point(1,1)));
 		
 		buildings = new ArrayList<BuildingModel>();
-		buildings.add(new BuildingModel(this,map.GetCityOriginCoord(),BuildingId.CityHall));
+		buildings.add(new BuildingModel(this, map.GetCityOriginCoord(), BuildingId.CityHall));
+		
+		Point shop_coord = map.GetCityCells().get(1).GetCoord();
+		buildings.add(new BuildingModel(this, shop_coord, BuildingId.Shop));
 	}
 	
 	public int GetMapWidth() {
