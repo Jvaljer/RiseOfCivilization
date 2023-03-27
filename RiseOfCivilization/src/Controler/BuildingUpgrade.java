@@ -23,13 +23,13 @@ public class BuildingUpgrade extends Thread{
 	@Override
 	public void run() {
 		Point dst = building.GetPos();
-		while(worker.getCordX()!=dst.x && worker.getCordY()!=dst.y) {
+		while(worker.getcoordX()!=dst.x && worker.getcoordY()!=dst.y) {
 			try {
 				worker.occupied();
 				worker.moving();
 				ArrayList<Point> path = map.GetShortestPath(worker.getPos(), dst);
 				Point nxt = path.get(1);
-				worker.setNextCord(nxt);
+				worker.setNextcoord(nxt);
 				sleep(480);
 				worker.MoveTo(nxt.x, nxt.y);
 				worker.stopMoving();

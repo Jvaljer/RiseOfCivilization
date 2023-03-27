@@ -356,7 +356,7 @@ public class MapModel {
 	}
 	public boolean CellIsOccupiedByWorker(CellModel cell) {
 		for(WorkerModel worker : game.GetWorkerModel()) {
-			if(worker.getCordX()==cell.GetX() && worker.getCordY()==cell.GetY()) {
+			if(worker.getcoordX()==cell.GetX() && worker.getcoordY()==cell.GetY()) {
 				return true;
 			}
 		}
@@ -390,7 +390,7 @@ public class MapModel {
 	}
 	public WorkerModel GetWorkerFromCoord(Point coord) {
 		for(WorkerModel worker : game.GetWorkerModel()) {
-			if(worker.getCordX()==coord.x && worker.getCordY()==coord.y) {
+			if(worker.getcoordX()==coord.x && worker.getcoordY()==coord.y) {
 				return worker;
 			}
 		}

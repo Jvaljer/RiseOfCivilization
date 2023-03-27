@@ -22,13 +22,13 @@ public class WorkerDrop extends Thread{
 		Point town_hall = map.GetCityOriginCoord();
 		System.out.println("Worker is dropping his inventory");
 		//first we want the worker to move to the town hall.
-		while(town_hall.x != worker.getCordX() || town_hall.y != worker.getCordY()) {
+		while(town_hall.x != worker.getcoordX() || town_hall.y != worker.getcoordY()) {
 			try {
 				worker.occupied();
 				worker.moving();
 				ArrayList<Point> path = map.GetShortestPath(worker.getPos(), town_hall);
 				Point nxt = path.get(1);
-				worker.setNextCord(nxt);
+				worker.setNextcoord(nxt);
 				sleep(480);
 				worker.MoveTo(nxt.x, nxt.y);
 				worker.stopMoving();

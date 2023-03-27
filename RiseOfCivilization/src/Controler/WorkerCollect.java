@@ -16,17 +16,19 @@ public class WorkerCollect extends Thread{
 		map = ctrl.GetGameModel().GetMapModel();
 		worker = W;
 		dst_coord = pts;
+		dst_cell = C;
+		worker.setNextcoord(dst_cell.GetCoord());
 	}
 	
 	@Override
 	public void run() {
-		while(dst_coord.x != worker.getCordX() || dst_coord.y != worker.getCordY()) {
+		while(dst_coord.x != worker.getcoordX() || dst_coord.y != worker.getcoordY()) {
 			try {
 				worker.occupied();
 				worker.moving();
 				ArrayList<Point> path = map.GetShortestPath(worker.getPos(), dst_coord);
 				Point nxt = path.get(1);
-				worker.setNextCord(nxt);
+				worker.setNextcoord(nxt);
 				sleep(480);
 				worker.MoveTo(nxt.x, nxt.y);
 				worker.stopMoving();
