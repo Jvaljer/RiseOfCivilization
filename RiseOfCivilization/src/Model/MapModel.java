@@ -334,8 +334,6 @@ public class MapModel {
 		int dist;
 		int shortest_dist = Integer.MAX_VALUE;
 		ArrayList<WorkerModel> workers = game.GetWorkerModel();
-		int cpt=0;
-		int took=-1;
 		for(WorkerModel worker : workers) {
 			if(!worker.GetOccupied()) {
 				ArrayList<Point> worker_path = GetShortestPath(worker.getPos(),coord);
@@ -343,10 +341,8 @@ public class MapModel {
 				if(dist <= shortest_dist) {
 					shortest_dist = dist;
 					nearest = worker;
-					took = cpt;
 				}
 			}
-			cpt++;
 		}
 		return nearest;
 	}
@@ -354,12 +350,8 @@ public class MapModel {
 	public WorkerModel GetNearestWorker(CellModel cell, String task) {
 		WorkerModel nearest = null;
 		WorkerRole needed_worker;
-		//here we wanna return the nearest CORRESPONDING WORKER 
-			//if the task is moving -> nearest is okay
-			//if the task is harvesting/collecting -> nearest corresponding role
-			//if the task is expanding -> nearest is okay
-			//if the task is building -> nearest corresponding role
-		if(task=="build" || task=="harvest" || task=="collect") {
+		
+		if(task=="build" || task=="collect" || task=="upgrade") {
 			if(CellIsOccupiedByBuilding(cell)) {
 				BuildingModel building = GetBuildingFromCoord(cell.GetCoord());
 				switch (building.GetId()) {
@@ -398,11 +390,23 @@ public class MapModel {
 						break;
 				}
 			}
-		} else if(task=="move" || task=="expand") {
+		} else {
 			needed_worker = null;
 		}
 		
-		//must finish implementation
+		int dist;
+		int shortest = Integer.MAX_VALUE;
+		
+		for(WorkerModel worker : game.GetWorkerModel()) {
+			if(worker.GetRole()==needed_worker && !worker.GetOccupied()) {
+				dist = GetShortestPath(cell.GetCoord(),worker.getPos()).size();
+				if(dist<=shortest) {
+					shortest = dist;
+					nearest = worker;
+				}
+			}
+		}
+		
 		return nearest;
 	}
 	

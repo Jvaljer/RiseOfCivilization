@@ -18,7 +18,8 @@ public class ActionExpand implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 			System.out.println("clicked on Expand Button");
 			CellModel cell = g_ctrl.GetMapCtrl().GetClickedCell();
-			WorkerModel nearest = map.GetNearestWorker(cell.GetCoord());
+			//WorkerModel nearest = map.GetNearestWorker(cell.GetCoord());
+			WorkerModel nearest = map.GetNearestWorker(cell, "expand");
 			if(nearest!=null) {
 				(new WorkerExpand(g_ctrl,nearest,cell.GetCoord())).start();
 			}
