@@ -2,6 +2,7 @@ package Model;
 
 import java.awt.*;
 import Types.*;
+import Types.WorkerRole;
 
 /**
  * This class is responsible for all information and action of a worker
@@ -16,7 +17,7 @@ public class WorkerModel {
 	private InventoryModel inventory;
 	private boolean moving;
 	private boolean occupied;
-	private int role;
+	private WorkerRole role;
 	private int harvest_capacity;
 	private int level;
 	
@@ -27,7 +28,7 @@ public class WorkerModel {
 	 * @param R The role of a worker that represente what kind of ressource he can collect
 	 * @param pts position on the map of the worker
 	 */
-	public WorkerModel(GameModel M, int R, Point pts) {
+	public WorkerModel(GameModel M, WorkerRole R, Point pts) {
 		model = M;
 		map_model = model.GetMapModel();
 		cell = map_model.GetCellFromCoord(pts.x,pts.y);
@@ -260,7 +261,7 @@ public class WorkerModel {
 		return (res_amount==inventory.GetMaxAmount());
 	}
 
-	public int GetRole() {
+	public WorkerRole GetRole() {
 		return this.role;
 	}
 }

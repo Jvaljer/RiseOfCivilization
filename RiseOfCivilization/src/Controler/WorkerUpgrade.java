@@ -24,7 +24,9 @@ public class WorkerUpgrade extends Thread{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		worker.LevelUp();
+		if(ctrl.GetGameModel().PlayerCanUpgradeWorker(worker)) {
+			worker.LevelUp();
+		}
 		worker.Free();
 	}
 }

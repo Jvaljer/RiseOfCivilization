@@ -16,8 +16,7 @@ public class WorkerCollect extends Thread{
 		map = ctrl.GetGameModel().GetMapModel();
 		worker = W;
 		dst_coord = pts;
-		dst_cell = C;
-		worker.setNextcoord(dst_cell.GetCoord());
+		worker.setNextcoord(dst_coord);
 	}
 	
 	@Override

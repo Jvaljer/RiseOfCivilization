@@ -45,8 +45,9 @@ public class BuildingUpgrade extends Thread{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		building.LevelUp();
+		if(ctrl.GetGameModel().PlayerCanUpgradeBuilding(building)) {
+			building.LevelUp();
+		}
 		worker.Free();
 		
 	}

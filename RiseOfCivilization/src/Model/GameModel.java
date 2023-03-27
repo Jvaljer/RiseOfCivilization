@@ -24,7 +24,7 @@ public class GameModel {
 		inventory = new InventoryModel();
 		inventory.add(Resource.Gold, 150);
 		workers = new ArrayList<WorkerModel>(10);
-		workers.add(new WorkerModel(this,WorkerRole.Worker, new Point(1,1)));
+		workers.add(new WorkerModel(this, WorkerRole.Worker, new Point(1,1)));
 		
 		buildings = new ArrayList<BuildingModel>();
 		buildings.add(new BuildingModel(this,map.GetCityOriginCoord(),BuildingId.CityHall));
@@ -273,5 +273,10 @@ public class GameModel {
 		
 		building_inventory.remove(res_type, amount);
 		return;
+	}
+	
+	public boolean PlayerCanUpgradeBuilding(BuildingModel building) {
+		//must implement
+		return true;
 	}
 }
