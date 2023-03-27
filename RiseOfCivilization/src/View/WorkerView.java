@@ -50,7 +50,11 @@ public class WorkerView {
 		
 		G.setColor(new Color(0,0,0));
 		G.drawOval(pos.x - w_div, pos.y - h_div, w, h);
-		G.setColor(new Color(0,100,200));
+		if(worker.GetOccupied()) {
+			G.setColor(new Color(200,0,0));
+		} else {
+			G.setColor(new Color(0,100,200));
+		}
 		G.fillOval(pos.x - w_div, pos.y - h_div, w, h);
 	}
 }
