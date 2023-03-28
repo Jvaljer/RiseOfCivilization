@@ -18,10 +18,15 @@ public class GameModel {
 	private InventoryModel inventory;
 	private ArrayList<WorkerModel> workers;
 	private ArrayList<BuildingModel> buildings;
+	
+	public int worker_amount;
 
 	public GameModel() {
 		map = new MapModel(this);
 		inventory = new InventoryModel();
+		
+		worker_amount = 0;
+		
 		inventory.add(Resource.Gold, 150);
 		workers = new ArrayList<WorkerModel>(10);
 		workers.add(new WorkerModel(this, WorkerRole.Miner, new Point(1,1)));
@@ -79,34 +84,16 @@ public class GameModel {
 		switch (bid) {
 			case SawMill:
 				cond = (wood>=200) && (stone>=120) && (iron>=50) && (gold>=30);
-				
-				System.out.println("wood : "+ wood+"/200");
-				System.out.println("stone : "+ stone+"/120");
-				System.out.println("iron : "+ iron+"/50");
-				System.out.println("gold : "+ gold+"/30");
-				
 				System.out.println("enough to build SawMill : " + cond); 
 				return cond;
 				
 			case Mine:
 				cond = (wood>=120) && (stone>=200) && (iron>=50) && (gold>=30);
-				
-				System.out.println("wood : "+ wood+"120");
-				System.out.println("stone : "+ stone+"/200");
-				System.out.println("iron : "+ iron+"/50");
-				System.out.println("gold : "+ gold+"/30");
-				
 				System.out.println("enough to build SawMill : " + cond);
 				break;
 				
 			case Quarry:
 				cond = (wood>=150) && (stone>=150) && (iron>=120) && (gold>=30);
-				
-				System.out.println("wood : "+ wood+"150");
-				System.out.println("stone : "+ stone+"/150");
-				System.out.println("iron : "+ iron+"/120");
-				System.out.println("gold : "+ gold+"/30");
-				
 				System.out.println("enough to build SawMill : " + cond); 
 				break;
 				

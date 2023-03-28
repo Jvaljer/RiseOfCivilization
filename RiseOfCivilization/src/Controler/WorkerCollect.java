@@ -36,7 +36,6 @@ public class WorkerCollect extends Thread{
 				e.printStackTrace();
 			}
 		}
-		System.out.println("worker is collecting resources");
 		worker.occupied();
 		try {
 			Thread.sleep(1000);

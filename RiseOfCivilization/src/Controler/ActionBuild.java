@@ -21,6 +21,7 @@ public class ActionBuild implements ActionListener {
             //WorkerModel nearest = map.GetNearestWorker(cell.GetCoord());
             WorkerModel nearest = map.GetNearestWorker(cell, "build");
             if(nearest!=null) {
+            	System.out.println("build -> selected worker : "+ nearest.ID);
             	(new WorkerBuild(g_ctrl,nearest,cell.GetCoord())).start();
             }
     }

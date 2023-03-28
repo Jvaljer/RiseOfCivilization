@@ -21,6 +21,7 @@ public class ActionExpand implements ActionListener {
 			//WorkerModel nearest = map.GetNearestWorker(cell.GetCoord());
 			WorkerModel nearest = map.GetNearestWorker(cell, "expand");
 			if(nearest!=null) {
+				System.out.println("expand -> selected worker : "+ nearest.ID);
 				(new WorkerExpand(g_ctrl,nearest,cell.GetCoord())).start();
 			}
 	}

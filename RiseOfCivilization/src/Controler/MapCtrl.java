@@ -87,10 +87,8 @@ public class MapCtrl extends Thread implements MouseListener {
 			return;
 		}
 		Point mouse_pos = new Point(mouse_x, mouse_y);
-		System.out.println("clicked on : " + mouse_pos);
 		
 		Point cell = GetCellFromClick(mouse_pos);
-		System.out.println("i%2 : " + (cell.x%2==0));
 		
 		if(map_model.CellIsValid(cell)) {
 			if(old_click != null) {
@@ -107,9 +105,6 @@ public class MapCtrl extends Thread implements MouseListener {
 		Point pos = map_model.GetPosFromCoord(cell.x,cell.y);
 		
 		CellModel clicked_cell = map_model.GetCellFromCoord(cell.x, cell.y);
-		System.out.println("Cell Inventory : " + clicked_cell.getInventory().getResources());
-		//BuildingModel building = clicked_cell.getBuilding();
-		//System.out.println("Building : " + building.getType() + " has " + building.getInventory().getResources());
 	}
 	
 	@Override

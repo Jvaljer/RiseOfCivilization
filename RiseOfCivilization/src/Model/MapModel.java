@@ -172,7 +172,6 @@ public class MapModel {
 			i = i - 1;
 			j = j - 1;
 		}
-		System.out.printf("Clicked coords are : (%d,%d)\n",(int) i-1,(int) j-1);
 		return (new Point((int) i-1,(int) j-1));
 	}
 	
@@ -398,7 +397,7 @@ public class MapModel {
 		int shortest = Integer.MAX_VALUE;
 		
 		for(WorkerModel worker : game.GetWorkerModel()) {
-			if(worker.GetRole()==needed_worker && !worker.GetOccupied()) {
+			if((worker.GetRole()==needed_worker || needed_worker==null) && !worker.GetOccupied()) {
 				dist = GetShortestPath(cell.GetCoord(),worker.getPos()).size();
 				if(dist<=shortest) {
 					shortest = dist;

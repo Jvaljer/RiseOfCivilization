@@ -21,6 +21,8 @@ public class WorkerModel {
 	private int harvest_capacity;
 	private int level;
 	
+	public int ID;
+	
 	/**
 	 * Constructor for a worker taking a GameModel, a workerRole and a position
 	 * 
@@ -38,6 +40,9 @@ public class WorkerModel {
 		occupied = false;
 		role = R;
 		level = 1;
+		
+		model.worker_amount++;
+		ID = model.worker_amount;
 	}
 
 	/**
@@ -106,7 +111,6 @@ public class WorkerModel {
 	 */
 	public void MoveTo(int i, int j) {
 		this.cell = this.model.GetMapModel().GetCellFromCoord(i, j);
-		System.out.println(this.cell.GetCoord());
 	}
 	
 	/**

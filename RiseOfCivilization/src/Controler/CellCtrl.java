@@ -73,7 +73,6 @@ public class CellCtrl extends Thread {
 		cell_view.Click();
 		//here we wanna give the possibility for the player to click certain buttons
 		if(map.CellIsOccupiedByBuilding(cell_model)) {
-			System.out.println("the cell is occupied by a building");
 			g_ctrl.GetButtonFromName("Move").setEnabled(false);
 			g_ctrl.GetButtonFromName("Collect").setEnabled(true);
 			g_ctrl.GetButtonFromName("LevelUp").setEnabled(map.CanUpgradeBuilding(cell_model,map.GetBuildingFromCoord(cell_model.GetCoord())));

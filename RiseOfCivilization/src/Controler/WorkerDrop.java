@@ -20,7 +20,6 @@ public class WorkerDrop extends Thread{
 	@Override
 	public void run() {
 		Point town_hall = map.GetCityOriginCoord();
-		System.out.println("Worker is dropping his inventory");
 		//first we want the worker to move to the town hall.
 		while(town_hall.x != worker.getcoordX() || town_hall.y != worker.getcoordY()) {
 			try {

@@ -19,6 +19,7 @@ public class ActionDrop implements ActionListener {
 			//we must first make the nearest worker (first without the right Id) move on the clicked cell
 			WorkerModel nearest = map.GetNearestWorker(cell.GetCoord());
 			if(nearest!=null) {
+				System.out.println("drop -> selected worker : "+ nearest.ID);
 				(new WorkerDrop(g_ctrl,nearest)).start();
 			}
 	}
