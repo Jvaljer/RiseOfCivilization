@@ -1,6 +1,7 @@
 package Controler;
 
 import java.awt.event.ActionEvent;
+import Types.Actions;
 import java.awt.event.ActionListener;
 import Model.MapModel;
 import Model.*;
