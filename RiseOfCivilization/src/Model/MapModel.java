@@ -346,11 +346,11 @@ public class MapModel {
 		return nearest;
 	}
 	
-	public WorkerModel GetNearestWorker(CellModel cell, String task) {
+	public WorkerModel GetNearestWorker(CellModel cell, Actions task) {
 		WorkerModel nearest = null;
-		WorkerRole needed_worker;
+		WorkerRole needed_worker = WorkerRole.Worker;
 		
-		if(task=="build" || task=="collect" || task=="upgrade") {
+		if(task==Actions.Build || task==Actions.Collect || task==Actions.LevelUp) {
 			if(CellIsOccupiedByBuilding(cell)) {
 				BuildingModel building = GetBuildingFromCoord(cell.GetCoord());
 				switch (building.GetId()) {
@@ -389,8 +389,6 @@ public class MapModel {
 						break;
 				}
 			}
-		} else {
-			needed_worker = null;
 		}
 		
 		int dist;

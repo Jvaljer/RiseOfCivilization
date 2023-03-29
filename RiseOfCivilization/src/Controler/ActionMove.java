@@ -3,6 +3,7 @@ package Controler;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Model.*;
+import Types.Actions;
 
 public class ActionMove implements ActionListener {
 	private GameCtrl g_ctrl;
@@ -18,7 +19,7 @@ public class ActionMove implements ActionListener {
 		System.out.println("clicked Move Button");
 		CellModel cell = g_ctrl.GetMapCtrl().GetClickedCell();
 		//WorkerModel nearest = map.GetNearestWorker(cell.GetCoord());
-		WorkerModel nearest = map.GetNearestWorker(cell, "move");
+		WorkerModel nearest = map.GetNearestWorker(cell, Actions.Move);
 		if(nearest!=null) {
 			System.out.println("move -> selected worker : "+ nearest.ID);
 			(new WorkerMoveCtrl(g_ctrl.GetGameModel(),nearest,cell.GetCoord())).start();

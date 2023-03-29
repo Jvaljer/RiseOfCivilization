@@ -21,22 +21,20 @@ public class WorkerExpand extends Thread {
 	
 	@Override
 	public void run() {
+		worker.occupied();
+		worker.moving();
 		while(dst_coord.x != worker.getcoordX() || dst_coord.y != worker.getcoordY()) {
 			try {
-				worker.occupied();
-				worker.moving();
 				ArrayList<Point> path = map.GetShortestPath(worker.getPos(), dst_coord);
 				Point nxt = path.get(1);
 				worker.setNextcoord(nxt);
 				sleep(480);
 				worker.MoveTo(nxt.x, nxt.y);
-				worker.stopMoving();
-				worker.Free();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		worker.occupied();
+		worker.stopMoving();
 		try {
 			Thread.sleep(2000);
 		} catch (Exception e) {

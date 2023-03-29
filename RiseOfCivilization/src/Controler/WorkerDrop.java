@@ -20,24 +20,22 @@ public class WorkerDrop extends Thread{
 	@Override
 	public void run() {
 		Point town_hall = map.GetCityOriginCoord();
+		worker.occupied();
+		worker.moving();
 		//first we want the worker to move to the town hall.
 		while(town_hall.x != worker.getcoordX() || town_hall.y != worker.getcoordY()) {
 			try {
-				worker.occupied();
-				worker.moving();
 				ArrayList<Point> path = map.GetShortestPath(worker.getPos(), town_hall);
 				Point nxt = path.get(1);
 				worker.setNextcoord(nxt);
 				sleep(480);
 				worker.MoveTo(nxt.x, nxt.y);
-				worker.stopMoving();
-				worker.Free();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		
-		worker.occupied();
+		worker.stopMoving();
 		try {
 			Thread.sleep(1250);
 		} catch (Exception e) {

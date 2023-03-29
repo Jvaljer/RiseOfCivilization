@@ -1,6 +1,7 @@
 package Controler;
 
 import java.awt.event.ActionEvent;
+import Types.Actions;
 import java.awt.event.ActionListener;
 import Model.MapModel;
 import Types.BuildingId;
@@ -19,7 +20,7 @@ public class ActionBuild implements ActionListener {
             System.out.println("clicked Build button");
             CellModel cell = g_ctrl.GetMapCtrl().GetClickedCell();
             //WorkerModel nearest = map.GetNearestWorker(cell.GetCoord());
-            WorkerModel nearest = map.GetNearestWorker(cell, "build");
+            WorkerModel nearest = map.GetNearestWorker(cell, Actions.Build);
             if(nearest!=null) {
             	System.out.println("build -> selected worker : "+ nearest.ID);
             	(new WorkerBuild(g_ctrl,nearest,cell.GetCoord())).start();

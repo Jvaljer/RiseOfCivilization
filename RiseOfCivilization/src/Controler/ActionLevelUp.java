@@ -1,6 +1,7 @@
 package Controler;
 
 import Model.*;
+import Types.Actions;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -26,7 +27,7 @@ public class ActionLevelUp implements ActionListener {
 			} else if(map.CellIsOccupiedByBuilding(cell)) {
 				//here we want a worker to move to the cell and upgrade the building
 				//WorkerModel nearest = map.GetNearestWorker(cell.GetCoord());
-				WorkerModel nearest = map.GetNearestWorker(cell, "upgrade");
+				WorkerModel nearest = map.GetNearestWorker(cell, Actions.LevelUp);
 				BuildingModel building = map.GetBuildingFromCoord(cell.GetCoord());
 				if(nearest!=null) {
 					(new BuildingUpgrade(g_ctrl,nearest,building)).start();

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import Model.*;
 import java.awt.event.ActionListener;
 import Model.MapModel;
+import Types.Actions;
 
 public class ActionExpand implements ActionListener {
 	private MapModel map;
@@ -19,7 +20,7 @@ public class ActionExpand implements ActionListener {
 			System.out.println("clicked on Expand Button");
 			CellModel cell = g_ctrl.GetMapCtrl().GetClickedCell();
 			//WorkerModel nearest = map.GetNearestWorker(cell.GetCoord());
-			WorkerModel nearest = map.GetNearestWorker(cell, "expand");
+			WorkerModel nearest = map.GetNearestWorker(cell, Actions.Expand);
 			if(nearest!=null) {
 				System.out.println("expand -> selected worker : "+ nearest.ID);
 				(new WorkerExpand(g_ctrl,nearest,cell.GetCoord())).start();
