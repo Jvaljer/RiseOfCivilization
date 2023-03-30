@@ -16,7 +16,7 @@ public class Checkup extends Thread {
 				if(w.GetOccupied()) {
 					System.out.println("worker "+w.ID+" is occupied on slot ("+w.getcoordX()+","+w.getcoordY()+")");
 				}
-				System.out.println("amount of running threads : "+game.nb_th);
+				//System.out.println("amount of running threads : "+game.nb_th);
 			}
 			
 			try {
