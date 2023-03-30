@@ -6,10 +6,10 @@ import Model.*;
 import java.util.*;
 
 public class WorkerCollect extends Thread{
-	private static GameCtrl ctrl;
-	private static MapModel map;
-	private static WorkerModel worker;
-	private static Point dst_coord;
+	private GameCtrl ctrl;
+	private MapModel map;
+	private WorkerModel worker;
+	private Point dst_coord;
 	private int worker_id;
 	private int th_id;
 	
