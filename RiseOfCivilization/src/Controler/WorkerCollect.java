@@ -21,6 +21,7 @@ public class WorkerCollect extends Thread{
 	
 	@Override
 	public void run() {
+		ctrl.nb_th++;
 		worker.occupied();
 		worker.moving();
 		while(dst_coord.x != worker.getcoordX() || dst_coord.y != worker.getcoordY()) {
@@ -46,5 +47,6 @@ public class WorkerCollect extends Thread{
 			ctrl.GetGameModel().Harvest(worker,map.GetCellFromCoord(dst_coord.x, dst_coord.y));
 		}
 		worker.Free();
+		ctrl.nb_th--;
 	}
 }

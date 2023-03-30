@@ -12,7 +12,10 @@ public class GameCtrl{
 	private ArrayList<JButton> buttons;
 	private MapCtrl map;
 	
+	public int nb_th;
+	
 	public GameCtrl(GameView V) {
+		nb_th = 0;
 		view = V;
 		model = view.GetGameModel();
 		map = new MapCtrl(this,view);
@@ -50,6 +53,7 @@ public class GameCtrl{
 		}
 		
 		(new RefreshCtrl(view)).start();
+		(new Checkup(this)).start();
 	}
 	
 	public GameModel GetGameModel() {
