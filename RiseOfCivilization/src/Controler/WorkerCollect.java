@@ -10,33 +10,21 @@ public class WorkerCollect extends Thread{
 	private MapModel map;
 	private WorkerModel worker;
 	private Point dst_coord;
-	private int worker_id;
-	private int th_id;
 	
 	public WorkerCollect(GameCtrl GC,WorkerModel W, Point pts) {
-		if(worker==null) {
-			System.out.println("worker is well null yet");
-		} else {
-			System.out.println("creation of THread, worker shall be null : "+worker.ID);
-		}
 		ctrl = GC;
 		map = ctrl.GetGameModel().GetMapModel();
 		worker = W;
-		System.out.println("now worker isn't null anymore ? : "+worker.ID);
 		dst_coord = pts;
 		worker.setNextcoord(dst_coord);
-		worker_id = worker.ID;
 	}
 	
 	@Override
 	public void run() {
-		ctrl.nb_th++;
-		th_id = ctrl.nb_th;
 		worker.occupied();
 		worker.moving();
 		while(dst_coord.x != worker.getcoordX() || dst_coord.y != worker.getcoordY()) {
 			try {
-				System.out.println("for thread n°"+th_id+" worker moving is n°"+worker.ID);
 				ArrayList<Point> path = map.GetShortestPath(worker.getPos(), dst_coord);
 				Point nxt = path.get(1);
 				worker.setNextcoord(nxt);
@@ -58,6 +46,5 @@ public class WorkerCollect extends Thread{
 			ctrl.GetGameModel().Harvest(worker,map.GetCellFromCoord(dst_coord.x, dst_coord.y));
 		}
 		worker.Free();
-		ctrl.nb_th--;
 	}
 }

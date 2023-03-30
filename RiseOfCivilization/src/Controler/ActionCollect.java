@@ -22,7 +22,6 @@ public class ActionCollect implements ActionListener {
 			//WorkerModel nearest = map.GetNearestWorker(cell.GetCoord());
 			WorkerModel nearest = map.GetNearestWorker(cell, Actions.Collect);
 			if(nearest!=null) {
-				System.out.println("collect -> selected worker : "+ nearest.ID);
 				(new WorkerCollect(g_ctrl,nearest,cell.GetCoord())).start();
 			}
 	}

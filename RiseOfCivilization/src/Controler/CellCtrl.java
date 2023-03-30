@@ -74,13 +74,13 @@ public class CellCtrl extends Thread {
 		//here we wanna give the possibility for the player to click certain buttons
 		if(map.CellIsOccupiedByBuilding(cell_model)) {
 			g_ctrl.GetButtonFromName("Move").setEnabled(false);
-			g_ctrl.GetButtonFromName("Collect").setEnabled(true);
+			g_ctrl.GetButtonFromName("Collect").setEnabled(map.CanCollect(cell_model));
 			g_ctrl.GetButtonFromName("LevelUp").setEnabled(map.CanUpgradeBuilding(cell_model,map.GetBuildingFromCoord(cell_model.GetCoord())));
 			g_ctrl.GetButtonFromName("Expand").setEnabled(map.CanExpand(cell_model));
 			g_ctrl.GetButtonFromName("Build").setEnabled(false);
-			g_ctrl.GetButtonFromName("Train").setEnabled(true);
+			g_ctrl.GetButtonFromName("Train").setEnabled(map.CanTrain(cell_model));
 			g_ctrl.GetButtonFromName("Shop").setEnabled(map.CellHasShop(cell_model));
-			g_ctrl.GetButtonFromName("Drop").setEnabled(map.CellIsOccupiedByWorker(cell_model));
+			g_ctrl.GetButtonFromName("Drop").setEnabled(map.CanDrop(cell_model));
 			
 		} else if(map.CellIsOccupiedByWorker(cell_model)) {
 			g_ctrl.GetButtonFromName("Move").setEnabled(false);

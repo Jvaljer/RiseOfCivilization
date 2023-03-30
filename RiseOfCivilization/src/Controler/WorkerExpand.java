@@ -7,10 +7,10 @@ import Model.MapModel;
 import Model.WorkerModel;
 
 public class WorkerExpand extends Thread {
-	private static GameCtrl ctrl;
-	private static MapModel map;
-	private static WorkerModel worker;
-	private static Point dst_coord;
+	private GameCtrl ctrl;
+	private MapModel map;
+	private WorkerModel worker;
+	private Point dst_coord;
 	
 	public WorkerExpand(GameCtrl GC, WorkerModel WM, Point pts) {
 		ctrl = GC;

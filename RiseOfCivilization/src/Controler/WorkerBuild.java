@@ -7,10 +7,10 @@ import Model.MapModel;
 import Model.WorkerModel;
 
 public class WorkerBuild extends Thread {
-	private static GameCtrl ctrl;
-	private static MapModel map;
-	private static WorkerModel worker;
-	private static Point dst_coord;
+	private GameCtrl ctrl;
+	private MapModel map;
+	private WorkerModel worker;
+	private Point dst_coord;
 	
 	public WorkerBuild(GameCtrl GC,WorkerModel W, Point pts) {
 		ctrl = GC;

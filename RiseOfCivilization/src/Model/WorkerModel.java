@@ -21,8 +21,6 @@ public class WorkerModel {
 	private int harvest_capacity;
 	private int level;
 	
-	public int ID;
-	
 	/**
 	 * Constructor for a worker taking a GameModel, a workerRole and a position
 	 * 
@@ -42,7 +40,6 @@ public class WorkerModel {
 		level = 1;
 		
 		model.worker_amount++;
-		ID = model.worker_amount;
 	}
 
 	/**

@@ -444,9 +444,13 @@ public class MapModel {
 		return cell.GetId()==CellId.Iron_Deposit || cell.GetId()==CellId.Forest || cell.GetId()==CellId.Mountain;
 	}
 	public boolean CanCollect(CellModel cell) {
-		return cell.GetId()==CellId.Iron_Deposit || cell.GetId()==CellId.Forest || cell.GetId()==CellId.Mountain || CellIsOccupiedByBuilding(cell);
+		return cell.GetId()==CellId.Iron_Deposit || cell.GetId()==CellId.Forest || cell.GetId()==CellId.Mountain || (CellIsOccupiedByBuilding(cell) && BuildingIsCollectable(cell));
 	}
 	
+	public boolean BuildingIsCollectable(CellModel cell) {
+		BuildingId bid = GetBuildingFromCoord(cell.GetCoord()).GetId();
+		return (bid==BuildingId.Mine) || (bid==BuildingId.SawMill) || (bid==BuildingId.Quarry);
+	}
 	public BuildingModel GetBuildingFromCoord(Point coord) {
 		for(BuildingModel building : game.GetBuildingList()) {
 			if(building.GetPos().x==coord.x && building.GetPos().y==coord.y) {
@@ -495,5 +499,14 @@ public class MapModel {
 	
 	public CellModel GetCurrentCell() {
 		return current_cell;
+	}
+	
+	public boolean CanDrop(CellModel cell) {
+		return (CellIsOccupiedByBuilding(cell) && GetBuildingFromCoord(cell.GetCoord()).GetId()==BuildingId.CityHall) || CellIsOccupiedByWorker(cell);
+	}
+	
+	public boolean CanTrain(CellModel cell) {
+		BuildingId bid = GetBuildingFromCoord(cell.GetCoord()).GetId();
+		return (bid==BuildingId.Barrack) || (bid==BuildingId.LumberCamp) || (bid==BuildingId.MinerCamp) || (bid==BuildingId.QuarrymanCamp);
 	}
 }

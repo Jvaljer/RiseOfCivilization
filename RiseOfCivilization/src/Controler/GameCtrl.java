@@ -53,7 +53,6 @@ public class GameCtrl{
 		}
 		
 		(new RefreshCtrl(view)).start();
-		(new Checkup(this)).start();
 	}
 	
 	public GameModel GetGameModel() {
