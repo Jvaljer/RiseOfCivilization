@@ -395,7 +395,13 @@ public class MapModel {
 		int shortest = Integer.MAX_VALUE;
 		
 		for(WorkerModel worker : game.GetWorkerModel()) {
-			if((worker.GetRole()==needed_worker || needed_worker==null) && !worker.GetOccupied()) {
+			if((worker.GetRole()==needed_worker) && !worker.GetOccupied()) {
+				dist = GetShortestPath(cell.GetCoord(),worker.getPos()).size();
+				if(dist<=shortest) {
+					shortest = dist;
+					nearest = worker;
+				}
+			} else if(needed_worker == WorkerRole.Worker && !worker.GetOccupied()) {
 				dist = GetShortestPath(cell.GetCoord(),worker.getPos()).size();
 				if(dist<=shortest) {
 					shortest = dist;
