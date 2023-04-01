@@ -17,7 +17,11 @@ public class BuildingTrain extends Thread {
 	
 	@Override
 	public void run() {
-		//must implement
-		return;
+		try {
+			sleep(5000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		building.Train();
 	}
 }

@@ -84,4 +84,30 @@ public class BuildingModel {
 			break;
 		}
 	}
+	
+	public void Train() {
+		if(!game.CanCreateNewWorker(this)) {
+			return;
+		}
+		switch (id) {
+			case Barrack:
+				game.AddWorker(WorkerRole.Knight,this.cell.GetCoord());
+				break;
+				
+			case LumberCamp:
+				game.AddWorker(WorkerRole.LumberJack,this.cell.GetCoord());
+				break;
+				
+			case MinerCamp:
+				game.AddWorker(WorkerRole.Miner,this.cell.GetCoord());
+				break;
+				
+			case QuarrymanCamp:
+				game.AddWorker(WorkerRole.QuarryMan,this.cell.GetCoord());
+				break;
+			
+			default:
+				break;
+		}
+	}
 }

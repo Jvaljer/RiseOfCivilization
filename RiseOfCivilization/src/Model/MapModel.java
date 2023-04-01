@@ -507,6 +507,6 @@ public class MapModel {
 	
 	public boolean CanTrain(CellModel cell) {
 		BuildingId bid = GetBuildingFromCoord(cell.GetCoord()).GetId();
-		return (bid==BuildingId.Barrack) || (bid==BuildingId.LumberCamp) || (bid==BuildingId.MinerCamp) || (bid==BuildingId.QuarrymanCamp);
+		return ((bid==BuildingId.Barrack) || (bid==BuildingId.LumberCamp) || (bid==BuildingId.MinerCamp) || (bid==BuildingId.QuarrymanCamp)) && game.CanCreateNewWorker(bid);
 	}
 }

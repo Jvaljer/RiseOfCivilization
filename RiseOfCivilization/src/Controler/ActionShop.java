@@ -15,6 +15,7 @@ public class ActionShop implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("clicked on Shop button");
-		//must implement
+		//here we wanna create a new JFrame in which the player will be allowed to buy & sell resources
+		//gonna implement this later on...
 	}
 }

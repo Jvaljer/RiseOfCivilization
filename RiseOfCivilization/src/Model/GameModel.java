@@ -303,4 +303,52 @@ public class GameModel {
 		
 		return (wood>=needed_wood) && (stone>=needed_stone) && (iron>=needed_iron) && (gold>=needed_gold);
 	}
+	
+	public WorkerRole GetRoleFromBuilding(BuildingId bid) {
+		switch (bid) {
+			case Barrack:
+				return WorkerRole.Knight;
+			case LumberCamp:
+				return WorkerRole.LumberJack;
+			case MinerCamp:
+				return WorkerRole.Miner;
+			case QuarrymanCamp:
+				return WorkerRole.QuarryMan;
+			default:
+				return null;
+		}
+	}
+	
+	public boolean CanCreateNewWorker(BuildingModel building) {
+		int limit = 1;
+		int current = 0;
+		WorkerRole role = GetRoleFromBuilding(building.GetId());
+		for(BuildingModel b : buildings) {
+			if(b.GetId()==building.GetId()) {
+				switch (building.GetLevel()) {
+					case 2:
+						limit+=3;
+						break;
+					case 3:
+						limit+=5;
+						break;
+						
+					default:
+						break;
+				}
+			}
+		}
+		
+		for(WorkerModel worker : workers) {
+			if(worker.GetRole()==role) {
+				current++;
+			}
+		}
+		
+		return (current<limit);
+	}
+	
+	public void AddWorker(WorkerRole wr, Point pos) {
+		workers.add(new WorkerModel(this,wr,pos));
+	}
 }
