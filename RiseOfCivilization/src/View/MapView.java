@@ -96,6 +96,10 @@ public class MapView extends JPanel {
 			DrawCurrentCell(G);
 		}
 		
+		for(BuildingView b_view : view.GetBuildingsView()) {
+			b_view.DrawBuilding(G);
+		}
+		
 		for(int i = 0; i < this.view.GetGameModel().GetWorkerModel().size(); i++)
 		{
 			if(this.view.GetGameModel().GetWorkerModel().get(i).GetMoving())
@@ -104,10 +108,6 @@ public class MapView extends JPanel {
 			} else {
 				this.view.getWorkerView().get(i).DrawWorker(G);
 			}
-		}
-		
-		for(BuildingView b_view : view.GetBuildingsView()) {
-			b_view.DrawBuilding(G);
 		}
 	}
 }

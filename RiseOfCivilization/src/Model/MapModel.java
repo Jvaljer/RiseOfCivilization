@@ -441,7 +441,7 @@ public class MapModel {
 		return false;
 	}
 	public boolean CanBuild(CellModel cell) {
-		return cell.GetId()==CellId.Iron_Deposit || cell.GetId()==CellId.Forest || cell.GetId()==CellId.Mountain;
+		return cell.GetId()==CellId.Iron_Deposit || cell.GetId()==CellId.Forest || cell.GetId()==CellId.Mountain || cell.GetId()==CellId.City;
 	}
 	public boolean CanCollect(CellModel cell) {
 		return cell.GetId()==CellId.Iron_Deposit || cell.GetId()==CellId.Forest || cell.GetId()==CellId.Mountain || (CellIsOccupiedByBuilding(cell) && BuildingIsCollectable(cell));
@@ -507,6 +507,6 @@ public class MapModel {
 	
 	public boolean CanTrain(CellModel cell) {
 		BuildingId bid = GetBuildingFromCoord(cell.GetCoord()).GetId();
-		return ((bid==BuildingId.Barrack) || (bid==BuildingId.LumberCamp) || (bid==BuildingId.MinerCamp) || (bid==BuildingId.QuarrymanCamp)) && game.CanCreateNewWorker(bid);
+		return ((bid==BuildingId.Barrack) || (bid==BuildingId.LumberCamp) || (bid==BuildingId.MinerCamp) || (bid==BuildingId.QuarrymanCamp)) && game.CanCreateNewWorker(GetBuildingFromCoord(cell.GetCoord()));
 	}
 }

@@ -1,6 +1,7 @@
 package Controler;
 
 import java.awt.Point;
+import Types.CellId;
 import Model.CellModel;
 import java.util.ArrayList;
 import Model.MapModel;
@@ -35,16 +36,20 @@ public class WorkerBuild extends Thread {
 			}
 		}
 		worker.stopMoving();
-		try {
-			Thread.sleep(3000);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		int old_len = ctrl.GetGameModel().GetBuildingList().size();
 		CellModel cell = map.GetCellFromCoord(dst_coord.x, dst_coord.y);
-		ctrl.GetGameModel().Build(cell);
+		if(cell.GetId()==CellId.City) {
+			ctrl.GiveBuildingChoice();
+		} else {
+			ctrl.GetGameModel().BuildOnResourceCell(cell);
+		}
 		int new_len = ctrl.GetGameModel().GetBuildingList().size();
 		if(old_len < new_len) {
+			try {
+				Thread.sleep(3000);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			ctrl.GetGameView().AddBuildingView(ctrl.GetGameModel().GetBuildingList().get(old_len));
 		}
 		worker.Free();

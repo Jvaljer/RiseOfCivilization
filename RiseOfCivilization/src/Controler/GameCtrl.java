@@ -75,4 +75,8 @@ public class GameCtrl{
 		}
 		return null;
 	}
+	public void GiveBuildingChoice() {
+		//here we wanna create a new JFrame in which the player will be able to choose the building he wanna create
+		return;
+	}
 }

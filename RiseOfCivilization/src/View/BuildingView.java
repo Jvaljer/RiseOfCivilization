@@ -21,10 +21,10 @@ public class BuildingView {
 				color = (new Color(77, 38, 0));
 				break;
 			case SawMill :
-				color = (new Color(51, 51, 0));
+				color = (new Color(51, 102, 0));
 				break;
 			case Mine :
-				color = (new Color(31, 31, 20));
+				color = (new Color(102, 102, 102));
 				break;
 			case LumberCamp :
 				color = (new Color(179, 89, 0));
@@ -33,7 +33,7 @@ public class BuildingView {
 				color = (new Color(128, 128, 0));
 				break;
 			case Quarry :
-				color = (new Color(96, 64, 31));
+				color = (new Color(134, 45, 45));
 				break;
 			case Shop :
 				color = (new Color(204, 204, 0));

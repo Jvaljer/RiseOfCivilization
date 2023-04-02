@@ -118,7 +118,6 @@ public class ActionView extends JPanel {
 		for (JButton but :Button_list) {
 			but.setEnabled(false);
 		}
-		
 	}
 
 	public ArrayList<JButton> GetButtonList(){

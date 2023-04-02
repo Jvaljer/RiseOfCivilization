@@ -27,11 +27,13 @@ public class GameModel {
 		
 		worker_amount = 0;
 		
+		Point start_coord = map.GetCityOriginCoord();
+		
 		inventory.add(Resource.Gold, 150);
 		workers = new ArrayList<WorkerModel>(10);
-		workers.add(new WorkerModel(this, WorkerRole.Miner, new Point(1,1)));
-		workers.add(new WorkerModel(this, WorkerRole.LumberJack, new Point(1,2)));
-		workers.add(new WorkerModel(this, WorkerRole.QuarryMan, new Point(2,1)));
+		workers.add(new WorkerModel(this, WorkerRole.Miner, start_coord));
+		workers.add(new WorkerModel(this, WorkerRole.LumberJack, start_coord));
+		workers.add(new WorkerModel(this, WorkerRole.QuarryMan, start_coord));
 		
 		buildings = new ArrayList<BuildingModel>();
 		buildings.add(new BuildingModel(this, map.GetCityOriginCoord(), BuildingId.CityHall));
@@ -89,27 +91,27 @@ public class GameModel {
 				
 			case Mine:
 				cond = (wood>=120) && (stone>=200) && (iron>=50) && (gold>=30);
-				System.out.println("enough to build SawMill : " + cond);
+				System.out.println("enough to build Mine : " + cond);
 				break;
 				
 			case Quarry:
 				cond = (wood>=150) && (stone>=150) && (iron>=120) && (gold>=30);
-				System.out.println("enough to build SawMill : " + cond); 
+				System.out.println("enough to build Quarry : " + cond); 
 				break;
 				
 			case LumberCamp:
 				cond = (wood>=300) && (stone>=200) && (iron>=80) && (gold>=50);
-				System.out.println("enough to build SawMill : " + cond); 
+				System.out.println("enough to build LumberCamp : " + cond); 
 				break;
 				
 			case MinerCamp:
 				cond = (wood>=200) && (stone>=300) && (iron>=80) && (gold>=50);
-				System.out.println("enough to build SawMill : " + cond); 
+				System.out.println("enough to build MinerCamp : " + cond); 
 				break;
 				
 			case QuarrymanCamp:
 				cond = (wood>=200) && (stone>=200) && (iron>=150) && (gold>=50);
-				System.out.println("enough to build SawMill : " + cond); 
+				System.out.println("enough to build QuarrymanCamp : " + cond); 
 				break;
 				
 			default:
@@ -141,33 +143,39 @@ public class GameModel {
 		}
 	}
 	
-	public void Build(CellModel cell) {
+	public void BuildOnResourceCell(CellModel cell) {
 		BuildingId bid;
     	CellId cid = cell.GetId();
     	switch (cid) {
     		case Mountain:
-    			System.out.println("building a Mine");
     			bid = BuildingId.Mine;
     			if(PlayerHasEnoughToBuild(bid)) {
     				AddBuilding(bid,cell.GetCoord());
+    				inventory.remove(Resource.Wood, 200);
+    				inventory.remove(Resource.Stone, 120);
+    				inventory.remove(Resource.Iron, 50);
+    				inventory.remove(Resource.Gold, 30);
     			}
     			break;
     		case Forest:
-    			System.out.println("building a SawMill");
     			bid = BuildingId.SawMill;
     			if(PlayerHasEnoughToBuild(bid)) {
     				AddBuilding(bid,cell.GetCoord());
+    				inventory.remove(Resource.Wood, 120);
+    				inventory.remove(Resource.Stone, 200);
+    				inventory.remove(Resource.Iron, 50);
+    				inventory.remove(Resource.Gold, 30);
     			}
     			break;
     		case Iron_Deposit:
-    			System.out.println("building a Quarry");
     			bid = BuildingId.Quarry;
     			if(PlayerHasEnoughToBuild(bid)) {
     				AddBuilding(bid,cell.GetCoord());
+    				inventory.remove(Resource.Wood, 150);
+    				inventory.remove(Resource.Stone, 150);
+    				inventory.remove(Resource.Iron, 120);
+    				inventory.remove(Resource.Gold, 30);
     			}
-    			break;
-    		case City:
-    			System.out.println("must choose MinerCamp || Barrack || QuarrymanCamp || LumberCamp");
     			break;
     		default:
     			break;
