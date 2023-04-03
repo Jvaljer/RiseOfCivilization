@@ -23,18 +23,26 @@ public class BuildingUpgrade extends Thread{
 	@Override
 	public void run() {
 		Point dst = building.GetPos();
-		while(worker.getcoordX()!=dst.x && worker.getcoordY()!=dst.y) {
+		while (this.worker.getcoordX() != dst.x || this.worker.getcoordY() != dst.y){
 			try {
-				worker.occupied();
-				worker.moving();
-				ArrayList<Point> path = map.GetShortestPath(worker.getPos(), dst);
-				Point nxt = path.get(1);
-				worker.setNextcoord(nxt);
-				sleep(480);
-				worker.MoveTo(nxt.x, nxt.y);
-				worker.stopMoving();
-				worker.Free();
+				ArrayList<Point> path = map.GetShortestPath(this.worker.getPos(),dst);
+ 				Point nxt_coord = path.get(1);
+				this.worker.setNextcoord(nxt_coord);
+				Point cord_src = map.GetPosFromCoord(worker.getcoordX(), worker.getcoordY());
+		        Point cord_dst = map.GetPosFromCoord(nxt_coord.x, nxt_coord.y);
+		        int x_src = cord_src.x - worker.getWidth()/2;
+		        int y_src = cord_src.y - worker.getHeight()/2;
+		        int x_dst = cord_dst.x - worker.getWidth()/2;
+		        int y_dst = cord_dst.y - worker.getHeight()/2;
+			    for(int i = 1; i <= 24; i++){
+			        int x = (int) ((x_dst - x_src) * i/ 24) + x_src;
+			        int y = (int) ((y_dst - y_src) * i/ 24) + y_src;
+			        this.worker.setPosWhileMoving(x, y);
+					Thread.sleep(1000/48);
+			    }
+				this.worker.MoveTo(nxt_coord.x, nxt_coord.y);
 			} catch (Exception e) {
+				System.out.println("Error in Move Worker");
 				e.printStackTrace();
 			}
 		}
