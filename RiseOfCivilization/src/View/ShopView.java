@@ -1,5 +1,6 @@
 package View;
 import javax.swing.ButtonGroup;
+import Types.Resource;
 import Model.ShopModel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,6 +11,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.JButton;
 import java.awt.*;
+
 public class ShopView extends JFrame implements ChangeListener {
 	private GameView game;
 	private ShopModel model;
@@ -35,6 +37,7 @@ public class ShopView extends JFrame implements ChangeListener {
         super("Shop Interface");
         game = GV;
         model = SM;
+        player_gold = game.GetGameModel().getInventoryModel().getAmmount(Resource.Gold);
         
         setPreferredSize(new Dimension(model.GetWidth(),model.GetHeight()));
 
@@ -126,9 +129,9 @@ public class ShopView extends JFrame implements ChangeListener {
     @Override
     public void stateChanged(ChangeEvent e) {
         // Get slider values
-        wood_amount = RoundToNearestHundred(woodSlider.getValue());
-        stone_amount = RoundToNearestHundred(stoneSlider.getValue());
-        iron_amount = RoundToNearestHundred(ironSlider.getValue());
+        wood_amount = RoundValue(woodSlider.getValue());
+        stone_amount = RoundValue(stoneSlider.getValue());
+        iron_amount = RoundValue(ironSlider.getValue());
 
         // Calculate buy/sell prices
         int wood_buy_price = wood_amount * 2;
@@ -142,14 +145,14 @@ public class ShopView extends JFrame implements ChangeListener {
         // Display buy/sell prices depending on user selection
         buy_price = wood_buy_price + stone_buy_price + iron_buy_price;
         buy_label.setText("Buying Price : " + buy_price + " gold");
+        buy_button.setEnabled(player_gold - buy_price >=0);
         
         sell_price = wood_sell_price + stone_sell_price + iron_sell_price;
         sell_label.setText("Selling Price : " + sell_price + " gold");
-        
         }
 
-    private int RoundToNearestHundred(int value) {
-        return Math.round(value / 100f) * 100;
+    private int RoundValue(int value) {
+        return Math.round(value/10f) * 10;
     }
     
     public JButton GetBuyButton() {
