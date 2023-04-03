@@ -12,6 +12,7 @@ public class WorkerModel {
 	private MapModel map_model;
 	private CellModel cell;
 	private Point next_coord;
+	private Point coordOnScreen;
 	private static final int width = 10;
 	private static final int height = 10;
 	private InventoryModel inventory;
@@ -108,6 +109,19 @@ public class WorkerModel {
 	 */
 	public void MoveTo(int i, int j) {
 		this.cell = this.model.GetMapModel().GetCellFromCoord(i, j);
+	}
+	
+	/**
+	 * 
+	 */
+	public void setPosWhileMoving(int i, int j)
+	{
+		this.coordOnScreen = new Point(i,j);
+	}
+	
+	public Point getPosWhileMoving()
+	{
+		return this.coordOnScreen;
 	}
 	
 	/**

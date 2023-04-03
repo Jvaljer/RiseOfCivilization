@@ -10,8 +10,6 @@ public class WorkerView {
     private GameView view;
     private MapModel map_model;
     private WorkerModel worker;
-	// Number of frame per second for the animation of movement of the worker
-    private int FPS = 100;
     
     /**
      * Constructs a WorkerView object with the specified GameView and WorkerModel objects.
@@ -53,10 +51,10 @@ public class WorkerView {
         int y_src = cord_src.y - worker.getHeight()/2;
         int x_dst = cord_dst.x - worker.getWidth()/2;
         int y_dst = cord_dst.y - worker.getHeight()/2;
-        for(int i = 1; i <= FPS; i++)
+        for(int i = 1; i <= 48; i++)
         {
-            int x = (int) ((x_dst - x_src) * i/ FPS) + x_src;
-            int y = (int) ((y_dst - y_src) * i/ FPS) + y_src;
+            int x = (int) ((x_dst - x_src) * i/ 48) + x_src;
+            int y = (int) ((y_dst - y_src) * i/ 48) + y_src;
             this.drawMove(G, x, y);
         }
     }
