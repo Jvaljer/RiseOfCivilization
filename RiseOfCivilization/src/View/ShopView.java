@@ -16,8 +16,10 @@ public class ShopView extends JFrame implements ChangeListener {
     private final JSlider ironSlider;
     private final JLabel buyPriceLabel;
     private final JLabel sellPriceLabel;
-    private boolean isBuying = true; // variable to store if user wants to buy or sell
 
+    private JButton buy_button;
+    private JButton sell_button;
+    
     public ShopView() {
         super("Material Trader");
 
@@ -48,8 +50,8 @@ public class ShopView extends JFrame implements ChangeListener {
         sellPriceLabel = new JLabel("Sell Price : 0");
 
         // Initialization of radio button to buy or sell
-        JButton buy = new JButton("Buy");
-        JButton sell = new JButton("Sell");
+        buy_button = new JButton("Buy");
+        sell_button = new JButton("Sell");
 
         // Initialization of main panel
         JPanel mainPanel = new JPanel(new GridLayout(4, 2));
@@ -63,8 +65,8 @@ public class ShopView extends JFrame implements ChangeListener {
         mainPanel.add(sellPriceLabel);
 
         // Adding button to main panel
-        mainPanel.add(buy);
-        mainPanel.add(sell);
+        mainPanel.add(buy_button);
+        mainPanel.add(sell_button);
         
         // Configuration of the window
         setContentPane(mainPanel);
@@ -101,5 +103,13 @@ public class ShopView extends JFrame implements ChangeListener {
 
     private int RoundToNearestHundred(int value) {
         return Math.round(value / 100f) * 100;
+    }
+    
+    public JButton GetBuyButton() {
+    	return buy_button;
+    }
+    
+    public JButton GetSellButton() {
+    	return sell_button;
     }
 }
