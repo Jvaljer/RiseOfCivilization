@@ -15,6 +15,7 @@ public class ActionBuy implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("clicked Buy Button");
 		//must implement
-		return;
+		
+		shop.GetView().dispose();
 	}
 }

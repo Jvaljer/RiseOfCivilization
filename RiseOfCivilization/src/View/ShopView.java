@@ -23,6 +23,14 @@ public class ShopView extends JFrame implements ChangeListener {
     private JButton buy_button;
     private JButton sell_button;
     
+    private int buy_price;
+    private int sell_price;
+    private int player_gold;
+    
+    private int wood_amount;
+    private int stone_amount;
+    private int iron_amount;
+    
     public ShopView(GameView GV, ShopModel SM) {
         super("Shop Interface");
         game = GV;
@@ -118,27 +126,27 @@ public class ShopView extends JFrame implements ChangeListener {
     @Override
     public void stateChanged(ChangeEvent e) {
         // Get slider values
-        int wood = RoundToNearestHundred(woodSlider.getValue());
-        int stone = RoundToNearestHundred(stoneSlider.getValue());
-        int iron = RoundToNearestHundred(ironSlider.getValue());
+        wood_amount = RoundToNearestHundred(woodSlider.getValue());
+        stone_amount = RoundToNearestHundred(stoneSlider.getValue());
+        iron_amount = RoundToNearestHundred(ironSlider.getValue());
 
         // Calculate buy/sell prices
-        int wood_buy_price = wood * 2;
-        int stone_buy_price = stone * 3;
-        int iron_buy_price = iron * 5;
+        int wood_buy_price = wood_amount * 2;
+        int stone_buy_price = stone_amount * 3;
+        int iron_buy_price = iron_amount * 5;
         
-        int wood_sell_price = wood * 1;
-        int stone_sell_price = stone * 2;
-        int iron_sell_price = iron * 4;
+        int wood_sell_price = wood_amount * 1;
+        int stone_sell_price = stone_amount * 2;
+        int iron_sell_price = iron_amount * 4;
 
         // Display buy/sell prices depending on user selection
-        int buy_price = wood_buy_price + stone_buy_price + iron_buy_price;
+        buy_price = wood_buy_price + stone_buy_price + iron_buy_price;
         buy_label.setText("Buying Price : " + buy_price + " gold");
         
-        int sell_price = wood_sell_price + stone_sell_price + iron_sell_price;
+        sell_price = wood_sell_price + stone_sell_price + iron_sell_price;
         sell_label.setText("Selling Price : " + sell_price + " gold");
         
-    }
+        }
 
     private int RoundToNearestHundred(int value) {
         return Math.round(value / 100f) * 100;
@@ -150,5 +158,29 @@ public class ShopView extends JFrame implements ChangeListener {
     
     public JButton GetSellButton() {
     	return sell_button;
+    }
+    
+    public int GetBuyPrice() {
+    	return buy_price;
+    }
+    
+    public int GetSellPrice() {
+    	return sell_price;
+    }
+    
+    public int GetPlayerGold() {
+    	return player_gold;
+    }
+    
+    public int GetWoodAmount() {
+    	return wood_amount;
+    }
+    
+    public int GetStoneAmount() {
+    	return stone_amount;
+    }
+    
+    public int GetIronAmount() {
+    	return iron_amount;
     }
 }

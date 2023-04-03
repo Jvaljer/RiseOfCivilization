@@ -12,4 +12,8 @@ public class ShopCtrl {
 		shop.GetBuyButton().addActionListener(new ActionBuy(game, this));
 		shop.GetSellButton().addActionListener(new ActionSell(game,this));
 	}
+	
+	public ShopView GetView() {
+		return shop;
+	}
 }
