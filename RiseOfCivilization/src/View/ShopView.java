@@ -103,18 +103,15 @@ public class ShopView extends JFrame implements ChangeListener {
         c.gridwidth = 2;
         mainPanel.add(buy_label, c);
 
-        c.insets = new Insets(5,10,5,10);
         c.gridx = 0;
         c.gridy = 4;
         mainPanel.add(sell_label, c);
         
-        c.insets = new Insets(5,10,5,10);
         c.gridx = 0;
         c.gridy = 5;
         c.gridwidth = 1;
         mainPanel.add(buy_button, c);
         
-        c.insets = new Insets(5,10,5,10);
         c.gridx = 1;
         mainPanel.add(sell_button, c);
 

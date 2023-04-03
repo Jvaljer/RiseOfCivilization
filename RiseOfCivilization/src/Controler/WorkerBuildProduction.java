@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import Model.MapModel;
 import Model.WorkerModel;
 
-public class WorkerBuild extends Thread {
+public class WorkerBuildProduction extends Thread {
 	private GameCtrl ctrl;
 	private MapModel map;
 	private WorkerModel worker;
 	private Point dst_coord;
 	
-	public WorkerBuild(GameCtrl GC,WorkerModel W, Point pts) {
+	public WorkerBuildProduction(GameCtrl GC,WorkerModel W, Point pts) {
 		ctrl = GC;
 		map = ctrl.GetGameModel().GetMapModel();
 		worker = W;
@@ -50,11 +50,7 @@ public class WorkerBuild extends Thread {
 		worker.stopMoving();
 		int old_len = ctrl.GetGameModel().GetBuildingList().size();
 		CellModel cell = map.GetCellFromCoord(dst_coord.x, dst_coord.y);
-		if(cell.GetId()==CellId.City) {
-			ctrl.GiveBuildingChoice();
-		} else {
-			ctrl.GetGameModel().BuildOnResourceCell(cell);
-		}
+		ctrl.GetGameModel().BuildOnResourceCell(cell);
 		int new_len = ctrl.GetGameModel().GetBuildingList().size();
 		if(old_len < new_len) {
 			try {

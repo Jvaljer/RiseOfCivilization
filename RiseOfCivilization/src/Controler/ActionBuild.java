@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import Model.MapModel;
 import Types.BuildingId;
 import Model.*;
+import Types.CellId;
 
 public class ActionBuild implements ActionListener {
     private MapModel map;
@@ -22,7 +23,11 @@ public class ActionBuild implements ActionListener {
             //WorkerModel nearest = map.GetNearestWorker(cell.GetCoord());
             WorkerModel nearest = map.GetNearestWorker(cell, Actions.Build);
             if(nearest!=null) {
-            	(new WorkerBuild(g_ctrl,nearest,cell.GetCoord())).start();
+            	if(cell.GetId()==CellId.City) {
+            		(new WorkerBuildTraining(g_ctrl,nearest,cell.GetCoord())).start();
+            	} else {
+            		(new WorkerBuildProduction(g_ctrl,nearest,cell.GetCoord())).start();
+            	}
             }
     }
 
