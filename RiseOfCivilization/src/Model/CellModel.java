@@ -89,11 +89,14 @@ public class CellModel {
 		return inventory.getAmmount(natural_resource);
 	}
 	
+	public boolean hasSameCoord(CellModel other) {
+		return (X == other.GetX() && Y == other.GetY());
+	}
+	
 	public void TurnToCity() {
-		if(id!=CellId.Plain) {
+		if(id != CellId.Plain) {
 			inventory.remove(natural_resource, MAX_RESOURCE);
 		}
-		id = null;
 		id = CellId.City;
 	}
 	

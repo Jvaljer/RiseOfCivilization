@@ -19,20 +19,20 @@ import java.awt.*;
 @SuppressWarnings("serial")
 public class DashboardView extends JPanel {
     private MapModel map_model;
-    private MinimapView minimap_view;
+    private CellInfoView cell_info_view;
     private CityInfoView city_info_view;
     private ActionView Action_view;
 
-    public DashboardView(MapModel mm, MinimapView mmv, CityInfoView civ, ActionView ibv) {
+    public DashboardView(MapModel mm, CellInfoView celliv, CityInfoView cityiv, ActionView ibv) {
         map_model = mm;
-        minimap_view = mmv;
-        city_info_view = civ;
+        cell_info_view = celliv;
+        city_info_view = cityiv;
         Action_view = ibv;
 
         setPreferredSize(new Dimension(map_model.GetWidth()/3, map_model.GetHeight()));
         setLayout(new BorderLayout());
 
-        add(minimap_view, BorderLayout.NORTH);
+        add(cell_info_view, BorderLayout.NORTH);
         add(city_info_view, BorderLayout.CENTER);
         add(Action_view, BorderLayout.SOUTH);
 

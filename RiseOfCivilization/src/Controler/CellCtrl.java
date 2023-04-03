@@ -31,6 +31,8 @@ public class CellCtrl extends Thread {
 	private CellId id;
 	/** refers to the actions buttons*/
 	private ArrayList<JButton> buttons;
+	/**represents the view of the cell's information**/
+	private CellInfoView ci_view;
 	
 	/**
 	 * Constructor, associating all the necessaries variables (Model, View, Id) 
@@ -45,6 +47,7 @@ public class CellCtrl extends Thread {
 		cell_model = cell_view.GetCellModel();
 		id = cell_model.GetId();
 		map = g_ctrl.GetGameModel().GetMapModel();
+		ci_view = g_view.getCellInfoView();
 	}
 	
 	/**
@@ -71,6 +74,7 @@ public class CellCtrl extends Thread {
 	 */
 	public void OnClick() {
 		cell_view.Click();
+		ci_view.update(cell_model);
 		//here we wanna give the possibility for the player to click certain buttons
 		if(map.CellIsOccupiedByBuilding(cell_model)) {
 			g_ctrl.GetButtonFromName("Move").setEnabled(false);
@@ -154,6 +158,11 @@ public class CellCtrl extends Thread {
 			default:
 				break;
 		}
+		
+		if(cell_model.hasSameCoord(map.GetCurrentCell())) {
+			ci_view.update(cell_model);
+		}
+		
 	}
 	
 	/**

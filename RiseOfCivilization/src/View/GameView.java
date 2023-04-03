@@ -14,7 +14,7 @@ public class GameView extends JFrame {
 	private ArrayList<WorkerView> workers_view;
 	private ArrayList<BuildingView> buildings_view;
 	private ActionView Action_view;
-	private MinimapView minimap_view;
+	private CellInfoView cell_info_view;
 	private CityInfoView city_info_view;
 	private DashboardView dashboard_view;
 
@@ -32,10 +32,10 @@ public class GameView extends JFrame {
 		for(int i=0; i<model.GetBuildingList().size(); i++) {
 			buildings_view.add(new BuildingView(this,model.GetBuildingList().get(i)));
 		}
-		minimap_view = new MinimapView(map_model);
+		cell_info_view = new CellInfoView(model, map_model);
 		city_info_view = new CityInfoView(map_model, model);
 		Action_view = new ActionView(map_model);
-		dashboard_view = new DashboardView(map_model, minimap_view, city_info_view, Action_view);
+		dashboard_view = new DashboardView(map_model, cell_info_view, city_info_view, Action_view);
 
 		setTitle("Rise Of Civilizations");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,6 +54,10 @@ public class GameView extends JFrame {
 
 	public MapView GetMapView() {
 		return map_view;
+	}
+	
+	public CellInfoView getCellInfoView() {
+		return cell_info_view;
 	}
 
 	public DashboardView GetDashboardView() {

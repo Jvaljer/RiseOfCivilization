@@ -59,6 +59,7 @@ public class MapModel {
 		city_origin = new Point(city_origin_x, city_origin_y);
 		CellModel city_origin = grid[city_origin_x][city_origin_y];
 		city_origin.TurnToCity();
+		current_cell = city_origin;
 		city_cells.add(city_origin);
 		
 		ArrayList<Point> city_neighbours = GetNeighbours(city_origin_x, city_origin_y);
