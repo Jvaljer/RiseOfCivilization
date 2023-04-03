@@ -1,5 +1,6 @@
 package View;
 import javax.swing.ButtonGroup;
+import Model.ShopModel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -7,21 +8,27 @@ import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.awt.GridLayout;
 import javax.swing.JButton;
-
+import java.awt.*;
 public class ShopView extends JFrame implements ChangeListener {
+	private GameView game;
+	private ShopModel model;
+	
     private final JSlider woodSlider;
     private final JSlider stoneSlider;
     private final JSlider ironSlider;
-    private final JLabel buyPriceLabel;
-    private final JLabel sellPriceLabel;
+    private final JLabel buy_label;
+    private final JLabel sell_label;
 
     private JButton buy_button;
     private JButton sell_button;
     
-    public ShopView() {
-        super("Material Trader");
+    public ShopView(GameView GV, ShopModel SM) {
+        super("Shop Interface");
+        game = GV;
+        model = SM;
+        
+        setPreferredSize(new Dimension(model.GetWidth(),model.GetHeight()));
 
         // Initialization of sliders
         woodSlider = new JSlider(0, 500, 0);
@@ -46,28 +53,60 @@ public class ShopView extends JFrame implements ChangeListener {
         ironSlider.addChangeListener(this);
 
         // Initialization of price labels
-        buyPriceLabel = new JLabel("Buy Price : 0");
-        sellPriceLabel = new JLabel("Sell Price : 0");
+        buy_label = new JLabel("Buy Price : 0 gold");
+        sell_label = new JLabel("Sell Price : 0 gold");
 
         // Initialization of radio button to buy or sell
         buy_button = new JButton("Buy");
         sell_button = new JButton("Sell");
 
         // Initialization of main panel
-        JPanel mainPanel = new JPanel(new GridLayout(4, 2));
-        mainPanel.add(new JLabel("Wood -"));
-        mainPanel.add(woodSlider);
-        mainPanel.add(new JLabel("Stone -"));
-        mainPanel.add(stoneSlider);
-        mainPanel.add(new JLabel("Iron -"));
-        mainPanel.add(ironSlider);
-        mainPanel.add(buyPriceLabel);
-        mainPanel.add(sellPriceLabel);
+        JPanel mainPanel = new JPanel(new GridBagLayout());
 
-        // Adding button to main panel
-        mainPanel.add(buy_button);
-        mainPanel.add(sell_button);
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 0;
+        c.anchor = GridBagConstraints.WEST;
+        mainPanel.add(new JLabel("Wood -"), c);
+
+        c.gridx = 1;
+        mainPanel.add(woodSlider, c);
+
+        c.gridx = 0;
+        c.gridy = 1;
+        mainPanel.add(new JLabel("Stone -"), c);
+
+        c.gridx = 1;
+        mainPanel.add(stoneSlider, c);
+
+        c.gridx = 0;
+        c.gridy = 2;
+        mainPanel.add(new JLabel("Iron -"), c);
+
+        c.gridx = 1;
+        mainPanel.add(ironSlider, c);
+
+        c.insets = new Insets(5,10,5,10);
+        c.gridx = 0;
+        c.gridy = 3;
+        c.gridwidth = 2;
+        mainPanel.add(buy_label, c);
+
+        c.insets = new Insets(5,10,5,10);
+        c.gridx = 0;
+        c.gridy = 4;
+        mainPanel.add(sell_label, c);
         
+        c.insets = new Insets(5,10,5,10);
+        c.gridx = 0;
+        c.gridy = 5;
+        c.gridwidth = 1;
+        mainPanel.add(buy_button, c);
+        
+        c.insets = new Insets(5,10,5,10);
+        c.gridx = 1;
+        mainPanel.add(sell_button, c);
+
         // Configuration of the window
         setContentPane(mainPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -94,10 +133,10 @@ public class ShopView extends JFrame implements ChangeListener {
 
         // Display buy/sell prices depending on user selection
         int buy_price = wood_buy_price + stone_buy_price + iron_buy_price;
-        buyPriceLabel.setText("Buying Price : " + buy_price);
+        buy_label.setText("Buying Price : " + buy_price + " gold");
         
         int sell_price = wood_sell_price + stone_sell_price + iron_sell_price;
-        sellPriceLabel.setText("Selling Price : " + sell_price);
+        sell_label.setText("Selling Price : " + sell_price + " gold");
         
     }
 

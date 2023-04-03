@@ -13,6 +13,7 @@ public class ActionSell implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		System.out.println("clicked Sell Button");
 		//must implement
 		return;
 	}
