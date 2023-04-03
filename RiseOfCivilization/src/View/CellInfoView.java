@@ -47,7 +47,8 @@ public class CellInfoView extends JPanel {
 	
 	public void update(CellModel cell_model) {
 		cell_type.setText("Cell type : " + cell_model.GetId());
-		if(cell_model.GetId() != CellId.Plain) {
+		CellId cell_id = cell_model.GetId();
+		if(cell_id != CellId.Plain && cell_id != CellId.City) {
 			cell_inventory.setText("Cell Resources : " + cell_model.getResourceAmount());
 		} else {
 			cell_inventory.setText("Cell Resources : None");
