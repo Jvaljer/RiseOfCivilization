@@ -99,7 +99,7 @@ public class ActionView extends JPanel {
 		button.setName("Shop");
 		button.setToolTipText("Shop");
 		button.setBackground(Color.BLACK);
-		button.setIcon(new ImageIcon("./icons/Expand.png"));
+		button.setIcon(new ImageIcon("./icons/Shop.png"));
 		c.gridx = 0;
 		c.gridy = 3;
 		Button_list.add(button);
@@ -109,7 +109,7 @@ public class ActionView extends JPanel {
 		button.setName("Drop");
 		button.setToolTipText("Drop");
 		button.setBackground(Color.BLACK);
-		button.setIcon(new ImageIcon("./icons/Train.png"));
+		button.setIcon(new ImageIcon("./icons/Drop.png"));
 		c.gridx = 1;
 		c.gridy = 3;
 		Button_list.add(button);

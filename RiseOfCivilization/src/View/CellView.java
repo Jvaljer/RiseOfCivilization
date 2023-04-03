@@ -2,7 +2,12 @@ package View;
 
 import Model.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+
 import Types.*;
+
+import javax.imageio.ImageIO;
 
 /**
  * View class of a Cell, containing and defining all the needed informations to 
@@ -17,6 +22,7 @@ public class CellView {
 	private CellId id;
 	private boolean clicked;
 	private Point[] border_pts;
+	private CellIcon Icons;
 	
 	public CellView(CellModel M) {
 		model = M;
@@ -24,6 +30,9 @@ public class CellView {
 		ord = model.GetY();
 		id = model.GetId();
 		clicked = false;
+		Icons=new CellIcon();
+
+
 	}
 	
 	public int GetAbs() {
@@ -54,6 +63,26 @@ public class CellView {
 				return (new Color(0,0,0));
 		}
 	}
+	public void GetImageFromId(CellId m_id, Graphics G,int x,int y){
+		switch (m_id) {
+			case Plain :
+				G.drawImage(Icons.Plain,x+3,y-16,37,34,null);
+				break;
+			case Forest :
+				G.drawImage(Icons.Forest,x+3,y-16,37,34,null);
+				break;
+			case Mountain :
+				G.drawImage(Icons.Mountain,x+3,y-16,37,34,null);
+				break;
+			case Iron_Deposit :
+				G.drawImage(Icons.Iron_Deposit,x+3,y-16,37,34,null);
+				break;
+			case City :
+				break;
+			default :
+				break;
+		}
+	}
 	
 	public void Click() {
 		clicked = !clicked;
@@ -70,6 +99,7 @@ public class CellView {
 		}
 		G.setColor(GetColorFromId(model.GetId()));
 		G.fillPolygon(pts_x, pts_y, len);
+		GetImageFromId(model.GetId(),G,pts_x[0],pts_y[0]);
 	}
 	
 	public void DrawCell(Graphics G, int s, int x0, int y0) {
