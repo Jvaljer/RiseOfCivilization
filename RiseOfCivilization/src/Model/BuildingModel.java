@@ -16,6 +16,7 @@ public class BuildingModel {
 	private static final int rec_height = 15;
 	private static final int triangle_dist = 10;
 	private static final int poly_dist = 5;
+	private boolean occupied;
 	
 	public BuildingModel(GameModel G, Point C, BuildingId bid) {
 		game = G;
@@ -42,6 +43,7 @@ public class BuildingModel {
 		inventory = new InventoryModel(200);
 		level = 1;
 		
+		occupied = false;
 	}
 	
 	public BuildingId GetId() {
@@ -109,5 +111,17 @@ public class BuildingModel {
 			default:
 				break;
 		}
+	}
+	
+	public void Occupy() {
+		occupied = true;
+	}
+	
+	public void Free() {
+		occupied = false;
+	}
+	
+	public boolean GetOccupied() {
+		return occupied;
 	}
 }

@@ -65,7 +65,11 @@ public class BuildingView {
 				}
 				
 				G.drawPolygon(pts_x, pts_y, pts.length);
-				G.setColor(color);
+				if(model.GetOccupied()) {
+					G.setColor(new Color(200,0,0));
+				} else {
+					G.setColor(color);
+				}
 				G.fillPolygon(pts_x, pts_y, pts.length);
 				break;
 				
@@ -75,11 +79,17 @@ public class BuildingView {
 				int w_div = w / 2;
 				int h_div = h / 2;
 				G.drawRoundRect(pos.x - w_div, pos.y - h_div, w, h, 2, 2);
-				G.setColor(color);
+				if(model.GetOccupied()) {
+					G.setColor(new Color(200,0,0));
+				} else {
+					G.setColor(color);
+				}
 				G.fillRoundRect(pos.x - w_div, pos.y - h_div, w, h, 2, 2);
 				break;
 			case 3 :
+				//must implement
 				break;
+				
 			default :
 				break;	
 		}

@@ -359,13 +359,49 @@ public class GameModel {
 				current++;
 			}
 		}
-		System.out.println("can create new worker : "+(current<limit));
-		System.out.println("current : "+current);
-		System.out.println("limit : "+limit);
 		return (current<limit);
 	}
 	
 	public void AddWorker(WorkerRole wr, Point pos) {
 		workers.add(new WorkerModel(this,wr,pos));
+	}
+	
+	public boolean PlayerCanTrain(BuildingModel building) {
+		int gold = inventory.getAmmount(Resource.Gold);
+		switch (building.GetId()) {
+			case LumberCamp:
+				return gold>=75;
+				
+			case MinerCamp:
+				return gold>=75;
+				
+			case QuarrymanCamp:
+				return gold>=100;
+				
+			case Barrack:
+				return gold>=150;
+			
+			default:
+				return false;
+		}
+	}
+	
+	public boolean PlayerHasEnoughToExpand(CellModel cell) {
+		int wood = inventory.getAmmount(Resource.Wood);
+		int stone = inventory.getAmmount(Resource.Stone);
+		
+		switch (cell.GetId()) {
+			case Forest:
+				return (wood>=100) && (stone>=100);
+				
+			case Mountain:
+				return (wood>=150) && (stone>=150);
+				
+			case Iron_Deposit:
+				return (wood>=200) && (stone>=200);
+				
+			default:
+				return false;
+		}
 	}
 }

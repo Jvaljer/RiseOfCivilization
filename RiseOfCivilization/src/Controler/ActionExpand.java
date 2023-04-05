@@ -21,7 +21,7 @@ public class ActionExpand implements ActionListener {
 			CellModel cell = g_ctrl.GetMapCtrl().GetClickedCell();
 			//WorkerModel nearest = map.GetNearestWorker(cell.GetCoord());
 			WorkerModel nearest = map.GetNearestWorker(cell, Actions.Expand);
-			if(nearest!=null) {
+			if(nearest!=null && g_ctrl.GetGameModel().PlayerHasEnoughToExpand(cell)) {
 				(new WorkerExpand(g_ctrl,nearest,cell.GetCoord())).start();
 			}
 	}

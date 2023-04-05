@@ -48,12 +48,12 @@ public class BuildingUpgrade extends Thread{
 		}
 		
 		worker.occupied();
-		try {
-			sleep(2500);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		if(ctrl.GetGameModel().PlayerCanUpgradeBuilding(building)) {
+			try {
+				sleep(2500);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			building.LevelUp();
 		}
 		worker.Free();
