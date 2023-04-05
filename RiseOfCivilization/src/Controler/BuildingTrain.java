@@ -3,6 +3,7 @@ package Controler;
 import Model.BuildingModel;
 import Model.MapModel;
 import Model.WorkerModel;
+import View.WorkerView;
 
 public class BuildingTrain extends Thread {
 	private static GameCtrl ctrl;
@@ -22,6 +23,12 @@ public class BuildingTrain extends Thread {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		int old_len = ctrl.GetGameModel().GetWorkerModel().size();
 		building.Train();
+		int new_len = ctrl.GetGameModel().GetWorkerModel().size();
+		
+		if(old_len < new_len) {
+			ctrl.GetGameView().getWorkerView().add(new WorkerView(ctrl.GetGameView(),ctrl.GetGameModel().GetWorkerModel().get(old_len)));
+		}
 	}
 }

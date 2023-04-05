@@ -338,11 +338,14 @@ public class GameModel {
 		for(BuildingModel b : buildings) {
 			if(b.GetId()==building.GetId()) {
 				switch (building.GetLevel()) {
+					case 1:
+						limit+=2;
+						break;
 					case 2:
-						limit+=3;
+						limit+=4;
 						break;
 					case 3:
-						limit+=5;
+						limit+=6;
 						break;
 						
 					default:
@@ -356,7 +359,9 @@ public class GameModel {
 				current++;
 			}
 		}
-		
+		System.out.println("can create new worker : "+(current<limit));
+		System.out.println("current : "+current);
+		System.out.println("limit : "+limit);
 		return (current<limit);
 	}
 	
