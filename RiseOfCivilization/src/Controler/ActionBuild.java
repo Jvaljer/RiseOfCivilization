@@ -21,14 +21,14 @@ public class ActionBuild implements ActionListener {
             System.out.println("clicked Build button");
             CellModel cell = g_ctrl.GetMapCtrl().GetClickedCell();
             //WorkerModel nearest = map.GetNearestWorker(cell.GetCoord());
-            WorkerModel nearest = map.GetNearestWorker(cell, Actions.Build);
-            if(nearest!=null) {
-            	if(cell.GetId()==CellId.City) {
-            		(new WorkerBuildTraining(g_ctrl,nearest,cell.GetCoord())).start();
-            	} else {
-            		(new WorkerBuildProduction(g_ctrl,nearest,cell.GetCoord())).start();
-            	}
-            }
+            WorkerModel nearest;
+            if(cell.GetId()==CellId.City) {
+            	nearest = map.GetNearestWorker(cell, Actions.Build_Training);
+           		(new WorkerBuildTraining(g_ctrl,nearest,cell.GetCoord())).start();
+           	} else {
+           		nearest = map.GetNearestWorker(cell, Actions.Build_Production);
+           		(new WorkerBuildProduction(g_ctrl,nearest,cell.GetCoord())).start();
+           	}
     }
 
 }

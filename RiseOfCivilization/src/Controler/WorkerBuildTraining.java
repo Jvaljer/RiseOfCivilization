@@ -23,6 +23,6 @@ public class WorkerBuildTraining extends Thread {
 	public void run() {
 		BuildingChoiceModel model = new BuildingChoiceModel(game.GetGameModel());
 		BuildingChoiceView view = new BuildingChoiceView(game.GetGameView(),model);
-		new BuildingChoiceCtrl(game,view);
+		new BuildingChoiceCtrl(game,view, dst_coord);
 	}
 }

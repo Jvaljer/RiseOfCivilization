@@ -182,6 +182,10 @@ public class GameModel {
     	}
 	}
 	
+	public void BuildOnCityCell(BuildingId bid, CellModel cell) {
+		AddBuilding(bid,cell.GetCoord());
+	}
+	
 	public boolean PlayerCanUpgradeWorker(WorkerModel worker) {
 		int gold = inventory.getAmmount(Resource.Gold);
 		

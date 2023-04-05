@@ -2,7 +2,8 @@ package Types;
 
 public enum Actions {
 	Collect,
-	Build,
+	Build_Production,
+	Build_Training,
 	Move,
 	Shop,
 	Train,

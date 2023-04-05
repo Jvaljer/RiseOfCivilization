@@ -351,7 +351,7 @@ public class MapModel {
 		WorkerModel nearest = null;
 		WorkerRole needed_worker = WorkerRole.Worker;
 		
-		if(task==Actions.Build || task==Actions.Collect || task==Actions.LevelUp) {
+		if(task==Actions.Build_Production || task==Actions.Collect || task==Actions.LevelUp) {
 			if(CellIsOccupiedByBuilding(cell)) {
 				BuildingModel building = GetBuildingFromCoord(cell.GetCoord());
 				switch (building.GetId()) {
@@ -509,5 +509,29 @@ public class MapModel {
 	public boolean CanTrain(CellModel cell) {
 		BuildingId bid = GetBuildingFromCoord(cell.GetCoord()).GetId();
 		return ((bid==BuildingId.Barrack) || (bid==BuildingId.LumberCamp) || (bid==BuildingId.MinerCamp) || (bid==BuildingId.QuarrymanCamp)) && game.CanCreateNewWorker(GetBuildingFromCoord(cell.GetCoord()));
+	}
+	
+	public WorkerModel GetNearestWorkerFromRole(CellModel cell, WorkerRole role) {
+		int dist;
+		int shortest = Integer.MAX_VALUE;
+		WorkerModel nearest = null;
+		
+		for(WorkerModel worker : game.GetWorkerModel()) {
+			if(role==WorkerRole.Worker && !worker.GetOccupied()) {
+				dist = GetShortestPath(worker.getPos(),cell.GetCoord()).size();
+				if(dist <= shortest) {
+					shortest = dist;
+					nearest = worker;
+				}
+			} else if(worker.GetRole()==role && !worker.GetOccupied()) {
+				dist = GetShortestPath(worker.getPos(),cell.GetCoord()).size();
+				if(dist <= shortest) {
+					shortest = dist;
+					nearest = worker;
+				}
+			}
+		}
+		
+		return nearest;
 	}
 }
