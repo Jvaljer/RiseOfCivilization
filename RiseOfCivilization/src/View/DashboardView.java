@@ -18,18 +18,18 @@ import java.awt.*;
  */
 @SuppressWarnings("serial")
 public class DashboardView extends JPanel {
-    private MapModel map_model;
+	private GameView game;
     private CellInfoView cell_info_view;
     private CityInfoView city_info_view;
     private ActionView Action_view;
 
-    public DashboardView(MapModel mm, CellInfoView celliv, CityInfoView cityiv, ActionView ibv) {
-        map_model = mm;
+    public DashboardView(GameView GV, CellInfoView celliv, CityInfoView cityiv, ActionView ibv) {
+    	game = GV;
         cell_info_view = celliv;
         city_info_view = cityiv;
         Action_view = ibv;
 
-        setPreferredSize(new Dimension(map_model.GetWidth()/3, map_model.GetHeight()));
+        setPreferredSize(new Dimension(game.GetGameModel().GetPanelWidth(),game.GetGameModel().GetPanelheight()));
         setLayout(new BorderLayout());
 
         add(cell_info_view, BorderLayout.NORTH);

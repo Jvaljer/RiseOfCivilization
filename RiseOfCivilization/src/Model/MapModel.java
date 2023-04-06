@@ -17,10 +17,10 @@ public class MapModel {
 	private GameModel game;
 	private static int width;
 	private static int height;
-	private static final int lines = 21;
-	private static final int columns = 18;
+	private static int lines;
+	private static int columns;
 	private static final int Cell_size = 20;
-	private static final Point OriginPoint = new Point(2*Cell_size,2*Cell_size);
+	private static final Point OriginPoint = new Point(2*Cell_size-10,2*Cell_size-5);
 	private CellModel[][] grid;
 	private Point city_origin;
 	private ArrayList<CellModel> city_cells;
@@ -30,7 +30,8 @@ public class MapModel {
 		game = M;
 		width = game.GetMapWidth();
 		height = game.GetMapHeight();
-		
+		lines = (width) / (Cell_size + Cell_size/2) - 3;
+		columns = (height - 10) / ((int) (Math.sqrt(3.) * Cell_size)) - 2;
 		//must add calcul of starting point, and all percentages for Cell types
 		grid = new CellModel[lines][columns];
 		for(int j=0; j<columns; j++) {
@@ -272,12 +273,12 @@ public class MapModel {
 	public boolean CellIsValid(Point cell) {
 		int i = cell.x;
 		int j = cell.y;
-		return (i<21 && i>=0 && j<18 && j>=0);
+		return (i<lines && i>=0 && j<columns && j>=0);
 	}
 	
 	public ArrayList<Point> GetShortestPath(Point start, Point end){
 		Point[][] graph;
-		graph = new Point[21][18];
+		graph = new Point[lines][columns];
 		HashMap<Point, Integer> distances= new HashMap<Point,Integer>();
 		HashMap<Point, Point> prev_nodes = new HashMap<Point,Point>();
 		for(CellModel[] line : grid){

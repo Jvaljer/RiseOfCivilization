@@ -9,9 +9,9 @@ import java.awt.*;
 
 public class GameModel {
 	private static final int time_unit = 60;
-	private static final int map_width = 675;
-	private static final int map_height = 650;
-	private static final int panel_width = 300;
+	private static int map_width;
+	private static int map_height;
+	private static final int panel_width = 250;
 	private static final int panel_height = 650;
 	
 	private MapModel map;
@@ -22,6 +22,12 @@ public class GameModel {
 	public int worker_amount;
 
 	public GameModel() {
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		map_width = (int) screenSize.getWidth() - panel_width;
+		System.out.println(map_width);
+		map_height = (int) screenSize.getHeight();
+		System.out.println(map_height);
+		
 		map = new MapModel(this);
 		inventory = new InventoryModel();
 		
@@ -30,6 +36,7 @@ public class GameModel {
 		Point start_coord = map.GetCityOriginCoord();
 		
 		inventory.add(Resource.Gold, 150);
+		
 		workers = new ArrayList<WorkerModel>(10);
 		workers.add(new WorkerModel(this, WorkerRole.Miner, start_coord));
 		workers.add(new WorkerModel(this, WorkerRole.LumberJack, start_coord));
