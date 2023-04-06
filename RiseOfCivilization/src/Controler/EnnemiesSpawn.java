@@ -22,9 +22,9 @@ public class EnnemiesSpawn extends Thread {
 	@Override
 	public void run() {
 		while(true) {
-			int wait = ThreadLocalRandom.current().nextInt(20,45);
+			int wait = ThreadLocalRandom.current().nextInt(30,60);
 			try {
-				sleep(wait*100);
+				sleep(wait*1000);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -35,7 +35,7 @@ public class EnnemiesSpawn extends Thread {
 			int new_len = game.GetGameModel().GetEnnemiesList().size();
 			if(old_len < new_len) {
 				game.GetGameView().AddEnnemyView(game.GetGameModel().GetEnnemiesList().get(old_len));
-				(new EnnemyCtrl()).start();
+				(new EnnemyCtrl(game,game.GetGameModel().GetEnnemiesList().get(old_len))).start();
 			}
 		}
 	}

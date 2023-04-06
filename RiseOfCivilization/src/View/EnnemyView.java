@@ -14,7 +14,7 @@ public class EnnemyView {
 	
 	public void DrawEnnemy(Graphics G) {
 		int l = model.GetWidth();
-		Point pos = model.GetCell().GetCoord();
+		Point pos = model.GetPos();
 		Point px_pos = game.GetGameModel().GetMapModel().GetPosFromCoord(pos.x, pos.y);
 		G.setColor(new Color(25,0,0));
 		G.fillRect(px_pos.x-l/2, px_pos.y-l/2, l, l);

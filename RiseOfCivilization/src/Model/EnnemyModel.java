@@ -41,7 +41,7 @@ public class EnnemyModel {
 	}
 	
 	public boolean IsDead() {
-		return current_health_bar>0;
+		return current_health_bar==0;
 	}
 	
 	public int GetWidth() {
