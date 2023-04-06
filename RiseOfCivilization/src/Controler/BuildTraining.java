@@ -58,13 +58,17 @@ public class BuildTraining implements ActionListener {
 				break;
 		}
 		
-		System.out.println("disposing the frame");
 		choice_window.dispose();
+		System.out.println("disposed the frame");
 		
 		nearest.occupied();
 		nearest.moving();
+		System.out.println("starting the worker's move along the path");
 		while (nearest.getcoordX() != pos.x || nearest.getcoordY() != pos.y){
+			System.out.print("tryna ");
 			try {
+				System.out.print("move");
+				System.out.println("");
 				ArrayList<Point> path = map.GetShortestPath(nearest.getPos(),pos);
  				Point nxt_coord = path.get(1);
  				nearest.setNextcoord(nxt_coord);

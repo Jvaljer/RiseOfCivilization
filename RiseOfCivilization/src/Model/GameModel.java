@@ -205,7 +205,8 @@ public class GameModel {
 	
 	public void WorkerDropsInventory(WorkerModel worker) {
 		Resource res_type;
-		int amount = worker.getInventory().GetMaxAmount();
+		int max_amount = worker.getInventory().GetMaxAmount();
+		int amount;
 		
 		switch (worker.GetRole()) {
 			case Worker:
@@ -237,19 +238,22 @@ public class GameModel {
 				
 			case LumberJack:
 				res_type = Resource.Wood;
+				amount = worker.getInventory().getAmmount(res_type);
 				worker.dropOff(res_type, amount);
 				inventory.add(res_type, amount);
 				break;
 				
 			case Miner:
 				res_type = Resource.Stone;
-				worker.dropOff(res_type, worker.getInventory().GetMaxAmount());
+				amount = worker.getInventory().getAmmount(res_type);
+				worker.dropOff(res_type, amount);
 				inventory.add(res_type, amount);
 				break;
 				
 			case QuarryMan:
 				res_type = Resource.Iron;
-				worker.dropOff(res_type, worker.getInventory().GetMaxAmount());
+				amount = worker.getInventory().getAmmount(res_type);
+				worker.dropOff(res_type, amount);
 				inventory.add(res_type, amount);
 				break;
 				
@@ -389,8 +393,10 @@ public class GameModel {
 	public boolean PlayerHasEnoughToExpand(CellModel cell) {
 		int wood = inventory.getAmmount(Resource.Wood);
 		int stone = inventory.getAmmount(Resource.Stone);
-		
+		System.out.println("player has "+wood+" woods & "+stone+" stones");
 		switch (cell.GetId()) {
+			case Plain:
+				return (wood>=50) && (stone>=50);
 			case Forest:
 				return (wood>=100) && (stone>=100);
 				
@@ -398,10 +404,39 @@ public class GameModel {
 				return (wood>=150) && (stone>=150);
 				
 			case Iron_Deposit:
-				return (wood>=200) && (stone>=200);
+				return (wood>=175) && (stone>=175);
 				
 			default:
 				return false;
+		}
+	}
+	
+	public void Expand(Point coord) {
+		CellModel cell = map.GetCellFromCoord(coord.x, coord.y);
+		cell.TurnToCity();
+		switch (cell.GetId()) {
+			case Plain:
+				inventory.remove(Resource.Wood, 50);
+				inventory.remove(Resource.Stone, 50);
+				break;
+				
+			case Forest:
+				inventory.remove(Resource.Wood, 100);
+				inventory.remove(Resource.Stone, 100);
+				break;
+			
+			case Mountain:
+				inventory.remove(Resource.Wood, 150);
+				inventory.remove(Resource.Stone, 150);
+				break;
+			
+			case Iron_Deposit:
+				inventory.remove(Resource.Wood, 175);
+				inventory.remove(Resource.Stone, 175);
+				break;
+			
+			default:
+				break;
 		}
 	}
 }
