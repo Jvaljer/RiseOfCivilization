@@ -174,7 +174,8 @@ public class MapModel {
 			i = i - 1;
 			j = j - 1;
 		}
-		return (new Point((int) i-1,(int) j-1));
+		System.out.println("for the click on ("+x_+","+y_+"), we got the coordinates ("+(i-1)+","+(j-1)+")");
+		return (new Point((int) i-1,(int) j-1)); 
 	}
 	
 	public ArrayList<Point> GetNeighbours(int i, int j) {

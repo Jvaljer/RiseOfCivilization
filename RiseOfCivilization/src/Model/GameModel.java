@@ -24,9 +24,7 @@ public class GameModel {
 	public GameModel() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		map_width = (int) screenSize.getWidth() - panel_width;
-		System.out.println(map_width);
 		map_height = (int) screenSize.getHeight();
-		System.out.println(map_height);
 		
 		map = new MapModel(this);
 		inventory = new InventoryModel();
