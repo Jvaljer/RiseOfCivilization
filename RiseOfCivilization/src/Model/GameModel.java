@@ -18,6 +18,7 @@ public class GameModel {
 	private InventoryModel inventory;
 	private ArrayList<WorkerModel> workers;
 	private ArrayList<BuildingModel> buildings;
+	private ArrayList<EnnemyModel> ennemies;
 	
 	public int worker_amount;
 
@@ -45,6 +46,8 @@ public class GameModel {
 		
 		Point shop_coord = map.GetCityCells().get(1).GetCoord();
 		buildings.add(new BuildingModel(this, shop_coord, BuildingId.Shop));
+		
+		ennemies = new ArrayList<EnnemyModel>();
 	}
 	
 	public int GetMapWidth() {
@@ -445,5 +448,13 @@ public class GameModel {
 				break;
 		}
 		cell.TurnToCity();
+	}
+	
+	public void AddEnnemy(CellModel cell, EnnemyRole role) {
+		ennemies.add(new EnnemyModel(this, role, cell.GetCoord()));
+	}
+	
+	public ArrayList<EnnemyModel> GetEnnemiesList(){
+		return ennemies;
 	}
 }

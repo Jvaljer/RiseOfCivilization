@@ -17,6 +17,7 @@ public class GameView extends JFrame {
 	private CityInfoView city_info_view;
 	private ActionView action_view;
 	private DashboardView dashboard_view;
+	private ArrayList<EnnemyView> ennemies_view;
 
 	public int win_width;
 	public int win_height;
@@ -46,6 +47,8 @@ public class GameView extends JFrame {
 			buildings_view.add(new BuildingView(this,model.GetBuildingList().get(i)));
 		}
 
+		ennemies_view = new ArrayList<EnnemyView>();
+		
 		cell_info_view = new CellInfoView(model, map_model);
 		city_info_view = new CityInfoView(model, map_model);
 		action_view = new ActionView(map_model);
@@ -102,7 +105,15 @@ public class GameView extends JFrame {
 	public ArrayList<BuildingView> GetBuildingsView(){
 		return buildings_view;
 	}
-
+	
+	public ArrayList<EnnemyView> GetEnnemiesView(){
+		return ennemies_view;
+	}
+	
+	public void AddEnnemyView(EnnemyModel ennemy) {
+		ennemies_view.add(new EnnemyView(this,ennemy));
+	}
+	
 	@Override
 	public void paint(Graphics G) {
 		super.paint(G);

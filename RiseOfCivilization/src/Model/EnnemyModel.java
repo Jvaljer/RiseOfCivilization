@@ -1,0 +1,54 @@
+package Model;
+
+import java.awt.*;
+import Types.EnnemyRole;
+
+public class EnnemyModel {
+	private GameModel game;
+	private MapModel map;
+	private CellModel cell;
+	private EnnemyRole role;
+	private int init_health_bar;
+	private int current_health_bar;
+	private static final int width = 10;
+	
+	public EnnemyModel(GameModel GM, EnnemyRole ER, Point pts) {
+		game = GM;
+		map = game.GetMapModel();
+		role = ER;
+		cell = map.GetCellFromCoord(pts.x, pts.y);
+		
+		switch (role) {
+			case Wolf:
+				init_health_bar = 1;
+				break;
+			case Ork:
+				init_health_bar = 2;
+				break;
+			default:
+				init_health_bar = 0;
+				break;
+		}
+		current_health_bar = init_health_bar;
+	}
+	
+	public int GetCurrentHealth() {
+		return current_health_bar;
+	}
+	
+	public void TakeDamage() {
+		current_health_bar--;
+	}
+	
+	public boolean IsDead() {
+		return current_health_bar>0;
+	}
+	
+	public int GetWidth() {
+		return width;
+	}
+	
+	public CellModel GetCell() {
+		return cell;
+	}
+}

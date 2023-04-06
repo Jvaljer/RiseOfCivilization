@@ -21,6 +21,8 @@ public class WorkerModel {
 	private WorkerRole role;
 	private int harvest_capacity;
 	private int level;
+	private int init_health_bar;
+	private int current_health_bar;
 	
 	/**
 	 * Constructor for a worker taking a GameModel, a workerRole and a position
@@ -40,9 +42,38 @@ public class WorkerModel {
 		role = R;
 		level = 1;
 		
+		if(role==WorkerRole.Knight) {
+			init_health_bar = 2;
+		} else {
+			init_health_bar = 1;
+		}
+		current_health_bar = init_health_bar;
+		
 		model.worker_amount++;
 	}
-
+	
+	public int GetCurrentHealth() {
+		return current_health_bar;
+	}
+	
+	public int GetInitHealth() {
+		return init_health_bar;
+	}
+	
+	public void Recovery() {
+		if(current_health_bar < init_health_bar) {
+			current_health_bar++;
+		}
+	}
+	
+	public void TakeDamage() {
+		current_health_bar--;
+	}
+	
+	public boolean IsDead() {
+		return current_health_bar>0;
+	}
+	
 	/**
 	 * Getter for the position on the map of the worker
 	 * 

@@ -24,6 +24,7 @@ public class MapModel {
 	private CellModel[][] grid;
 	private Point city_origin;
 	private ArrayList<CellModel> city_cells;
+	private ArrayList<CellModel> spawner_cells;
 	private CellModel current_cell;
 	
 	public MapModel(GameModel M) {
@@ -53,7 +54,6 @@ public class MapModel {
 				grid[i][j] = new CellModel(i,j,id);
 			}
 		}
-		
 		city_cells = new ArrayList<CellModel>();
 		int city_origin_x = ThreadLocalRandom.current().nextInt(1, 20);
 		int city_origin_y = ThreadLocalRandom.current().nextInt(1, 17);
@@ -76,6 +76,17 @@ public class MapModel {
 		CellModel city_cell_2 = grid[p2.x][p2.y];
 		city_cell_2.TurnToCity();
 		city_cells.add(city_cell_2);
+		
+		spawner_cells = new ArrayList<CellModel>();
+		int rand_x;
+		int rand_y;
+		do {
+			rand_x = ThreadLocalRandom.current().nextInt(0, lines);
+			rand_y = ThreadLocalRandom.current().nextInt(0, columns);
+			if(grid[rand_x][rand_y].GetId()==CellId.Forest) {
+				spawner_cells.add(grid[rand_x][rand_y]);
+			}
+		} while (spawner_cells.size()<10);
 	}
 	
 	public GameModel GetGameModel() {
@@ -535,5 +546,9 @@ public class MapModel {
 		}
 		
 		return nearest;
+	}
+	
+	public ArrayList<CellModel> GetSpawnerCells(){
+		return spawner_cells;
 	}
 }

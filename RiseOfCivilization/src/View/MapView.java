@@ -96,6 +96,10 @@ public class MapView extends JPanel {
 			DrawCurrentCell(G);
 		}
 		
+		for(EnnemyView e_view : view.GetEnnemiesView()) {
+			e_view.DrawEnnemy(G);
+		}
+		
 		for(BuildingView b_view : view.GetBuildingsView()) {
 			b_view.DrawBuilding(G);
 		}
