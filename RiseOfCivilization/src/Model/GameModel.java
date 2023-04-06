@@ -422,7 +422,6 @@ public class GameModel {
 	
 	public void Expand(Point coord) {
 		CellModel cell = map.GetCellFromCoord(coord.x, coord.y);
-		cell.TurnToCity();
 		switch (cell.GetId()) {
 			case Plain:
 				inventory.remove(Resource.Wood, 50);
@@ -447,5 +446,6 @@ public class GameModel {
 			default:
 				break;
 		}
+		cell.TurnToCity();
 	}
 }
