@@ -6,7 +6,7 @@ import Types.EnnemyRole;
 public class EnnemyModel {
 	private GameModel game;
 	private MapModel map;
-	private CellModel cell;
+	private Point pos;
 	private EnnemyRole role;
 	private int init_health_bar;
 	private int current_health_bar;
@@ -16,7 +16,7 @@ public class EnnemyModel {
 		game = GM;
 		map = game.GetMapModel();
 		role = ER;
-		cell = map.GetCellFromCoord(pts.x, pts.y);
+		pos = pts;
 		
 		switch (role) {
 			case Wolf:
@@ -48,7 +48,11 @@ public class EnnemyModel {
 		return width;
 	}
 	
-	public CellModel GetCell() {
-		return cell;
+	public Point GetPos() {
+		return pos;
+	}
+	
+	public void MoveTo(Point coord) {
+		pos = coord;
 	}
 }

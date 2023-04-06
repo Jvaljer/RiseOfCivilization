@@ -5,6 +5,7 @@ import Model.CellModel;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import Types.EnnemyRole;
+import Model.EnnemyModel;
 
 public class EnnemiesSpawn extends Thread {
 	private GameCtrl game;
@@ -34,6 +35,7 @@ public class EnnemiesSpawn extends Thread {
 			int new_len = game.GetGameModel().GetEnnemiesList().size();
 			if(old_len < new_len) {
 				game.GetGameView().AddEnnemyView(game.GetGameModel().GetEnnemiesList().get(old_len));
+				(new EnnemyCtrl()).start();
 			}
 		}
 	}
