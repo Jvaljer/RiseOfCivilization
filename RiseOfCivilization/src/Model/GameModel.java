@@ -84,6 +84,7 @@ public class GameModel {
 	public int TimeUnit() {
 		return time_unit;
 	}
+	
 	public boolean PlayerHasEnoughToBuild(BuildingId bid) {
 		int wood = inventory.getAmmount(Resource.Wood);
 		int stone = inventory.getAmmount(Resource.Stone);
@@ -126,6 +127,7 @@ public class GameModel {
 		}
 		return cond;
 	}
+	
 	public void AddBuilding(BuildingId bid, Point pts) {
 		buildings.add(new BuildingModel(this,pts,bid));
 	}

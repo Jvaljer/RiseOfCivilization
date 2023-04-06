@@ -1,12 +1,11 @@
 package Controler;
 
-import Model.CellModel;
 import Model.MapModel;
 import Model.WorkerModel;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class WorkerDrop extends Thread{
+public class WorkerDrop extends Thread {
 	private GameCtrl ctrl;
 	private MapModel map;
 	private WorkerModel worker;
@@ -55,6 +54,7 @@ public class WorkerDrop extends Thread{
 		}
 		System.out.println("player drops inventory");
 		ctrl.GetGameModel().WorkerDropsInventory(worker);
+		ctrl.GetGameView().getCityInfoView().update();
 		worker.Free();
 	}
 }

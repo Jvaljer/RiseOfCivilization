@@ -4,13 +4,12 @@ import Model.CellModel;
 import Model.GameModel;
 import Model.MapModel;
 import Types.CellId;
-import Types.Resource;
 
 import java.awt.Color;
 import java.awt.Dimension;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 
 /**
  * This class is the view of the minimap. The minimap is represented in
@@ -32,26 +31,22 @@ public class CellInfoView extends JPanel {
 		game_model = gm;
 		map_model = mm;
 	
-		cell_type = new JLabel();
-		add(cell_type);
-		cell_inventory = new JLabel();
-		add(cell_inventory);
-		building_label = new JLabel();
-		add(building_label);
-		worker_label= new JLabel();
-		add(worker_label);
+		cell_type = new JLabel(); add(cell_type);
+		cell_inventory = new JLabel(); add(cell_inventory);
+		building_label = new JLabel(); add(building_label);
+		worker_label= new JLabel(); add(worker_label);
 		
 		setPreferredSize(new Dimension(map_model.GetWidth()/3, map_model.GetHeight()/3));
 		setBackground(Color.LIGHT_GRAY);
 	}
 	
 	public void update(CellModel cell_model) {
-		cell_type.setText("Cell type : " + cell_model.GetId());
+		cell_type.setText("Type : " + cell_model.GetId());
 		CellId cell_id = cell_model.GetId();
 		if(cell_id != CellId.Plain && cell_id != CellId.City) {
-			cell_inventory.setText("Cell Resources : " + cell_model.getResourceAmount());
+			cell_inventory.setText(cell_model.getResource() + " : " + cell_model.getResourceAmount());
 		} else {
-			cell_inventory.setText("Cell Resources : None");
+			cell_inventory.setText("Resources : None");
 		}
 		building_label.setText("Building : ");
 		worker_label.setText("Worker");
