@@ -551,4 +551,32 @@ public class MapModel {
 	public ArrayList<CellModel> GetSpawnerCells(){
 		return spawner_cells;
 	}
+	
+	public boolean WorkerOnCoord(Point coord) {
+		for(WorkerModel worker : game.GetWorkerModel()) {
+			if(worker.getcoordX()==coord.x && worker.getcoordY()==coord.y) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void EnnemySearchForCitizen(boolean sees_citizen, Point citizen_coord, ArrayList<Point> vision) {
+		int len = vision.size();
+		for(int i=0; i<len; i++) {
+			Point pts = vision.get(i);
+			if(WorkerOnCoord(pts)) {
+				sees_citizen = true;
+				citizen_coord = pts;
+				break;
+			}
+			for(Point neigh : GetValidNeighbors(pts.x, pts.y)) {
+				if(WorkerOnCoord(neigh)) {
+					sees_citizen = true;
+					citizen_coord = neigh;
+					break;
+				}
+			}
+		}
+	}
 }

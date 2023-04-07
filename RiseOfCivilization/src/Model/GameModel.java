@@ -457,4 +457,20 @@ public class GameModel {
 	public ArrayList<EnnemyModel> GetEnnemiesList(){
 		return ennemies;
 	}
+	
+	public void EnnemyAttacksWorker(EnnemyModel ennemy, WorkerModel worker) {
+		if(worker.GetRole()==WorkerRole.Knight) {
+			//if the worker is a knight then it will fight back
+			worker.TakeDamage();
+			ennemy.TakeDamage();
+			if(worker.IsDead()) {
+				
+			} 
+			if(ennemy.IsDead()) {
+				
+			}
+		} else {
+			//if not then it's simply gonna die
+		}
+	}
 }
