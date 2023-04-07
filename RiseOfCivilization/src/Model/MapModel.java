@@ -561,22 +561,22 @@ public class MapModel {
 		return false;
 	}
 	
-	public void EnnemySearchForCitizen(boolean sees_citizen, Point citizen_coord, ArrayList<Point> vision) {
+	public Pair<Boolean,Point> EnnemySearchForCitizen(ArrayList<Point> vision) {
 		int len = vision.size();
+		
 		for(int i=0; i<len; i++) {
+			System.out.println("SearchForCitizen -> cpt :"+i);
 			Point pts = vision.get(i);
 			if(WorkerOnCoord(pts)) {
-				sees_citizen = true;
-				citizen_coord = pts;
-				break;
+				return new Pair(true,pts);
 			}
-			for(Point neigh : GetValidNeighbors(pts.x, pts.y)) {
+			for(Point neigh : GetNeighbours(pts.x, pts.y)) {
 				if(WorkerOnCoord(neigh)) {
-					sees_citizen = true;
-					citizen_coord = neigh;
-					break;
+					return new Pair(true,neigh);
 				}
 			}
 		}
+		
+		return new Pair(false,null);
 	}
 }

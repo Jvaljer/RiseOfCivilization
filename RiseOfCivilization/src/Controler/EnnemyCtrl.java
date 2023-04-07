@@ -6,6 +6,7 @@ import java.awt.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.*;
 import Model.WorkerModel;
+import Types.Pair;
 
 public class EnnemyCtrl extends Thread {
 	private GameCtrl game;
@@ -24,29 +25,34 @@ public class EnnemyCtrl extends Thread {
 	@Override
 	public void run() {
 		while(!model.IsDead()) {
+			System.out.println("ennemy is alive");
 			//if the enney is alive, we want it to first check if there's any citizen close to it
-			ArrayList<Point> vision = map.GetValidNeighbors(cur_pos.x, cur_pos.y);
+			ArrayList<Point> vision = map.GetNeighbours(cur_pos.x, cur_pos.y);
 			int len = vision.size();
-			boolean sees_citizen = false;
-			Point citizen_coord = null;
+			Pair<Boolean,Point> pair = map.EnnemySearchForCitizen(vision);
 			
-			map.EnnemySearchForCitizen(sees_citizen,citizen_coord, vision);
-			
-			if(sees_citizen) {
+			if(pair.Fst()) {
+				System.out.println("ennemy sees a citizen");
 				//if so -> then hunt it for 5 to 10 cells
-				WorkerModel citizen = map.GetWorkerFromCoord(citizen_coord);
+				WorkerModel citizen = map.GetWorkerFromCoord(pair.Snd());
 				int pursue_time = ThreadLocalRandom.current().nextInt(5,11);
 				boolean citizen_caught = false;
 				int pursued_time = 0;
 				while(!citizen_caught || (pursued_time<pursue_time)) {
-					if(cur_pos.x==citizen_coord.x && cur_pos.y==citizen_coord.y) {
+					System.out.println("ennemy pursuing the citizen");
+					if(cur_pos.x==pair.Snd().x && cur_pos.y==pair.Snd().y) {
 						citizen_caught = true;
 					}
 					
-					ArrayList<Point> pursue_path = map.GetShortestPath(cur_pos, citizen_coord);
-					cur_pos = pursue_path.get(1);
+					ArrayList<Point> pursue_path = map.GetShortestPath(cur_pos, pair.Snd());
+					if(pursue_path.size()==1) {
+						cur_pos = pursue_path.get(0);
+					} else {
+						cur_pos = pursue_path.get(1);
+					}
+					model.MoveTo(cur_pos);
 					pursued_time++;
-					citizen_coord = citizen.getPos();
+					pair.SetSnd(citizen.getPos());
 					try {
 						sleep(1000);
 					} catch (Exception e) {
@@ -56,14 +62,20 @@ public class EnnemyCtrl extends Thread {
 
 				if(citizen_caught) {
 					//if catches it then kill 
-					game.EnnemyAttacksWorker(model,citizen);
+					game.GetGameModel().EnnemyAttacksWorker(model,citizen);
 				}
 				//if not then simply stops
 			} else {
+				System.out.println("ennemy simply moves");
 				//if not -> then may move of 1 cell
+				ArrayList<Point> neigh = map.GetNeighbours(cur_pos.x, cur_pos.y);
+				int rand_index = ThreadLocalRandom.current().nextInt(0,neigh.size());
+				
+				cur_pos = neigh.get(rand_index);
+				model.MoveTo(cur_pos);
 			}
 			
-			//then thread waits for 1s 
+			//then thread waits for 1.5s 
 			try {
 				sleep(1500);
 			} catch (Exception e) {

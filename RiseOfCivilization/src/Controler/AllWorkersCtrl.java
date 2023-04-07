@@ -4,13 +4,13 @@ import Model.MapModel;
 import java.util.*;
 import Model.WorkerModel;
 
-public class WorkersCtrl extends Thread{
+public class AllWorkersCtrl extends Thread{
 	private GameCtrl ctrl;
 	private MapModel map;
 	private ArrayList<WorkerModel> workers;
 	private int old_len;
 	
-	public WorkersCtrl(GameCtrl GC) {
+	public AllWorkersCtrl(GameCtrl GC) {
 		ctrl = GC;
 		map = ctrl.GetGameModel().GetMapModel();
 		workers = ctrl.GetGameModel().GetWorkerModel();
