@@ -2,10 +2,11 @@ package Controler;
 
 import View.*;
 import Model.*;
+import java.awt.*;
 import java.util.*;
 import javax.swing.JButton;
 
-public class GameCtrl extends Thread{
+public class GameCtrl{
 	private GameView view;
 	private GameModel model;
 	private ArrayList<JButton> buttons;
@@ -50,7 +51,9 @@ public class GameCtrl extends Thread{
 					break;
 			}
 		}
-		new RefreshCtrl(view).start();
+		
+		(new RefreshCtrl(view)).start();
+		(new EnnemiesSpawn(this)).start();
 	}
 	
 	public GameModel GetGameModel() {
@@ -72,14 +75,5 @@ public class GameCtrl extends Thread{
 			}
 		}
 		return null;
-	}
-	public void GiveBuildingChoice() {
-		//here we wanna create a new JFrame in which the player will be able to choose the building he wanna create
-		return;
-	}
-	
-	public void run()
-	{
-		new EnnemyCtrl(this).start();
 	}
 }

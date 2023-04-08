@@ -51,7 +51,7 @@ public class MapModel {
 				} else {
 					id = null;
 				}
-				grid[i][j] = new CellModel(this.game,i,j,id);
+				grid[i][j] = new CellModel(i,j,id);
 			}
 		}
 		city_cells = new ArrayList<CellModel>();

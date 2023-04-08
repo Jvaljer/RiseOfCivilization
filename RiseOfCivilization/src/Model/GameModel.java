@@ -1,8 +1,6 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.Random;
-
 import Types.*;
 import Types.BuildingId;
 import Types.Resource;
@@ -19,8 +17,8 @@ public class GameModel {
 	private MapModel map;
 	private InventoryModel inventory;
 	private ArrayList<WorkerModel> workers;
-	private ArrayList<EnnemyModel> ennemies;
 	private ArrayList<BuildingModel> buildings;
+	private ArrayList<EnnemyModel> ennemies;
 	
 	public int worker_amount;
 
@@ -33,17 +31,10 @@ public class GameModel {
 		inventory = new InventoryModel();
 		
 		worker_amount = 0;
-		Random random = new Random();
+		
 		Point start_coord = map.GetCityOriginCoord();
 		
 		inventory.add(Resource.Gold, 150);
-		ennemies = new ArrayList<EnnemyModel>(10);
-		for(int i = 0; i < 10; i++)
-		{
-			int x = random.nextInt(map.GetLinesAmount());
-			int y = random.nextInt(map.GetColumnsAmount());
-			ennemies.add(new EnnemyModel(this, map.GetCellFromCoord(x, y)));
-		}
 		
 		workers = new ArrayList<WorkerModel>(10);
 		workers.add(new WorkerModel(this, WorkerRole.Miner, start_coord));
@@ -81,10 +72,6 @@ public class GameModel {
 	
 	public InventoryModel getInventoryModel() {
 		return inventory;
-	}
-	
-	public ArrayList<EnnemyModel> getEnnemyModel() {
-		return this.ennemies;
 	}
 	
 	public ArrayList<WorkerModel> GetWorkerModel() {
@@ -463,27 +450,27 @@ public class GameModel {
 		cell.TurnToCity();
 	}
 	
-	//public void AddEnnemy(CellModel cell, EnnemyRole role) {
-	//	ennemies.add(new EnnemyModel(this, role, cell.GetCoord()));
-	//}
+	public void AddEnnemy(CellModel cell, EnnemyRole role) {
+		ennemies.add(new EnnemyModel(this, role, cell.GetCoord()));
+	}
 	
 	public ArrayList<EnnemyModel> GetEnnemiesList(){
 		return ennemies;
 	}
 	
-	//public void EnnemyAttacksWorker(EnnemyModel ennemy, WorkerModel worker) {
-	//	if(worker.GetRole()==WorkerRole.Knight) {
-	//		//if the worker is a knight then it will fight back
-	//		worker.TakeDamage();
-	//		ennemy.TakeDamage();
-	//		if(worker.IsDead()) {
-	//			
-	//		} 
-	//		if(ennemy.IsDead()) {
-	//			
-	//		}
-	//	} else {
-	//		//if not then it's simply gonna die
-	//	}
-	//}
+	public void EnnemyAttacksWorker(EnnemyModel ennemy, WorkerModel worker) {
+		if(worker.GetRole()==WorkerRole.Knight) {
+			//if the worker is a knight then it will fight back
+			worker.TakeDamage();
+			ennemy.TakeDamage();
+			if(worker.IsDead()) {
+				
+			} 
+			if(ennemy.IsDead()) {
+				
+			}
+		} else {
+			//if not then it's simply gonna die
+		}
+	}
 }

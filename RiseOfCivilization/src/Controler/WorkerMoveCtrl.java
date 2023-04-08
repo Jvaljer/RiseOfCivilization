@@ -54,7 +54,7 @@ public class WorkerMoveCtrl extends Thread {
 			        int x = (int) ((x_dst - x_src) * i/ 24) + x_src;
 			        int y = (int) ((y_dst - y_src) * i/ 24) + y_src;
 			        this.worker.setPosWhileMoving(x, y);
-					Thread.sleep(1000/36);
+					Thread.sleep(1000/48);
 			    }
 				this.worker.MoveTo(nextCord.x, nextCord.y);
 			} catch (Exception e) {

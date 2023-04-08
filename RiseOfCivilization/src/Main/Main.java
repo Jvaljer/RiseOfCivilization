@@ -14,7 +14,6 @@ public class Main {
 		GameModel model = new GameModel();
 		GameView view = new GameView(model);
 		GameCtrl ctrl = new GameCtrl(view);
-		ctrl.start();
 	}
 
 }
