@@ -68,7 +68,7 @@ public class CellView {
 				return (new Color(0,0,0));
 		}
 	}
-	public void GetImageFromId(CellId m_id, Graphics G,int x,int y){
+	public void DrawImageFromId(CellId m_id, Graphics G,int x,int y){
 		switch (m_id) {
 			case Plain :
 				G.drawImage(Icons.Plain,x+3,y-16,37,34,null);
@@ -104,7 +104,7 @@ public class CellView {
 		}
 		G.setColor(GetColorFromId(model.GetId()));
 		G.fillPolygon(pts_x, pts_y, len);
-		GetImageFromId(model.GetId(),G,pts_x[0],pts_y[0]);
+		DrawImageFromId(model.GetId(),G,pts_x[0],pts_y[0]);
 	}
 	
 	public void DrawCell(Graphics G, int s, int x0, int y0) {
