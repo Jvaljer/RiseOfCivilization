@@ -1,9 +1,6 @@
 package View;
 
 import Model.*;
-import Types.BuildingId;
-import Types.CellId;
-
 import java.awt.*;
 
 public class BuildingView {
@@ -12,14 +9,12 @@ public class BuildingView {
 	private BuildingModel model;
 	private Point coord;
 	private Color color;
-	private CellIcon Icons;
 	
 	public BuildingView(GameView G, BuildingModel M) {
 		game = G;
 		map = game.GetGameModel().GetMapModel();
 		model = M;
 		coord = model.GetPos();
-		Icons=new CellIcon();
 		
 		switch (model.GetId()) {
 			case CityHall :
@@ -47,46 +42,15 @@ public class BuildingView {
 				break;
 		}
 	}
-	public void DrawImageFromId(BuildingId m_id, Graphics G, int x, int y){
-		switch (m_id) {
-			case CityHall :
-				G.drawImage(Icons.CityHall,x-15,y-15,37,34,null);
-				break;
-			case SawMill :
-				G.drawImage(Icons.SawMill,x+3,y-16,37,34,null);
-				break;
-			case Quarry :
-				G.drawImage(Icons.Quarry,x+3,y-16,37,34,null);
-				break;
-			case LumberCamp :
-				G.drawImage(Icons.LumberCamp,x+3,y-16,37,34,null);
-				break;
-			case MinerCamp :
-				G.drawImage(Icons.MinerCamp,x+3,y-16,37,34,null);
-				break;
-			case QuarrymanCamp :
-				G.drawImage(Icons.QuarrymanCamp,x+3,y-16,37,34,null);
-				break;
-			case Barrack :
-				G.drawImage(Icons.Barrack,x+3,y-16,37,34,null);
-				break;
-			case Shop :
-				G.drawImage(Icons.Shop,x-15,y-15,30,30,null);
-				break;
-			default :
-				break;
-		}
-	}
 	
 	public void DrawBuilding(Graphics G) {
 		Point pos = map.GetPosFromCoord(coord.x,coord.y);
 		G.setColor(new Color(0,0,0));
-		DrawImageFromId(model.GetId(),G,pos.x,pos.y);
+		
 		Point[] pts;
-		int d = model.GetTriangleDist();
 		switch (model.GetLevel()) {
 			case 1 :
-				/*
+				int d = model.GetTriangleDist();
 				pts = new Point[3];
 				pts[0] = new Point(pos.x,pos.y-d);
 				pts[1] = new Point(pos.x+(d/2)+(d/3), pos.y+(d/2)+(d/3));
@@ -107,15 +71,9 @@ public class BuildingView {
 					G.setColor(color);
 				}
 				G.fillPolygon(pts_x, pts_y, pts.length);
-				*/
-				G.setColor(color);
-				G.drawOval(pos.x-(d/3),pos.y+d*1,5,5);
-				G.fillOval(pos.x-(d/3),pos.y+d*1,5,5);
-
 				break;
 				
 			case 2 :
-				/*
 				int w = model.GetRecWidth();
 				int h = model.GetRecHeight();
 				int w_div = w / 2;
@@ -126,24 +84,10 @@ public class BuildingView {
 				} else {
 					G.setColor(color);
 				}
-				G.setColor(color);
 				G.fillRoundRect(pos.x - w_div, pos.y - h_div, w, h, 2, 2);
-				*/
-
-				G.setColor(color);
-				G.drawOval(pos.x-(d/3)-(d/2)-2,pos.y+d*1,5,5);
-				G.fillOval(pos.x-(d/3)-(d/2)-2,pos.y+d*1,5,5);
-				G.drawOval(pos.x-(d/3)+(d/2)+2,pos.y+d*1,5,5);
-				G.fillOval(pos.x-(d/3)+(d/2)+2,pos.y+d*1,5,5);
 				break;
 			case 3 :
-				G.setColor(color);
-				G.drawOval(pos.x-(d/3)-(d/2)-2,pos.y+d*1,5,5);
-				G.fillOval(pos.x-(d/3)-(d/2)-2,pos.y+d*1,5,5);
-				G.drawOval(pos.x-(d/3),pos.y+d*1,5,5);
-				G.fillOval(pos.x-(d/3),pos.y+d*1,5,5);
-				G.drawOval(pos.x-(d/3)+(d/2)+2,pos.y+d*1,5,5);
-				G.fillOval(pos.x-(d/3)+(d/2)+2,pos.y+d*1,5,5);
+				//must implement
 				break;
 				
 			default :
