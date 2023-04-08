@@ -16,20 +16,23 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author martin
  */
 public class CellModel {
+	private GameModel gameModel;
 	private int X;
 	private int Y;
 	private CellId id;
 	private Resource natural_resource;
 	public static final int MAX_RESOURCE = 500;
 	private InventoryModel inventory;
+	private boolean visible;
 	private Color color;
 	
 	
-	public CellModel(int x, int y, CellId i) {
+	public CellModel(GameModel g,int x, int y, CellId i) {
+		this.gameModel = g;
 		X = x;
 		Y = y;
 		id = i;
-		
+		this.visible = true;
 		inventory = new InventoryModel(200);
 		int amount;
 		switch (id) {
@@ -110,5 +113,27 @@ public class CellModel {
 	
 	public void collectResource(int n) {
 		inventory.remove(natural_resource, n);
+	}
+	
+	public void setVisible(boolean b)
+	{
+		this.visible = b;
+	}
+	
+	public boolean getVisible()
+	{
+		return this.visible;
+	}
+	
+	public void isVisible()
+	{
+		this.setVisible(false);
+		for(int i = 0; i < this.gameModel.GetWorkerModel().size(); i++)
+		{
+			if(this.gameModel.GetMapModel().GetShortestPath(this.gameModel.GetWorkerModel().get(i).getPos(), this.GetCoord()).size() <= 3)
+			{
+				this.setVisible(true);
+			}
+		}
 	}
 }

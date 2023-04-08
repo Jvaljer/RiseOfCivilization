@@ -33,7 +33,7 @@ public class WorkerView {
     public void drawMove(Graphics G, int i, int j) {
         G.setColor(new Color(0,0,0));
         G.drawOval(i,j, worker.getWidth(), worker.getHeight());
-        G.setColor(new Color(0,100,255));
+        G.setColor(this.SetColorFromRole());
         G.fillOval(i,j, worker.getWidth(), worker.getHeight());
     }
 

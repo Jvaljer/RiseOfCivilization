@@ -50,6 +50,14 @@ public class WorkerModel {
 		current_health_bar = init_health_bar;
 		
 		model.worker_amount++;
+		
+		for(int k = 0; k < this.map_model.GetColumnsAmount(); k++)
+		{
+			for(int l = 0; l < this.map_model.GetLinesAmount(); l++)
+			{
+				this.map_model.GetCellFromCoord(l, k).isVisible();
+			}
+		}
 	}
 	
 	public int GetCurrentHealth() {
@@ -140,6 +148,13 @@ public class WorkerModel {
 	 */
 	public void MoveTo(int i, int j) {
 		this.cell = this.model.GetMapModel().GetCellFromCoord(i, j);
+		for(int k = 0; k < this.map_model.GetColumnsAmount(); k++)
+		{
+			for(int l = 0; l < this.map_model.GetLinesAmount(); l++)
+			{
+				this.map_model.GetCellFromCoord(l, k).isVisible();
+			}
+		}
 	}
 	
 	/**

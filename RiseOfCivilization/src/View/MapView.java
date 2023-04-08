@@ -113,5 +113,18 @@ public class MapView extends JPanel {
 				this.view.getWorkerView().get(i).DrawWorker(G);
 			}
 		}
+		
+		for(int i = 0; i < this.view.GetGameModel().getEnnemyModel().size(); i++)
+		{
+			if(this.view.GetGameModel().getEnnemyModel().get(i).isVisible())
+			{
+				if(this.view.GetGameModel().getEnnemyModel().get(i).getMoving())
+				{
+					this.view.getEnnemyView().get(i).drawMove(G, this.view.GetGameModel().getEnnemyModel().get(i).getPosWhileMoving().x, this.view.GetGameModel().getEnnemyModel().get(i).getPosWhileMoving().y);
+				} else {
+					this.view.getEnnemyView().get(i).DrawEnnemy(G);
+				}
+			}
+		}
 	}
 }

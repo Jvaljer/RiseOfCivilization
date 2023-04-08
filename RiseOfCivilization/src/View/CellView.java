@@ -48,17 +48,22 @@ public class CellView {
 	}
 	
 	public Color GetColorFromId(CellId m_id) {
+		int n = 2;
+		if (this.model.getVisible())
+		{
+			n = 1;
+		}
 		switch (m_id) {
 			case Plain :
-				return (new Color(255, 204, 102));
+				return (new Color(254/n, 204/n, 102/n));
 			case Forest :
-				return (new Color(0, 153, 0));
+				return (new Color(0, 152/n, 0));
 			case Mountain :
-				return (new Color(150, 150, 150));
+				return (new Color(150/n, 150/n, 150/n));
 			case Iron_Deposit :
-				return (new Color(169, 84, 69));
+				return (new Color(168/n, 84/n, 69/n));
 			case City : 
-				return (new Color(165, 110, 20));
+				return (new Color(165/n, 110/n, 20/n));
 			default :
 				return (new Color(0,0,0));
 		}

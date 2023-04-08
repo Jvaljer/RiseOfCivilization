@@ -1,58 +1,85 @@
 package Model;
 
-import java.awt.*;
-import Types.EnnemyRole;
+import java.awt.Point;
 
 public class EnnemyModel {
-	private GameModel game;
-	private MapModel map;
-	private Point pos;
-	private EnnemyRole role;
-	private int init_health_bar;
-	private int current_health_bar;
+	private GameModel model;
+	private MapModel mapModel;
+	private CellModel cell;
+	private boolean moving;
+	private Point coordOnScreen;
 	private static final int width = 10;
+	private static final int height = 10;
 	
-	public EnnemyModel(GameModel GM, EnnemyRole ER, Point pts) {
-		game = GM;
-		map = game.GetMapModel();
-		role = ER;
-		pos = pts;
-		
-		switch (role) {
-			case Wolf:
-				init_health_bar = 1;
-				break;
-			case Ork:
-				init_health_bar = 2;
-				break;
-			default:
-				init_health_bar = 0;
-				break;
-		}
-		current_health_bar = init_health_bar;
+	
+	public EnnemyModel(GameModel model, CellModel cell)
+	{
+		this.model = model;
+		this.cell = cell;
+		this.mapModel = model.GetMapModel();
+		this.coordOnScreen = this.mapModel.GetPosFromCoord(this.cell.GetX(), this.cell.GetY());
+		this.moving = false;
 	}
 	
-	public int GetCurrentHealth() {
-		return current_health_bar;
+	public GameModel getGame()
+	{
+		return this.model;
 	}
 	
-	public void TakeDamage() {
-		current_health_bar--;
+	public MapModel getMap()
+	{
+		return this.mapModel;
 	}
 	
-	public boolean IsDead() {
-		return current_health_bar==0;
-	}
-	
-	public int GetWidth() {
+	public int getWidth()
+	{
 		return width;
 	}
 	
-	public Point GetPos() {
-		return pos;
+	public int getHeight()
+	{
+		return height;
 	}
 	
-	public void MoveTo(Point coord) {
-		pos = coord;
+	public Point getPos()
+	{
+		return this.cell.GetCoord();
+	}
+	
+	public boolean getMoving()
+	{
+		return this.moving;
+	}
+	
+	public void setMoving(boolean b)
+	{
+		this.moving = b;
+	}
+	
+	public void moveTo(Point p)
+	{
+		this.cell = this.mapModel.GetCellFromCoord(p.x, p.y);
+	}
+	
+	public void setPosWhileMoving(int i, int j)
+	{
+		this.coordOnScreen = new Point(i,j);
+	}
+	
+	public Point getPosWhileMoving()
+	{
+		return this.coordOnScreen;
+	}
+	
+	public boolean isVisible()
+	{
+		for(int i = 0; i < this.model.GetWorkerModel().size(); i++)
+		{
+			if(this.mapModel.GetShortestPath(this.model.GetWorkerModel().get(i).getPos(), this.getPos()).size() <= 3)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 }

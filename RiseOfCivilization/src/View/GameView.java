@@ -12,6 +12,7 @@ public class GameView extends JFrame {
 
 	private MapView map_view;
 	private ArrayList<WorkerView> workers_view;
+	private ArrayList<EnnemyView> ennemiesView;
 	private ArrayList<BuildingView> buildings_view;
 	private CellInfoView cell_info_view;
 	private CityInfoView city_info_view;
@@ -40,6 +41,12 @@ public class GameView extends JFrame {
 		for(int i = 0; i < this.model.GetWorkerModel().size(); i++)
 		{
 			workers_view.add(new WorkerView(this, this.model.GetWorkerModel().get(i)));
+		}
+		
+		this.ennemiesView = new ArrayList<EnnemyView>();
+		for(int i = 0; i < this.model.getEnnemyModel().size(); i++)
+		{
+			ennemiesView.add(new EnnemyView(this, this.model.getEnnemyModel().get(i)));
 		}
 		
 		buildings_view = new ArrayList<BuildingView>();
@@ -100,6 +107,10 @@ public class GameView extends JFrame {
 
 	public ArrayList<WorkerView> getWorkerView() {
 		return this.workers_view;
+	}
+	
+	public ArrayList<EnnemyView> getEnnemyView() {
+		return this.ennemiesView;
 	}
 	
 	public ArrayList<BuildingView> GetBuildingsView(){
