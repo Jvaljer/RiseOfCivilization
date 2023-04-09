@@ -24,7 +24,7 @@ public class AllWorkersCtrl extends Thread{
 	
 	@Override
 	public void run() {
-		while(true) {
+		while(ctrl.GetGameModel().GetClock().IsTicking()) {
 			int new_len = workers.size();
 			if(old_len < new_len) {
 				(new WorkerCtrl(ctrl,workers.get(old_len))).start();

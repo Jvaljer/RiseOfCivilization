@@ -21,7 +21,7 @@ public class EnnemiesSpawn extends Thread {
 	
 	@Override
 	public void run() {
-		while(true) {
+		while(game.GetGameModel().GetClock().IsTicking()) {
 			int wait = ThreadLocalRandom.current().nextInt(30,60);
 			try {
 				sleep(wait*1000);

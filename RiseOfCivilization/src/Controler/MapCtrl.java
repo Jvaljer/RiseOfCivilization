@@ -11,7 +11,7 @@ import java.util.*;
  *   it also extends Thread to create one which will dict real-time behaviours of it.
  * @author Abel
  */
-public class MapCtrl extends Thread implements MouseListener {
+public class MapCtrl implements MouseListener {
 	private GameCtrl ctrl;
 	private GameModel model;
 	private GameView view;
@@ -69,12 +69,6 @@ public class MapCtrl extends Thread implements MouseListener {
 	
 	public CellModel GetClickedCell() {
 		return current_cell;
-	}
-	
-	@Override
-	public void run() {
-		//must implement
-		System.out.println("MapCtrl running");
 	}
 	
 	@Override

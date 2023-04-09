@@ -19,7 +19,7 @@ public class RefreshCtrl extends Thread {
 	
 	@Override
 	public void run() {
-		while(true) {
+		while(view.GetGameModel().GetClock().IsTicking()) {
 			map_view.revalidate();
 			map_view.repaint();
 			

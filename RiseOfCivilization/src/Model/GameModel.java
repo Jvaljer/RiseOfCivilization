@@ -30,8 +30,10 @@ public class GameModel {
 	private ArrayList<BuildingModel> buildings;
 	//List of all the ennemies currently in the game
 	private ArrayList<EnnemyModel> ennemies;
-
+	//model of the game objectives
 	private GoalsModel goals;
+	//model of the game's clock
+	private ClockModel clock;
 
 	/**
 	 * Constructor for the GameModel
@@ -67,6 +69,8 @@ public class GameModel {
 		ennemies = new ArrayList<EnnemyModel>();
 		
 		goals = new GoalsModel(this);
+		
+		clock = new ClockModel();
 	}
 	
 	/**
@@ -663,5 +667,13 @@ public class GameModel {
 	 */
 	public GoalsModel GetGoals() {
 		return goals;
+	}
+	
+	/**
+	 * Getter for the clock
+	 * @return this.clock
+	 */
+	public ClockModel GetClock() {
+		return clock;
 	}
 }

@@ -21,8 +21,6 @@ public class GameCtrl{
 	private ArrayList<JButton> buttons;
 	// Controller of the map
 	private MapCtrl map;
-	//
-	public int nb_th;
 	
 	/**
 	 * Constructor of the is Controller
@@ -30,9 +28,9 @@ public class GameCtrl{
 	 * @param V
 	 */
 	public GameCtrl(GameView V) {
-		nb_th = 0;
 		view = V;
 		model = view.GetGameModel();
+		(new ClockCtrl(model.GetClock(),30,0)).start();
 		map = new MapCtrl(this,view);
 		
 		buttons = view.GetDashboardView().GetActionView().GetButtonList();
