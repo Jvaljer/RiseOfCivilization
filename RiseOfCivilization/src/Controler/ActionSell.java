@@ -52,6 +52,7 @@ public class ActionSell implements ActionListener {
 		inventory.remove(Resource.Stone, stone_amount);
 		inventory.remove(Resource.Iron, iron_amount);
 		
+		game.GetGameView().getCityInfoView().update();
 		shop.GetView().dispose();
 	}
 }

@@ -52,6 +52,7 @@ public class BuildingTrain extends Thread {
 				ctrl.GetGameView().getWorkerView().add(new WorkerView(ctrl.GetGameView(),ctrl.GetGameModel().GetWorkerModel().get(old_len)));
 			}
 		}
+		ctrl.GetGameView().getCityInfoView().update();
 		building.Free();
 	}
 }

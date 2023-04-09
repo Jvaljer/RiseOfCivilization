@@ -54,6 +54,7 @@ public class WorkerExpand extends Thread {
 		}
 		CellId cell_id = map.GetCellFromCoord(dst_coord.x, dst_coord.y).GetId();
 		ctrl.GetGameModel().Expand(dst_coord);
+		ctrl.GetGameView().getCityInfoView().update();
 		worker.Free();
 	}
 }

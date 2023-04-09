@@ -35,6 +35,7 @@ public class ActionBuy implements ActionListener {
 		inventory.add(Resource.Stone, stone_amount);
 		inventory.add(Resource.Iron, iron_amount);
 		
+		game.GetGameView().getCityInfoView().update();
 		shop.GetView().dispose();
 	}
 }

@@ -60,6 +60,7 @@ public class WorkerBuildProduction extends Thread {
 			}
 			ctrl.GetGameView().AddBuildingView(ctrl.GetGameModel().GetBuildingList().get(old_len));
 		}
+		ctrl.GetGameView().getCityInfoView().update();
 		worker.Free();
 	}
 }

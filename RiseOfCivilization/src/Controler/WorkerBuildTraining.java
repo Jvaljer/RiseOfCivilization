@@ -24,5 +24,6 @@ public class WorkerBuildTraining extends Thread {
 		BuildingChoiceModel model = new BuildingChoiceModel(game.GetGameModel());
 		BuildingChoiceView view = new BuildingChoiceView(game.GetGameView(),model);
 		new BuildingChoiceCtrl(game,view, dst_coord);
+		game.GetGameView().getCityInfoView().update();
 	}
 }

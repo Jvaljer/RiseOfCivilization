@@ -27,6 +27,7 @@ public class WorkerUpgrade extends Thread{
 		if(ctrl.GetGameModel().PlayerCanUpgradeWorker(worker)) {
 			worker.LevelUp();
 		}
+		ctrl.GetGameView().getCityInfoView().update();
 		worker.Free();
 	}
 }

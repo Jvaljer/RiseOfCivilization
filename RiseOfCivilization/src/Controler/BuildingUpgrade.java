@@ -56,6 +56,7 @@ public class BuildingUpgrade extends Thread{
 			}
 			building.LevelUp();
 		}
+		ctrl.GetGameView().getCityInfoView().update();
 		worker.Free();
 		
 	}
