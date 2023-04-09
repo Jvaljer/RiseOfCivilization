@@ -1,4 +1,4 @@
-package Controler;
+package Threads;
 
 import java.awt.Point;
 import java.util.ArrayList;

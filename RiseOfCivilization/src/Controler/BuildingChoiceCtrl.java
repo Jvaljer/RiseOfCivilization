@@ -1,6 +1,8 @@
 package Controler;
 
 import Model.BuildingChoiceModel;
+import Threads.*;
+import Threads.BuildTraining;
 import Types.BuildingId;
 import View.BuildingChoiceView;
 import Types.BuildingId;

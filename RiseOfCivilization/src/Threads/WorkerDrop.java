@@ -1,31 +1,32 @@
-package Controler;
+package Threads;
 
 import Model.MapModel;
+import Model.WorkerModel;
 import java.awt.*;
 import java.util.ArrayList;
 
-import Model.WorkerModel;
-import Model.BuildingModel;
+import Controler.GameCtrl;
 
-public class BuildingUpgrade extends Thread{
-	private static GameCtrl ctrl;
-	private static MapModel map;
-	private static WorkerModel worker;
-	private static BuildingModel building;
+public class WorkerDrop extends Thread {
+	private GameCtrl ctrl;
+	private MapModel map;
+	private WorkerModel worker;
 	
-	public BuildingUpgrade(GameCtrl GC, WorkerModel WM, BuildingModel BM) {
+	public WorkerDrop(GameCtrl GC, WorkerModel WM) {
 		ctrl = GC;
 		map = ctrl.GetGameModel().GetMapModel();
 		worker = WM;
-		building = BM;
 	}
 	
 	@Override
 	public void run() {
-		Point dst = building.GetPos();
-		while (this.worker.getcoordX() != dst.x || this.worker.getcoordY() != dst.y){
+		Point town_hall = map.GetCityOriginCoord();
+		worker.occupied();
+		worker.moving();
+		//first we want the worker to move to the town hall.
+		while (this.worker.getcoordX() != town_hall.x || this.worker.getcoordY() != town_hall.y){
 			try {
-				ArrayList<Point> path = map.GetShortestPath(this.worker.getPos(),dst);
+				ArrayList<Point> path = map.GetShortestPath(this.worker.getPos(),town_hall);
  				Point nxt_coord = path.get(1);
 				this.worker.setNextcoord(nxt_coord);
 				Point cord_src = map.GetPosFromCoord(worker.getcoordX(), worker.getcoordY());
@@ -47,17 +48,14 @@ public class BuildingUpgrade extends Thread{
 			}
 		}
 		
-		worker.occupied();
-		if(ctrl.GetGameModel().PlayerCanUpgradeBuilding(building)) {
-			try {
-				sleep(2500);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			building.LevelUp();
+		worker.stopMoving();
+		try {
+			Thread.sleep(1250);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		ctrl.GetGameModel().WorkerDropsInventory(worker);
 		ctrl.GetGameView().getCityInfoView().update();
 		worker.Free();
-		
 	}
 }

@@ -1,30 +1,34 @@
-package Controler;
+package Threads;
 
-import Model.MapModel;
-import Model.WorkerModel;
-import java.awt.*;
+import java.awt.Point;
+import Types.CellId;
+import Model.CellModel;
 import java.util.ArrayList;
 
-public class WorkerDrop extends Thread {
+import Controler.GameCtrl;
+import Model.MapModel;
+import Model.WorkerModel;
+
+public class WorkerBuildProduction extends Thread {
 	private GameCtrl ctrl;
 	private MapModel map;
 	private WorkerModel worker;
+	private Point dst_coord;
 	
-	public WorkerDrop(GameCtrl GC, WorkerModel WM) {
+	public WorkerBuildProduction(GameCtrl GC,WorkerModel W, Point pts) {
 		ctrl = GC;
 		map = ctrl.GetGameModel().GetMapModel();
-		worker = WM;
+		worker = W;
+		dst_coord = pts;
 	}
 	
 	@Override
 	public void run() {
-		Point town_hall = map.GetCityOriginCoord();
 		worker.occupied();
 		worker.moving();
-		//first we want the worker to move to the town hall.
-		while (this.worker.getcoordX() != town_hall.x || this.worker.getcoordY() != town_hall.y){
+		while (this.worker.getcoordX() != dst_coord.x || this.worker.getcoordY() != dst_coord.y){
 			try {
-				ArrayList<Point> path = map.GetShortestPath(this.worker.getPos(),town_hall);
+				ArrayList<Point> path = map.GetShortestPath(this.worker.getPos(),dst_coord);
  				Point nxt_coord = path.get(1);
 				this.worker.setNextcoord(nxt_coord);
 				Point cord_src = map.GetPosFromCoord(worker.getcoordX(), worker.getcoordY());
@@ -45,14 +49,19 @@ public class WorkerDrop extends Thread {
 				e.printStackTrace();
 			}
 		}
-		
 		worker.stopMoving();
-		try {
-			Thread.sleep(1250);
-		} catch (Exception e) {
-			e.printStackTrace();
+		int old_len = ctrl.GetGameModel().GetBuildingList().size();
+		CellModel cell = map.GetCellFromCoord(dst_coord.x, dst_coord.y);
+		ctrl.GetGameModel().BuildOnResourceCell(cell);
+		int new_len = ctrl.GetGameModel().GetBuildingList().size();
+		if(old_len < new_len) {
+			try {
+				Thread.sleep(3000);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			ctrl.GetGameView().AddBuildingView(ctrl.GetGameModel().GetBuildingList().get(old_len));
 		}
-		ctrl.GetGameModel().WorkerDropsInventory(worker);
 		ctrl.GetGameView().getCityInfoView().update();
 		worker.Free();
 	}

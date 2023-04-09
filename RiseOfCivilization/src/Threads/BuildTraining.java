@@ -1,12 +1,12 @@
-package Controler;
+package Threads;
 
 import java.awt.event.*;
+import Controler.GameCtrl;
 import java.util.ArrayList;
 import View.BuildingChoiceView;
 import Types.BuildingId;
 import Types.WorkerRole;
 import java.awt.*;
-import Types.Actions;
 import Model.WorkerModel;
 import Model.MapModel;
 import Model.CellModel;

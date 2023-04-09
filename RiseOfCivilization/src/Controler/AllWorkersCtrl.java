@@ -3,6 +3,7 @@ package Controler;
 import Model.MapModel;
 import java.util.*;
 import Model.WorkerModel;
+import Threads.WorkerCtrl;
 
 public class AllWorkersCtrl extends Thread{
 	private GameCtrl ctrl;
@@ -16,7 +17,6 @@ public class AllWorkersCtrl extends Thread{
 		workers = ctrl.GetGameModel().GetWorkerModel();
 		int len = workers.size();
 		for(int i=0; i<len; i++) {
-			System.out.println("creating initial worker's controller -> "+i);
 			(new WorkerCtrl(ctrl,workers.get(i))).start();
 		}
 		old_len = workers.size();
@@ -27,7 +27,6 @@ public class AllWorkersCtrl extends Thread{
 		while(true) {
 			int new_len = workers.size();
 			if(old_len < new_len) {
-				System.out.println("a new worker controler has been created !");
 				(new WorkerCtrl(ctrl,workers.get(old_len))).start();
 			}
 		}

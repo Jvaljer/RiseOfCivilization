@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import Types.Actions;
 import java.awt.event.ActionListener;
 import Model.MapModel;
+import Threads.WorkerCollect;
 import Model.*;
 
 public class ActionCollect implements ActionListener {

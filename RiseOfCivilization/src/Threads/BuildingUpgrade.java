@@ -1,32 +1,32 @@
-package Controler;
+package Threads;
 
-import java.awt.Point;
-import Types.CellId;
-import Model.CellModel;
-import java.util.ArrayList;
 import Model.MapModel;
-import Model.WorkerModel;
+import java.awt.*;
+import java.util.ArrayList;
 
-public class WorkerBuildProduction extends Thread {
-	private GameCtrl ctrl;
-	private MapModel map;
-	private WorkerModel worker;
-	private Point dst_coord;
+import Controler.GameCtrl;
+import Model.WorkerModel;
+import Model.BuildingModel;
+
+public class BuildingUpgrade extends Thread{
+	private static GameCtrl ctrl;
+	private static MapModel map;
+	private static WorkerModel worker;
+	private static BuildingModel building;
 	
-	public WorkerBuildProduction(GameCtrl GC,WorkerModel W, Point pts) {
+	public BuildingUpgrade(GameCtrl GC, WorkerModel WM, BuildingModel BM) {
 		ctrl = GC;
 		map = ctrl.GetGameModel().GetMapModel();
-		worker = W;
-		dst_coord = pts;
+		worker = WM;
+		building = BM;
 	}
 	
 	@Override
 	public void run() {
-		worker.occupied();
-		worker.moving();
-		while (this.worker.getcoordX() != dst_coord.x || this.worker.getcoordY() != dst_coord.y){
+		Point dst = building.GetPos();
+		while (this.worker.getcoordX() != dst.x || this.worker.getcoordY() != dst.y){
 			try {
-				ArrayList<Point> path = map.GetShortestPath(this.worker.getPos(),dst_coord);
+				ArrayList<Point> path = map.GetShortestPath(this.worker.getPos(),dst);
  				Point nxt_coord = path.get(1);
 				this.worker.setNextcoord(nxt_coord);
 				Point cord_src = map.GetPosFromCoord(worker.getcoordX(), worker.getcoordY());
@@ -47,20 +47,18 @@ public class WorkerBuildProduction extends Thread {
 				e.printStackTrace();
 			}
 		}
-		worker.stopMoving();
-		int old_len = ctrl.GetGameModel().GetBuildingList().size();
-		CellModel cell = map.GetCellFromCoord(dst_coord.x, dst_coord.y);
-		ctrl.GetGameModel().BuildOnResourceCell(cell);
-		int new_len = ctrl.GetGameModel().GetBuildingList().size();
-		if(old_len < new_len) {
+		
+		worker.occupied();
+		if(ctrl.GetGameModel().PlayerCanUpgradeBuilding(building)) {
 			try {
-				Thread.sleep(3000);
+				sleep(2500);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			ctrl.GetGameView().AddBuildingView(ctrl.GetGameModel().GetBuildingList().get(old_len));
+			building.LevelUp();
 		}
 		ctrl.GetGameView().getCityInfoView().update();
 		worker.Free();
+		
 	}
 }

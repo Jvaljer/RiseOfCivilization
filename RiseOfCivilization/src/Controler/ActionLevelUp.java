@@ -1,6 +1,8 @@
 package Controler;
 
 import Model.*;
+import Threads.BuildingUpgrade;
+import Threads.WorkerUpgrade;
 import Types.Actions;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

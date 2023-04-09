@@ -1,7 +1,8 @@
-package Controler;
+package Threads;
 
 import Model.WorkerModel;
 import Types.WorkerRole;
+import Controler.GameCtrl;
 import Model.MapModel;
 
 public class WorkerCtrl extends Thread {

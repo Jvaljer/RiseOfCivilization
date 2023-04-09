@@ -1,8 +1,10 @@
-package Controler;
+package Threads;
 
 import java.awt.Point;
 import Types.*;
 import java.util.ArrayList;
+
+import Controler.GameCtrl;
 import Model.MapModel;
 import Model.WorkerModel;
 

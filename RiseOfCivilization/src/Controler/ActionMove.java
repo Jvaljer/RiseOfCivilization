@@ -3,6 +3,7 @@ package Controler;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Model.*;
+import Threads.WorkerMoveCtrl;
 import Types.Actions;
 
 public class ActionMove implements ActionListener {

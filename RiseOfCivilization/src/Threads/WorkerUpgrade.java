@@ -1,7 +1,8 @@
-package Controler;
+package Threads;
 
 import java.awt.Point;
 
+import Controler.GameCtrl;
 import Model.MapModel;
 import Model.WorkerModel;
 

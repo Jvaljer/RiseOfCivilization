@@ -1,5 +1,6 @@
-package Controler;
+package Threads;
 
+import Controler.GameCtrl;
 import Model.MapModel;
 import Model.WorkerModel;
 

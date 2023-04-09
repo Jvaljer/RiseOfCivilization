@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import Model.*;
 import java.awt.event.ActionListener;
 import Model.MapModel;
+import Threads.WorkerExpand;
 import Types.Actions;
 
 public class ActionExpand implements ActionListener {

@@ -1,8 +1,11 @@
-package Controler;
+package Threads;
 
 import Model.MapModel;
 import Model.WorkerModel;
 import java.awt.*;
+
+import Controler.BuildingChoiceCtrl;
+import Controler.GameCtrl;
 import Model.BuildingChoiceModel;
 import View.BuildingChoiceView;
 

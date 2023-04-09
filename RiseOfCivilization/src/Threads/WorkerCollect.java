@@ -1,9 +1,11 @@
-package Controler;
+package Threads;
 
 import java.awt.Point;
 import Types.*;
 import Model.*;
 import java.util.*;
+
+import Controler.GameCtrl;
 
 public class WorkerCollect extends Thread{
 	private GameCtrl ctrl;
