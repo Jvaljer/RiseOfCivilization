@@ -33,9 +33,10 @@ public class CellIcon {
             Plain = ImageIO.read(new File("./icons/Plain.png"));
             Mountain = ImageIO.read(new File("./icons/Mountain.png"));
             Iron_Deposit = ImageIO.read(new File("./icons/Iron_Deposit.png"));
-            
+
 
             CityHall = ImageIO.read(new File("./icons/CityHall.png"));
+            SawMill=ImageIO.read(new File("./icons/SawMill.png"));
             Mine = ImageIO.read(new File("./icons/Mine.png"));
             Quarry = ImageIO.read(new File("./icons/Quarry.png"));
             LumberCamp = ImageIO.read(new File("./icons/LumberCamp.png"));
