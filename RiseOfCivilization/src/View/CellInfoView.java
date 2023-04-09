@@ -19,11 +19,17 @@ import javax.swing.JPanel;
 
 
 /**
- * This class is the view of the minimap. The minimap is represented in
- * a seperate panel at the top of the infobar panel.
- * Its default height is a third of the height of the infobar.
+ * This class is the view of the currently cell's information. It shows
+ * can show (if relevant), the cell's type, the amount of its resource it
+ * currently has, the maximum amount of its resource it can have, the type
+ * of the building built on it, the level of the building, the amount of
+ * resource the building currently has and the maximum amount resource
+ * the building can store. It also paints an enlarged representation of
+ * the cell and its buildings.
+ * It is represented in its own panel at the top of the dashboard.
+ * Its default height is a third of the height of the dashboard.
  *
- * @author martin
+ * @author Martin
  */
 @SuppressWarnings("serial")
 public class CellInfoView extends JPanel {
@@ -51,6 +57,17 @@ public class CellInfoView extends JPanel {
 	private GridBagConstraints building_max_res_c;
 	private final static int offset = 10;
 	
+	/**
+     * This is the constructor of the CellInfoView. It uses a
+	 * GridBagLayout and creates all of its labels and their
+	 * constraints before adding them. The labels aren't
+	 * initialized with text and only get one after update()
+	 * is first called on the default current cell, the cell of
+	 * the townhall.
+     *
+     * @param gv the game view
+	 * @param dv the dashboard view
+     */
 	public CellInfoView(GameView gv, DashboardView dv) {
 		game_view = gv;
 		map_view = gv.GetMapView();
@@ -177,6 +194,9 @@ public class CellInfoView extends JPanel {
 		setBackground(Color.LIGHT_GRAY);
 	}
 	
+	/**
+	 * Resets the constraints for all labels by setting their weighty to 0.
+	 */
 	public void resetConstraints() {		
 		for (JLabel label : labels_constraints.keySet()) {
 			GridBagConstraints label_c = labels_constraints.get(label);
@@ -188,6 +208,13 @@ public class CellInfoView extends JPanel {
 		repaint();
 	}
 	
+	/**
+	 * Resets all the constraints before setting one label's weighty to 1
+	 * and revalidating & repainting the panel to update the changes.
+	 * This method is used to always ensure that only the lowest label
+	 * has a weighty of 1, whereas all the others will have a weighty of 0.
+	 * This allows the labels to always be stacked against the top of the panel.
+	 */
 	public void setLowest(JLabel label) {
 		resetConstraints();
 		
@@ -199,6 +226,14 @@ public class CellInfoView extends JPanel {
 		repaint();
 	}
 	
+	/**
+	 * Updates all the labels of the CellInfoView. This method select
+	 * only the relevent labels of the clicked cell, and hides all of
+	 * the others. It then sets the last visible lable to be the lowest,
+	 * and revalidates & repaints the panel to update the changes.
+	 * 
+	 * @param cell_model the cell model of the last clicked cell
+	 */
 	public void update(CellModel cell_model) {
 		
 		current_cell = cell_model;
@@ -271,10 +306,18 @@ public class CellInfoView extends JPanel {
 		repaint();
 	}
 	
+	/**
+	 * Overrrides the super paint method.
+	 * This method, paints an enlarged version of the cell at a fixed
+	 * position at the bottom of the panel. It shows both the cell
+	 * and its buildings.
+	 * 
+	 * @param g the graphics of the panel
+	 */
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		
+
 		if(current_cell!=null) {
 			CellView cell_view = new CellView(map_view.GetGrid()[current_cell.GetX()][current_cell.GetY()]);
 			cell_view.setAbs(0);
