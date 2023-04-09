@@ -1,5 +1,8 @@
 package Model;
 
+/**
+ * The shopModel class represente ...
+ */
 public class ShopModel {
 	private GameModel game;
 	private final static int width = 400;

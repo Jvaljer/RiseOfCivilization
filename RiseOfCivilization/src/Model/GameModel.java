@@ -7,20 +7,39 @@ import Types.Resource;
 import Types.WorkerRole;
 import java.awt.*;
 
+/**
+ * The GameModel classe is the main Model of this game it gather all the entity on the game
+ * 
+ * @author all the groupe
+ */
 public class GameModel {
+	// Constante on this game
 	private static final int time_unit = 60;
 	private static int map_width;
 	private static int map_height;
 	private static int panel_width;
 	private static int panel_height;
 	
+	//Model of the map
 	private MapModel map;
+	// Inventory of the player 
 	private InventoryModel inventory;
+	// List of all the workers currently in the game
 	private ArrayList<WorkerModel> workers;
+	// List of all the building currently in the game
 	private ArrayList<BuildingModel> buildings;
+	//List of all the ennemies currently in the game
 	private ArrayList<EnnemyModel> ennemies;
+
 	private GoalsModel goals;
 
+	/**
+	 * Constructor for the GameModel
+	 * 
+	 * Initialised a Position for the city 
+	 * Initialised 3 worker on of each type
+	 * 
+	 */
 	public GameModel() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		map_width = ((int) screenSize.getWidth()) - ((int) (screenSize.getHeight()/3));
@@ -50,42 +69,86 @@ public class GameModel {
 		goals = new GoalsModel(this);
 	}
 	
+	/**
+	 * Getter for the width of the map
+	 * @return this.map_width
+	 */
 	public int GetMapWidth() {
 		return map_width;
 	}
 	
+	/**
+	 * Getter for the Height of the map
+	 * @return this.map_height
+	 */
 	public int GetMapHeight() {
 		return map_height;
 	}
 	
+	/**
+	 * Getter for the width of the panel
+	 * @return this.panel_width
+	 */
 	public int GetPanelWidth() {
 		return panel_width;
 	}
 	
+	/**
+	 * Getter for the height of the panel
+	 * @return this.panel_height
+	 */
 	public int GetPanelheight() {
 		return panel_height;
 	}
 	
+	/**
+	 * Getter for the map Model
+	 * @return this.map
+	 */
 	public MapModel GetMapModel() {
 		return map;
 	}
 	
+	/**
+	 * Getter for the inventory of the player
+	 * @return this.inventory
+	 */
 	public InventoryModel getInventoryModel() {
 		return inventory;
 	}
 	
+	/**
+	 * Getter for the Workers
+	 * return an ArrayList of all the worker
+	 * @return this.workers
+	 */
 	public ArrayList<WorkerModel> GetWorkerModel() {
 		return workers;
 	}
 	
+	/**
+	 * Getter for the buildings
+	 * return an arrayList of all the building
+	 * @return this.building
+	 */
 	public ArrayList<BuildingModel> GetBuildingList(){
 		return buildings;
 	}
 	
+	/**
+	 * Getter for the timeUnit
+	 * @return this.time_unit
+	 */
 	public int TimeUnit() {
 		return time_unit;
 	}
 	
+	/**
+	 * The PlayerHasEnoughToBuild function return a boolean if the player have enough Ressources to build 
+	 * The building he want
+	 * @param bid ID of the building the player want to build
+	 * @return if we can build 
+	 */
 	public boolean PlayerHasEnoughToBuild(BuildingId bid) {
 		int wood = inventory.getAmount(Resource.Wood);
 		int stone = inventory.getAmount(Resource.Stone);
@@ -123,10 +186,25 @@ public class GameModel {
 		return cond;
 	}
 	
+	/**
+	 * AddBuilding Method 
+	 * Add a new building to the list
+	 * @param bid the ID of the Building we add
+	 * @param pts The position where it's build
+	 */
 	public void AddBuilding(BuildingId bid, Point pts) {
 		buildings.add(new BuildingModel(this,pts,bid));
 	}
 	
+	/**
+	 * Harvest Method
+	 * Make a worker harvest the ressources on a Cell
+	 * The quantity harvested depend 
+	 * on the size of the Inventory of the player
+	 * on the quantity of ressources on the cell
+	 * @param worker worker that want to harvest
+	 * @param cell the cell were we harvest
+	 */
 	public void Harvest(WorkerModel worker, CellModel cell) {
 		InventoryModel cell_inventory = cell.getInventory();
 		InventoryModel worker_inventory = worker.getInventory();
@@ -151,6 +229,11 @@ public class GameModel {
 		}
 	}
 	
+	/**
+	 * The BuildOnResourceCell Method creat a building on a cell
+	 * But withdraw ressources needed for the construction
+	 * @param cell the cell where we build
+	 */
 	public void BuildOnResourceCell(CellModel cell) {
 		BuildingId bid;
     	CellId cid = cell.GetId();
@@ -190,10 +273,21 @@ public class GameModel {
     	}
 	}
 	
+	/**
+	 * The BuildOnCityCell creat a build on a Cell
+	 * @param bid ID of the building we are trying to build
+	 * @param cell The cell where we want to build
+	 */
 	public void BuildOnCityCell(BuildingId bid, CellModel cell) {
 		AddBuilding(bid,cell.GetCoord());
 	}
 	
+	/**
+	 * The PlayerCanUpgradeWorker Function 
+	 * return if the player have enough gold to upgrade a worker
+	 * @param worker worker that we want to upgrade
+	 * @return if we can upgrade the worker
+	 */
 	public boolean PlayerCanUpgradeWorker(WorkerModel worker) {
 		int gold = inventory.getAmount(Resource.Gold);
 		
@@ -211,6 +305,12 @@ public class GameModel {
 		}
 	}
 	
+	/**
+	 * the WorkerDropsInventory Method 
+	 * Make all the ressource from a worker a global Ressources
+	 * (It move the Ressources from the workerInventory to the PlayerInventory)
+	 * @param worker
+	 */
 	public void WorkerDropsInventory(WorkerModel worker) {
 		Resource res_type;
 		int max_amount = worker.getInventory().GetMaxAmount();
@@ -266,6 +366,12 @@ public class GameModel {
 		}
 	}
 	
+	/**
+	 * The Collect Method
+	 * Let a worker collect as much as possible of the ressource on a building
+	 * @param worker worker that collect
+	 * @param building building that is collected
+	 */
 	public void Collect(WorkerModel worker, BuildingModel building) {
 		InventoryModel building_inventory = building.GetInventory();
 		
@@ -284,6 +390,12 @@ public class GameModel {
 		return;
 	}
 	
+	/**
+	 * The PlayerCanUpgradeBuilding Function 
+	 * return if the player have enough ressources to upgrade a building
+	 * @param building the building we want to upgrade
+	 * @return if we can upgrade it
+	 */
 	public boolean PlayerCanUpgradeBuilding(BuildingModel building) {
 		int wood = inventory.getAmount(Resource.Wood);
 		int stone = inventory.getAmount(Resource.Stone);
@@ -321,6 +433,12 @@ public class GameModel {
 		return (wood>=needed_wood) && (stone>=needed_stone) && (iron>=needed_iron) && (gold>=needed_gold);
 	}
 	
+	/**
+	 * The GetRoleFromBuilding Function 
+	 * Return the associated WorkerRole of the building
+	 * @param bid ID of the building
+	 * @return
+	 */
 	public WorkerRole GetRoleFromBuilding(BuildingId bid) {
 		switch (bid) {
 			case Barrack:
@@ -336,6 +454,12 @@ public class GameModel {
 		}
 	}
 	
+	/**
+	 * The CanCreateNewWorker Function
+	 * Return true if there is enough building to create a new worker
+	 * @param building
+	 * @return
+	 */
 	public boolean CanCreateNewWorker(BuildingModel building) {
 		int limit = 1;
 		int current = 0;
@@ -367,10 +491,27 @@ public class GameModel {
 		return (current<limit);
 	}
 	
+	/**
+	 * The AddWorker Method 
+	 * Add a worker on the workers List
+	 * @param wr role of the new worker
+	 * @param pos Position on the map of the new worker
+	 */
 	public void AddWorker(WorkerRole wr, Point pos) {
 		workers.add(new WorkerModel(this,wr,pos));
 	}
 	
+	/**
+	 * The PlayerCanTrain Function
+	 * Return true if the player have enough gold to produce a new worker 
+	 * with role associated to the building
+	 * LumberCamp -> 75
+	 * MinerCamp -> 75
+	 * QuarryWorkerCamp -> 100
+	 * Barrack -> 150
+	 * @param building
+	 * @return
+	 */
 	public boolean PlayerCanTrain(BuildingModel building) {
 		int gold = inventory.getAmount(Resource.Gold);
 		switch (building.getId()) {
@@ -391,6 +532,14 @@ public class GameModel {
 		}
 	}
 	
+	/**
+	 * The PlayerHasEnoughToExpand Function
+	 * 
+	 * return true if the player have enough wood and stone stone to expand the city
+	 * 			   else false
+	 * @param cell The cell where we want to expand the city
+	 * @return
+	 */
 	public boolean PlayerHasEnoughToExpand(CellModel cell) {
 		int wood = inventory.getAmount(Resource.Wood);
 		int stone = inventory.getAmount(Resource.Stone);
@@ -412,6 +561,12 @@ public class GameModel {
 		}
 	}
 	
+	/**
+	 * The Expand Method 
+	 * Remove all The ressources from the selected Cell
+	 * Then turn the Cell type as a city
+	 * @param coord coordonate of the cell we transform
+	 */
 	public void Expand(Point coord) {
 		CellModel cell = map.GetCellFromCoord(coord.x, coord.y);
 		switch (cell.GetId()) {
@@ -441,14 +596,31 @@ public class GameModel {
 		cell.TurnToCity();
 	}
 	
+	/**
+	 * The AddEnnemy Method
+	 * add a new ennemy in the ennemies List
+	 * @param cell Cell where the ennemy will spawn
+	 * @param role Role (type) of the ennemy
+	 */
 	public void AddEnnemy(CellModel cell, EnnemyRole role) {
 		ennemies.add(new EnnemyModel(this, role, cell.GetCoord()));
 	}
 	
+	/**
+	 * Getter for the ennemies
+	 * @return an ArrayList of all the ennemy currently in the game
+	 */
 	public ArrayList<EnnemyModel> GetEnnemiesList(){
 		return ennemies;
 	}
 	
+	/**
+	 * The EnnemyAttacksWorker Method
+	 * This method decrease the HP of the worker if he's not knight
+	 * if the worker is a knight then it's the ennemy that loose some HP
+	 * @param ennemy the ennemy that attack
+	 * @param worker the worker that is attacked
+	 */
 	public void EnnemyAttacksWorker(EnnemyModel ennemy, WorkerModel worker) {
 		System.out.println("the worker currently has "+worker.GetCurrentHealth()+"HP");
 		worker.TakeDamage();
@@ -459,6 +631,11 @@ public class GameModel {
 		}
 	}
 	
+	/**
+	 * The removeWorker Method
+	 * Remove a worker from the workers List in the game
+	 * @param worker worker that is removed
+	 */
 	public void RemoveWorker(WorkerModel worker) {
 		for(int i=0; i<workers.size(); i++) {
 			WorkerModel wm = workers.get(i);
@@ -468,15 +645,24 @@ public class GameModel {
 		}
 	}
 	
+	/**
+	 * The RemoveEnnemy Method
+	 * Remove an ennemy from the ennemies List in the game
+	 * @param ennemy ennemy that is removed
+	 */
 	public void RemoveEnnemy(EnnemyModel ennemy) {
 		for(int i=0; i<ennemies.size(); i++) {
 			EnnemyModel em = ennemies.get(i);
 			if(em==ennemy) {
-				workers.remove(i);
+				ennemies.remove(i);
 			}
 		}
 	}
 	
+	/**
+	 * Getter for the goals
+	 * @return this.goals
+	 */
 	public GoalsModel GetGoals() {
 		return goals;
 	}
