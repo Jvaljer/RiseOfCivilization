@@ -6,18 +6,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 
 /**
- * This class is the view of the dashboard. The dashboard is represented in
- * a seperate panel at the right of the map and serves as a container for,
- * from top to bottom :
- * the CellInfoView, the CityInfoCiew and the ActionView.
- * Its default height is the height of the game frame and its default width
- * is a third of the height of the game frame.
- *
- * @author Martin
- */
-
-
-/**
  * This class is for the model of a cell. A cell has a position and an id
  * corresponding to the type of terrain of the cell. It also has an inventory
  * that holds resources. Each cell that isn't a plain nor a city cell has a
