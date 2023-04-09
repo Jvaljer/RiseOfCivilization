@@ -48,8 +48,6 @@ public class WorkerModel {
 			init_health_bar = 1;
 		}
 		current_health_bar = init_health_bar;
-		
-		model.worker_amount++;
 	}
 	
 	public int GetCurrentHealth() {

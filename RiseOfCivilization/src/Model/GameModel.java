@@ -19,8 +19,7 @@ public class GameModel {
 	private ArrayList<WorkerModel> workers;
 	private ArrayList<BuildingModel> buildings;
 	private ArrayList<EnnemyModel> ennemies;
-	
-	public int worker_amount;
+	private GoalsModel goals;
 
 	public GameModel() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -30,8 +29,6 @@ public class GameModel {
 		panel_height = map_height;
 		map = new MapModel(this);
 		inventory = new InventoryModel();
-		
-		worker_amount = 0;
 		
 		Point start_coord = map.GetCityOriginCoord();
 		
@@ -49,6 +46,8 @@ public class GameModel {
 		buildings.add(new BuildingModel(this, shop_coord, BuildingId.Shop));
 		
 		ennemies = new ArrayList<EnnemyModel>();
+		
+		goals = new GoalsModel(this);
 	}
 	
 	public int GetMapWidth() {
@@ -470,5 +469,9 @@ public class GameModel {
 				workers.remove(i);
 			}
 		}
+	}
+	
+	public GoalsModel GetGoals() {
+		return goals;
 	}
 }
