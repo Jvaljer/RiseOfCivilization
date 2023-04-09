@@ -52,7 +52,6 @@ public class WorkerDrop extends Thread {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("player drops inventory");
 		ctrl.GetGameModel().WorkerDropsInventory(worker);
 		ctrl.GetGameView().getCityInfoView().update();
 		worker.Free();

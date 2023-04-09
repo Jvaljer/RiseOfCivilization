@@ -69,7 +69,7 @@ public class WorkerModel {
 	}
 	
 	public boolean IsDead() {
-		return current_health_bar>0;
+		return current_health_bar==0;
 	}
 	
 	/**

@@ -30,7 +30,9 @@ public class WorkerCtrl extends Thread {
 				(new WorkerDrop(ctrl,worker)).start();
 			}
 		}
-		recovery.stop();
+		if(recovery!=null) {
+			recovery.stop();
+		}
 		//if the worker is dead then delete it from all lists
 		ctrl.GetGameView().RemoveWorker(worker);
 		ctrl.GetGameModel().RemoveWorker(worker);

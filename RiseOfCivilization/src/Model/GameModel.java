@@ -462,4 +462,13 @@ public class GameModel {
 			}
 		}
 	}
+	
+	public void RemoveEnnemy(EnnemyModel ennemy) {
+		for(int i=0; i<ennemies.size(); i++) {
+			EnnemyModel em = ennemies.get(i);
+			if(em==ennemy) {
+				workers.remove(i);
+			}
+		}
+	}
 }

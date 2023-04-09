@@ -12,6 +12,10 @@ public class EnnemyView {
 		model = EM;
 	}
 	
+	public EnnemyModel GetModel() {
+		return model;
+	}
+	
 	public void DrawEnnemy(Graphics G) {
 		int l = model.GetWidth();
 		Point pos = model.GetPos();

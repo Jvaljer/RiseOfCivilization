@@ -82,5 +82,7 @@ public class EnnemyCtrl extends Thread {
 		}
 		System.out.println("ennemy is DEAD");
 		//if the ennemy is dead then we wanna delete its model & view from the game's model & view lists
+		game.GetGameView().RemoveEnnemy(model);
+		game.GetGameModel().RemoveEnnemy(model);
 	}
 }
