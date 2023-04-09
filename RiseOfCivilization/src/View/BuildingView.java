@@ -53,22 +53,22 @@ public class BuildingView {
 				G.drawImage(Icons.CityHall,x-15,y-15,37,34,null);
 				break;
 			case SawMill :
-				G.drawImage(Icons.SawMill,x+3,y-16,37,34,null);
+				G.drawImage(Icons.SawMill,x-15,y-15,30,30,null);
 				break;
 			case Quarry :
-				G.drawImage(Icons.Quarry,x+3,y-16,37,34,null);
+				G.drawImage(Icons.Quarry,x-15,y-15,30,30,null);
 				break;
 			case LumberCamp :
-				G.drawImage(Icons.LumberCamp,x+3,y-16,37,34,null);
+				G.drawImage(Icons.LumberCamp,x-15,y-15,30,30,null);
 				break;
 			case MinerCamp :
-				G.drawImage(Icons.MinerCamp,x+3,y-16,37,34,null);
+				G.drawImage(Icons.MinerCamp,x-15,y-15,30,30,null);
 				break;
 			case QuarrymanCamp :
-				G.drawImage(Icons.QuarrymanCamp,x+3,y-16,37,34,null);
+				G.drawImage(Icons.QuarrymanCamp,x-15,y-15,30,30,null);
 				break;
 			case Barrack :
-				G.drawImage(Icons.Barrack,x+3,y-16,37,34,null);
+				G.drawImage(Icons.Barrack,x-15,y-15,30,30,null);
 				break;
 			case Shop :
 				G.drawImage(Icons.Shop,x-15,y-15,30,30,null);
