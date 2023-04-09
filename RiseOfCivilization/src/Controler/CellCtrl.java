@@ -107,7 +107,6 @@ public class CellCtrl extends Thread {
 			g_ctrl.GetButtonFromName("Drop").setEnabled(false);
 			g_ctrl.GetButtonFromName("Objectives").setEnabled(true);
 		}
-		
 	}
 	
 	public void UnClick() {
