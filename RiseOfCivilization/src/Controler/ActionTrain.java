@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Model.MapModel;
 import Threads.BuildingTrain;
+import Types.Goals;
 import Model.CellModel;
 import Model.BuildingModel;
 
@@ -23,6 +24,7 @@ public class ActionTrain implements ActionListener {
 			BuildingModel building = map.GetBuildingFromCoord(cell.GetCoord());
 			
 			(new BuildingTrain(g_ctrl,building)).start();
+			g_ctrl.GetGameModel().GetGoals().IncrementGoal(Goals.TrainedWorkers);
 	}
 
 }

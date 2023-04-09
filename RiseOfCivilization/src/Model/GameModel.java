@@ -137,10 +137,16 @@ public class GameModel {
 			if(available >= worker.GetHarvestCapacity()) {
 				worker.harvest(cell.getResource());
 				cell.collectResource(worker.GetHarvestCapacity());
+				goals.IncrementGoal(Goals.CollectResources, 3);
 			} else {
 				int amount = cell.getResourceAmount();
 				worker.harvest(cell.getResource(),cell.getResourceAmount());
 				cell.collectResource(cell.getResourceAmount());
+				if(amount<30) {
+					goals.IncrementGoal(Goals.CollectResources);
+				} else {
+					goals.IncrementGoal(Goals.CollectResources, Math.round(amount/30));
+				}
 			}
 		}
 	}
