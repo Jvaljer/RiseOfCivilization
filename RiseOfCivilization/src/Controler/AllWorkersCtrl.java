@@ -14,14 +14,12 @@ public class AllWorkersCtrl extends Thread{
 		ctrl = GC;
 		map = ctrl.GetGameModel().GetMapModel();
 		workers = ctrl.GetGameModel().GetWorkerModel();
-		old_len = workers.size();
-		for(int i=0; i<old_len; i++) {
-			if(workers.get(i).InventoryIsFull()) {
-				(new WorkerDrop(ctrl,workers.get(i))).start();
-				(new WorkerRecovery(ctrl,workers.get(i))).start();
-				(new WorkerCtrl(ctrl,workers.get(i))).start();
-			}
+		int len = workers.size();
+		for(int i=0; i<len; i++) {
+			System.out.println("creating initial worker's controller -> "+i);
+			(new WorkerCtrl(ctrl,workers.get(i))).start();
 		}
+		old_len = workers.size();
 	}
 	
 	@Override
