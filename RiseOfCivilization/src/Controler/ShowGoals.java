@@ -1,18 +1,17 @@
 package Controler;
 
 import java.awt.event.*;
+import View.GoalsView;
 
 public class ShowGoals implements ActionListener {
 	private GameCtrl game;
-	private GoalsCtrl goals;
 	
-	public ShowGoals(GameCtrl GC, GoalsCtrl GsC) {
+	public ShowGoals(GameCtrl GC) {
 		game = GC;
-		goals = GsC;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//when the player clicks on this button we wanna open a new window showing how he advanced the different objectivs
+		new GoalsView(game.GetGameView(),game.GetGameModel().GetGoals());
 	}
 }

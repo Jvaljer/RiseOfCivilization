@@ -47,6 +47,9 @@ public class GameCtrl{
 				case "Drop" :
 					button.addActionListener(new ActionDrop(this));
 					break;
+				case "Objectives":
+					button.addActionListener(new ShowGoals(this));
+					break;
 				default:
 					break;
 			}

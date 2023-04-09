@@ -122,6 +122,15 @@ public class ActionView extends JPanel {
 		Button_list.add(button);
 		add(button, c);
 		
+		button = new JButton("");
+		button.setName("Objectives");
+		button.setToolTipText("Objectives");
+		button.setBackground(Color.BLACK);
+		button.setIcon(new ImageIcon("./icons/Objectives.png"));
+		c.gridx = 2;
+		c.gridy = 3;
+		Button_list.add(button);
+		add(button, c);
 		for (JButton but :Button_list) {
 			but.setEnabled(false);
 		}

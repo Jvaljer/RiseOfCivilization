@@ -29,7 +29,14 @@ public class GoalsView extends JFrame {
         // Create the primary goals panel
     	primary_objectives = new JPanel();
     	primary_objectives.setLayout(new BoxLayout(primary_objectives, BoxLayout.Y_AXIS));
-
+    	JLabel title = new JLabel("Primary Objectives -");
+    	primary_objectives.add(title);
+    	
+    	secondary_objectives = new JPanel();
+    	secondary_objectives.setLayout(new BoxLayout(secondary_objectives, BoxLayout.Y_AXIS));
+    	JLabel title_ = new JLabel("Secondary Objectives -");
+    	secondary_objectives.add(title_);
+    	
         // Create some sample primary goals
     	for(Goals key : model.GetGoalsMap().keySet()) {
     		JLabel goal = new JLabel(key.toString());
@@ -50,7 +57,7 @@ public class GoalsView extends JFrame {
 
         setTitle("Game Objectives");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(200, 400);
+        setSize(400, 300);
         setLocationRelativeTo(null);
         setVisible(true);
     }

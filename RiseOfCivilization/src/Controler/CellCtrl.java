@@ -85,7 +85,7 @@ public class CellCtrl extends Thread {
 			g_ctrl.GetButtonFromName("Train").setEnabled(map.CanTrain(cell_model));
 			g_ctrl.GetButtonFromName("Shop").setEnabled(map.CellHasShop(cell_model));
 			g_ctrl.GetButtonFromName("Drop").setEnabled(map.CanDrop(cell_model));
-			
+			g_ctrl.GetButtonFromName("Objectives").setEnabled(true);
 		} else if(map.CellIsOccupiedByWorker(cell_model)) {
 			g_ctrl.GetButtonFromName("Move").setEnabled(false);
 			g_ctrl.GetButtonFromName("Collect").setEnabled(map.CanCollect(cell_model));
@@ -95,7 +95,7 @@ public class CellCtrl extends Thread {
 			g_ctrl.GetButtonFromName("Train").setEnabled(false);
 			g_ctrl.GetButtonFromName("Shop").setEnabled(false);
 			g_ctrl.GetButtonFromName("Drop").setEnabled(true);
-			
+			g_ctrl.GetButtonFromName("Objectives").setEnabled(true);
 		} else {
 			g_ctrl.GetButtonFromName("Move").setEnabled(map.KnightsAreOnMap());
 			g_ctrl.GetButtonFromName("Collect").setEnabled(map.CanCollect(cell_model));
@@ -105,7 +105,7 @@ public class CellCtrl extends Thread {
 			g_ctrl.GetButtonFromName("Train").setEnabled(false);
 			g_ctrl.GetButtonFromName("Shop").setEnabled(false);
 			g_ctrl.GetButtonFromName("Drop").setEnabled(false);
-			
+			g_ctrl.GetButtonFromName("Objectives").setEnabled(true);
 		}
 		
 	}
