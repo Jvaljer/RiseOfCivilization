@@ -4,32 +4,53 @@ import Types.*;
 import java.awt.*;
 import java.util.concurrent.ThreadLocalRandom;
 
+
+/**
+ * This class is the view of the dashboard. The dashboard is represented in
+ * a seperate panel at the right of the map and serves as a container for,
+ * from top to bottom :
+ * the CellInfoView, the CityInfoCiew and the ActionView.
+ * Its default height is the height of the game frame and its default width
+ * is a third of the height of the game frame.
+ *
+ * @author Martin
+ */
+
+
 /**
  * This class is for the model of a cell. A cell has a position and an id
  * corresponding to the type of terrain of the cell. It also has an inventory
- * that holds resources. Each cell that isn't a city cell has a specific
- * natural resource that corresponds to its id as following :
- * Wheat for Plains, Wood for Forests, Stone for Mountains & Iron for Veins.
+ * that holds resources. Each cell that isn't a plain nor a city cell has a
+ * specific natural resource that corresponds to its id as following :
+ * Wood for Forest, Stone for Mountain & Iron for Iron_Deposit.
  * Each cell has a maximum ammount of resource it can have.
  * 
- * @author abel
- * @author martin
+ * @author Abel
+ * @author Martin
  */
 public class CellModel {
 	private int X;
 	private int Y;
 	private CellId id;
 	private Resource natural_resource;
-	public static final int MAX_RESOURCE = 500;
+	public static final int MAX_RESOURCE = 200;
 	private InventoryModel inventory;
 	private BuildingModel building;
 	
+	/**
+     * This is the constructor of the CellModel. Each resource cell
+	 * is created with a random amout of resource between 10 and 100.
+     *
+     * @param x the x coordinate of the cell
+	 * @param y the y coordinate of the cell
+     * @param i the id of the cell
+     */
 	public CellModel(int x, int y, CellId i) {
 		X = x;
 		Y = y;
 		id = i;
 		
-		inventory = new InventoryModel(200);
+		inventory = new InventoryModel(MAX_RESOURCE);
 		int starting_amount;
 		switch (id) {
 			case Forest :
@@ -52,55 +73,105 @@ public class CellModel {
 		}
 	}
 	
+	/**
+    * Returns the x coordinate of the cell
+    */
 	public int GetX() {
 		return X;
 	}
 	
+	/**
+    * Returns the y coordinate of the cell
+    */
 	public int GetY() {
 		return Y;
 	}
 	
+	/**
+    * Returns the coordinates of the cell
+	* 
+	* @return a new Point containing the coordinates of the cell
+    */
 	public Point GetCoord() {
 		return (new Point(X,Y));
 	}
 	
+	/**
+    * Returns the id of the cell
+    */
 	public CellId GetId() {
 		return id;
 	}
 	
+	/**
+    * Returns the natural resource that the cell produces
+    */
 	public Resource getResource() {
 		return natural_resource;
 	}
 	
+	/**
+    * Returns the inventory of the cell
+    */
 	public InventoryModel getInventory() {
 		return inventory;
 	}
 	
+	/**
+    * Returns the amount of resource the cell currently has
+    */
 	public int getResourceAmount() {
 		return inventory.getAmount(natural_resource);
 	}
 	
+	/**
+    * Returns the amount of resource the cell currently has
+	* 
+	* @param other the other cell to compare
+	* @return      if other has the same coordinates
+    */
 	public boolean hasSameCoord(CellModel other) {
 		return (X == other.GetX() && Y == other.GetY());
 	}
 	
+	/**
+    * Returns the building of the cell or null if the cell has none
+    */
 	public BuildingModel getBuilding() {
 		return building;
 	}
 	
+	/**
+    * Sets the building of the cell to the already built building
+	* 
+	* @param bm the building to be built on the cell
+    */
 	public void build(BuildingModel bm) {
 		building = bm;
 	}
 	
+	/**
+    * Returns if the cell has a building
+    */
 	public boolean hasBuilding() {
 		return building != null;
 	}
 	
+	/**
+    * Returns if the cell has a resource producing building
+	* 
+	* @return true if a SawMill, Mine or Quarry has been built on the cell
+    */
 	public boolean hasProdBuilding() {
 		BuildingId id = building.getId();
 		return (id == BuildingId.SawMill || id == BuildingId.Mine || id == BuildingId.Quarry);
 	}
 	
+	/**
+    * Turns the cell to be a city cell. This methods first removes of all
+	* the previous resource it could have had before changing its id and
+	* removing its previous natural resource.
+    */
 	public void TurnToCity() {
 		if(id != CellId.Plain) {
 			inventory.remove(natural_resource, MAX_RESOURCE);
@@ -109,6 +180,11 @@ public class CellModel {
 		natural_resource = null;
 	}
 	
+	/**
+    * Removes resource from the cell's inventoryy
+	* 
+	* @param n the amount to be removed
+    */
 	public void collectResource(int n) {
 		inventory.remove(natural_resource, n);
 	}
