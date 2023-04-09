@@ -14,19 +14,34 @@ import Types.*;
  * @author abel
  */
 public class MapModel {
+	// The main Model of the Game it gather all the information about the current game
 	private GameModel game;
+
+	// Constante about the map
 	private static int width;
 	private static int height;
 	private static int lines;
 	private static int columns;
 	private static final int Cell_size = 20;
 	private static final Point OriginPoint = new Point(2*Cell_size-10,2*Cell_size-5);
+
+	// Double  ArrayList of CellModel that compose the map
 	private CellModel[][] grid;
+	// Position on the map of the cityHall 
 	private Point city_origin;
+	// ArrayList of cell where we have some cityCell
 	private ArrayList<CellModel> city_cells;
+	// ArrayList of cell where ennemy can spawn
 	private ArrayList<CellModel> spawner_cells;
+
 	private CellModel current_cell;
 	
+	/**
+	 * Constructor for the mapModel
+	 * Initialised the position of the cityHall and all the cityCell
+	 * Also Initialised the spawner for the ennemy
+	 * @param M The gameModel
+	 */
 	public MapModel(GameModel M) {
 		game = M;
 		width = game.GetMapWidth();
@@ -89,54 +104,111 @@ public class MapModel {
 		} while (spawner_cells.size()<10);
 	}
 	
+	/**
+	 * Getter for the GameModel
+	 * @return this.game
+	 */
 	public GameModel GetGameModel() {
 		return game;
 	}
 	
+	/**
+	 * Getter for the number of line in the map
+	 * @return this.lines
+	 */
 	public int GetLinesAmount() {
 		return lines;
 	}
 	
+	/**
+	 * Getter for the number of columns in the map
+	 * @return this.comlumns
+	 */
 	public int GetColumnsAmount() {
 		return columns;
 	}
 	
+	/**
+	 * Getter for size of a cell
+	 * @return this.Cell_size
+	 */
 	public int GetCellSize() {
 		return Cell_size;
 	}
 	
+	/**
+	 * Getter for the grid of cell that represent this map
+	 * @return this.grid
+	 */
 	public CellModel[][] GetGrid(){
 		return grid;
 	}
 	
+	/**
+	 * Getter for cell
+	 * @param x X coordonate on the grid
+	 * @param y Y coordonate on the grid
+	 * @return this.grid[x][y]
+	 */
 	public CellModel GetCellFromCoord(int x, int y) {
 		return grid[x][y];
 	}
 	
+	/**
+	 * Getter for a cell
+	 * @param p position on the grid
+	 * @return this.grid[p.x][p.y]
+	 */
 	public CellModel getCellFromPoint(Point p) {
 		return grid[p.x][p.y];
 	}
 	
+	/**
+	 * Getter for the width of the map
+	 * @return this.width
+	 */
 	public int GetWidth() {
 		return width;
 	}
 	
+	/**
+	 * Getter for the Height of the map
+	 * @return this.height
+	 */
 	public int GetHeight() {
 		return height;
 	}
 	
+	/**
+	 * Getter for the Origin point (0,0)
+	 * @return this.OriginPoint
+	 */
 	public Point GetOriginCoord() {
 		return OriginPoint;
 	}
 	
+	/**
+	 * Getter for the CityHall position
+	 * @return this.city_origin
+	 */
 	public Point GetCityOriginCoord() {
 		return city_origin;
 	}
 	
+	/**
+	 * Getter for all the city Cells
+	 * @return this.city_cells
+	 */
 	public ArrayList<CellModel> getCityCells() {
 		return city_cells;
 	}
 	
+	/**
+	 *  Getter for position on the screen from Coordonate on the map
+	 * @param i X coordonate on the map
+	 * @param j y coordonate on the map
+	 * @return 
+	 */
 	public Point GetPosFromCoord(int i, int j) {
 		Point pos = new Point(0,0);
 		int x0 = OriginPoint.x;
@@ -156,6 +228,12 @@ public class MapModel {
 		return pos;
 	}
 	
+	/**
+	 * Getter for a position on the map depending on coordonate on the screen
+	 * @param x_ X coordonate on the screen
+	 * @param y_ Y coordonate on the screen
+	 * @return
+	 */
 	public Point GetCoordFromClick(int x_, int y_) {
 		int s = Cell_size;
 		double angle = 60. * Math.PI / 180. ;
@@ -188,6 +266,13 @@ public class MapModel {
 		return (new Point((int) i-1,(int) j-1)); 
 	}
 	
+	/**
+	 * The GetNeighbours Function
+	 * return an ArrayList<Point> of all the Cell that suround a Cell on the map
+	 * @param i X coordonate of the cell on the map
+	 * @param j Y coordonate of the cell on the map
+	 * @return
+	 */
 	public ArrayList<Point> GetNeighbours(int i, int j) {
 		ArrayList<Point > neighbors = new ArrayList<Point>();
 		Point[] directions = new Point[6];
@@ -225,6 +310,11 @@ public class MapModel {
 		return neighbors;
 	}
 	
+	/**
+	 * This Function return a boolean if there is no worker or building on the cell
+	 * @param pts position of the cell
+	 * @return
+	 */
 	public boolean CellIsFree(Point pts) {
 		for(WorkerModel worker : game.GetWorkerModel()) {
 			if(pts==worker.getPos()) {
@@ -240,12 +330,25 @@ public class MapModel {
 		return true;
 	}
 	
+	/**
+	 * Return a boolean that said if the coordonate givent to the function can be a cell of the map
+	 * @param cell coordonate of a cell
+	 * @return
+	 */
 	public boolean CellIsValid(Point cell) {
 		int i = cell.x;
 		int j = cell.y;
 		return (i<lines && i>=0 && j<columns && j>=0);
 	}
 	
+	/**
+	 * The GetShortestPath Function
+	 * Calcul the shortest path between to point on the map
+	 * The path given by the function will avoid other player and cell that have a building on it
+	 * @param start cell from where we start
+	 * @param end destiantion cell
+	 * @return a path between those two cell
+	 */
 	public ArrayList<Point> GetShortestPath(Point start, Point end){
 		Point[][] graph;
 		graph = new Point[lines][columns];
@@ -293,12 +396,23 @@ public class MapModel {
 		return path;
 	}
 	
+	/**
+	 * Convert two int as a Point
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public Point GetPointFromCoord(int x, int y) {
 		CellModel cell = GetCellFromCoord(x,y);
 		Point pts = new Point(cell.GetX(),cell.GetY());
 		return pts;
 	}
 	
+	/**
+	 *  Getter for the nearest worker that's free on the map
+	 * @param coord coordonate from where we want the nearest worker
+	 * @return the nearest worker
+	 */
 	public WorkerModel GetNearestWorker(Point coord) {
 		WorkerModel nearest = null;
 		int dist;
@@ -317,6 +431,12 @@ public class MapModel {
 		return nearest;
 	}
 	
+	/**
+	 * Getter for the nearest worker that's free on the map that can execute a certain task
+	 * @param cell Cell from where we want the nearest worker
+	 * @param task the task the worker have to be able to execute
+	 * @return
+	 */
 	public WorkerModel GetNearestWorker(CellModel cell, Actions task) {
 		WorkerModel nearest = null;
 		WorkerRole needed_worker = WorkerRole.Worker;
@@ -386,6 +506,12 @@ public class MapModel {
 		return nearest;
 	}
 	
+	/**
+	 * The CellIsOccupiedByBuilding function
+	 * return a boolean that describe if the cell already have a building on it
+	 * @param cell
+	 * @return
+	 */
 	public boolean CellIsOccupiedByBuilding(CellModel cell) {
 		for(BuildingModel building : game.GetBuildingList()) {
 			if(building.GetPos().x==cell.GetX() && building.GetPos().y==cell.GetY()) {
@@ -394,6 +520,13 @@ public class MapModel {
 		}
 		return false;
 	}
+
+	/**
+	 * The CellIsOccupiedByWorker function
+	 * return a boolean that describe if the cell already have a worker on it
+	 * @param cell
+	 * @return
+	 */
 	public boolean CellIsOccupiedByWorker(CellModel cell) {
 		for(WorkerModel worker : game.GetWorkerModel()) {
 			if(worker.getcoordX()==cell.GetX() && worker.getcoordY()==cell.GetY()) {
@@ -402,6 +535,15 @@ public class MapModel {
 		}
 		return false;
 	}
+
+	/**
+	 * The CanExpand function
+	 * Return a boolean that describe if we can expand the city to this cell
+	 * The cell must not already be a CityCell
+	 * And on of it neighbor must be a cityCell
+	 * @param cell
+	 * @return
+	 */
 	public boolean CanExpand(CellModel cell) {
 		if(cell.GetId()==CellId.City) {
 			return false;
@@ -413,17 +555,41 @@ public class MapModel {
 		}
 		return false;
 	}
+
+	/**
+	 * This function return a boolean that describe if we can build any building on a cell
+	 * @param cell
+	 * @return
+	 */
 	public boolean CanBuild(CellModel cell) {
 		return cell.GetId()==CellId.Iron_Deposit || cell.GetId()==CellId.Forest || cell.GetId()==CellId.Mountain || cell.GetId()==CellId.City;
 	}
+
+
+	/**
+	 * This function return a boolean that describe if we can harvest ressources from a cell
+	 * @param cell
+	 * @return
+	 */
 	public boolean CanCollect(CellModel cell) {
 		return cell.GetId()==CellId.Iron_Deposit || cell.GetId()==CellId.Forest || cell.GetId()==CellId.Mountain || (CellIsOccupiedByBuilding(cell) && BuildingIsCollectable(cell));
 	}
 	
+	/**
+	 * This function return a boolean that describe if there is a building on the cell and if we can collect ressources from this building
+	 * @param cell
+	 * @return
+	 */
 	public boolean BuildingIsCollectable(CellModel cell) {
 		BuildingId bid = GetBuildingFromCoord(cell.GetCoord()).getId();
 		return (bid==BuildingId.Mine) || (bid==BuildingId.SawMill) || (bid==BuildingId.Quarry);
 	}
+
+	/**
+	 * Return the building on a cell from the given Coordonate if there is one else it return the null pointer
+	 * @param coord
+	 * @return
+	 */
 	public BuildingModel GetBuildingFromCoord(Point coord) {
 		for(BuildingModel building : game.GetBuildingList()) {
 			if(building.GetPos().x==coord.x && building.GetPos().y==coord.y) {
@@ -432,6 +598,12 @@ public class MapModel {
 		}
 		return null;
 	}
+
+	/**
+	 * Return the worker on a cell from the given Coordonate if there is one else it return the null pointer
+	 * @param coord
+	 * @return
+	 */
 	public WorkerModel GetWorkerFromCoord(Point coord) {
 		for(WorkerModel worker : game.GetWorkerModel()) {
 			if(worker.getcoordX()==coord.x && worker.getcoordY()==coord.y) {
@@ -441,14 +613,28 @@ public class MapModel {
 		return null;
 	}
 	
+	/**
+	 * add a building on the game
+	 * @param bid the ID of the building we want to build
+	 * @param pts position on the map of this new building
+	 */
 	public void Build(BuildingId bid, Point pts) {
 		game.AddBuilding(bid, pts);
 	}
 	
+	/**
+	 * Return all the cityCell on the map
+	 * @return this.city_cells
+	 */
 	public ArrayList<CellModel> GetCityCells(){
 		return city_cells;
 	}
 	
+	/**
+	 * Return if there is a shop the cell
+	 * @param cell
+	 * @return
+	 */
 	public boolean CellHasShop(CellModel cell) {
 		BuildingModel shop = GetBuildingFromCoord(cell.GetCoord());
 		if(shop!=null) {
@@ -458,31 +644,67 @@ public class MapModel {
 		}
 	}
 	
+	/**
+	 * Return  a boolean that describe if the player given in argument has a level under 5
+	 * @param cell
+	 * @param worker
+	 * @return
+	 */
 	public boolean CanUpgradeWorker(CellModel cell, WorkerModel worker) {
 		return worker.GetLevel()<5;
 	}
 	
+	/**
+	 * Return  a boolean that describe if the building given in argument has a level under 3
+	 * @param cell
+	 * @param building
+	 * @return
+	 */
 	public boolean CanUpgradeBuilding(CellModel cell, BuildingModel building) {
 		return building.GetLevel()<3;
 	}
 	
+	/**
+	 * Setter for the variable current_sell
+	 * @param cell
+	 */
 	public void SetCurrentCell(CellModel cell) {
 		current_cell = cell;
 	}
 	
+	/**
+	 * Getter for the current_cell
+	 * @return this.current_cell
+	 */
 	public CellModel GetCurrentCell() {
 		return current_cell;
 	}
 	
+	/**
+	 * Return a boolean that describe if there is a worker and a building on a cell
+	 * @param cell
+	 * @return
+	 */
 	public boolean CanDrop(CellModel cell) {
 		return (CellIsOccupiedByBuilding(cell) && GetBuildingFromCoord(cell.GetCoord()).getId()==BuildingId.CityHall) || CellIsOccupiedByWorker(cell);
 	}
 	
+	/**
+	 * Return a boolean that describe if there is a building on a cell and we can create a new worker
+	 * @param cell
+	 * @return
+	 */
 	public boolean CanTrain(CellModel cell) {
 		BuildingId bid = GetBuildingFromCoord(cell.GetCoord()).getId();
 		return ((bid==BuildingId.Barrack) || (bid==BuildingId.LumberCamp) || (bid==BuildingId.MinerCamp) || (bid==BuildingId.QuarryWorkerCamp)) && game.CanCreateNewWorker(GetBuildingFromCoord(cell.GetCoord()));
 	}
 	
+	/**
+	 * Getter for the nearest worker that's free on the map that have a certain role
+	 * @param cell
+	 * @param role
+	 * @return
+	 */
 	public WorkerModel GetNearestWorkerFromRole(CellModel cell, WorkerRole role) {
 		int dist;
 		int shortest = Integer.MAX_VALUE;
@@ -507,10 +729,20 @@ public class MapModel {
 		return nearest;
 	}
 	
+	/**
+	 * Getter for all the spawner cell on the map
+	 * @return this.spawner_cells
+	 */
 	public ArrayList<CellModel> GetSpawnerCells(){
 		return spawner_cells;
 	}
 	
+
+	/**
+	 * Return a boolean that describe if there is a worker on a certain coordonate on the map
+	 * @param coord
+	 * @return
+	 */
 	public boolean WorkerOnCoord(Point coord) {
 		for(WorkerModel worker : game.GetWorkerModel()) {
 			if(worker.getcoordX()==coord.x && worker.getcoordY()==coord.y) {
@@ -538,6 +770,12 @@ public class MapModel {
 		return new Pair(false,null);
 	}
 	
+	/**
+	 * The KnightsAreOnMap Function 
+	 * Return True if on of the worker is a knight
+	 * else return false
+	 * @return
+	 */
 	public boolean KnightsAreOnMap() {
 		for(WorkerModel wm : game.GetWorkerModel()) {
 			if(wm.GetRole()==WorkerRole.Knight) {
