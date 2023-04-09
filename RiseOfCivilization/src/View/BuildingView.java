@@ -2,7 +2,6 @@ package View;
 
 import Model.*;
 import Types.BuildingId;
-import Types.CellId;
 
 import java.awt.*;
 
@@ -47,31 +46,71 @@ public class BuildingView {
 				break;
 		}
 	}
+	
+	public BuildingModel getModel() {
+		return model;
+	}
+	
+	public Point getCoord() {
+		return coord;
+	}
+	
 	public void DrawImageFromId(BuildingId m_id, Graphics G, int x, int y){
 		switch (m_id) {
 			case CityHall :
-				G.drawImage(Icons.CityHall,x-15,y-15,37,34,null);
+				G.drawImage(CellIcon.CityHall,x-18,y-19,37,34,null);
 				break;
 			case SawMill :
-				G.drawImage(Icons.SawMill,x-15,y-15,30,30,null);
+				G.drawImage(CellIcon.SawMill,x-15,y-15,30,30,null);
 				break;
 			case Quarry :
-				G.drawImage(Icons.Quarry,x-15,y-15,30,30,null);
+				G.drawImage(CellIcon.Quarry,x-15,y-15,30,30,null);
 				break;
 			case LumberCamp :
-				G.drawImage(Icons.LumberCamp,x-15,y-15,30,30,null);
+				G.drawImage(CellIcon.LumberCamp,x-15,y-15,30,30,null);
 				break;
 			case MinerCamp :
-				G.drawImage(Icons.MinerCamp,x-15,y-15,30,30,null);
+				G.drawImage(CellIcon.MinerCamp,x-15,y-15,30,30,null);
 				break;
 			case QuarrymanCamp :
-				G.drawImage(Icons.QuarrymanCamp,x-15,y-15,30,30,null);
+				G.drawImage(CellIcon.QuarrymanCamp,x-15,y-15,30,30,null);
 				break;
 			case Barrack :
-				G.drawImage(Icons.Barrack,x-15,y-15,30,30,null);
+				G.drawImage(CellIcon.Barrack,x-15,y-15,30,30,null);
 				break;
 			case Shop :
-				G.drawImage(Icons.Shop,x-15,y-15,30,30,null);
+				G.drawImage(CellIcon.Shop,x-15,y-15,30,30,null);
+				break;
+			default :
+				break;
+		}
+	}
+	
+	public void DrawImageFromId(BuildingId m_id, Graphics G, int x, int y, boolean is_bigger){
+		switch (m_id) {
+			case CityHall :
+				G.drawImage(CellIcon.CityHall,x-54,y-57,111,102,null);
+				break;
+			case SawMill :
+				G.drawImage(CellIcon.SawMill,x-45,y-45,90,90,null);
+				break;
+			case Quarry :
+				G.drawImage(CellIcon.Quarry,x-45,y-45,90,90,null);
+				break;
+			case LumberCamp :
+				G.drawImage(CellIcon.LumberCamp,x-45,y-45,90,90,null);
+				break;
+			case MinerCamp :
+				G.drawImage(CellIcon.MinerCamp,x-45,y-45,90,90,null);
+				break;
+			case QuarrymanCamp :
+				G.drawImage(CellIcon.QuarrymanCamp,x-45,y-45,90,90,null);
+				break;
+			case Barrack :
+				G.drawImage(CellIcon.Barrack,x-45,y-45,90,90,null);
+				break;
+			case Shop :
+				G.drawImage(CellIcon.Shop,x-45,y-45,90,90,null);
 				break;
 			default :
 				break;

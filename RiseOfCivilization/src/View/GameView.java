@@ -47,7 +47,7 @@ public class GameView extends JFrame {
 			buildings_view.add(new BuildingView(this,model.GetBuildingList().get(i)));
 		}
 
-		dashboard_view = new DashboardView(model);
+		dashboard_view = new DashboardView(model, this);
 		cell_info_view = dashboard_view.getCellInfoView();
 		city_info_view = dashboard_view.getCityInfoView();
 		action_view = dashboard_view.GetActionView();

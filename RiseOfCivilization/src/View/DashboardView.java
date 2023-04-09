@@ -21,21 +21,23 @@ import Model.GameModel;
 @SuppressWarnings("serial")
 public class DashboardView extends JPanel {
 	private GameModel game_model;
+	private GameView game_view;
     private int width;
     private int height;
     private CellInfoView cell_info_view;
     private CityInfoView city_info_view;
     private ActionView Action_view;
 
-    public DashboardView(GameModel gm) {
+    public DashboardView(GameModel gm, GameView gv) {
     	game_model = gm;
+    	game_view = gv;
     	
         width = game_model.GetPanelWidth();
         height = game_model.GetPanelheight();
         setPreferredSize(new Dimension(width, height));
         setLayout(new BorderLayout());
         
-        cell_info_view = new CellInfoView(this);
+        cell_info_view = new CellInfoView(game_view, this);
         city_info_view = new CityInfoView(game_model, this);
         Action_view = new ActionView(this);
 

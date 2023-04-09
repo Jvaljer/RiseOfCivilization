@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
@@ -29,41 +30,63 @@ public class CityInfoView extends JPanel {
 	private DashboardView dashboard_view;
 	private InventoryModel global_inventory;
 	private ArrayList<JLabel> labels;
+	private ArrayList<WorkerModel> workers;
+	private GridBagLayout layout;
 	private JLabel wood_label;
 	private JLabel stone_label;
 	private JLabel iron_label;
 	private JLabel gold_label;
+	private JLabel workers_label;
+	private final static int offset = 5;
 	
 	public CityInfoView(GameModel gm, DashboardView dv) {
 		game_model = gm;
 		dashboard_view = dv;
 		global_inventory = game_model.getInventoryModel();
 		labels = new ArrayList<JLabel>();
-		ArrayList<WorkerModel> workers = game_model.GetWorkerModel();
+		workers = game_model.GetWorkerModel();
 		
-		setLayout(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
+		layout = new GridBagLayout();
+		setLayout(layout);
+		
+		GridBagConstraints left_c = new GridBagConstraints();
+		left_c.anchor = GridBagConstraints.NORTHWEST;
+		left_c.fill = GridBagConstraints.HORIZONTAL;
 		
 		wood_label = new JLabel();
 		labels.add(wood_label);
-		c.gridx = 0;
-		c.gridy = 0;
-		add(wood_label, c);
-		stone_label = new JLabel();
-		labels.add(stone_label);
-		c.gridx = 1;
-		c.gridy = 0;
-		add(stone_label, c);
+		left_c.weightx = 0.5;
+		left_c.insets = new Insets(0, offset, 0, 0);
+		left_c.gridx = 0;
+		left_c.gridy = 0;
+		add(wood_label, left_c);
+		
 		iron_label = new JLabel();
 		labels.add(iron_label);
-		c.gridx = 0;
-		c.gridy = 1;
-		add(iron_label, c);
+		left_c.gridy = 1;
+		add(iron_label, left_c);
+		
+		workers_label = new JLabel();
+		labels.add(workers_label);
+		left_c.gridwidth = 2;
+		left_c.gridy = 2;
+		add(workers_label, left_c);
+		
+		GridBagConstraints right_c = new GridBagConstraints();
+		right_c.anchor = GridBagConstraints.NORTHWEST;
+		right_c.fill = GridBagConstraints.HORIZONTAL;
+		
+		stone_label = new JLabel();
+		labels.add(stone_label);
+		right_c.weightx = 0.5;
+		right_c.gridx = 1;
+		right_c.gridy = 0;
+		add(stone_label, right_c);
+		
 		gold_label= new JLabel();
 		labels.add(gold_label);
-		c.gridx = 1;
-		c.gridy = 1;
-		add(gold_label, c);
+		right_c.gridy = 1;
+		add(gold_label, right_c);
 		
 		for (JLabel label : labels) {
 			label.setFont(label.getFont().deriveFont(15.0f));
@@ -71,7 +94,7 @@ public class CityInfoView extends JPanel {
 		
 		update();
 
-		setPreferredSize(new Dimension(dashboard_view.getWidth(), (int) (dashboard_view.getHeight()/6)));
+		setPreferredSize(new Dimension(dashboard_view.getWidth(), (int) (dashboard_view.getHeight()/3)));
 		setBackground(Color.GRAY);
 	}
 	
@@ -80,5 +103,6 @@ public class CityInfoView extends JPanel {
 		stone_label.setText("Stone : " + global_inventory.getAmount(Resource.Stone));
 		iron_label.setText("Iron : " + global_inventory.getAmount(Resource.Iron));
 		gold_label.setText("Gold : " + global_inventory.getAmount(Resource.Gold));
+		workers_label.setText("Free Workers : " + workers.stream().filter(w -> !w.GetOccupied()).count() + "/" + workers.size());
 	}
 }

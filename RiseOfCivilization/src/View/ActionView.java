@@ -1,10 +1,9 @@
 package View;
 
-import Model.MapModel;
-
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
+
 
 /**
  * This class is the view of the infobar. The infobar is represented in
@@ -21,7 +20,7 @@ public class ActionView extends JPanel {
 	public ActionView(DashboardView dv) {
 		dashboard_view = dv;
 		
-		setPreferredSize(new Dimension(dashboard_view.getWidth(), (int) (3*dashboard_view.getHeight()/6)));
+		setPreferredSize(new Dimension(dashboard_view.getWidth(), (int) (dashboard_view.getHeight()/3)));
 		setBackground(Color.LIGHT_GRAY);
 		
 		Button_list = new ArrayList<JButton>();
