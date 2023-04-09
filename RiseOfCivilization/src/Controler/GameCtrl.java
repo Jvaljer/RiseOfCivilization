@@ -54,6 +54,7 @@ public class GameCtrl{
 		
 		(new RefreshCtrl(view)).start();
 		(new EnnemiesSpawn(this)).start();
+		(new AllWorkersCtrl(this)).start();
 	}
 	
 	public GameModel GetGameModel() {

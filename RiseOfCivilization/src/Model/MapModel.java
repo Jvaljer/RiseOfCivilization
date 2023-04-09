@@ -185,7 +185,6 @@ public class MapModel {
 			i = i - 1;
 			j = j - 1;
 		}
-		System.out.println("for the click on ("+x_+","+y_+"), we got the coordinates ("+(i-1)+","+(j-1)+")");
 		return (new Point((int) i-1,(int) j-1)); 
 	}
 	
@@ -565,7 +564,6 @@ public class MapModel {
 		int len = vision.size();
 		
 		for(int i=0; i<len; i++) {
-			System.out.println("SearchForCitizen -> cpt :"+i);
 			Point pts = vision.get(i);
 			if(WorkerOnCoord(pts)) {
 				return new Pair(true,pts);
