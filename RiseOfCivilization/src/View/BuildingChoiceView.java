@@ -54,7 +54,7 @@ public class BuildingChoiceView extends JFrame {
 		pane.add(barrack, cstr);
 		
 		setContentPane(pane);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         pack();
         setLocationRelativeTo(null);
         setVisible(true);

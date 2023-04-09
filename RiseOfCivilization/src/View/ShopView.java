@@ -117,7 +117,7 @@ public class ShopView extends JFrame implements ChangeListener {
 
         // Configuration of the window
         setContentPane(mainPanel);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
