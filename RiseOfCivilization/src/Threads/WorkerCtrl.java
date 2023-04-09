@@ -37,5 +37,6 @@ public class WorkerCtrl extends Thread {
 		//if the worker is dead then delete it from all lists
 		ctrl.GetGameView().RemoveWorker(worker);
 		ctrl.GetGameModel().RemoveWorker(worker);
+		ctrl.GetGameView().getCityInfoView().update();
 	}
 }

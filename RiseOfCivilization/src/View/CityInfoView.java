@@ -147,6 +147,7 @@ public class CityInfoView extends JPanel {
 	}
 	
 	public void update() {
+		
 		wood_label.setText("Wood : " + global_inventory.getAmount(Resource.Wood));
 		stone_label.setText("Stone : " + global_inventory.getAmount(Resource.Stone));
 		iron_label.setText("Iron : " + global_inventory.getAmount(Resource.Iron));
