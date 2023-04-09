@@ -10,7 +10,12 @@ import Types.Goals;
 import Model.GoalsModel;
 import java.awt.*;
 import java.util.Arrays;
-
+/**
+ * This view appears when you press the Goals button.
+ * It shows you the progress of the main and secondary goals of the game
+ *
+ * @author Abel
+ */
 public class GoalsView extends JFrame {
 	private GameView game;
 	private GoalsModel model;
@@ -19,6 +24,10 @@ public class GoalsView extends JFrame {
     private JPanel primary_objectives;
     private JPanel secondary_objectives;
 
+/**
+ * this is the constructor of GoalsView. It creates the panes and adds the progress bars with
+ * the progress given in GoalsModel
+ */
     public GoalsView(GameView GV, GoalsModel GM) {
     	game = GV;
     	model = GM;
@@ -73,12 +82,12 @@ public class GoalsView extends JFrame {
 
         setTitle("Game Objectives");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(400, 300);
+        setSize(400, 400);
         setLocationRelativeTo(null);
         setVisible(true);
     }
-    
-    // Function to modify the progress bar for a goal
+
+/** Function to modify the progress bar for a goal*/
     public void modifyProgressBar(String goalTitle, int steps) {
         Component[] primaryGoalsComponents = primary_objectives.getComponents();
         Component[] secondaryGoalsComponents = secondary_objectives.getComponents();

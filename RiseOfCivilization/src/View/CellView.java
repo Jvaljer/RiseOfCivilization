@@ -123,7 +123,7 @@ public class CellView {
 	public void Click() {
 		clicked = !clicked;
 	}
-	
+	/** changes the appearance of the cell when called */
 	public void DrawClick(Graphics G, int[] X, int[] Y) {
 		int len = border_pts.length;
 		int[] pts_x = new int[len];
@@ -137,7 +137,9 @@ public class CellView {
 		G.fillPolygon(pts_x, pts_y, len);
 		DrawImageFromId(model.GetId(),G,pts_x[0],pts_y[0]);
 	}
-	
+	/** draws the border of cell
+	 * fills it with its color
+	 * and draws its icon*/
 	public void DrawClick(Graphics G, int[] X, int[] Y, boolean is_bigger) {
 		int len = border_pts.length;
 		int[] pts_x = new int[len];
@@ -151,7 +153,7 @@ public class CellView {
 		G.fillPolygon(pts_x, pts_y, len);
 		DrawImageFromId(model.GetId(),G,pts_x[0],pts_y[0], true);
 	}
-	
+	/** Draws a cell */
 	public void DrawCell(Graphics G, int s, int x0, int y0) {
 		int w = (int) (Math.sqrt(3) * s);
 		
@@ -185,9 +187,9 @@ public class CellView {
 			y[n] = border_pts[n].y;
 		}
 		
-		DrawClick(G, x, y);
+		//DrawClick(G, x, y);
 	}
-	
+	/** Draws a cell but bigger */
 	public void DrawCell(Graphics G, int s, int x0, int y0, boolean is_bigger) {
 		int w = (int) (Math.sqrt(3) * s);
 		
@@ -223,7 +225,7 @@ public class CellView {
 		
 		DrawClick(G, x, y, true);
 	}
-	
+	/** draws a contour around the cell when called */
 	public void DrawContour(Graphics G, int s, int x0, int y0) {
 		int w = (int) (Math.sqrt(3) * s);
 		

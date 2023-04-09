@@ -11,7 +11,12 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.JButton;
 import java.awt.*;
-
+/**
+ * This class is the appears when your click on the shop button.
+ * Allows you to sell/buys resources
+ *
+ * @author Abel
+ */
 public class ShopView extends JFrame implements ChangeListener {
 	private GameView game;
 	private ShopModel model;
@@ -32,7 +37,10 @@ public class ShopView extends JFrame implements ChangeListener {
     private int wood_amount;
     private int stone_amount;
     private int iron_amount;
-    
+
+    /**
+     * Constructor of ShopView adds all of the slider onto the window and creates the buy price and sell price label
+     */
     public ShopView(GameView GV, ShopModel SM) {
         super("Shop Interface");
         game = GV;
@@ -122,7 +130,10 @@ public class ShopView extends JFrame implements ChangeListener {
         setLocationRelativeTo(null);
         setVisible(true);
     }
-    
+    /**
+     * When its called it modifies the value of the sell and buy label. Also enable/disables the buy button if the
+     * price of the selected resources is greater than the players wallet
+     */
     @Override
     public void stateChanged(ChangeEvent e) {
         // Get slider values

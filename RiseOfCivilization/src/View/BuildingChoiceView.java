@@ -7,15 +7,24 @@ import java.awt.*;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
+/**
+ * This class is the apears when your try to build onto à city cell.
+ * It gives you the choice between mutiple buildings
+ *
+ * @author Abel
+ */
 public class BuildingChoiceView extends JFrame {
 	private GameView game;
 	private BuildingChoiceModel model;
-	
-	private JButton barrack;
-	private JButton lumber_camp;
-	private JButton miner_camp;
-	private JButton QuarryWorker_camp;
-	
+
+	/**barrack button*/private JButton barrack;
+	/**lumber_camp button*/private JButton lumber_camp;
+	/**miner_camp button*/private JButton miner_camp;
+	/**QuarryWorker_camp button*/ JButton QuarryWorker_camp;
+
+	/**
+	 *Constructor of BuildingChoiceView creates all buttons set the grid bag layout and adds it to the JPanel
+	 */
 	public BuildingChoiceView(GameView GV, BuildingChoiceModel BCM) {
 		super("Building Choice");
 		
