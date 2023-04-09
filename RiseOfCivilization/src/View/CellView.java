@@ -181,7 +181,7 @@ public class CellView {
 			y[n] = border_pts[n].y;
 		}
 		
-		//DrawClick(G, x, y);
+		DrawClick(G, x, y);
 	}
 	/** Draws a cell but bigger */
 	public void DrawCell(Graphics G, int s, int x0, int y0, boolean is_bigger) {
