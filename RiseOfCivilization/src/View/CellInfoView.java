@@ -250,14 +250,14 @@ public class CellInfoView extends JPanel {
 				building_inv.setVisible(true);
 				building_inv.setText("Stash : " + inventory.getAmount(building.GetProducedResource()));
 				building_max_res.setVisible(true);
-				building_max_res.setText("(max = " + inventory.GetMaxAmount() + ")");
+				building_max_res.setText("(max=" + inventory.GetMaxAmount() + ")");
 				
 				setLowest(building_inv);
 			} else {
 				cell_inv.setVisible(true);
 				cell_inv.setText("Amount : " + current_cell.getResourceAmount());
 				cell_max_res.setVisible(true);
-				cell_max_res.setText("(max = " + current_cell.getInventory().GetMaxAmount() +")");
+				cell_max_res.setText("(max=" + current_cell.getInventory().GetMaxAmount() +")");
 				building_type.setText("Building : None");
 				building_level.setVisible(false);
 				building_inv.setVisible(false);
@@ -275,15 +275,17 @@ public class CellInfoView extends JPanel {
 	public void paint(Graphics g) {
 		super.paint(g);
 		
-		CellView cell_view = new CellView(map_view.GetGrid()[current_cell.GetX()][current_cell.GetY()]);
-		cell_view.setAbs(0);
-		cell_view.setOrd(0);
-		cell_view.DrawCell(g, 60, 70, 185, true);
-		
-		if(current_cell.hasBuilding()) {
-			for(BuildingView b_view : game_view.GetBuildingsView()) {
-				if(b_view.getCoord().equals(current_cell.GetCoord()))
-				b_view.DrawImageFromId(b_view.getModel().getId(), g, 70, 185, true);
+		if(current_cell!=null) {
+			CellView cell_view = new CellView(map_view.GetGrid()[current_cell.GetX()][current_cell.GetY()]);
+			cell_view.setAbs(0);
+			cell_view.setOrd(0);
+			cell_view.DrawCell(g, 60, 70, 185, true);
+			
+			if(current_cell.hasBuilding()) {
+				for(BuildingView b_view : game_view.GetBuildingsView()) {
+					if(b_view.getCoord().equals(current_cell.GetCoord()))
+					b_view.DrawImageFromId(b_view.getModel().getId(), g, 70, 185, true);
+				}
 			}
 		}
 	}
