@@ -6,12 +6,23 @@ import java.awt.Point;
 
 import Model.EnnemyModel;
 import Model.MapModel;
-
+/**
+ * This is the class responsible for the graphic representation of the ennemy
+ * @author William
+ */
 public class EnnemyView {
+    // The Main view of this game
 	private GameView view;
+    // The model of the map (information of all the current cell)
     private MapModel map_model;
+    // The model of the ennemy we want to draw
     private EnnemyModel ennemy;
     
+    /**
+     * Constructor of the ennemy
+     * @param view
+     * @param ennemy
+     */
     public EnnemyView(GameView view, EnnemyModel ennemy)
     {
     	this.view = view;
@@ -19,6 +30,10 @@ public class EnnemyView {
         this.ennemy = ennemy;
     }
     
+    /**
+     * This function will draw a red Point on the map where the ennemy is
+     * @param G
+     */
     public void DrawEnnemy(Graphics G) {
         int w = ennemy.getWidth();
         int h = ennemy.getHeight();
@@ -34,6 +49,13 @@ public class EnnemyView {
 		G.fillOval(pos.x - w_div, pos.y - h_div, w, h);
 	}
     
+    /**
+     * this Method Draw a red Point that represent the ennemy on the screen
+     * This method is usefull when the ennemy is moving
+     * @param G
+     * @param i
+     * @param j
+     */
     public void drawMove(Graphics G, int i, int j) {
         G.setColor(new Color(0,0,0));
         G.drawOval(i,j, ennemy.getWidth(), ennemy.getHeight());

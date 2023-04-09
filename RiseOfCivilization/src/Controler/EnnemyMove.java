@@ -6,17 +6,36 @@ import java.util.ArrayList;
 import Model.EnnemyModel;
 import Model.GameModel;
 
+/**
+ * The ennemyMove is the controller that extend Thread and make one nnemy move to an another cell
+ * 
+ * @author William
+ */
 public class EnnemyMove extends Thread{
+	// Main model of the gale
 	private GameModel model;
+	// The ennemy that's currently moving
 	private EnnemyModel ennemy;
+	// The destination Coord where the ennemy is moving
 	private Point destCord;
 	
+	/**
+	 *  Constructor for the ennemyMove
+	 * @param m Main Model of the game
+	 * @param e ModelClass of the ennemy that's mooving
+	 * @param p Destination
+	 */
 	public EnnemyMove(GameModel m, EnnemyModel e, Point p) {
 		this.model = m;
 		this.ennemy = e;
 		this.destCord = p;
 	}
 	
+	/**
+	 * This is the function that will be lunch when we start the Thread
+	 * Set the state of the annemy as moving
+	 * Then make him move from cell to cell until he reach his destination
+	 */
 	public void run()
 	{
 		this.ennemy.setMoving(true);
