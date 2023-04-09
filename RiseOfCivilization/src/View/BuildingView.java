@@ -106,6 +106,9 @@ public class BuildingView {
 			case SawMill :
 				G.drawImage(CellIcon.SawMill,x-45,y-45,90,90,null);
 				break;
+			case Mine :
+				G.drawImage(CellIcon.Mine,x-45,y-45,90,90,null);
+				break;
 			case Quarry :
 				G.drawImage(CellIcon.Quarry,x-45,y-45,90,90,null);
 				break;
