@@ -303,15 +303,19 @@ public class WorkerModel {
 		switch(level) {
 			case 2:
 				harvest_capacity+=100;
+				inventory.IncreaseMaxAmount(200);
 				break;
 			case 3:
 				harvest_capacity+=80;
+				inventory.IncreaseMaxAmount(200);
 				break;
 			case 4:
 				harvest_capacity+=60;
+				inventory.IncreaseMaxAmount(150);
 				break;
 			case 5:
 				harvest_capacity+=60;
+				inventory.IncreaseMaxAmount(150);
 				break;
 			default:
 				break;
