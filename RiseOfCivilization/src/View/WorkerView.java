@@ -5,6 +5,8 @@ import java.awt.*;
 
 /**
  * This class is responsible for rendering the visual representation of a worker on the game map.
+ * 
+ * @author William
  */
 public class WorkerView {
     private GameView view;
