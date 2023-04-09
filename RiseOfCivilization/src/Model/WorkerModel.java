@@ -278,9 +278,9 @@ public class WorkerModel {
 		Resource res_type;
 		switch (role) {
 			case Worker:
-				int wood = getInventory().getAmmount(Resource.Wood);
-				int stone = getInventory().getAmmount(Resource.Stone);
-				int iron = getInventory().getAmmount(Resource.Iron);
+				int wood = getInventory().getAmount(Resource.Wood);
+				int stone = getInventory().getAmount(Resource.Stone);
+				int iron = getInventory().getAmount(Resource.Iron);
 				int max = inventory.GetMaxAmount();
 				return (wood==max) || (stone==max) || (iron==max);
 				
@@ -301,7 +301,7 @@ public class WorkerModel {
 				break;
 		}
 		
-		int res_amount = inventory.getAmmount(res_type);
+		int res_amount = inventory.getAmount(res_type);
 		return (res_amount==inventory.GetMaxAmount());
 	}
 

@@ -15,15 +15,16 @@ import javax.swing.*;
  */
 @SuppressWarnings("serial")
 public class ActionView extends JPanel {
-	private MapModel map_model;
+	private DashboardView dashboard_view;
 	private ArrayList<JButton> Button_list;
 
-	public ActionView(MapModel mm) {
-		Button_list=new ArrayList<JButton>();
-
-		map_model = mm;
-		setPreferredSize(new Dimension(map_model.GetWidth()/3, map_model.GetHeight()/2));
+	public ActionView(DashboardView dv) {
+		dashboard_view = dv;
+		
+		setPreferredSize(new Dimension(dashboard_view.getWidth(), (int) (3*dashboard_view.getHeight()/6)));
 		setBackground(Color.LIGHT_GRAY);
+		
+		Button_list = new ArrayList<JButton>();
 
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();

@@ -23,7 +23,7 @@ public class BuildingTrain extends Thread {
 		building.Occupy();
 		if(ctrl.GetGameModel().PlayerCanTrain(building)) {
 			InventoryModel inv = ctrl.GetGameModel().getInventoryModel();
-			switch (building.GetId()) {
+			switch (building.getId()) {
 				case LumberCamp:
 					inv.remove(Resource.Gold, 75);
 					break;

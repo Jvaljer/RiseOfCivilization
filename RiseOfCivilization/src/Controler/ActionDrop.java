@@ -18,7 +18,7 @@ public class ActionDrop implements ActionListener {
 			System.out.println("clicked Drop button");
 			CellModel cell = g_ctrl.GetMapCtrl().GetClickedCell();
 			if(map.CellIsOccupiedByBuilding(cell)) {
-				if(map.GetBuildingFromCoord(cell.GetCoord()).GetId()==BuildingId.CityHall) {
+				if(map.GetBuildingFromCoord(cell.GetCoord()).getId()==BuildingId.CityHall) {
 					for(WorkerModel worker : g_ctrl.GetGameModel().GetWorkerModel()) {
 						if(!worker.GetOccupied()) {
 							(new WorkerDrop(g_ctrl,worker)).start();

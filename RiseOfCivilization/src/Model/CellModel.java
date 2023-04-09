@@ -22,8 +22,7 @@ public class CellModel {
 	private Resource natural_resource;
 	public static final int MAX_RESOURCE = 500;
 	private InventoryModel inventory;
-	private Color color;
-	
+	private BuildingModel building;
 	
 	public CellModel(int x, int y, CellId i) {
 		X = x;
@@ -31,30 +30,23 @@ public class CellModel {
 		id = i;
 		
 		inventory = new InventoryModel(200);
-		int amount;
+		int starting_amount;
 		switch (id) {
 			case Forest :
 				natural_resource = Resource.Wood;
-				color = new Color(0, 153, 0);
-				amount = ThreadLocalRandom.current().nextInt(10,100);
-				inventory.add(natural_resource, amount);
+				starting_amount = ThreadLocalRandom.current().nextInt(10,100);
+				inventory.add(natural_resource, starting_amount);
 				break;
 			case Mountain :
 				natural_resource = Resource.Stone;
-				color = new Color(150, 150, 150);
-				amount = ThreadLocalRandom.current().nextInt(0,40);
-				inventory.add(natural_resource, amount);
+				starting_amount = ThreadLocalRandom.current().nextInt(0,40);
+				inventory.add(natural_resource, starting_amount);
 				break;
 			case Iron_Deposit :
 				natural_resource = Resource.Iron;
-				color = new Color(169,84,69);
-				amount = ThreadLocalRandom.current().nextInt(10,100);
-				inventory.add(natural_resource, amount);
+				starting_amount = ThreadLocalRandom.current().nextInt(10,100);
+				inventory.add(natural_resource, starting_amount);
 				break;
-			case City:
-				color = new Color(165,110,20);
-			case Plain:
-				color = new Color(225,205,102);
 			default:
 				break;
 		}
@@ -85,11 +77,28 @@ public class CellModel {
 	}
 	
 	public int getResourceAmount() {
-		return inventory.getAmmount(natural_resource);
+		return inventory.getAmount(natural_resource);
 	}
 	
 	public boolean hasSameCoord(CellModel other) {
 		return (X == other.GetX() && Y == other.GetY());
+	}
+	
+	public BuildingModel getBuilding() {
+		return building;
+	}
+	
+	public void build(BuildingModel bm) {
+		building = bm;
+	}
+	
+	public boolean hasBuilding() {
+		return building != null;
+	}
+	
+	public boolean hasProdBuilding() {
+		BuildingId id = building.getId();
+		return (id == BuildingId.SawMill || id == BuildingId.Mine || id == BuildingId.Quarry);
 	}
 	
 	public void TurnToCity() {
@@ -97,15 +106,7 @@ public class CellModel {
 			inventory.remove(natural_resource, MAX_RESOURCE);
 		}
 		id = CellId.City;
-	}
-	
-	public Color GetColor() {
-		return color;
-	}
-	
-	public void SetColor() {
-		//must implement
-		return;
+		natural_resource = null;
 	}
 	
 	public void collectResource(int n) {

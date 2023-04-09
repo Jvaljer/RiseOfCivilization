@@ -124,7 +124,7 @@ public class CellCtrl extends Thread {
 			BuildingModel building = map.GetBuildingFromCoord(cell_model.GetCoord());
 			if(building!=null) {
 				InventoryModel inventory = building.GetInventory();
-				switch (building.GetId()) {
+				switch (building.getId()) {
 					case SawMill:
 						inventory.add(Resource.Wood, 16);
 						break;

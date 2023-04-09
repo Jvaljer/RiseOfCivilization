@@ -4,11 +4,11 @@ import Types.*;
 import java.awt.*;
 
 public class BuildingModel {
+	private BuildingId id;
 	private GameModel game;
 	private MapModel map;
 	private CellModel[][] model_grid;
 	private CellModel cell;
-	private BuildingId id;
 	private InventoryModel inventory;
 	private Resource produced_resource;
 	private int level;
@@ -23,6 +23,7 @@ public class BuildingModel {
 		map = game.GetMapModel();
 		model_grid = map.GetGrid();
 		cell = model_grid[C.x][C.y];
+		cell.build(this);
 		id = bid;
 		
 		switch(id) {
@@ -46,33 +47,42 @@ public class BuildingModel {
 		occupied = false;
 	}
 	
-	public BuildingId GetId() {
+	public BuildingId getId() {
 		return id;
 	}
+	
 	public Point GetPos() {
 		return cell.GetCoord();
 	}
+
 	public int GetRecWidth() {
 		return rec_width;
 	}
+
 	public int GetRecHeight() {
 		return rec_height;
 	}
+
 	public int GetTriangleDist() {
 		return triangle_dist;
 	}
+
 	public int GetPolyDist() {
 		return poly_dist;
 	}
+	
 	public InventoryModel GetInventory() {
 		return inventory;
 	}
+	
 	public int GetLevel() {
 		return level;
 	}
+	
 	public Resource GetProducedResource() {
 		return produced_resource;
 	}
+	
 	public void LevelUp() {
 		level += 1;
 		switch(level) {

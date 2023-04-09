@@ -367,7 +367,7 @@ public class MapModel {
 		if(task==Actions.Build_Production || task==Actions.Collect || task==Actions.LevelUp) {
 			if(CellIsOccupiedByBuilding(cell)) {
 				BuildingModel building = GetBuildingFromCoord(cell.GetCoord());
-				switch (building.GetId()) {
+				switch (building.getId()) {
 					case SawMill:
 						needed_worker = WorkerRole.LumberJack;
 						break;
@@ -462,7 +462,7 @@ public class MapModel {
 	}
 	
 	public boolean BuildingIsCollectable(CellModel cell) {
-		BuildingId bid = GetBuildingFromCoord(cell.GetCoord()).GetId();
+		BuildingId bid = GetBuildingFromCoord(cell.GetCoord()).getId();
 		return (bid==BuildingId.Mine) || (bid==BuildingId.SawMill) || (bid==BuildingId.Quarry);
 	}
 	public BuildingModel GetBuildingFromCoord(Point coord) {
@@ -493,7 +493,7 @@ public class MapModel {
 	public boolean CellHasShop(CellModel cell) {
 		BuildingModel shop = GetBuildingFromCoord(cell.GetCoord());
 		if(shop!=null) {
-			return shop.GetId()==BuildingId.Shop;
+			return shop.getId()==BuildingId.Shop;
 		} else {
 			return false;
 		}
@@ -516,11 +516,11 @@ public class MapModel {
 	}
 	
 	public boolean CanDrop(CellModel cell) {
-		return (CellIsOccupiedByBuilding(cell) && GetBuildingFromCoord(cell.GetCoord()).GetId()==BuildingId.CityHall) || CellIsOccupiedByWorker(cell);
+		return (CellIsOccupiedByBuilding(cell) && GetBuildingFromCoord(cell.GetCoord()).getId()==BuildingId.CityHall) || CellIsOccupiedByWorker(cell);
 	}
 	
 	public boolean CanTrain(CellModel cell) {
-		BuildingId bid = GetBuildingFromCoord(cell.GetCoord()).GetId();
+		BuildingId bid = GetBuildingFromCoord(cell.GetCoord()).getId();
 		return ((bid==BuildingId.Barrack) || (bid==BuildingId.LumberCamp) || (bid==BuildingId.MinerCamp) || (bid==BuildingId.QuarrymanCamp)) && game.CanCreateNewWorker(GetBuildingFromCoord(cell.GetCoord()));
 	}
 	

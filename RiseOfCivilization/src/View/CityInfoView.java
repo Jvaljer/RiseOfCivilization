@@ -2,11 +2,15 @@ package View;
 
 import Model.GameModel;
 import Model.InventoryModel;
-import Model.MapModel;
+import Model.WorkerModel;
 import Types.Resource;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.util.ArrayList;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -22,33 +26,59 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class CityInfoView extends JPanel {
 	private GameModel game_model;
-	private MapModel map_model;
+	private DashboardView dashboard_view;
 	private InventoryModel global_inventory;
+	private ArrayList<JLabel> labels;
 	private JLabel wood_label;
 	private JLabel stone_label;
 	private JLabel iron_label;
 	private JLabel gold_label;
 	
-	public CityInfoView(GameModel gm, MapModel mm) {
+	public CityInfoView(GameModel gm, DashboardView dv) {
 		game_model = gm;
-		map_model = mm;
+		dashboard_view = dv;
 		global_inventory = game_model.getInventoryModel();
+		labels = new ArrayList<JLabel>();
+		ArrayList<WorkerModel> workers = game_model.GetWorkerModel();
 		
-		wood_label = new JLabel(); add(wood_label);
-		stone_label = new JLabel(); add(stone_label);
-		iron_label = new JLabel(); add(iron_label);
-		gold_label= new JLabel(); add(gold_label);
+		setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		
+		wood_label = new JLabel();
+		labels.add(wood_label);
+		c.gridx = 0;
+		c.gridy = 0;
+		add(wood_label, c);
+		stone_label = new JLabel();
+		labels.add(stone_label);
+		c.gridx = 1;
+		c.gridy = 0;
+		add(stone_label, c);
+		iron_label = new JLabel();
+		labels.add(iron_label);
+		c.gridx = 0;
+		c.gridy = 1;
+		add(iron_label, c);
+		gold_label= new JLabel();
+		labels.add(gold_label);
+		c.gridx = 1;
+		c.gridy = 1;
+		add(gold_label, c);
+		
+		for (JLabel label : labels) {
+			label.setFont(label.getFont().deriveFont(15.0f));
+		}
 		
 		update();
 
-		setPreferredSize(new Dimension(map_model.GetWidth()/3, map_model.GetHeight()/3));
+		setPreferredSize(new Dimension(dashboard_view.getWidth(), (int) (dashboard_view.getHeight()/6)));
 		setBackground(Color.GRAY);
 	}
 	
 	public void update() {
-		wood_label.setText("Wood : " + global_inventory.getAmmount(Resource.Wood));
-		stone_label.setText("Stone : " + global_inventory.getAmmount(Resource.Stone));
-		iron_label.setText("Iron : " + global_inventory.getAmmount(Resource.Iron));
-		gold_label.setText("Gold : " + global_inventory.getAmmount(Resource.Gold));
+		wood_label.setText("Wood : " + global_inventory.getAmount(Resource.Wood));
+		stone_label.setText("Stone : " + global_inventory.getAmount(Resource.Stone));
+		iron_label.setText("Iron : " + global_inventory.getAmount(Resource.Iron));
+		gold_label.setText("Gold : " + global_inventory.getAmount(Resource.Gold));
 	}
 }

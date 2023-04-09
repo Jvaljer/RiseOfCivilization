@@ -46,7 +46,7 @@ public class InventoryModel {
 		return resources;
 	}
 	
-	public int getAmmount(Resource r) {
+	public int getAmount(Resource r) {
 		return resources.get(r);
 	}
 	
@@ -73,7 +73,7 @@ public class InventoryModel {
 		Resource[] resource_values = Resource.values();
 		for(int i=0; i < resource_values.length; i++) {
 			Resource resource = resource_values[i];
-			resources.replace(resource, resources.get(resource) + other.getAmmount(resource));
+			resources.replace(resource, resources.get(resource) + other.getAmount(resource));
 		}
 		other.clear();
 	}

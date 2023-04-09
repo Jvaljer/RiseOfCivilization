@@ -1,11 +1,12 @@
 package View;
 
-import Model.MapModel;
-
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JPanel;
+
+import Model.GameModel;
 
 
 /**
@@ -19,28 +20,50 @@ import javax.swing.JPanel;
  */
 @SuppressWarnings("serial")
 public class DashboardView extends JPanel {
-	private GameView game;
+	private GameModel game_model;
+    private int width;
+    private int height;
     private CellInfoView cell_info_view;
     private CityInfoView city_info_view;
     private ActionView Action_view;
 
-    public DashboardView(GameView GV, CellInfoView celliv, CityInfoView cityiv, ActionView ibv) {
-    	game = GV;
-        cell_info_view = celliv;
-        city_info_view = cityiv;
-        Action_view = ibv;
-
-        setPreferredSize(new Dimension(game.GetGameModel().GetPanelWidth(),game.GetGameModel().GetPanelheight()));
+    public DashboardView(GameModel gm) {
+    	game_model = gm;
+    	
+        width = game_model.GetPanelWidth();
+        height = game_model.GetPanelheight();
+        setPreferredSize(new Dimension(width, height));
         setLayout(new BorderLayout());
+        
+        cell_info_view = new CellInfoView(this);
+        city_info_view = new CityInfoView(game_model, this);
+        Action_view = new ActionView(this);
 
         add(cell_info_view, BorderLayout.NORTH);
         add(city_info_view, BorderLayout.CENTER);
         add(Action_view, BorderLayout.SOUTH);
-
+        
+        setBackground(Color.BLACK);
     }
-
+    
+    public int getWidth() {
+    	return width;
+    }
+    
+    public int getHeight() {
+    	return height;
+    }
+    
+    public CellInfoView getCellInfoView() {
+    	return cell_info_view;
+    }
+    
+    public CityInfoView getCityInfoView() {
+    	return city_info_view;
+    }
+    
     public ActionView GetActionView() {
-        return Action_view;
+    	return Action_view;
     }
     
     @Override

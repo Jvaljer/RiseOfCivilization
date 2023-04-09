@@ -22,9 +22,9 @@ public class ActionSell implements ActionListener {
 	}
 	
 	public void AdjustValues() {
-		int wood = inventory.getAmmount(Resource.Wood);
-		int stone = inventory.getAmmount(Resource.Stone);
-		int iron = inventory.getAmmount(Resource.Iron);
+		int wood = inventory.getAmount(Resource.Wood);
+		int stone = inventory.getAmount(Resource.Stone);
+		int iron = inventory.getAmount(Resource.Iron);
 		
 		if(wood_amount > wood) {
 			wood_amount = wood;

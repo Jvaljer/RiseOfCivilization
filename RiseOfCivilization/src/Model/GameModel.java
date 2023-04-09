@@ -11,8 +11,8 @@ public class GameModel {
 	private static final int time_unit = 60;
 	private static int map_width;
 	private static int map_height;
-	private static final int panel_width = 250;
-	private static final int panel_height = 650;
+	private static int panel_width;
+	private static int panel_height;
 	
 	private MapModel map;
 	private InventoryModel inventory;
@@ -24,9 +24,10 @@ public class GameModel {
 
 	public GameModel() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		map_width = (int) screenSize.getWidth() - panel_width;
+		map_width = ((int) screenSize.getWidth()) - ((int) (screenSize.getHeight()/3));
 		map_height = (int) screenSize.getHeight();
-		
+		panel_width = (int) (screenSize.getWidth()) - map_width;
+		panel_height = map_height;
 		map = new MapModel(this);
 		inventory = new InventoryModel();
 		
@@ -87,10 +88,10 @@ public class GameModel {
 	}
 	
 	public boolean PlayerHasEnoughToBuild(BuildingId bid) {
-		int wood = inventory.getAmmount(Resource.Wood);
-		int stone = inventory.getAmmount(Resource.Stone);
-		int iron = inventory.getAmmount(Resource.Iron);
-		int gold = inventory.getAmmount(Resource.Gold);
+		int wood = inventory.getAmount(Resource.Wood);
+		int stone = inventory.getAmount(Resource.Stone);
+		int iron = inventory.getAmount(Resource.Iron);
+		int gold = inventory.getAmount(Resource.Gold);
 		boolean cond;
 		switch (bid) {
 			case SawMill:
@@ -131,9 +132,9 @@ public class GameModel {
 		InventoryModel cell_inventory = cell.getInventory();
 		InventoryModel worker_inventory = worker.getInventory();
 		
-		if(worker_inventory.getAmmount(cell.getResource()) < worker_inventory.GetMaxAmount()
-				&& cell_inventory.getAmmount(cell.getResource()) > 0) {
-			int available = cell_inventory.getAmmount(cell.getResource());
+		if(worker_inventory.getAmount(cell.getResource()) < worker_inventory.GetMaxAmount()
+				&& cell_inventory.getAmount(cell.getResource()) > 0) {
+			int available = cell_inventory.getAmount(cell.getResource());
 			if(available >= worker.GetHarvestCapacity()) {
 				worker.harvest(cell.getResource());
 				cell.collectResource(worker.GetHarvestCapacity());
@@ -189,7 +190,7 @@ public class GameModel {
 	}
 	
 	public boolean PlayerCanUpgradeWorker(WorkerModel worker) {
-		int gold = inventory.getAmmount(Resource.Gold);
+		int gold = inventory.getAmount(Resource.Gold);
 		
 		switch (worker.GetLevel()){
 			case 1 :
@@ -212,12 +213,12 @@ public class GameModel {
 		
 		switch (worker.GetRole()) {
 			case Worker:
-				int wood_ = inventory.getAmmount(Resource.Wood);
-				int stone_ = inventory.getAmmount(Resource.Stone);
-				int iron_ = inventory.getAmmount(Resource.Iron);
-				int wood = worker.getInventory().getAmmount(Resource.Wood);
-				int stone = worker.getInventory().getAmmount(Resource.Stone);
-				int iron = worker.getInventory().getAmmount(Resource.Iron);
+				int wood_ = inventory.getAmount(Resource.Wood);
+				int stone_ = inventory.getAmount(Resource.Stone);
+				int iron_ = inventory.getAmount(Resource.Iron);
+				int wood = worker.getInventory().getAmount(Resource.Wood);
+				int stone = worker.getInventory().getAmount(Resource.Stone);
+				int iron = worker.getInventory().getAmount(Resource.Iron);
 				
 				worker.dropOff(Resource.Wood, wood);
 				inventory.add(Resource.Wood, wood);
@@ -226,31 +227,31 @@ public class GameModel {
 				worker.dropOff(Resource.Iron, iron);
 				inventory.add(Resource.Iron, iron);
 				
-				wood_ = inventory.getAmmount(Resource.Wood);
-				stone_ = inventory.getAmmount(Resource.Stone);
-				iron_ = inventory.getAmmount(Resource.Iron);
-				wood = worker.getInventory().getAmmount(Resource.Wood);
-				stone = worker.getInventory().getAmmount(Resource.Stone);
-				iron = worker.getInventory().getAmmount(Resource.Iron);
+				wood_ = inventory.getAmount(Resource.Wood);
+				stone_ = inventory.getAmount(Resource.Stone);
+				iron_ = inventory.getAmount(Resource.Iron);
+				wood = worker.getInventory().getAmount(Resource.Wood);
+				stone = worker.getInventory().getAmount(Resource.Stone);
+				iron = worker.getInventory().getAmount(Resource.Iron);
 				break;
 				
 			case LumberJack:
 				res_type = Resource.Wood;
-				amount = worker.getInventory().getAmmount(res_type);
+				amount = worker.getInventory().getAmount(res_type);
 				worker.dropOff(res_type, amount);
 				inventory.add(res_type, amount);
 				break;
 				
 			case Miner:
 				res_type = Resource.Stone;
-				amount = worker.getInventory().getAmmount(res_type);
+				amount = worker.getInventory().getAmount(res_type);
 				worker.dropOff(res_type, amount);
 				inventory.add(res_type, amount);
 				break;
 				
 			case QuarryMan:
 				res_type = Resource.Iron;
-				amount = worker.getInventory().getAmmount(res_type);
+				amount = worker.getInventory().getAmount(res_type);
 				worker.dropOff(res_type, amount);
 				inventory.add(res_type, amount);
 				break;
@@ -264,7 +265,7 @@ public class GameModel {
 		InventoryModel building_inventory = building.GetInventory();
 		
 		Resource res_type = building.GetProducedResource();
-		int available = building_inventory.getAmmount(res_type);
+		int available = building_inventory.getAmount(res_type);
 		System.out.println("building has "+available+" available resources");
 		int amount;
 		if(worker.GetHarvestCapacity()>=available) {
@@ -282,17 +283,17 @@ public class GameModel {
 	}
 	
 	public boolean PlayerCanUpgradeBuilding(BuildingModel building) {
-		int wood = inventory.getAmmount(Resource.Wood);
-		int stone = inventory.getAmmount(Resource.Stone);
-		int iron = inventory.getAmmount(Resource.Iron);
-		int gold = inventory.getAmmount(Resource.Gold);
+		int wood = inventory.getAmount(Resource.Wood);
+		int stone = inventory.getAmount(Resource.Stone);
+		int iron = inventory.getAmount(Resource.Iron);
+		int gold = inventory.getAmount(Resource.Gold);
 		
 		int needed_wood;
 		int needed_stone;
 		int needed_iron;
 		int needed_gold;
 		
-		BuildingId bid = building.GetId();
+		BuildingId bid = building.getId();
 		int level = building.GetLevel();
 		
 		if(bid==BuildingId.Mine || bid==BuildingId.SawMill || bid==BuildingId.Quarry) {
@@ -336,9 +337,9 @@ public class GameModel {
 	public boolean CanCreateNewWorker(BuildingModel building) {
 		int limit = 1;
 		int current = 0;
-		WorkerRole role = GetRoleFromBuilding(building.GetId());
+		WorkerRole role = GetRoleFromBuilding(building.getId());
 		for(BuildingModel b : buildings) {
-			if(b.GetId()==building.GetId()) {
+			if(b.getId()==building.getId()) {
 				switch (building.GetLevel()) {
 					case 1:
 						limit+=2;
@@ -369,8 +370,8 @@ public class GameModel {
 	}
 	
 	public boolean PlayerCanTrain(BuildingModel building) {
-		int gold = inventory.getAmmount(Resource.Gold);
-		switch (building.GetId()) {
+		int gold = inventory.getAmount(Resource.Gold);
+		switch (building.getId()) {
 			case LumberCamp:
 				return gold>=75;
 				
@@ -389,8 +390,8 @@ public class GameModel {
 	}
 	
 	public boolean PlayerHasEnoughToExpand(CellModel cell) {
-		int wood = inventory.getAmmount(Resource.Wood);
-		int stone = inventory.getAmmount(Resource.Stone);
+		int wood = inventory.getAmount(Resource.Wood);
+		int stone = inventory.getAmount(Resource.Stone);
 		System.out.println("player has "+wood+" woods & "+stone+" stones");
 		switch (cell.GetId()) {
 			case Plain:

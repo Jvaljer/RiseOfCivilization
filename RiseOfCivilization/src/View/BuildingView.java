@@ -21,7 +21,7 @@ public class BuildingView {
 		coord = model.GetPos();
 		Icons=new CellIcon();
 		
-		switch (model.GetId()) {
+		switch (model.getId()) {
 			case CityHall :
 				color = (new Color(77, 38, 0));
 				break;
@@ -81,7 +81,7 @@ public class BuildingView {
 	public void DrawBuilding(Graphics G) {
 		Point pos = map.GetPosFromCoord(coord.x,coord.y);
 		G.setColor(new Color(0,0,0));
-		DrawImageFromId(model.GetId(),G,pos.x,pos.y);
+		DrawImageFromId(model.getId(),G,pos.x,pos.y);
 		Point[] pts;
 		int d = model.GetTriangleDist();
 		switch (model.GetLevel()) {

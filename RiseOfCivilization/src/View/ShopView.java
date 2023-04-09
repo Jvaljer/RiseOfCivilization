@@ -37,7 +37,7 @@ public class ShopView extends JFrame implements ChangeListener {
         super("Shop Interface");
         game = GV;
         model = SM;
-        player_gold = game.GetGameModel().getInventoryModel().getAmmount(Resource.Gold);
+        player_gold = game.GetGameModel().getInventoryModel().getAmount(Resource.Gold);
         
         setPreferredSize(new Dimension(model.GetWidth(),model.GetHeight()));
 
