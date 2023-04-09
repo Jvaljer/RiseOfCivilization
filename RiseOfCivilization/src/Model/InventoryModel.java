@@ -8,18 +8,23 @@ import java.util.concurrent.ConcurrentHashMap;
 
 
 /**
- * This class is the model of the inventory. An inventory stores various
- * resources. Cells, Workers and Buildings all have an inventory.
- *
- * @author martin
+ * This class is for the model of an inventory. An inventory stores all
+ * the different types of resources. Cells, Workers, Buildings ang the
+ * City all have an inventory.
+ * 
+ * @author Martin
  */
-public class InventoryModel {	
-	/* The map of all the ressources to their quantity */
+public class InventoryModel {
 	private ConcurrentHashMap<Resource, Integer> resources;
-	/* Default of -1 means no max_resource */
-	private int max_resource;
+	private int max_resource; /* Default of -1 means no max_resource */
 	
-	
+	/**
+     * This is a constructor of an Inventory. It has a specified
+	 * maximum amount it can store and has specified starting resources.
+	 * 
+	 * @param ammounts the list of amount for all resource in order of the Enum
+	 * @param max_amount the maximum amount of resource the inventory can store
+     */
 	public InventoryModel(List<Integer> ammounts, int max_amount) {
 		max_resource = max_amount;
 		resources = new ConcurrentHashMap<Resource, Integer>();
@@ -33,23 +38,44 @@ public class InventoryModel {
 		}
 	}
 	
+	/**
+     * This is a constructor of an Inventory. It has a specified
+	 * maximum amount it can store and holds no resource.
+	 * 
+	 * @param max_amount the maximum amount of resource the inventory can store
+     */
 	public InventoryModel(int max_amount) {
 		this(Arrays.asList(0, 0, 0, 0), max_amount);
 		max_resource = max_amount;
 	}
 	
+	/**
+     * This is the default constructor of an Inventory. It has no
+	 * maximum amount it can store and holds no resource.
+     */
 	public InventoryModel() {
 		this(-1);
 	}
 	
+	/**
+    * Returns map of all resources to their quantity
+    */
 	public ConcurrentHashMap<Resource, Integer> getResources() {
 		return resources;
 	}
 	
+	/**
+    * Returns the stored amount of a single resource.
+	* 
+	* @param r the resource
+    */
 	public int getAmount(Resource r) {
 		return resources.get(r);
 	}
 	
+	/**
+    * Remove all stored resources from the inventory
+    */
 	public void clear() {
 		Resource[] resource_values = Resource.values();
 		for(int i=0; i < resource_values.length; i++) {
@@ -57,6 +83,12 @@ public class InventoryModel {
 		}
 	}
 	
+	/**
+    * Adds a specified amount of a single resource
+	* 
+	* @param r      the resource
+	* @param amount the amount of resource to be added
+    */
 	public int add(Resource r, int amount) {
 		int prev_amount = resources.get(r);
 		int amount_sum = prev_amount + amount;
@@ -69,6 +101,13 @@ public class InventoryModel {
 		}
 	}
 	
+	/**
+    * Removes all of the resource stored in the inventory and adds them
+	* to another one.
+	* 
+	* @param r      the resource
+	* @param other the other inventory
+    */
 	public void transfer(InventoryModel other) {
 		Resource[] resource_values = Resource.values();
 		for(int i=0; i < resource_values.length; i++) {
@@ -78,6 +117,12 @@ public class InventoryModel {
 		other.clear();
 	}
 	
+	/**
+    * Removes a specified amount of a single resource
+	* 
+	* @param r      the resource
+	* @param amount the amount of resource to be removed
+    */
 	public int remove(Resource r, int amount) {
 		int prev_amount = resources.get(r);
 		int amount_diff = prev_amount - amount;
@@ -85,10 +130,19 @@ public class InventoryModel {
 		return Math.min(amount, prev_amount);
 	}
 	
+	/**
+    * Returns the maximum of resource that can be stored
+    */
 	public int GetMaxAmount() {
 		return max_resource;
 	}
 	
+	/**
+    * Increases the maximum of resource that can be stored by a
+	* specified amount
+	* 
+	* @param amount the amount added to the maximum
+    */
 	public void IncreaseMaxAmount(int n) {
 		max_resource += n;
 		return;
