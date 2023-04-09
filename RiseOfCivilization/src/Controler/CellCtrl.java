@@ -97,7 +97,7 @@ public class CellCtrl extends Thread {
 			g_ctrl.GetButtonFromName("Drop").setEnabled(true);
 			
 		} else {
-			g_ctrl.GetButtonFromName("Move").setEnabled(true);
+			g_ctrl.GetButtonFromName("Move").setEnabled(map.KnightsAreOnMap());
 			g_ctrl.GetButtonFromName("Collect").setEnabled(map.CanCollect(cell_model));
 			g_ctrl.GetButtonFromName("LevelUp").setEnabled(false);
 			g_ctrl.GetButtonFromName("Expand").setEnabled(map.CanExpand(cell_model));

@@ -18,7 +18,6 @@ public class ActionTrain implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-			System.out.println("clicked New_Worker button");
 			CellModel cell = map.GetCurrentCell();
 			BuildingModel building = map.GetBuildingFromCoord(cell.GetCoord());
 			

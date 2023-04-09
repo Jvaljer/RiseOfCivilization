@@ -15,7 +15,6 @@ public class ActionShop implements ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("clicked on Shop button");
 		ShopModel model = new ShopModel(g_ctrl.GetGameModel());
 		ShopView view = new ShopView(g_ctrl.GetGameView(),model);
 		ShopCtrl shop = new ShopCtrl(g_ctrl,view);

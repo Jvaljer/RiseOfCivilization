@@ -30,26 +30,21 @@ public class BuildTraining implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("a click has been performed inside the window");
 		WorkerModel nearest;
 		switch (wanted_building) {
 			case Barrack:
-				System.out.println("we want a BARRACK");
 				nearest = map.GetNearestWorkerFromRole(dst_cell, WorkerRole.Worker);
 				break;
 				
 			case LumberCamp:
-				System.out.println("we want a LUMBERCAMP");
 				nearest = map.GetNearestWorkerFromRole(dst_cell, WorkerRole.LumberJack);
 				break;
 				
 			case MinerCamp:
-				System.out.println("we want a MINECAMP");
 				nearest = map.GetNearestWorkerFromRole(dst_cell, WorkerRole.Miner);
 				break;
 				
 			case QuarrymanCamp:
-				System.out.println("we want a QUARRYMANCAMP");
 				nearest = map.GetNearestWorkerFromRole(dst_cell, WorkerRole.QuarryMan);
 				break;
 				

@@ -39,7 +39,6 @@ public class ActionSell implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("clicked Sell Button");
 		sell_value = shop.GetView().GetSellPrice();
 		
 		wood_amount = shop.GetView().GetWoodAmount();

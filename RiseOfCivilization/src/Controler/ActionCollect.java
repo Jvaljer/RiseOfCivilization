@@ -16,10 +16,7 @@ public class ActionCollect implements ActionListener {
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-			System.out.println("clicked Collect button");
 			CellModel cell = g_ctrl.GetMapCtrl().GetClickedCell();
-			//we must first make the nearest worker (first without the right Id) move on the clicked cell
-			//WorkerModel nearest = map.GetNearestWorker(cell.GetCoord());
 			WorkerModel nearest = map.GetNearestWorker(cell, Actions.Collect);
 			if(nearest!=null) {
 				(new WorkerCollect(g_ctrl,nearest,cell.GetCoord())).start();

@@ -29,6 +29,7 @@ public class AllWorkersCtrl extends Thread{
 		while(true) {
 			int new_len = workers.size();
 			if(old_len < new_len) {
+				System.out.println("a new worker controler has been created !");
 				(new WorkerCtrl(ctrl,workers.get(old_len))).start();
 			}
 		}
