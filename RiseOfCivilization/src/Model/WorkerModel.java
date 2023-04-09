@@ -61,9 +61,7 @@ public class WorkerModel {
 	}
 	
 	public void Recovery() {
-		if(current_health_bar < init_health_bar) {
-			current_health_bar++;
-		}
+		current_health_bar++;
 	}
 	
 	public void TakeDamage() {

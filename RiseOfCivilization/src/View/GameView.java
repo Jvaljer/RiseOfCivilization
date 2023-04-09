@@ -114,6 +114,15 @@ public class GameView extends JFrame {
 		ennemies_view.add(new EnnemyView(this,ennemy));
 	}
 	
+	public void RemoveWorker(WorkerModel worker) {
+		for(int i=0; i<workers_view.size(); i++) {
+			WorkerView wv = workers_view.get(i);
+			if(wv.GetModel()==worker) {
+				workers_view.remove(i);
+			}
+		}
+	}
+	
 	@Override
 	public void paint(Graphics G) {
 		super.paint(G);
