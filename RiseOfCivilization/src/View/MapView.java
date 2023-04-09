@@ -92,6 +92,7 @@ public class MapView extends JPanel {
 		super.paint(G);
 		
 		DrawMap(G);
+		
 		if(map_model.GetCurrentCell()!=null) {
 			DrawCurrentCell(G);
 		}

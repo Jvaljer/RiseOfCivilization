@@ -99,6 +99,7 @@ public class BuildTraining implements ActionListener {
 			}
 			System.out.println("we created a new building for sure");
 			g_ctrl.GetGameView().AddBuildingView(g_ctrl.GetGameModel().GetBuildingList().get(old_len));
+			g_ctrl.GetGameView().getCityInfoView().update();
 		}
 		g_ctrl.GetGameView().getCityInfoView().update();
 		nearest.Free();
