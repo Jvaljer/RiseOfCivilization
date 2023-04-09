@@ -9,6 +9,7 @@ import Threads.WorkerBuildTraining;
 import Types.BuildingId;
 import Model.*;
 import Types.CellId;
+import Types.Goals;
 
 public class ActionBuild implements ActionListener {
     private MapModel map;
@@ -25,9 +26,11 @@ public class ActionBuild implements ActionListener {
             if(cell.GetId()==CellId.City) {
             	nearest = map.GetNearestWorker(cell, Actions.Build_Training);
            		(new WorkerBuildTraining(g_ctrl,nearest,cell.GetCoord())).start();
+           		g_ctrl.GetGameModel().GetGoals().IncrementGoal(Goals.TrainingBuilt);
            	} else {
            		nearest = map.GetNearestWorker(cell, Actions.Build_Production);
            		(new WorkerBuildProduction(g_ctrl,nearest,cell.GetCoord())).start();
+           		g_ctrl.GetGameModel().GetGoals().IncrementGoal(Goals.ProductionBuilt);
            	}
     }
 

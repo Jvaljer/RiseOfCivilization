@@ -25,7 +25,12 @@ public class GoalsModel {
 	
 	public void IncrementGoal(Goals key) {
 		int amount = goals_count.get(key);
-		goals_count.replace(key, amount++);
+		goals_count.replace(key, amount+1);
+	}
+	
+	public void IncrementGoal(Goals key, int n) {
+		int amount = goals_count.get(key);
+		goals_count.replace(key, amount+n);
 	}
 	
 	public int GetWidth() {

@@ -40,7 +40,23 @@ public class GoalsView extends JFrame {
         // Create some sample primary goals
     	for(Goals key : model.GetGoalsMap().keySet()) {
     		JLabel goal = new JLabel(key.toString());
-    		JProgressBar progress = new JProgressBar(0,100);
+    		int max;
+    		switch(key) {
+    		case ExpandedSlots:
+    			max = 100;
+    			break;
+    		case CollectResources:
+    			max = 150;
+    			break;
+    		case KilledEnnemies:
+    			max = 25;
+    			break;
+    		default:
+    			max = 50;
+    			break;
+    		}
+    		JProgressBar progress = new JProgressBar(0,max);
+    		progress.setValue(model.GetGoalsMap().get(key));
     		if(key.importance==1) {
     			primary_objectives.add(goal);
     			primary_objectives.add(progress);
@@ -56,7 +72,7 @@ public class GoalsView extends JFrame {
         setContentPane(pane);
 
         setTitle("Game Objectives");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(400, 300);
         setLocationRelativeTo(null);
         setVisible(true);

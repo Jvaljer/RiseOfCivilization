@@ -6,6 +6,7 @@ import java.awt.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.*;
 import Model.WorkerModel;
+import Types.Goals;
 import Types.Pair;
 
 public class EnnemyCtrl extends Thread {
@@ -80,7 +81,7 @@ public class EnnemyCtrl extends Thread {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("ennemy is DEAD");
+		game.GetGameModel().GetGoals().IncrementGoal(Goals.KilledEnnemies);
 		//if the ennemy is dead then we wanna delete its model & view from the game's model & view lists
 		game.GetGameView().RemoveEnnemy(model);
 		game.GetGameModel().RemoveEnnemy(model);

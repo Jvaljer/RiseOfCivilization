@@ -6,6 +6,7 @@ public enum Goals {
 	ProductionBuilt("Production Buildings",1),
 	TrainingBuilt("Training Buildings",1),
 	KilledEnnemies("Wolf Slaying",1),
+	CollectResources("Resource Collector",1),
 	//secondary goals
 	SoldResources("Merchandising",2),
 	BoughtResources("Trading",2),

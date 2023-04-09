@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import Model.MapModel;
 import Threads.WorkerExpand;
 import Types.Actions;
+import Types.Goals;
 
 public class ActionExpand implements ActionListener {
 	private MapModel map;
@@ -22,6 +23,7 @@ public class ActionExpand implements ActionListener {
 			WorkerModel nearest = map.GetNearestWorker(cell, Actions.Expand);
 			if(nearest!=null && g_ctrl.GetGameModel().PlayerHasEnoughToExpand(cell)) {
 				(new WorkerExpand(g_ctrl,nearest,cell.GetCoord())).start();
+				g_ctrl.GetGameModel().GetGoals().IncrementGoal(Goals.ExpandedSlots);
 			}
 	}
 	

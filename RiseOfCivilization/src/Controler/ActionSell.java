@@ -2,6 +2,7 @@ package Controler;
 
 import java.awt.event.*;
 import Model.InventoryModel;
+import Types.Goals;
 import Types.Resource;
 
 public class ActionSell implements ActionListener {
@@ -54,5 +55,7 @@ public class ActionSell implements ActionListener {
 		
 		game.GetGameView().getCityInfoView().update();
 		shop.GetView().dispose();
+		
+		game.GetGameModel().GetGoals().IncrementGoal(Goals.SoldResources, Math.round(sell_value/100));
 	}
 }
