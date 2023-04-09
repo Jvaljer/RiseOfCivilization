@@ -5,6 +5,10 @@ import Model.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * this is the global view of the game this.
+ * It represents the main window of the game
+ */
 @SuppressWarnings("serial")
 public class GameView extends JFrame {
 	private GameModel model;
@@ -21,7 +25,10 @@ public class GameView extends JFrame {
 
 	public int win_width;
 	public int win_height;
-	
+	/**
+	 * constructor of GameView it creates all the necessary secondary views and give them their model
+	 * also sets the title of the window
+	 */
 	public GameView(GameModel m) {
 		model = m;
 		map_model = model.GetMapModel();
@@ -113,7 +120,7 @@ public class GameView extends JFrame {
 	public void AddEnnemyView(EnnemyModel ennemy) {
 		ennemies_view.add(new EnnemyView(this,ennemy));
 	}
-	
+	/** removes the given worker */
 	public void RemoveWorker(WorkerModel worker) {
 		for(int i=0; i<workers_view.size(); i++) {
 			WorkerView wv = workers_view.get(i);
@@ -122,7 +129,7 @@ public class GameView extends JFrame {
 			}
 		}
 	}
-	
+	/** removes the given enemy */
 	public void RemoveEnnemy(EnnemyModel ennemy) {
 		for(int i=0; i<ennemies_view.size(); i++) {
 			EnnemyView ev = ennemies_view.get(i);

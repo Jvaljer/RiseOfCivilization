@@ -3,6 +3,10 @@ package View;
 import java.awt.*;
 import Model.EnnemyModel;
 
+/**
+ * view of the enemies show on the map
+ * they are represented by a black square
+ */
 public class EnnemyView {
 	private GameView game;
 	private EnnemyModel model;
