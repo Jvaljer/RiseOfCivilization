@@ -134,7 +134,7 @@ public class GameView extends JFrame {
 		for(int i=0; i<ennemies_view.size(); i++) {
 			EnnemyView ev = ennemies_view.get(i);
 			if(ev.GetModel()==ennemy) {
-				workers_view.remove(i);
+				ennemies_view.remove(i);
 			}
 		}
 	}

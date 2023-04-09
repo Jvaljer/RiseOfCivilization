@@ -622,9 +622,7 @@ public class GameModel {
 	 * @param worker the worker that is attacked
 	 */
 	public void EnnemyAttacksWorker(EnnemyModel ennemy, WorkerModel worker) {
-		System.out.println("the worker currently has "+worker.GetCurrentHealth()+"HP");
 		worker.TakeDamage();
-		System.out.println("the worker has now "+worker.GetCurrentHealth()+"HP");
 		if(worker.GetRole()==WorkerRole.Knight) {
 			//if the worker is a knight then it will fight back
 			ennemy.TakeDamage();
