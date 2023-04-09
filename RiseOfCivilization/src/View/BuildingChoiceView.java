@@ -14,7 +14,7 @@ public class BuildingChoiceView extends JFrame {
 	private JButton barrack;
 	private JButton lumber_camp;
 	private JButton miner_camp;
-	private JButton quarryman_camp;
+	private JButton QuarryWorker_camp;
 	
 	public BuildingChoiceView(GameView GV, BuildingChoiceModel BCM) {
 		super("Building Choice");
@@ -45,8 +45,8 @@ public class BuildingChoiceView extends JFrame {
 		
 		cstr.gridx = 0;
 		cstr.gridy = 2;
-		quarryman_camp = new JButton("QuarryMan Camp");
-		pane.add(quarryman_camp, cstr);
+		QuarryWorker_camp = new JButton("QuarryWorker Camp");
+		pane.add(QuarryWorker_camp, cstr);
 		
 		cstr.gridx = 1;
 		cstr.gridy = 2;
@@ -76,7 +76,7 @@ public class BuildingChoiceView extends JFrame {
 		return miner_camp;
 	}
 	
-	public JButton GetQuarrymanCampButton() {
-		return quarryman_camp;
+	public JButton GetQuarryWorkerCampButton() {
+		return QuarryWorker_camp;
 	}
 }

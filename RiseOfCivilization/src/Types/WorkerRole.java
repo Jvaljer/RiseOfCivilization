@@ -2,8 +2,8 @@ package Types;
 
 public enum WorkerRole {
 	Worker,
-	LumberJack,
-	QuarryMan,
+	Lumberjack,
+	QuarryWorker,
 	Miner,
 	Citizen,
 	Knight

@@ -20,10 +20,10 @@ public class CellIcon {
     public static Image CityHall;
     public static Image SawMill;
     public static Image Mine;
-    public static Image  Quarry;
+    public static Image Quarry;
     public static Image LumberCamp;
     public static Image MinerCamp;
-    public static Image QuarrymanCamp;
+    public static Image QuarryWorkerCamp;
     public static Image Barrack;
     public static Image Shop;
 
@@ -33,24 +33,19 @@ public class CellIcon {
             Plain = ImageIO.read(new File("./icons/Plain.png"));
             Mountain = ImageIO.read(new File("./icons/Mountain.png"));
             Iron_Deposit = ImageIO.read(new File("./icons/Iron_Deposit.png"));
+            
 
             CityHall = ImageIO.read(new File("./icons/CityHall.png"));
             Mine = ImageIO.read(new File("./icons/Mine.png"));
             Quarry = ImageIO.read(new File("./icons/Quarry.png"));
             LumberCamp = ImageIO.read(new File("./icons/LumberCamp.png"));
             MinerCamp = ImageIO.read(new File("./icons/MinerCamp.png"));
-            QuarrymanCamp = ImageIO.read(new File("./icons/QuarrymanCamp.png"));
+            QuarryWorkerCamp = ImageIO.read(new File("./icons/QuarryWorkerCamp.png"));
             Barrack = ImageIO.read(new File("./icons/Barrack.png"));
             Shop = ImageIO.read(new File("./icons/Shop_Bulding.png"));
-
-
-
-
         } catch (IOException e) {
             throw new RuntimeException(e);
-            }
+        }
     }
-
-
 }
 

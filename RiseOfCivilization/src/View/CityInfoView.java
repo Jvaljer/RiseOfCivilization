@@ -36,7 +36,13 @@ public class CityInfoView extends JPanel {
 	private JLabel stone_label;
 	private JLabel iron_label;
 	private JLabel gold_label;
-	private JLabel workers_label;
+	private JLabel total_workers_label;
+	/**
+	private JLabel lumberjack_label;
+	private JLabel quarry_worker_label;
+	private JLabel miner_label;
+	private JLabel knight_label;
+	**/
 	private final static int offset = 5;
 	
 	public CityInfoView(GameModel gm, DashboardView dv) {
@@ -49,43 +55,71 @@ public class CityInfoView extends JPanel {
 		layout = new GridBagLayout();
 		setLayout(layout);
 		
+		JLabel title = new JLabel("<HTML><U>City Information :</U></HTML>");
+		title.setFont(title.getFont().deriveFont(18.0f));
+		GridBagConstraints title_c = new GridBagConstraints();
+		title_c.anchor = GridBagConstraints.NORTHWEST;
+		title_c.fill = GridBagConstraints.HORIZONTAL;
+		title_c.weightx = 1;
+		title_c.weighty = 0;
+		title_c.gridwidth = 2;
+		title_c.insets = new Insets(0, (int) (offset/2), 0, 0);
+		title_c.gridx = 0;
+		title_c.gridy = 0;
+		add(title, title_c);
+		
 		GridBagConstraints left_c = new GridBagConstraints();
 		left_c.anchor = GridBagConstraints.NORTHWEST;
 		left_c.fill = GridBagConstraints.HORIZONTAL;
+		left_c.weightx = 0.5;
+		left_c.weighty = 0;
+		left_c.insets = new Insets(0, offset, 0, 0);
+		left_c.gridx = 0;
 		
 		wood_label = new JLabel();
 		labels.add(wood_label);
-		left_c.weightx = 0.5;
-		left_c.insets = new Insets(0, offset, 0, 0);
-		left_c.gridx = 0;
-		left_c.gridy = 0;
+		left_c.gridy = 1;
 		add(wood_label, left_c);
 		
 		iron_label = new JLabel();
 		labels.add(iron_label);
-		left_c.gridy = 1;
+		left_c.gridy = 2;
 		add(iron_label, left_c);
 		
-		workers_label = new JLabel();
-		labels.add(workers_label);
+		/**
+		lumberjack_label = new JLabel();
+		labels.add(lumberjack_label);
+		left_c.gridy = 4;
+		add(lumberjack_label, left_c);
+		
+		quarry_worker_label = new JLabel();
+		labels.add(quarry_worker_label);
+		left_c.gridy = 5;
+		add(quarry_worker_label, left_c);
+		**/
+		
+		total_workers_label = new JLabel();
+		labels.add(total_workers_label);
+		left_c.insets = new Insets(5, offset, 0, 0);
 		left_c.gridwidth = 2;
-		left_c.gridy = 2;
-		add(workers_label, left_c);
+		left_c.gridy = 3;
+		add(total_workers_label, left_c);
 		
 		GridBagConstraints right_c = new GridBagConstraints();
 		right_c.anchor = GridBagConstraints.NORTHWEST;
 		right_c.fill = GridBagConstraints.HORIZONTAL;
+		right_c.weightx = 0.5;
+		right_c.weighty = 0;
+		right_c.gridx = 1;
 		
 		stone_label = new JLabel();
 		labels.add(stone_label);
-		right_c.weightx = 0.5;
-		right_c.gridx = 1;
-		right_c.gridy = 0;
+		right_c.gridy = 1;
 		add(stone_label, right_c);
 		
 		gold_label= new JLabel();
 		labels.add(gold_label);
-		right_c.gridy = 1;
+		right_c.gridy = 2;
 		add(gold_label, right_c);
 		
 		for (JLabel label : labels) {
@@ -103,6 +137,18 @@ public class CityInfoView extends JPanel {
 		stone_label.setText("Stone : " + global_inventory.getAmount(Resource.Stone));
 		iron_label.setText("Iron : " + global_inventory.getAmount(Resource.Iron));
 		gold_label.setText("Gold : " + global_inventory.getAmount(Resource.Gold));
-		workers_label.setText("Free Workers : " + workers.stream().filter(w -> !w.GetOccupied()).count() + "/" + workers.size());
+		/*
+		Worker,
+		Lumberjack,
+		QuarryWorker,
+		Miner,
+		Citizen,
+		Knight
+		*/
+		total_workers_label.setText("Total Workers : " + workers.size());
+		for(WorkerModel worker : workers) {
+			System.out.println(worker.GetRole());
+		}
+		// workers.stream().filter(w -> !w.GetOccupied()).count() + "/" + workers.size()
 	}
 }

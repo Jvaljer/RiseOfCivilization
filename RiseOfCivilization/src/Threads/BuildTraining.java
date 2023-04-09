@@ -37,15 +37,15 @@ public class BuildTraining implements ActionListener {
 				break;
 				
 			case LumberCamp:
-				nearest = map.GetNearestWorkerFromRole(dst_cell, WorkerRole.LumberJack);
+				nearest = map.GetNearestWorkerFromRole(dst_cell, WorkerRole.Lumberjack);
 				break;
 				
 			case MinerCamp:
 				nearest = map.GetNearestWorkerFromRole(dst_cell, WorkerRole.Miner);
 				break;
 				
-			case QuarrymanCamp:
-				nearest = map.GetNearestWorkerFromRole(dst_cell, WorkerRole.QuarryMan);
+			case QuarryWorkerCamp:
+				nearest = map.GetNearestWorkerFromRole(dst_cell, WorkerRole.QuarryWorker);
 				break;
 				
 			default:

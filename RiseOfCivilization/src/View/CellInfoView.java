@@ -170,7 +170,7 @@ public class CellInfoView extends JPanel {
 		add(building_max_res, building_max_res_c);
 		
 		for (JLabel label : labels_constraints.keySet()) {
-			label.setFont(label.getFont().deriveFont(15.0f));
+			label.setFont(label.getFont().deriveFont(13.0f));
 		}
 		
 		setPreferredSize(new Dimension(dashboard_view.getWidth(), (int) (dashboard_view.getHeight()/3)));
@@ -207,7 +207,7 @@ public class CellInfoView extends JPanel {
 		cell_type.setText("Type : " + cell_id);
 		
 		if(cell_id == CellId.Plain) {
-			cell_res.setText("Resources : None");
+			cell_res.setText("Resource : None");
 			cell_inv.setVisible(false);
 			cell_max_res.setVisible(false);
 			building_type.setVisible(false);
@@ -219,7 +219,7 @@ public class CellInfoView extends JPanel {
 		}
 		
 		if(cell_id == CellId.City) {
-			cell_res.setText("Resources : None");
+			cell_res.setText("Resource : None");
 			cell_inv.setVisible(false);
 			cell_max_res.setVisible(false);
 			building_type.setVisible(true);
@@ -237,7 +237,7 @@ public class CellInfoView extends JPanel {
 		}
 
 		if(cell_id != CellId.Plain && cell_id != CellId.City) {
-			cell_res.setText("Resources : " + current_cell.getResource());
+			cell_res.setText("Resource : " + current_cell.getResource());
 			BuildingModel building = current_cell.getBuilding();
 			building_type.setVisible(true);
 			if(building != null) {

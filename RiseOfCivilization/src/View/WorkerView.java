@@ -86,7 +86,7 @@ public class WorkerView {
     public Color SetColorFromRole() {
     	Color color;
     	switch (worker.GetRole()) {
-    		case LumberJack:
+    		case Lumberjack:
     			color = new Color(30,70,20);
     			break;
     			
@@ -94,7 +94,7 @@ public class WorkerView {
     			color = new Color(75,75,75);
     			break;
     			
-    		case QuarryMan:
+    		case QuarryWorker:
     			color = new Color(110,40,30);
     			break;
     			

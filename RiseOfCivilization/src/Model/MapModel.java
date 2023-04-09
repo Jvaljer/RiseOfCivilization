@@ -326,7 +326,7 @@ public class MapModel {
 				BuildingModel building = GetBuildingFromCoord(cell.GetCoord());
 				switch (building.getId()) {
 					case SawMill:
-						needed_worker = WorkerRole.LumberJack;
+						needed_worker = WorkerRole.Lumberjack;
 						break;
 						
 					case Mine:
@@ -334,7 +334,7 @@ public class MapModel {
 						break;
 						
 					case Quarry:
-						needed_worker = WorkerRole.QuarryMan;
+						needed_worker = WorkerRole.QuarryWorker;
 						break;
 						
 					default:
@@ -344,7 +344,7 @@ public class MapModel {
 			} else {
 				switch (cell.GetId()) {
 					case Forest:
-						needed_worker = WorkerRole.LumberJack;
+						needed_worker = WorkerRole.Lumberjack;
 						break;
 						
 					case Mountain:
@@ -352,7 +352,7 @@ public class MapModel {
 						break;
 						
 					case Iron_Deposit:
-						needed_worker = WorkerRole.QuarryMan;
+						needed_worker = WorkerRole.QuarryWorker;
 						break;
 						
 					default:
@@ -480,7 +480,7 @@ public class MapModel {
 	
 	public boolean CanTrain(CellModel cell) {
 		BuildingId bid = GetBuildingFromCoord(cell.GetCoord()).getId();
-		return ((bid==BuildingId.Barrack) || (bid==BuildingId.LumberCamp) || (bid==BuildingId.MinerCamp) || (bid==BuildingId.QuarrymanCamp)) && game.CanCreateNewWorker(GetBuildingFromCoord(cell.GetCoord()));
+		return ((bid==BuildingId.Barrack) || (bid==BuildingId.LumberCamp) || (bid==BuildingId.MinerCamp) || (bid==BuildingId.QuarryWorkerCamp)) && game.CanCreateNewWorker(GetBuildingFromCoord(cell.GetCoord()));
 	}
 	
 	public WorkerModel GetNearestWorkerFromRole(CellModel cell, WorkerRole role) {

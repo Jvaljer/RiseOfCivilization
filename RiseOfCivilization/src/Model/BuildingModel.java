@@ -107,15 +107,15 @@ public class BuildingModel {
 				break;
 				
 			case LumberCamp:
-				game.AddWorker(WorkerRole.LumberJack,this.cell.GetCoord());
+				game.AddWorker(WorkerRole.Lumberjack,this.cell.GetCoord());
 				break;
 				
 			case MinerCamp:
 				game.AddWorker(WorkerRole.Miner,this.cell.GetCoord());
 				break;
 				
-			case QuarrymanCamp:
-				game.AddWorker(WorkerRole.QuarryMan,this.cell.GetCoord());
+			case QuarryWorkerCamp:
+				game.AddWorker(WorkerRole.QuarryWorker,this.cell.GetCoord());
 				break;
 			
 			default:

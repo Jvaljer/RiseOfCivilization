@@ -31,7 +31,7 @@ public class BuildingTrain extends Thread {
 				case MinerCamp:
 					inv.remove(Resource.Gold, 75);
 					break;
-				case QuarrymanCamp:
+				case QuarryWorkerCamp:
 					inv.remove(Resource.Gold, 100);
 					break;
 				case Barrack:

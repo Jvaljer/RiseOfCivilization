@@ -64,8 +64,8 @@ public class BuildingView {
 			case MinerCamp :
 				G.drawImage(Icons.MinerCamp,x+3,y-16,37,34,null);
 				break;
-			case QuarrymanCamp :
-				G.drawImage(Icons.QuarrymanCamp,x+3,y-16,37,34,null);
+			case QuarryWorkerCamp :
+				G.drawImage(Icons.QuarryWorkerCamp,x+3,y-16,37,34,null);
 				break;
 			case Barrack :
 				G.drawImage(Icons.Barrack,x+3,y-16,37,34,null);

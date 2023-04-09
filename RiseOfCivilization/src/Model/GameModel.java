@@ -36,8 +36,8 @@ public class GameModel {
 		
 		workers = new ArrayList<WorkerModel>(10);
 		workers.add(new WorkerModel(this, WorkerRole.Miner, start_coord));
-		workers.add(new WorkerModel(this, WorkerRole.LumberJack, start_coord));
-		workers.add(new WorkerModel(this, WorkerRole.QuarryMan, start_coord));
+		workers.add(new WorkerModel(this, WorkerRole.Lumberjack, start_coord));
+		workers.add(new WorkerModel(this, WorkerRole.QuarryWorker, start_coord));
 		
 		buildings = new ArrayList<BuildingModel>();
 		buildings.add(new BuildingModel(this, map.GetCityOriginCoord(), BuildingId.CityHall));
@@ -113,7 +113,7 @@ public class GameModel {
 				cond = (wood>=200) && (stone>=300) && (iron>=80) && (gold>=50);
 				break;
 				
-			case QuarrymanCamp:
+			case QuarryWorkerCamp:
 				cond = (wood>=200) && (stone>=200) && (iron>=150) && (gold>=50);
 				break;
 				
@@ -234,7 +234,7 @@ public class GameModel {
 				iron = worker.getInventory().getAmount(Resource.Iron);
 				break;
 				
-			case LumberJack:
+			case Lumberjack:
 				res_type = Resource.Wood;
 				amount = worker.getInventory().getAmount(res_type);
 				worker.dropOff(res_type, amount);
@@ -248,7 +248,7 @@ public class GameModel {
 				inventory.add(res_type, amount);
 				break;
 				
-			case QuarryMan:
+			case QuarryWorker:
 				res_type = Resource.Iron;
 				amount = worker.getInventory().getAmount(res_type);
 				worker.dropOff(res_type, amount);
@@ -298,7 +298,7 @@ public class GameModel {
 			needed_iron = level*100;
 			needed_gold = level*75;
 			
-		} else if(bid==BuildingId.LumberCamp || bid==BuildingId.MinerCamp || bid==BuildingId.QuarrymanCamp) {
+		} else if(bid==BuildingId.LumberCamp || bid==BuildingId.MinerCamp || bid==BuildingId.QuarryWorkerCamp) {
 			needed_wood = level*100;
 			needed_stone = level*100;
 			needed_iron = level*75;
@@ -320,11 +320,11 @@ public class GameModel {
 			case Barrack:
 				return WorkerRole.Knight;
 			case LumberCamp:
-				return WorkerRole.LumberJack;
+				return WorkerRole.Lumberjack;
 			case MinerCamp:
 				return WorkerRole.Miner;
-			case QuarrymanCamp:
-				return WorkerRole.QuarryMan;
+			case QuarryWorkerCamp:
+				return WorkerRole.QuarryWorker;
 			default:
 				return null;
 		}
@@ -374,7 +374,7 @@ public class GameModel {
 			case MinerCamp:
 				return gold>=75;
 				
-			case QuarrymanCamp:
+			case QuarryWorkerCamp:
 				return gold>=100;
 				
 			case Barrack:

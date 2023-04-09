@@ -21,6 +21,6 @@ public class BuildingChoiceCtrl {
 		view.GetBarrackButton().addActionListener(new BuildTraining(game, view, BuildingId.Barrack, pts));
 		view.GetLumberCampButton().addActionListener(new BuildTraining(game, view, BuildingId.LumberCamp, pts));
 		view.GetMinerCampButton().addActionListener(new BuildTraining(game, view, BuildingId.MinerCamp, pts));
-		view.GetQuarrymanCampButton().addActionListener(new BuildTraining(game, view, BuildingId.QuarrymanCamp, pts));
+		view.GetQuarryWorkerCampButton().addActionListener(new BuildTraining(game, view, BuildingId.QuarryWorkerCamp, pts));
 	}
 }

@@ -286,11 +286,11 @@ public class WorkerModel {
 				res_type = Resource.Stone;
 				break;
 				
-			case LumberJack:
+			case Lumberjack:
 				res_type = Resource.Wood;
 				break;
 				
-			case QuarryMan:
+			case QuarryWorker:
 				res_type = Resource.Iron;
 				break;
 				

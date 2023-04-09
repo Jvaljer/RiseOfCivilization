@@ -79,8 +79,8 @@ public class BuildingView {
 			case MinerCamp :
 				G.drawImage(CellIcon.MinerCamp,x-15,y-15,30,30,null);
 				break;
-			case QuarrymanCamp :
-				G.drawImage(CellIcon.QuarrymanCamp,x-15,y-15,30,30,null);
+			case QuarryWorkerCamp :
+				G.drawImage(CellIcon.QuarryWorkerCamp,x-15,y-15,30,30,null);
 				break;
 			case Barrack :
 				G.drawImage(CellIcon.Barrack,x-15,y-15,30,30,null);
@@ -112,8 +112,8 @@ public class BuildingView {
 			case MinerCamp :
 				G.drawImage(CellIcon.MinerCamp,x-45,y-45,90,90,null);
 				break;
-			case QuarrymanCamp :
-				G.drawImage(CellIcon.QuarrymanCamp,x-45,y-45,90,90,null);
+			case QuarryWorkerCamp :
+				G.drawImage(CellIcon.QuarryWorkerCamp,x-45,y-45,90,90,null);
 				break;
 			case Barrack :
 				G.drawImage(CellIcon.Barrack,x-45,y-45,90,90,null);
