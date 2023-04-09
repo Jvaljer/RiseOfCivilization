@@ -4,6 +4,7 @@ import Model.GameModel;
 import Model.InventoryModel;
 import Model.WorkerModel;
 import Types.Resource;
+import Types.WorkerRole;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -37,13 +38,11 @@ public class CityInfoView extends JPanel {
 	private JLabel iron_label;
 	private JLabel gold_label;
 	private JLabel total_workers_label;
-	/**
 	private JLabel lumberjack_label;
 	private JLabel quarry_worker_label;
 	private JLabel miner_label;
 	private JLabel knight_label;
-	**/
-	private final static int offset = 5;
+	private final static int offset = 10;
 	
 	public CityInfoView(GameModel gm, DashboardView dv) {
 		game_model = gm;
@@ -55,7 +54,7 @@ public class CityInfoView extends JPanel {
 		layout = new GridBagLayout();
 		setLayout(layout);
 		
-		JLabel title = new JLabel("<HTML><U>City Information :</U></HTML>");
+		JLabel title = new JLabel("<HTML><U>City Info :</U></HTML>");
 		title.setFont(title.getFont().deriveFont(18.0f));
 		GridBagConstraints title_c = new GridBagConstraints();
 		title_c.anchor = GridBagConstraints.NORTHWEST;
@@ -78,52 +77,67 @@ public class CityInfoView extends JPanel {
 		
 		wood_label = new JLabel();
 		labels.add(wood_label);
-		left_c.gridy = 1;
+		left_c.gridy = 2;
 		add(wood_label, left_c);
 		
 		iron_label = new JLabel();
 		labels.add(iron_label);
-		left_c.gridy = 2;
+		left_c.gridy = 3;
 		add(iron_label, left_c);
 		
-		/**
 		lumberjack_label = new JLabel();
 		labels.add(lumberjack_label);
-		left_c.gridy = 4;
+		left_c.gridy = 5;
 		add(lumberjack_label, left_c);
 		
 		quarry_worker_label = new JLabel();
 		labels.add(quarry_worker_label);
-		left_c.gridy = 5;
+		left_c.gridy = 6;
 		add(quarry_worker_label, left_c);
-		**/
+		
+		JLabel stash = new JLabel("<HTML><U>Stash :</U></HTML>");
+		stash.setFont(stash.getFont().deriveFont(15.0f));
+		left_c.insets = new Insets(15, offset, 0, 0);
+		left_c.gridwidth = 2;
+		left_c.gridy = 1;
+		add(stash, left_c);
 		
 		total_workers_label = new JLabel();
-		labels.add(total_workers_label);
-		left_c.insets = new Insets(5, offset, 0, 0);
+		total_workers_label.setFont(total_workers_label.getFont().deriveFont(15.0f));
 		left_c.gridwidth = 2;
-		left_c.gridy = 3;
+		left_c.gridy = 4;
 		add(total_workers_label, left_c);
 		
 		GridBagConstraints right_c = new GridBagConstraints();
 		right_c.anchor = GridBagConstraints.NORTHWEST;
 		right_c.fill = GridBagConstraints.HORIZONTAL;
-		right_c.weightx = 0.5;
+		right_c.weightx = 1;
 		right_c.weighty = 0;
 		right_c.gridx = 1;
 		
 		stone_label = new JLabel();
 		labels.add(stone_label);
-		right_c.gridy = 1;
+		right_c.gridy = 2;
 		add(stone_label, right_c);
 		
 		gold_label= new JLabel();
 		labels.add(gold_label);
-		right_c.gridy = 2;
+		right_c.gridy = 3;
 		add(gold_label, right_c);
 		
+		miner_label = new JLabel();
+		labels.add(miner_label);
+		right_c.gridy = 5;
+		add(miner_label, right_c);
+		
+		knight_label = new JLabel();
+		labels.add(knight_label);
+		right_c.gridy = 6;
+		right_c.weighty = 1;
+		add(knight_label, right_c);
+		
 		for (JLabel label : labels) {
-			label.setFont(label.getFont().deriveFont(15.0f));
+			label.setFont(label.getFont().deriveFont(13.0f));
 		}
 		
 		update();
@@ -137,18 +151,10 @@ public class CityInfoView extends JPanel {
 		stone_label.setText("Stone : " + global_inventory.getAmount(Resource.Stone));
 		iron_label.setText("Iron : " + global_inventory.getAmount(Resource.Iron));
 		gold_label.setText("Gold : " + global_inventory.getAmount(Resource.Gold));
-		/*
-		Worker,
-		Lumberjack,
-		QuarryWorker,
-		Miner,
-		Citizen,
-		Knight
-		*/
-		total_workers_label.setText("Total Workers : " + workers.size());
-		for(WorkerModel worker : workers) {
-			System.out.println(worker.GetRole());
-		}
-		// workers.stream().filter(w -> !w.GetOccupied()).count() + "/" + workers.size()
+		total_workers_label.setText("<HTML><U>Total Workers : " + workers.size() + "</U></HTML>");
+		lumberjack_label.setText("Lumberjacks : " + workers.stream().filter(w -> w.GetRole() == WorkerRole.Lumberjack).count());
+		quarry_worker_label.setText("Quarry Workers : " + workers.stream().filter(w -> w.GetRole() == WorkerRole.QuarryWorker).count());
+		miner_label.setText("Miners : " + workers.stream().filter(w -> w.GetRole() == WorkerRole.Miner).count());
+		knight_label.setText("Knights : " + workers.stream().filter(w -> w.GetRole() == WorkerRole.Knight).count());
 	}
 }

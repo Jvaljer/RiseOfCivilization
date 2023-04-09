@@ -60,7 +60,7 @@ public class CellInfoView extends JPanel {
 		layout = new GridBagLayout();
 		setLayout(layout);
 		
-		JLabel title = new JLabel("<HTML><U>Cell Information :</U></HTML>");
+		JLabel title = new JLabel("<HTML><U>Cell Info :</U></HTML>");
 		title.setFont(title.getFont().deriveFont(18.0f));
 		GridBagConstraints title_c = new GridBagConstraints();
 		title_c.anchor = GridBagConstraints.NORTHWEST;
