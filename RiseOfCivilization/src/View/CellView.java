@@ -7,10 +7,20 @@ import Types.*;
 
 
 /**
- * View class of a Cell, containing and defining all the needed informations to 
+ * This class is for the model of an inventory. An inventory stores all
+ * the different types of resources. Cells, Workers, Buildings ang the
+ * City all have an inventory.
+ * 
+ * @author Martin
+ */
+
+/**
+ * This class is for the model of an inventory, containing and defining all the needed informations to 
  * draw properly the cell as a regular Hexagon, who's color gonna evolve throughout
  * the game.
- * @author abel
+ * 
+ * @author Abel
+ * @author Martin
  */
 public class CellView {
 	private CellModel model;

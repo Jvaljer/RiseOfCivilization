@@ -1,44 +1,59 @@
 package Controler;
 
 import java.awt.event.*;
-
 import Model.InventoryModel;
 import Types.Goals;
 import Types.Resource;
 
+/**
+ * This class is the the "Buy" Action Controller. It implements
+ * ActionListener and is called whenever the "Buy" button of the
+ * Shop Controller is pressed.
+ * 
+ * @author Abel
+ */
 public class ActionBuy implements ActionListener {
-	private GameCtrl game;
-	private ShopCtrl shop;
-	private InventoryModel inventory;
-	
+	private GameCtrl game_ctrl;
+	private ShopCtrl shop_ctrl;
+	private InventoryModel inventory_model;
 	private int buy_value;
-	
 	private int wood_amount;
 	private int stone_amount;
 	private int iron_amount;
 	
-	public ActionBuy(GameCtrl GC, ShopCtrl SC) {
-		game = GC;
-		shop = SC;
-		inventory = game.GetGameModel().getInventoryModel();
+	/**
+     * Default Constructor of ActionCollect.
+     *
+     * @param ctrl the main controller
+     * @param sc   the shop controller
+     */
+	public ActionBuy(GameCtrl ctrl, ShopCtrl sc) {
+		game_ctrl = ctrl;
+		shop_ctrl = sc;
+		inventory_model = game_ctrl.GetGameModel().getInventoryModel();
 	}
 	
+	/**
+	 * Overrrides the super actionPerformed method.
+	 * This method, removes gold from the global inventory and
+	 * adds resources instead according to the buy rates.
+	 * 
+	 * @param e the preceding ActionEvent
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		buy_value = shop.GetView().GetSellPrice();
+		buy_value = shop_ctrl.GetView().GetSellPrice();
+		wood_amount = shop_ctrl.GetView().GetWoodAmount();
+		stone_amount = shop_ctrl.GetView().GetStoneAmount();
+		iron_amount = shop_ctrl.GetView().GetIronAmount();
 		
-		wood_amount = shop.GetView().GetWoodAmount();
-		stone_amount = shop.GetView().GetStoneAmount();
-		iron_amount = shop.GetView().GetIronAmount();
+		inventory_model.remove(Resource.Gold, buy_value);
+		inventory_model.add(Resource.Wood, wood_amount);
+		inventory_model.add(Resource.Stone, stone_amount);
+		inventory_model.add(Resource.Iron, iron_amount);
 		
-		inventory.remove(Resource.Gold, buy_value);
-		inventory.add(Resource.Wood, wood_amount);
-		inventory.add(Resource.Stone, stone_amount);
-		inventory.add(Resource.Iron, iron_amount);
-		
-		game.GetGameView().getCityInfoView().update();
-		shop.GetView().dispose();
-		
-		game.GetGameModel().GetGoals().IncrementGoal(Goals.BoughtResources, Math.round(buy_value/100));
+		game_ctrl.GetGameView().getCityInfoView().update();
+		shop_ctrl.GetView().dispose();
+		game_ctrl.GetGameModel().GetGoals().IncrementGoal(Goals.BoughtResources, Math.round(buy_value/100));
 	}
 }

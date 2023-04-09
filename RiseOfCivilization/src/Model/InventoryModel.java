@@ -105,7 +105,7 @@ public class InventoryModel {
     * Removes all of the resource stored in the inventory and adds them
 	* to another one.
 	* 
-	* @param r      the resource
+	* @param r     the resource
 	* @param other the other inventory
     */
 	public void transfer(InventoryModel other) {
