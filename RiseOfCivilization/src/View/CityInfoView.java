@@ -18,12 +18,13 @@ import javax.swing.JPanel;
 
 
 /**
- * This class is the view of the city's information. It shows the
- * global inventory, the number of available and busy worker.
- * It is represented in a seperate panel in the middle of the dashboard.
- * Its default height is a sixth of the height of the dashboard.
+ * This class is the view of the city's information. It shows the city's
+ * stash (inventory), the number of total worker, and the number of
+ * workers per role.
+ * It is represented in its own panel in the middle of the dashboard.
+ * Its default height is a third of the height of the dashboard.
  *
- * @author martin
+ * @author Martin
  */
 @SuppressWarnings("serial")
 public class CityInfoView extends JPanel {
@@ -44,6 +45,16 @@ public class CityInfoView extends JPanel {
 	private JLabel knight_label;
 	private final static int offset = 10;
 	
+	/**
+     * This is the constructor of the CityInfoView. It uses a
+	 * GridBagLayout and creates all of its labels and their
+	 * constraints before adding them. The labels aren't
+	 * initialized with text and only get one after update()
+	 * is called at the end of the constructor.
+     *
+     * @param gm the game model
+	 * @param dv the dashboard view
+     */
 	public CityInfoView(GameModel gm, DashboardView dv) {
 		game_model = gm;
 		dashboard_view = dv;
@@ -146,8 +157,14 @@ public class CityInfoView extends JPanel {
 		setBackground(Color.GRAY);
 	}
 	
+	/**
+	 * Updates all the labels of the CityInfoView. Resources are fetched
+	 * from the game's inventory (the city's stash), while worker counts
+	 * are fetched from the game's list of all the workers.
+	 * This method is called whenever an action would cause to modify the
+	 * content of the previously mentioned objects.
+	 */
 	public void update() {
-		
 		wood_label.setText("Wood : " + global_inventory.getAmount(Resource.Wood));
 		stone_label.setText("Stone : " + global_inventory.getAmount(Resource.Stone));
 		iron_label.setText("Iron : " + global_inventory.getAmount(Resource.Iron));
