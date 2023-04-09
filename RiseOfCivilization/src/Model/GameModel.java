@@ -95,32 +95,26 @@ public class GameModel {
 		switch (bid) {
 			case SawMill:
 				cond = (wood>=200) && (stone>=120) && (iron>=50) && (gold>=30);
-				System.out.println("enough to build SawMill : " + cond); 
 				return cond;
 				
 			case Mine:
 				cond = (wood>=120) && (stone>=200) && (iron>=50) && (gold>=30);
-				System.out.println("enough to build Mine : " + cond);
 				break;
 				
 			case Quarry:
 				cond = (wood>=150) && (stone>=150) && (iron>=120) && (gold>=30);
-				System.out.println("enough to build Quarry : " + cond); 
 				break;
 				
 			case LumberCamp:
 				cond = (wood>=300) && (stone>=200) && (iron>=80) && (gold>=50);
-				System.out.println("enough to build LumberCamp : " + cond); 
 				break;
 				
 			case MinerCamp:
 				cond = (wood>=200) && (stone>=300) && (iron>=80) && (gold>=50);
-				System.out.println("enough to build MinerCamp : " + cond); 
 				break;
 				
 			case QuarrymanCamp:
 				cond = (wood>=200) && (stone>=200) && (iron>=150) && (gold>=50);
-				System.out.println("enough to build QuarrymanCamp : " + cond); 
 				break;
 				
 			default:
@@ -143,12 +137,10 @@ public class GameModel {
 			if(available >= worker.GetHarvestCapacity()) {
 				worker.harvest(cell.getResource());
 				cell.collectResource(worker.GetHarvestCapacity());
-				System.out.println("worker harvested "+worker.GetHarvestCapacity()+" on the "+available+" available resources");
 			} else {
 				int amount = cell.getResourceAmount();
 				worker.harvest(cell.getResource(),cell.getResourceAmount());
 				cell.collectResource(cell.getResourceAmount());
-				System.out.println("worker harvested "+amount+" the total amount of cell's resources");
 			}
 		}
 	}
@@ -223,12 +215,10 @@ public class GameModel {
 				int wood_ = inventory.getAmmount(Resource.Wood);
 				int stone_ = inventory.getAmmount(Resource.Stone);
 				int iron_ = inventory.getAmmount(Resource.Iron);
-				System.out.println("inventory has : wood("+wood_+"), stone("+stone_+"), iron("+iron_+")");
 				int wood = worker.getInventory().getAmmount(Resource.Wood);
 				int stone = worker.getInventory().getAmmount(Resource.Stone);
 				int iron = worker.getInventory().getAmmount(Resource.Iron);
 				
-				System.out.println("workers has : wood("+wood+"), stone("+stone+"), iron("+iron+")");
 				worker.dropOff(Resource.Wood, wood);
 				inventory.add(Resource.Wood, wood);
 				worker.dropOff(Resource.Stone, stone);
@@ -242,8 +232,6 @@ public class GameModel {
 				wood = worker.getInventory().getAmmount(Resource.Wood);
 				stone = worker.getInventory().getAmmount(Resource.Stone);
 				iron = worker.getInventory().getAmmount(Resource.Iron);
-				System.out.println("inventory has : wood("+wood_+"), stone("+stone_+"), iron("+iron_+")");
-				System.out.println("workers has : wood("+wood+"), stone("+stone+"), iron("+iron+")");
 				break;
 				
 			case LumberJack:
@@ -459,18 +447,21 @@ public class GameModel {
 	}
 	
 	public void EnnemyAttacksWorker(EnnemyModel ennemy, WorkerModel worker) {
+		System.out.println("the worker currently has "+worker.GetCurrentHealth()+"HP");
+		worker.TakeDamage();
+		System.out.println("the worker has now "+worker.GetCurrentHealth()+"HP");
 		if(worker.GetRole()==WorkerRole.Knight) {
 			//if the worker is a knight then it will fight back
-			worker.TakeDamage();
 			ennemy.TakeDamage();
-			if(worker.IsDead()) {
-				
-			} 
-			if(ennemy.IsDead()) {
-				
+		}
+	}
+	
+	public void RemoveWorker(WorkerModel worker) {
+		for(int i=0; i<workers.size(); i++) {
+			WorkerModel wm = workers.get(i);
+			if(wm==worker) {
+				workers.remove(i);
 			}
-		} else {
-			//if not then it's simply gonna die
 		}
 	}
 }

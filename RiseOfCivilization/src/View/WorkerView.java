@@ -112,4 +112,8 @@ public class WorkerView {
     	}
     	return color;
     }
+    
+    public WorkerModel GetModel() {
+    	return worker;
+    }
 }
