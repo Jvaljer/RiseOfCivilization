@@ -4,15 +4,21 @@ import Model.*;
 import Types.BuildingId;
 
 import java.awt.*;
-
+/**
+ * Contains all Icons shown on the map
+ *
+ * @author Amaury,Abel,Martin
+ */
 public class BuildingView {
-	private GameView game;
-	private MapModel map;
-	private BuildingModel model;
-	private Point coord;
-	private Color color;
-	private CellIcon Icons;
-	
+	/** game view */private GameView game;
+	/** map model */private MapModel map;
+	/** building model */private BuildingModel model;
+	/** coordinates of the building */private Point coord;
+	/** color of the building used for the level dots */private Color color;
+	/** the image of this building */private CellIcon Icons;
+
+
+	/** contructor of BuildingView assigns the color to the building  */
 	public BuildingView(GameView G, BuildingModel M) {
 		game = G;
 		map = game.GetGameModel().GetMapModel();
@@ -54,7 +60,8 @@ public class BuildingView {
 	public Point getCoord() {
 		return coord;
 	}
-	
+
+	/** Draw the image of the building given the coordinates type of building  */
 	public void DrawImageFromId(BuildingId m_id, Graphics G, int x, int y){
 		switch (m_id) {
 			case CityHall :
@@ -85,6 +92,8 @@ public class BuildingView {
 				break;
 		}
 	}
+
+	/** Draw the image of the building given the coordinates type of building but bigger */
 	
 	public void DrawImageFromId(BuildingId m_id, Graphics G, int x, int y, boolean is_bigger){
 		switch (m_id) {
@@ -116,7 +125,7 @@ public class BuildingView {
 				break;
 		}
 	}
-	
+	/** Draws a building withs its icons color and level */
 	public void DrawBuilding(Graphics G) {
 		Point pos = map.GetPosFromCoord(coord.x,coord.y);
 		G.setColor(new Color(0,0,0));

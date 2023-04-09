@@ -5,6 +5,12 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Contains all Icons shown on the map
+ *
+ * @author Amaury
+ */
+
 public class CellIcon {
     public static Image Forest;
     public static Image Plain;

@@ -75,6 +75,8 @@ public class CellView {
 				return (new Color(0,0,0));
 		}
 	}
+
+	/** Draw the image of the cell given its coordinates and type  */
 	
 	public void DrawImageFromId(CellId m_id, Graphics G,int x,int y){
 		switch (m_id) {
@@ -96,7 +98,7 @@ public class CellView {
 				break;
 		}
 	}
-	
+	/** Draw the image of the cell given its coordinates and type but bigger  */
 	public void DrawImageFromId(CellId m_id, Graphics G,int x,int y, boolean is_bigger){
 		switch (m_id) {
 			case Plain :

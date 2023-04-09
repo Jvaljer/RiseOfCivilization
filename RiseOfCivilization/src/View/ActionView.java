@@ -6,17 +6,24 @@ import javax.swing.*;
 
 
 /**
- * This class is the view of the infobar. The infobar is represented in
+ * This class is the view of the actions. The action view is represented in
  * a seperate panel at the bottom of the dashboard.
  * Its default height is half of the height of the dashboard.
+ * This view uses a grid bag layout and adds buttons for the player actions.
  *
- * @author martin
+ * @author Amaury
  */
 @SuppressWarnings("serial")
 public class ActionView extends JPanel {
 	private DashboardView dashboard_view;
-	private ArrayList<JButton> Button_list;
+	/** contains the list of button in the Jpanel */private ArrayList<JButton> Button_list;
 
+	/**
+	 * this is the constructor of the actions view that creates the constraint
+	 * and add the buttons and their corresponding icons
+	 *
+	 * @author Amaury
+	 */
 	public ActionView(DashboardView dv) {
 		dashboard_view = dv;
 		
@@ -120,9 +127,12 @@ public class ActionView extends JPanel {
 		}
 	}
 
+	/** returns the list of button in the Jpanel */
 	public ArrayList<JButton> GetButtonList(){
 		return Button_list;
 	}
+
+	/** returns the button with the corresponding name in the Jpanel */
 	public JButton GetButtonFromName(String name) {
 		for(JButton but : Button_list) {
 			if(but.getName()==name) {
