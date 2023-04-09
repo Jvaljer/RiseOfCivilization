@@ -83,6 +83,15 @@ public class WorkerView {
 		G.fillOval(pos.x - w_div, pos.y - h_div, w, h);
 	}
     
+    /**
+     * SetColorFromRole give a different color to each worker depending on is Role
+     * LumberJack darkgreen
+     * Miner DarkGrey
+     * QuarryWorker Darkred
+     * Worker navy-Blue
+     * 
+     * @return color of the worker
+     */
     public Color SetColorFromRole() {
     	Color color;
     	switch (worker.GetRole()) {
@@ -113,6 +122,12 @@ public class WorkerView {
     	return color;
     }
     
+
+    /**
+     * Getter for the worker associated with this view
+     * 
+     * @return the worker
+     */
     public WorkerModel GetModel() {
     	return worker;
     }

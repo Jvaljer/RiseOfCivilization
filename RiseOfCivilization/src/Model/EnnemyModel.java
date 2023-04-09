@@ -3,6 +3,12 @@ package Model;
 import java.awt.*;
 import Types.EnnemyRole;
 
+/**
+ * This class is responsible for all information and action of a ennemy
+ * (Another version existe on the branch test_fog but this time implemented by William)
+ * 
+ * @author Abel
+ */
 public class EnnemyModel {
 	private GameModel game;
 	private MapModel map;

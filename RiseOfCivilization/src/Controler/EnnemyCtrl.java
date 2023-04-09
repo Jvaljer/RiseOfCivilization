@@ -6,9 +6,14 @@ import java.awt.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.*;
 import Model.WorkerModel;
-import Types.Goals;
 import Types.Pair;
 
+/**
+ * This class is responsible for all the action of a ennemy
+ * (Another version existe on the branch test_fog but this time implemented by William)
+ * 
+ * @author Abel
+ */
 public class EnnemyCtrl extends Thread {
 	private GameCtrl game;
 	private MapModel map;
@@ -81,7 +86,7 @@ public class EnnemyCtrl extends Thread {
 				e.printStackTrace();
 			}
 		}
-		game.GetGameModel().GetGoals().IncrementGoal(Goals.KilledEnnemies);
+		System.out.println("ennemy is DEAD");
 		//if the ennemy is dead then we wanna delete its model & view from the game's model & view lists
 		game.GetGameView().RemoveEnnemy(model);
 		game.GetGameModel().RemoveEnnemy(model);

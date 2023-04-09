@@ -9,10 +9,15 @@ import Model.WorkerModel;
 /**
  * This class is responsible for all the interraction in the game with the movement of worker
  * it extend thread and will be lunch in the GameCtrl
+ * 
+ * @author William
  */
 public class WorkerMoveCtrl extends Thread {
+	// Main model that have all the information of the game
 	private GameModel model;
+	// Model of the worker that mooving
 	private WorkerModel worker;
+	// It's destination on the map
 	private Point destCord;
 
 	/**
@@ -31,6 +36,7 @@ public class WorkerMoveCtrl extends Thread {
 	/**
 	 * This is the run method that run this thread.
 	 * It will move the player one cell at a time to it destination
+	 * setting the occpuied boolean and moving boolean to true until he arrived at destination
 	 */
 	public void run()
 	{

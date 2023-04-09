@@ -8,24 +8,42 @@ import Types.WorkerRole;
  * This class is responsible for all information and action of a worker
  */
 public class WorkerModel {
+	// The main Model (Model of the game)
 	private GameModel model;
+	// Model of the map of the game
 	private MapModel map_model;
+	// Model of the cell where the player is currently on
 	private CellModel cell;
+	// Position of the next cell if the player is mooving ? (Probably useless and not use)
 	private Point next_coord;
+	// Coordonate of the player on the screen
 	private Point coordOnScreen;
+	// Width of the circle that represent the player on the screen
 	private static final int width = 10;
+	// Height of the circle that represent the player on the screen
 	private static final int height = 10;
+	// Inventory of the worker
 	private InventoryModel inventory;
+	// Boolean that indicate if the player is currently mooving
 	private boolean moving;
+	// Boolean that indicate if the player is currently doing a task
 	private boolean occupied;
+	// Role of the player (indicate if he is a knight or a worker)
 	private WorkerRole role;
+	// Int that represent how much the worker can harvest
 	private int harvest_capacity;
+	// Int that represent the level of the worker
 	private int level;
+	// Int that represent the Health of the player at it's creation
 	private int init_health_bar;
+	// Current HP level of the worker
 	private int current_health_bar;
 	
 	/**
 	 * Constructor for a worker taking a GameModel, a workerRole and a position
+	 * 
+	 * Initialized harvest capacity to 100
+	 * Initialized HP to 1 or 2 depend on if the worker is a knight or not
 	 * 
 	 * @param M The gameModel object that represent the game
 	 * @param R The role of a worker that represente what kind of ressource he can collect
@@ -50,22 +68,42 @@ public class WorkerModel {
 		current_health_bar = init_health_bar;
 	}
 	
+	/**
+	 * Getter for the current HP level of the player
+	 * 
+	 * @return this.current_health_bar
+	 */
 	public int GetCurrentHealth() {
 		return current_health_bar;
 	}
 	
+	/**
+	 * Getter for the initial HP level of the player
+	 * 
+	 * @return this.init_health_bar
+	 */
 	public int GetInitHealth() {
 		return init_health_bar;
 	}
 	
+	/**
+	 * The recovery Method increase the life of a worker by one
+	 */
 	public void Recovery() {
 		current_health_bar++;
 	}
 	
+	/**
+	 * The TakeDamage Method decrease the life of a worker by one
+	 */
 	public void TakeDamage() {
 		current_health_bar--;
 	}
 	
+	/**
+	 * IsDead function return if the player have no more life point
+	 * @return if the player still have HP
+	 */
 	public boolean IsDead() {
 		return current_health_bar==0;
 	}
@@ -129,7 +167,7 @@ public class WorkerModel {
 	}
 	
 	/**
-	 * The MoveTo function change the cell where the player is, to the cell that have have the (i, j) coordonate on the map
+	 * The MoveTo Method change the cell where the player is, to the cell that have have the (i, j) coordonate on the map
 	 * 
 	 * @param i X position on the map for the new position
 	 * @param j Y position on the map for the new position
@@ -208,7 +246,7 @@ public class WorkerModel {
 	}
 	
 	/**
-	 * 
+	 * The harvest Method add in the inventory of the worker n ressources r (n the harvest_capacity, r the ressource)
 	 * @param r
 	 */
 	public void harvest(Resource r) {
@@ -216,7 +254,7 @@ public class WorkerModel {
 	}
 
 	/**
-	 * 
+	 * The harvest Method add in the inventory of the worker n ressources r (n an int, r the ressource)
 	 * @param r
 	 * @param n
 	 */
@@ -225,7 +263,7 @@ public class WorkerModel {
 	}
 	
 	/**
-	 * 
+	 * The DropOff method remove from the inventory of the worker the ressources r by the ammount
 	 * @param r
 	 * @param ammount
 	 */
@@ -234,24 +272,32 @@ public class WorkerModel {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 *  Getter for the HarvestCapacity
+	 * @return this.harvest_capacity
 	 */
 	public int GetHarvestCapacity() {
 		return harvest_capacity;
 	}
 
 	/**
-	 * 
-	 * @return
+	 *  Getter for the worker inventory
+	 * @return this.inventory
 	 */
 	public InventoryModel getInventory() {
 		return inventory;
 	}
+
+	/**
+	 *  Getter for the level of the worker
+	 * @return this.level
+	 */
 	public int GetLevel() {
 		return level;
 	}
 	
+	/**
+	 * The LevelUp Method increase the level of the worker and increase the harvest_capacity 
+	 */
 	public void LevelUp() {
 		level += 1;
 		switch(level) {
@@ -272,6 +318,11 @@ public class WorkerModel {
 		}
 	}
 	
+
+	/**
+	 * The InventoryIsFull Function return if the inventory of the player have reach it's limit
+	 * @return
+	 */
 	public boolean InventoryIsFull() {
 		Resource res_type;
 		switch (role) {
@@ -303,6 +354,11 @@ public class WorkerModel {
 		return (res_amount==inventory.GetMaxAmount());
 	}
 
+
+	/**
+	 *  Getter for the Role of the worker
+	 * @return this.role
+	 */
 	public WorkerRole GetRole() {
 		return this.role;
 	}

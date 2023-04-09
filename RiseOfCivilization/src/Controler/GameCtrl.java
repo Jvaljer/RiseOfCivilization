@@ -6,14 +6,29 @@ import java.awt.*;
 import java.util.*;
 import javax.swing.JButton;
 
+/**
+ * This is the main Controller.
+ * It will link All the button with the associated action (Thread)
+ * Then will lunch the controller of all the entity on the game
+ * 
+ */
 public class GameCtrl{
+	// The "Main" View of the game
 	private GameView view;
+	// The "Main" Model of the game (all the information of the current state of the game)
 	private GameModel model;
+	// List of all the button in the game
 	private ArrayList<JButton> buttons;
+	// Controller of the map
 	private MapCtrl map;
-	
+	//
 	public int nb_th;
 	
+	/**
+	 * Constructor of the is Controller
+	 * Initialized all the controller that run the game
+	 * @param V
+	 */
 	public GameCtrl(GameView V) {
 		nb_th = 0;
 		view = V;
@@ -60,18 +75,46 @@ public class GameCtrl{
 		(new AllWorkersCtrl(this)).start();
 	}
 	
+	/**
+	 * Getter for the gameModel
+	 * @return this.model
+	 */
 	public GameModel GetGameModel() {
 		return model;
 	}
+
+	/**
+	 * Getter for the GameView
+	 * @return this.view
+	 */
 	public GameView GetGameView() {
 		return view;
 	}
+
+	/**
+	 * Getter for the map Controller
+	 * @return this.map
+	 */
 	public MapCtrl GetMapCtrl() {
 		return map;
 	}
+
+	/**
+	 * Getter for all the button
+	 * return an arrayList of JButton
+	 * @return this.buttons
+	 */
 	public ArrayList<JButton> GetButtons(){
 		return buttons;
 	}
+
+	/**
+	 * The GetButtonFromName Function return the button associated with the name
+	 * if he exist else return null pointer
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public JButton GetButtonFromName(String name) {
 		for(JButton but : buttons) {
 			if(but.getName()==name) {
