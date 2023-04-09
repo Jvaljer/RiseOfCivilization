@@ -6,7 +6,7 @@ import java.awt.*;
 import java.util.*;
 import javax.swing.JButton;
 
-public class GameCtrl{
+public class GameCtrl extends Thread{
 	private GameView view;
 	private GameModel model;
 	private ArrayList<JButton> buttons;
@@ -78,5 +78,10 @@ public class GameCtrl{
 	public void GiveBuildingChoice() {
 		//here we wanna create a new JFrame in which the player will be able to choose the building he wanna create
 		return;
+	}
+	
+	public void run()
+	{
+		new EnnemyCtrl(this).start();
 	}
 }

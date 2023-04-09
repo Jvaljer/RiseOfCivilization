@@ -24,13 +24,16 @@ public class CellModel {
 	public static final int MAX_RESOURCE = 500;
 	private InventoryModel inventory;
 	private Color color;
+	private boolean visible;
+	private GameModel gameModel;
 	
 	
-	public CellModel(int x, int y, CellId i) {
+	public CellModel(GameModel game,int x, int y, CellId i) {
 		X = x;
 		Y = y;
 		id = i;
-		
+		this.gameModel = game;
+		this.visible = false;
 		inventory = new InventoryModel(200);
 		int amount;
 		switch (id) {
@@ -111,5 +114,27 @@ public class CellModel {
 	
 	public void collectResource(int n) {
 		inventory.remove(natural_resource, n);
+	}
+	
+	public void setVisible(boolean b)
+	{
+		this.visible = b;
+	}
+	
+	public boolean getVisible()
+	{
+		return this.visible;
+	}
+	
+	public void isVisible()
+	{
+		this.setVisible(false);
+		for(int i = 0; i < this.gameModel.GetWorkerModel().size(); i++)
+		{
+			if(this.gameModel.GetMapModel().GetShortestPath(this.gameModel.GetWorkerModel().get(i).getPos(), this.GetCoord()).size() <= 3)
+			{
+				this.setVisible(true);
+			}
+		}
 	}
 }

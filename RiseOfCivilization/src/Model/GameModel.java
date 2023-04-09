@@ -1,6 +1,8 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Random;
+
 import Types.*;
 import Types.BuildingId;
 import Types.Resource;
@@ -17,6 +19,7 @@ public class GameModel {
 	private MapModel map;
 	private InventoryModel inventory;
 	private ArrayList<WorkerModel> workers;
+	private ArrayList<EnnemyModel> ennemies;
 	private ArrayList<BuildingModel> buildings;
 	
 	public int worker_amount;
@@ -24,16 +27,31 @@ public class GameModel {
 	public GameModel() {
 		map = new MapModel(this);
 		inventory = new InventoryModel();
-		
+		Random random = new Random();
 		worker_amount = 0;
 		
 		Point start_coord = map.GetCityOriginCoord();
+		this.ennemies = new ArrayList<EnnemyModel>(10);
+		for(int i = 0; i < 10; i++)
+		{
+			int x = random.nextInt(map.GetLinesAmount());
+			int y = random.nextInt(map.GetColumnsAmount());
+			ennemies.add(new EnnemyModel(this, map.GetCellFromCoord(x, y)));
+		}
 		
 		inventory.add(Resource.Gold, 150);
 		workers = new ArrayList<WorkerModel>(10);
 		workers.add(new WorkerModel(this, WorkerRole.Miner, start_coord));
 		workers.add(new WorkerModel(this, WorkerRole.LumberJack, start_coord));
 		workers.add(new WorkerModel(this, WorkerRole.QuarryMan, start_coord));
+		
+		for(int i = 0; i < this.GetMapModel().GetLinesAmount(); i++)
+		{
+			for(int j = 0; j < this.GetMapModel().GetColumnsAmount(); j++)
+			{
+				this.GetMapModel().GetCellFromCoord(i, j).isVisible();
+			}
+		}
 		
 		buildings = new ArrayList<BuildingModel>();
 		buildings.add(new BuildingModel(this, map.GetCityOriginCoord(), BuildingId.CityHall));
@@ -358,5 +376,9 @@ public class GameModel {
 	
 	public void AddWorker(WorkerRole wr, Point pos) {
 		workers.add(new WorkerModel(this,wr,pos));
+	}
+	
+	public ArrayList<EnnemyModel> getEnnemyModel() {
+		return this.ennemies;
 	}
 }

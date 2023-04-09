@@ -17,6 +17,8 @@ public class GameView extends JFrame {
 	private CellInfoView cell_info_view;
 	private CityInfoView city_info_view;
 	private DashboardView dashboard_view;
+	private ArrayList<EnnemyView> ennemiesView;
+
 
 	public GameView(GameModel m) {
 		model = m;
@@ -32,6 +34,13 @@ public class GameView extends JFrame {
 		for(int i=0; i<model.GetBuildingList().size(); i++) {
 			buildings_view.add(new BuildingView(this,model.GetBuildingList().get(i)));
 		}
+		
+		this.ennemiesView = new ArrayList<EnnemyView>();
+		for(int i = 0; i < this.model.getEnnemyModel().size(); i++)
+		{
+			ennemiesView.add(new EnnemyView(this, this.model.getEnnemyModel().get(i)));
+		}
+		
 		cell_info_view = new CellInfoView(model, map_model);
 		city_info_view = new CityInfoView(map_model, model);
 		Action_view = new ActionView(map_model);
@@ -79,6 +88,10 @@ public class GameView extends JFrame {
 	
 	public ArrayList<BuildingView> GetBuildingsView(){
 		return buildings_view;
+	}
+	
+	public ArrayList<EnnemyView> getEnnemyView() {
+		return this.ennemiesView;
 	}
 
 	@Override

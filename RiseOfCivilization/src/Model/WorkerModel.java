@@ -109,6 +109,13 @@ public class WorkerModel {
 	 */
 	public void MoveTo(int i, int j) {
 		this.cell = this.model.GetMapModel().GetCellFromCoord(i, j);
+		for(int k = 0; k < this.model.GetMapModel().GetColumnsAmount(); k++)
+		{
+			for(int l = 0; l < this.model.GetMapModel().GetLinesAmount(); l++)
+				{
+				this.model.GetMapModel().getCellFromPoint(new Point(l,k)).isVisible();
+				}
+		}
 	}
 	
 	/**
