@@ -74,7 +74,7 @@ public class MapModel {
 		int city_origin_y = ThreadLocalRandom.current().nextInt(1, 17);
 		city_origin = new Point(city_origin_x, city_origin_y);
 		CellModel city_origin = grid[city_origin_x][city_origin_y];
-		city_origin.TurnToCity();
+		city_origin.TurnToCity(false);
 		current_cell = city_origin;
 		city_cells.add(city_origin);
 		
@@ -82,14 +82,14 @@ public class MapModel {
 		int random_id_1 = ThreadLocalRandom.current().nextInt(0, city_neighbours.size());
 		Point p1 = city_neighbours.get(random_id_1);
 		CellModel city_cell_1 = grid[p1.x][p1.y];
-		city_cell_1.TurnToCity();
+		city_cell_1.TurnToCity(false);
 		city_cells.add(city_cell_1);
 		city_neighbours.remove(p1);
 		
 		int random_id_2 = ThreadLocalRandom.current().nextInt(0, city_neighbours.size());
 		Point p2 = city_neighbours.get(random_id_2);
 		CellModel city_cell_2 = grid[p2.x][p2.y];
-		city_cell_2.TurnToCity();
+		city_cell_2.TurnToCity(false);
 		city_cells.add(city_cell_2);
 		
 		spawner_cells = new ArrayList<CellModel>();

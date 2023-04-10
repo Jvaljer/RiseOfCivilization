@@ -159,13 +159,16 @@ public class CellModel {
     * Turns the cell to be a city cell. This methods first removes of all
 	* the previous resource it could have had before changing its id and
 	* removing its previous natural resource.
+	* @param has_building indicates if the cell must keep it's resource type or not
     */
-	public void TurnToCity() {
+	public void TurnToCity(boolean has_building) {
 		if(id != CellId.Plain) {
 			inventory.remove(natural_resource, MAX_RESOURCE);
 		}
 		id = CellId.City;
-		natural_resource = null;
+		if(!has_building) {
+			natural_resource = null;
+		}
 	}
 	
 	/**

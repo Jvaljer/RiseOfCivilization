@@ -642,7 +642,7 @@ public class GameModel {
 			default:
 				break;
 		}
-		cell.TurnToCity();
+		cell.TurnToCity(map.CellIsOccupiedByBuilding(cell));
 	}
 	
 	/**

@@ -4,6 +4,7 @@ import Model.BuildingModel;
 import Model.CellModel;
 import Model.InventoryModel;
 import Model.MapModel;
+import Types.BuildingId;
 import Types.CellId;
 
 import java.awt.Color;
@@ -259,23 +260,49 @@ public class CellInfoView extends JPanel {
 			cell_max_res.setVisible(false);
 			building_type.setVisible(true);
 			BuildingModel building = current_cell.getBuilding();
-			if(building != null) {
+			if(building != null && (building.getId()!=BuildingId.CityHall && building.getId()!=BuildingId.Shop)) {
+				cell_max_res.setVisible(false);
+				cell_inv.setVisible(false);
 				building_type.setText("Building : " + building.getId());
+				building_level.setVisible(true);
+				building_level.setText("(Lv." + building.GetLevel() + ")");
+				InventoryModel inventory = building.GetInventory();
+				building_inv.setVisible(true);
+				building_inv.setText("Stash : " + inventory.getAmount(building.GetProducedResource()));
+				building_max_res.setVisible(true);
+				building_max_res.setText("(max=" + inventory.GetMaxAmount() + ")");
+				
+				setLowest(building_inv);
+			} else if (building!=null) {
+				cell_res.setText("Resource : None");
+				cell_inv.setVisible(false);
+				cell_max_res.setVisible(false);
+				building_type.setVisible(true);
+				if(building != null) {
+					building_type.setText("Building : " + building.getId());
+				} else {
+					building_type.setText("Building : None");
+				}
+				building_level.setVisible(false);
+				building_inv.setVisible(false);
+				building_max_res.setVisible(false);
+				
+				setLowest(building_type);
 			} else {
+				cell_res.setText("Resource : None");
 				building_type.setText("Building : None");
+				building_level.setVisible(false);
+				building_inv.setVisible(false);
+				building_max_res.setVisible(false);
+				setLowest(building_type);
 			}
-			building_level.setVisible(false);
-			building_inv.setVisible(false);
-			building_max_res.setVisible(false);
-			
-			setLowest(building_type);
 		}
 
 		if(cell_id != CellId.Plain && cell_id != CellId.City) {
 			cell_res.setText("Resource : " + current_cell.getResource());
 			BuildingModel building = current_cell.getBuilding();
 			building_type.setVisible(true);
-			if(building != null) {
+			if(building != null ) {
 				cell_max_res.setVisible(false);
 				cell_inv.setVisible(false);
 				building_type.setText("Building : " + building.getId());

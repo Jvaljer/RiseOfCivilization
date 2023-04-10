@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import Model.*;
 import Threads.WorkerDrop;
 import Types.BuildingId;
-
+import Types.WorkerRole;
 
 /**
  * This class is the the "Drop" Action Controller. It implements
@@ -44,7 +44,7 @@ public class ActionDrop implements ActionListener {
 		if(map_model.CellIsOccupiedByBuilding(cell)) {
 			if(map_model.GetBuildingFromCoord(cell.GetCoord()).getId() == BuildingId.CityHall) {
 				for(WorkerModel worker : game_ctrl.GetGameModel().GetWorkerModel()) {
-					if(!worker.GetOccupied()) {
+					if(!worker.GetOccupied() && (worker.GetRole()!=WorkerRole.Knight)) {
 						(new WorkerDrop(game_ctrl, worker)).start();
 					}
 				}

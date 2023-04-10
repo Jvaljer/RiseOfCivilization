@@ -18,7 +18,7 @@ public class ScoreView extends JFrame {
 		score = sc;
 		win = w;
 		
-		setPreferredSize(new Dimension(200,200));
+		setPreferredSize(new Dimension(250,250));
 		
 		JPanel pane = new JPanel();
 		if(win) {
