@@ -5,6 +5,7 @@ import Model.*;
 import java.awt.*;
 import java.util.*;
 import javax.swing.JButton;
+import Types.Goals;
 
 /**
  * This is the main Controller.
@@ -12,7 +13,7 @@ import javax.swing.JButton;
  * Then will lunch the controller of all the entity on the game
  * 
  */
-public class GameCtrl{
+public class GameCtrl extends Thread {
 	// The "Main" View of the game
 	private GameView view;
 	// The "Main" Model of the game (all the information of the current state of the game)
@@ -120,5 +121,48 @@ public class GameCtrl{
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * Show score method, instantiates a new JFrame that prints the player's score after their calculation
+	 */
+	public void ShowScore() {
+		int score = 0;
+		for(Goals key : model.GetGoals().GetGoalsMap().keySet()) {
+			switch (key) {
+			case ExpandedSlots:
+				break;
+			case ProductionBuilt:
+				break;
+			case TrainingBuilt:
+				break;
+			case KilledEnnemies:
+				break;
+			case CollectResources:
+				break;
+			case SoldResources:
+				break;
+			case BoughtResources:
+				break;
+			case TrainedWorkers:
+				break;
+			default:
+				break;
+			}
+		}
+		boolean win = ;true;
+		new ScoreView(score,win);
+	}
+	
+	@Override
+	public void run() {
+		while(model.GetClock().IsTicking()) {
+			try {
+				this.sleep(0);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		ShowScore();
 	}
 }
