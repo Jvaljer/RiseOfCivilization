@@ -7,12 +7,26 @@ import java.util.*;
 
 import Controler.GameCtrl;
 
+
+/**
+ * This class is part of the Collect Action Controller.
+ * It extends Thread and is called by ActionCollect.
+ * 
+ * @author Abel
+ */
 public class WorkerCollect extends Thread{
 	private GameCtrl ctrl;
 	private MapModel map;
 	private WorkerModel worker;
 	private Point dst_coord;
 	
+	/**
+     * Default Constructor of ActionBuild.
+     *
+     * @param GC  the main controller
+	 * @param W   the worker model
+	 * @param pts the Point of the coordinates of the cell to collect resource from
+     */
 	public WorkerCollect(GameCtrl GC,WorkerModel W, Point pts) {
 		ctrl = GC;
 		map = ctrl.GetGameModel().GetMapModel();

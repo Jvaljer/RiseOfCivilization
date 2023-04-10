@@ -8,11 +8,23 @@ import Model.WorkerModel;
 import View.WorkerView;
 import Types.Resource;
 
+/**
+ * This class is part of the Train Action Controller.
+ * It extends Thread and is called by ActionTrain
+ * 
+ * @author Abel
+ */
 public class BuildingTrain extends Thread {
 	private static GameCtrl ctrl;
 	private static MapModel map;
 	private static BuildingModel building;
 	
+	/**
+     * Default Constructor of ActionBuild.
+     *
+     * @param GC the main controller
+	 * @param BM the building model
+     */
 	public BuildingTrain(GameCtrl GC, BuildingModel BM) {
 		ctrl = GC;
 		map = ctrl.GetGameModel().GetMapModel();

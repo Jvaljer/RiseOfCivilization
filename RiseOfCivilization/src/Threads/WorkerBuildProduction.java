@@ -9,13 +9,27 @@ import Controler.GameCtrl;
 import Model.MapModel;
 import Model.WorkerModel;
 
+
+/**
+ * This class is part of the Build Action Controller.
+ * It extends Thread and is called by ActionBuild.
+ * 
+ * @author Abel
+ */
 public class WorkerBuildProduction extends Thread {
 	private GameCtrl ctrl;
 	private MapModel map;
 	private WorkerModel worker;
 	private Point dst_coord;
 	
-	public WorkerBuildProduction(GameCtrl GC,WorkerModel W, Point pts) {
+	/**
+     * Default Constructor of ActionBuild.
+     *
+     * @param GC  the main controller
+	 * @param W   the worker model
+	 * @param pts the Point of the coordinates of the production building
+     */
+	public WorkerBuildProduction(GameCtrl GC, WorkerModel W, Point pts) {
 		ctrl = GC;
 		map = ctrl.GetGameModel().GetMapModel();
 		worker = W;

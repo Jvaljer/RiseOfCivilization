@@ -8,12 +8,25 @@ import Controler.GameCtrl;
 import Model.WorkerModel;
 import Model.BuildingModel;
 
+/**
+ * This class is part of the Building Upgrade Action Controller.
+ * It extends Thread and is called by ActionLevelUp
+ * 
+ * @author Abel
+ */
 public class BuildingUpgrade extends Thread{
 	private static GameCtrl ctrl;
 	private static MapModel map;
 	private static WorkerModel worker;
 	private static BuildingModel building;
 	
+	/**
+     * Default Constructor of ActionBuild.
+     *
+     * @param GC the main controller
+	 * @param WM the worker model
+	 * @param BM the building model
+     */
 	public BuildingUpgrade(GameCtrl GC, WorkerModel WM, BuildingModel BM) {
 		ctrl = GC;
 		map = ctrl.GetGameModel().GetMapModel();

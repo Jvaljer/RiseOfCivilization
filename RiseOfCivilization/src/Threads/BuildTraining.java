@@ -11,6 +11,13 @@ import Model.WorkerModel;
 import Model.MapModel;
 import Model.CellModel;
 
+
+/**
+ * This class is part of the Build Action Controller.
+ * It extends Thread and is called by ActionBuild.
+ * 
+ * @author Abel
+ */
 public class BuildTraining implements ActionListener {
 	private GameCtrl g_ctrl;
 	private MapModel map;
@@ -19,6 +26,14 @@ public class BuildTraining implements ActionListener {
 	private CellModel dst_cell;
 	private Point pos;
 	
+	/**
+     * Default Constructor of ActionBuild.
+     *
+     * @param GC the main controller
+	 * @param BCV the building choice view
+	 * @param bid the building id
+	 * @param pts the Point of the coordinates
+     */
 	public BuildTraining(GameCtrl GC, BuildingChoiceView BCV, BuildingId bid, Point pts) {
 		g_ctrl = GC;
 		map = g_ctrl.GetGameModel().GetMapModel();
