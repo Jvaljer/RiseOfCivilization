@@ -7,7 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.*;
 import Model.WorkerModel;
 import Types.Pair;
-
+import Types.CellId;
 /**
  * This class is responsible for all the action of a ennemy
  * (Another version existe on the branch test_fog but this time implemented by William)
@@ -54,7 +54,10 @@ public class EnnemyCtrl extends Thread {
 					} else {
 						cur_pos = pursue_path.get(1);
 					}
-					model.MoveTo(cur_pos);
+					if(!(map.GetCellFromCoord(cur_pos.x, cur_pos.y).GetId()==CellId.City)) {
+						model.MoveTo(cur_pos);
+					}
+					
 					pursued_time++;
 					pair.SetSnd(citizen.getPos());
 					try {

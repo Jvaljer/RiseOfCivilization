@@ -183,6 +183,10 @@ public class GameModel {
 			case QuarryWorkerCamp:
 				cond = (wood>=200) && (stone>=200) && (iron>=150) && (gold>=50);
 				break;
+			
+			case Barrack:
+				cond = (wood>=250) && (stone>=250) && (iron>+150) && (gold>=100);
+				break;
 				
 			default:
 				return false;
@@ -285,19 +289,46 @@ public class GameModel {
 	public void BuildOnCityCell(BuildingId bid, CellModel cell) {
 		switch (bid) {
 			case Barrack:
-				inventory.remove(Resource.Wood, 250);
-				inventory.remove(Resource.Stone, 250);
-				inventory.remove(Resource.Iron, 150);
-				inventory.remove(Resource.Gold, 75);
+				if(PlayerHasEnoughToBuild(bid)) {
+					AddBuilding(bid,cell.GetCoord());
+					inventory.remove(Resource.Wood, 250);
+					inventory.remove(Resource.Stone, 250);
+					inventory.remove(Resource.Iron, 150);
+					inventory.remove(Resource.Gold, 75);
+				}
+				break;
+			case LumberCamp:
+				if(PlayerHasEnoughToBuild(bid)) {
+					AddBuilding(bid,cell.GetCoord());
+					inventory.remove(Resource.Wood, 300);
+					inventory.remove(Resource.Stone, 200);
+					inventory.remove(Resource.Iron, 80);
+					inventory.remove(Resource.Gold, 50);
+				}
+				break;
+				
+			case MinerCamp:
+				if(PlayerHasEnoughToBuild(bid)) {
+					AddBuilding(bid,cell.GetCoord());
+					inventory.remove(Resource.Wood, 200);
+					inventory.remove(Resource.Stone, 300);
+					inventory.remove(Resource.Iron, 80);
+					inventory.remove(Resource.Gold, 50);
+				}
+				break;
+				
+			case QuarryWorkerCamp:
+				if(PlayerHasEnoughToBuild(bid)) {
+					AddBuilding(bid,cell.GetCoord());
+					inventory.remove(Resource.Wood, 200);
+					inventory.remove(Resource.Stone, 200);
+					inventory.remove(Resource.Iron, 150);
+					inventory.remove(Resource.Gold, 50);
+				}
 				break;
 			default:
-				inventory.remove(Resource.Wood, 300);
-				inventory.remove(Resource.Stone, 300);
-				inventory.remove(Resource.Iron, 200);
-				inventory.remove(Resource.Gold, 50);
 				break;
 		}
-		AddBuilding(bid,cell.GetCoord());
 	}
 	
 	/**
