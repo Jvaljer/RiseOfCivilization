@@ -8,12 +8,25 @@ import Controler.GameCtrl;
 import Model.MapModel;
 import Model.WorkerModel;
 
+/**
+ *  This class is responsible for the action of expanding the city
+ */
 public class WorkerExpand extends Thread {
+	// The GameCtrl that gather all information about all controller
 	private GameCtrl ctrl;
+	// The mapModel
 	private MapModel map;
+	// the worker that will extend the city
 	private WorkerModel worker;
+	// Coordonate of the cell that we want to extand
 	private Point dst_coord;
 	
+	/**
+	 * The constructor of this class
+	 * @param GC GameCtrl
+	 * @param WM WorkerModel
+	 * @param pts Position of the cell
+	 */
 	public WorkerExpand(GameCtrl GC, WorkerModel WM, Point pts) {
 		ctrl = GC;
 		map = ctrl.GetGameModel().GetMapModel();
@@ -21,6 +34,11 @@ public class WorkerExpand extends Thread {
 		dst_coord = pts;
 	}
 	
+	/**
+	 * This is the run method of this class
+	 * Fisrt it maake a worker move to the Cell
+	 * Then after 2s the destination Cell becomma a cityCell
+	 */
 	@Override
 	public void run() {
 		worker.occupied();

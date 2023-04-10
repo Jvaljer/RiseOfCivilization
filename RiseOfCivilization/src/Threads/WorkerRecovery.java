@@ -4,17 +4,33 @@ import Controler.GameCtrl;
 import Model.MapModel;
 import Model.WorkerModel;
 
+/**
+ * This is the Recovery Thread it make worker recovering their life 
+ */
 public class WorkerRecovery extends Thread {
+	// The GameCtrl that gather all information about all controller
 	private GameCtrl ctrl;
+	// The mapModel
 	private MapModel map;
+	// the worker that will be heal
 	private WorkerModel worker;
 	
+	/**
+	 * this is the constructor of this class
+	 * @param GC Gamecontroller
+	 * @param WM The worker that will be healed
+	 */
 	public WorkerRecovery(GameCtrl GC, WorkerModel WM) {
 		ctrl = GC;
 		worker = WM;
 		map = ctrl.GetGameModel().GetMapModel();
 	}
 	
+	/**
+	 * This is the run method that run this thread.
+	 * It's running until the player die
+	 * if he don't have all his HP once every 10s he will recover 1 hp
+	 */
 	@Override
 	public void run() {
 		int recovers = 0;

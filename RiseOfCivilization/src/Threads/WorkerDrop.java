@@ -7,17 +7,33 @@ import java.util.ArrayList;
 
 import Controler.GameCtrl;
 
+/**
+ * This classe is responsible for the dropAction for a worker
+ */
 public class WorkerDrop extends Thread {
+	// The GameCtrl that gather all information about all information
 	private GameCtrl ctrl;
+	// The mapModel 
 	private MapModel map;
+	// The worker that we want to drop is inventory
 	private WorkerModel worker;
-	
+
+	/**
+	 * Constructor of this class
+	 * @param GC GameCtrl
+	 * @param WM WorkerModel
+	 */
 	public WorkerDrop(GameCtrl GC, WorkerModel WM) {
 		ctrl = GC;
 		map = ctrl.GetGameModel().GetMapModel();
 		worker = WM;
 	}
 	
+	/**
+	 * The Run méthod of this Thread
+	 * This method start by making the worker move to the cityHall
+	 * Then after 1.25s the worker drop all his inventory to the player inventory
+	 */
 	@Override
 	public void run() {
 		Point town_hall = map.GetCityOriginCoord();
