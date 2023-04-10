@@ -54,16 +54,11 @@ public class BuildTraining implements ActionListener {
 		}
 		
 		choice_window.dispose();
-		System.out.println("disposed the frame");
 		
 		nearest.occupied();
 		nearest.moving();
-		System.out.println("starting the worker's move along the path");
 		while (nearest.getcoordX() != pos.x || nearest.getcoordY() != pos.y){
-			System.out.print("tryna ");
 			try {
-				System.out.print("move");
-				System.out.println("");
 				ArrayList<Point> path = map.GetShortestPath(nearest.getPos(),pos);
  				Point nxt_coord = path.get(1);
  				nearest.setNextcoord(nxt_coord);
@@ -92,12 +87,6 @@ public class BuildTraining implements ActionListener {
 		g_ctrl.GetGameModel().BuildOnCityCell(wanted_building, cell);
 		int new_len = g_ctrl.GetGameModel().GetBuildingList().size();
 		if(old_len < new_len) {
-			try {
-				Thread.sleep(5000);
-			} catch (Exception e_) {
-				e_.printStackTrace();
-			}
-			System.out.println("we created a new building for sure");
 			g_ctrl.GetGameView().AddBuildingView(g_ctrl.GetGameModel().GetBuildingList().get(old_len));
 			g_ctrl.GetGameView().getCityInfoView().update();
 		}

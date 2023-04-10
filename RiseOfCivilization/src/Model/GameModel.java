@@ -283,6 +283,20 @@ public class GameModel {
 	 * @param cell The cell where we want to build
 	 */
 	public void BuildOnCityCell(BuildingId bid, CellModel cell) {
+		switch (bid) {
+			case Barrack:
+				inventory.remove(Resource.Wood, 250);
+				inventory.remove(Resource.Stone, 250);
+				inventory.remove(Resource.Iron, 150);
+				inventory.remove(Resource.Gold, 75);
+				break;
+			default:
+				inventory.remove(Resource.Wood, 300);
+				inventory.remove(Resource.Stone, 300);
+				inventory.remove(Resource.Iron, 200);
+				inventory.remove(Resource.Gold, 50);
+				break;
+		}
 		AddBuilding(bid,cell.GetCoord());
 	}
 	

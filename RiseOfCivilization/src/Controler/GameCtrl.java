@@ -128,30 +128,39 @@ public class GameCtrl extends Thread {
 	 */
 	public void ShowScore() {
 		int score = 0;
-		for(Goals key : model.GetGoals().GetGoalsMap().keySet()) {
+		GoalsModel goals = model.GetGoals();
+		for(Goals key : goals.GetGoalsMap().keySet()) {
 			switch (key) {
 			case ExpandedSlots:
+				score += 5*(goals.GetGoalsMap().get(key));
 				break;
 			case ProductionBuilt:
+				score += 10*(goals.GetGoalsMap().get(key));
 				break;
 			case TrainingBuilt:
+				score += 15*(goals.GetGoalsMap().get(key));
 				break;
 			case KilledEnnemies:
+				score += 10*(goals.GetGoalsMap().get(key));
 				break;
 			case CollectResources:
+				score += 5*(goals.GetGoalsMap().get(key));
 				break;
 			case SoldResources:
+				score += 20*(goals.GetGoalsMap().get(key));
 				break;
 			case BoughtResources:
+				score += 20*(goals.GetGoalsMap().get(key));
 				break;
 			case TrainedWorkers:
+				score += 15*(goals.GetGoalsMap().get(key));
 				break;
 			default:
 				break;
 			}
 		}
-		boolean win = ;true;
-		new ScoreView(score,win);
+		boolean win = (score>=1000) || (model.GetClock().HasReached(30, 0));
+		new ScoreView(model.GetGoals(),score,win);
 	}
 	
 	@Override
