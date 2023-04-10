@@ -21,12 +21,20 @@ public class ScoreView extends JFrame {
 		setPreferredSize(new Dimension(200,200));
 		
 		JPanel pane = new JPanel();
-		
+		if(win) {
+			pane.add(new JLabel("You won !!!"));
+		} else {
+			pane.add(new JLabel("You lost..."));
+		}
 		for(Goals key : goals.GetGoalsMap().keySet()) {
 			JLabel label = new JLabel(key.toString()+" : "+ goals.GetGoalsMap().get(key));
 			pane.add(label);
 		}
 		
 		setContentPane(pane);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    pack();
+	    setLocationRelativeTo(null);
+	    setVisible(true);
 	}
 }
