@@ -28,10 +28,10 @@ public class GameCtrl extends Thread {
 	 * Initialized all the controller that run the game
 	 * @param V
 	 */
-	public GameCtrl(GameView V) {
+	public GameCtrl(GameView V, int min_lim, int sec_lim) {
 		view = V;
 		model = view.GetGameModel();
-		(new ClockCtrl(model.GetClock(),30,0)).start();
+		(new ClockCtrl(model.GetClock(),min_lim,sec_lim)).start();
 		map = new MapCtrl(this,view);
 		
 		buttons = view.GetDashboardView().GetActionView().GetButtonList();
@@ -72,6 +72,7 @@ public class GameCtrl extends Thread {
 		(new RefreshCtrl(view)).start();
 		(new EnnemiesSpawn(this)).start();
 		(new AllWorkersCtrl(this)).start();
+		this.start();
 	}
 	
 	/**
@@ -172,6 +173,7 @@ public class GameCtrl extends Thread {
 				e.printStackTrace();
 			}
 		}
+		System.out.println("end of the game !");
 		ShowScore();
 	}
 }

@@ -17,6 +17,7 @@ public class ClockCtrl extends Thread {
 	public void run() {
 		model.StartsTicking();
 		while(!model.HasReached(min_lim, sec_lim)) {
+			System.out.println("ticking -> "+model.GetMinutes()+":"+model.GetSeconds());
 			try {
 				this.sleep(1000);
 			} catch (Exception e) {

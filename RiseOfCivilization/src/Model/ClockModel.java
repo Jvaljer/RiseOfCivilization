@@ -39,6 +39,12 @@ public class ClockModel {
 	public int GetSeconds() {
 		return seconds;
 	}
+	/**
+	 * Getter for the minutes amount
+	 */
+	public int GetMinutes() {
+		return minutes;
+	}
 	
 	/**
 	 * Getter for the 'ticking' predicate
