@@ -260,7 +260,7 @@ public class CellInfoView extends JPanel {
 			cell_max_res.setVisible(false);
 			building_type.setVisible(true);
 			BuildingModel building = current_cell.getBuilding();
-			if(building != null && (building.getId()!=BuildingId.CityHall && building.getId()!=BuildingId.Shop)) {
+			if(building != null && (building.getId()!=BuildingId.CityHall && building.getId()!=BuildingId.Shop && building.getId()!=BuildingId.LumberCamp && building.getId()!=BuildingId.MinerCamp && building.getId()!=BuildingId.QuarryWorkerCamp && building.getId()!=BuildingId.Barrack)) {
 				cell_max_res.setVisible(false);
 				cell_inv.setVisible(false);
 				building_type.setText("Building : " + building.getId());
