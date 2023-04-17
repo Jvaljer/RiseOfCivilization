@@ -22,6 +22,10 @@ public class GameCtrl extends Thread {
 	private ArrayList<JButton> buttons;
 	// Controller of the map
 	private MapCtrl map;
+	//predicate on ennemies spawn
+	private boolean spawning;
+	//time limit for the player to be alone
+	private final static int spawn_time = 1;
 	
 	/**
 	 * Constructor of the is Controller
@@ -70,7 +74,8 @@ public class GameCtrl extends Thread {
 		}
 		
 		(new RefreshCtrl(view)).start();
-		(new EnnemiesSpawn(this)).start();
+		spawning = false;
+		//(new EnnemiesSpawn(this)).start();
 		(new AllWorkersCtrl(this)).start();
 		this.start();
 	}
@@ -167,6 +172,10 @@ public class GameCtrl extends Thread {
 	@Override
 	public void run() {
 		while(model.GetClock().IsTicking()) {
+			if(model.GetClock().GetMinutes()==spawn_time && spawning==false) {
+				(new EnnemiesSpawn(this)).start();
+				spawning = true;
+			}
 			try {
 				this.sleep(0);
 			} catch (Exception e) {
