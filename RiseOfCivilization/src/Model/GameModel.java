@@ -161,8 +161,9 @@ public class GameModel {
 		boolean cond;
 		switch (bid) {
 			case SawMill:
-				cond = (wood>=200) && (stone>=120) && (iron>=50) && (gold>=30);
-				return cond;
+				//cond = (wood>=200) && (stone>=120) && (iron>=50) && (gold>=30);
+				//break;
+				return true;
 				
 			case Mine:
 				cond = (wood>=120) && (stone>=200) && (iron>=50) && (gold>=30);
@@ -185,8 +186,9 @@ public class GameModel {
 				break;
 			
 			case Barrack:
-				cond = (wood>=250) && (stone>=250) && (iron>+150) && (gold>=100);
-				break;
+				//cond = (wood>=250) && (stone>=250) && (iron>+150) && (gold>=100);
+				//break;
+				return true;
 				
 			default:
 				return false;

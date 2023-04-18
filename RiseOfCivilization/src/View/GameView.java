@@ -34,7 +34,7 @@ public class GameView extends JFrame {
 		map_model = model.GetMapModel();
 		
 		setTitle("Rise Of Civilizations");
-		setExtendedState(MAXIMIZED_BOTH);
+		//setExtendedState(MAXIMIZED_BOTH);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
 		

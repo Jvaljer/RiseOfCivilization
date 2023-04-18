@@ -25,7 +25,7 @@ public class GameCtrl extends Thread {
 	//predicate on ennemies spawn
 	private boolean spawning;
 	//time limit for the player to be alone
-	private final static int spawn_time = 1;
+	private final static int spawn_time = 4;
 	
 	/**
 	 * Constructor of the is Controller
